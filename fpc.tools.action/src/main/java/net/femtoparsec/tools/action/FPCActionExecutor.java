@@ -58,12 +58,11 @@ public class FPCActionExecutor implements ActionExecutor {
     public <P, R> @NonNull CompletionStage<R> pushAction(@NonNull Action<? super P, ? extends R> action,
                                                          @NonNull P parameter) {
         final long id = actionId.getAndIncrement();
-        dispatcher.onPushedAction(this,id, action, parameter);
-        return this.<P,R>doPushAction(action, parameter).whenComplete((r, t) -> {
+        dispatcher.onPushedAction(this, id, action, parameter);
+        return this.<P, R>doPushAction(action, parameter).whenComplete((r, t) -> {
             final TryResult<R, Throwable> result = r != null ? TryResult.success(r) : TryResult.failure(t);
-            dispatcher.onActionResult(this,id, result);
+            dispatcher.onActionResult(this, id, result);
         });
-
     }
 
     public <P, R> @NonNull CompletionStage<R> doPushAction(@NonNull Action<? super P, ? extends R> action,
@@ -83,6 +82,7 @@ public class FPCActionExecutor implements ActionExecutor {
         }
         return result;
     }
+
 
     private <P, R> void performAction(@NonNull ActionItem<P, R> ticket) {
         final Runnable execution;

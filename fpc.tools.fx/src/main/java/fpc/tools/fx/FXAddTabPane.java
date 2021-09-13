@@ -13,7 +13,6 @@ import lombok.NonNull;
  * The size of the add button can be configured in the CSS file using the "add-button" keyword and the "-fx-pref-width"
  * and "-fx-pref-height" parameters
  *
- * @author sebastienp
  */
 public class FXAddTabPane  extends TabPane {
 

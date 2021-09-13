@@ -43,13 +43,13 @@ public class DefaultDialogHelper<K extends DialogKindBase<K>> implements DialogH
             @NonNull Function1<? super Class<C>, ? extends FXLoader> loaderFactory,
             @NonNull I input) {
         final var result = loaderFactory.f(controllerClass).load();
-        final var controller = result.getController(controllerClass).orElseThrow(() -> new RuntimeException("Invalid controller class "+controllerClass));
-        return showDialog(dialogKind,controller,result.getRoot(),input);
+        final var controller = result.getController(controllerClass).orElseThrow(() -> new RuntimeException("Invalid controller class " + controllerClass));
+        return showDialog(dialogKind, controller, result.getRoot(), input);
     }
 
     private <I, O> CompletionStage<Optional<O>> showDialog(
             @NonNull K dialogKind,
-            @NonNull DialogController<I,O> controller,
+            @NonNull DialogController<I, O> controller,
             @NonNull Parent root,
             @NonNull I input
     ) {
@@ -65,7 +65,7 @@ public class DefaultDialogHelper<K extends DialogKindBase<K>> implements DialogH
             final Window owner = dialogKind.getOwnerStage(this.dialogModel.getUnmodifiableDialogStages()).orElse(null);
             final Stage stage = new Stage();
 
-            subscriptionHolder.append(SubscriptionHelper.bind(stage.titleProperty(),controller.titleProperty()));
+            subscriptionHolder.append(SubscriptionHelper.bind(stage.titleProperty(), controller.titleProperty()));
 
             stage.initModality(dialogKind.getModality());
             stage.initOwner(owner);
@@ -84,11 +84,9 @@ public class DefaultDialogHelper<K extends DialogKindBase<K>> implements DialogH
             });
             dialogPreparer.setup(stage, dialogInfo);
 
-            if (dialogKind.isShowAndWait()) {
-                stage.showAndWait();
-            } else {
-                stage.show();
-            }
+            controller.beforeShowing(stage,input);
+
+            stage.show();
 
             return result;
         } catch (Exception e) {

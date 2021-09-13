@@ -20,5 +20,4 @@ public interface DialogKindBase<K extends DialogKindBase<K>> {
 
     boolean isAlwaysOnTop();
 
-    boolean isShowAndWait();
 }

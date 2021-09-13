@@ -4,6 +4,7 @@ import fpc.tools.lang.Subscription;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.beans.value.ObservableStringValue;
 import javafx.beans.value.ObservableValue;
+import javafx.stage.Stage;
 import lombok.NonNull;
 
 public interface DialogController<I,O> extends DialogResultHandler<O> {
@@ -21,6 +22,8 @@ public interface DialogController<I,O> extends DialogResultHandler<O> {
      */
     @NonNull
     Subscription initializeDialog(@NonNull I input);
+
+    void beforeShowing(@NonNull Stage holderStage, @NonNull I input);
 
     /**
      * @return an observable containing the current result (valid or invalid) of the dialog

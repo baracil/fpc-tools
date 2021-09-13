@@ -2,8 +2,8 @@ package fpc.tools.fxmodel;
 
 public interface PluggableController {
 
-    void onShowing();
+    default void onShowing() {};
 
-    void onHiding();
+    default void onHiding() {};
 
 }

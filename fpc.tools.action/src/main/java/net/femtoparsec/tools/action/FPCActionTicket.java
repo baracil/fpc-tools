@@ -3,6 +3,7 @@ package net.femtoparsec.tools.action;
 import fpc.tools.action.Action;
 import fpc.tools.action.ActionExecutor;
 import fpc.tools.action.ActionTicket;
+import fpc.tools.action.AsyncAction;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Nil;
 import lombok.NonNull;
@@ -42,6 +43,11 @@ public class FPCActionTicket<R> implements ActionTicket<R> {
     @Override
     public @NonNull <S> ActionTicket<S> thenExecute(@NonNull Class<? extends Action<R, S>> actionType) {
         return withNewCompletionStage(completionStage.thenCompose(r -> actionExecutor.pushAction(actionType,r)));
+    }
+
+    @Override
+    public @NonNull <S> ActionTicket<S> thenExecuteAsync(@NonNull Class<? extends AsyncAction<R, S>> actionType) {
+        return withNewCompletionStage(completionStage.thenCompose(r -> actionExecutor.pushAction(actionType, r).thenCompose(c -> c)));
     }
 
     @Override

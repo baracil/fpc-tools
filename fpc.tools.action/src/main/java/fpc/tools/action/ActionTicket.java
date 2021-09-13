@@ -23,5 +23,8 @@ public interface ActionTicket<R> {
     <S> ActionTicket<S> thenExecute(@NonNull Class<? extends Action<R,S>> actionType);
 
     @NonNull
+    <S> ActionTicket<S> thenExecuteAsync(@NonNull Class<? extends AsyncAction<R,S>> actionType);
+
+    @NonNull
     CompletionStage<R> asCompletionStage();
 }

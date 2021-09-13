@@ -11,8 +11,12 @@ import java.util.Optional;
 @Value
 public class DialogState<O> {
 
-    public static <O> DialogState<O> empty() {
+    public static <O> @NonNull DialogState<O> empty() {
         return new DialogState<>(ValidationResult.empty(),null);
+    }
+
+    public static <O> @NonNull DialogState<O> valid(@NonNull O value) {
+        return new DialogState<>(ValidationResult.empty(),value);
     }
 
     @NonNull ValidationResult validationResult;
