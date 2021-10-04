@@ -1,7 +1,9 @@
 package fpc.tools.action;
 
+import fpc.tools.fp.Consumer1;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Nil;
+import fpc.tools.fp.TryResult;
 import lombok.NonNull;
 
 import java.util.concurrent.CompletionStage;
@@ -11,10 +13,14 @@ import java.util.function.Consumer;
 public interface ActionTicket<R> {
 
     @NonNull
-    ActionTicket<R> whenComplete(@NonNull BiConsumer<? super R, ? super Throwable> action);
+    ActionTicket<R> whenComplete(@NonNull Consumer1<? super TryResult<? super  R, ? super Throwable>> action);
+
+    default ActionTicket<R> onFailureDo(@NonNull Consumer1<? super Throwable> action) {
+        return whenComplete(t -> t.ifFailedAccept(action));
+    }
 
     @NonNull
-    ActionTicket<Nil> thenAccept(@NonNull Consumer<? super R> action);
+    ActionTicket<Nil> thenAccept(@NonNull Consumer1<? super R> action);
 
     @NonNull
     <S> ActionTicket<S> thenApply(@NonNull Function1<? super R, ? extends S> after);

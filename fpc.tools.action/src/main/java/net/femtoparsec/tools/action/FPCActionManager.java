@@ -45,11 +45,7 @@ public class FPCActionManager implements ActionManager {
         final CompletionStage<R> completionStage = launchable.launch(actionExecutor, parameter);
         final ActionTicket<R> ticket = new FPCActionTicket<>(actionExecutor, completionStage);
 
-        return ticket.whenComplete((n, t) -> {
-            if (t != null) {
-                logError(launchable, parameter, t);
-            }
-        });
+        return ticket.whenComplete(tryResult -> tryResult.ifFailedAccept(t -> logError(launchable,parameter,t)));
 
     }
 

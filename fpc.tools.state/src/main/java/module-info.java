@@ -5,13 +5,14 @@ module fpc.tools.state {
     requires static lombok;
     requires java.desktop;
 
-    requires fpc.tools.lang;
-    requires fpc.tools.fp;
+    requires transitive fpc.tools.lang;
+    requires transitive fpc.tools.fp;
 
     requires org.apache.logging.log4j;
-    requires javafx.base;
     requires com.google.common;
-    requires javafx.graphics;
+
+    requires transitive javafx.base;
+    requires transitive javafx.graphics;
 
     exports fpc.tools.state;
 

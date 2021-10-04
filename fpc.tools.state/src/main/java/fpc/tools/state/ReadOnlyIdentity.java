@@ -39,6 +39,9 @@ public interface ReadOnlyIdentity<S> {
     }
 
 
-
+    /**
+     * @return the current state, there might be mutations in progress which means this state might not the up to date one
+     */
+    @NonNull S getCurrentState();
 
 }

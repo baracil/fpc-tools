@@ -104,6 +104,10 @@ public class FPCIdentity<R> implements Identity<R> {
         }
     }
 
+    @Override
+    public @NonNull R getCurrentState() {
+        return rootState;
+    }
 
     @NonNull
     private <P> CompletionStage<P> launchHeavyComputation(@NonNull Function0<? extends P> heavyComputation) {

@@ -29,6 +29,11 @@ public class ProxyIdentity<R> implements Identity<R> {
     }
 
     @Override
+    public @NonNull R getCurrentState() {
+        return delegate.getCurrentState();
+    }
+
+    @Override
     @NonNull
     public CompletionStage<R> mutate(@NonNull Mutation<R> mutation) {
         return delegate.mutate(mutation);

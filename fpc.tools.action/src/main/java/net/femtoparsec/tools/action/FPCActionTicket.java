@@ -4,8 +4,10 @@ import fpc.tools.action.Action;
 import fpc.tools.action.ActionExecutor;
 import fpc.tools.action.ActionTicket;
 import fpc.tools.action.AsyncAction;
+import fpc.tools.fp.Consumer1;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Nil;
+import fpc.tools.fp.TryResult;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -22,12 +24,12 @@ public class FPCActionTicket<R> implements ActionTicket<R> {
     private final CompletionStage<R> completionStage;
 
     @Override
-    public @NonNull ActionTicket<R> whenComplete(@NonNull BiConsumer<? super R, ? super Throwable> action) {
-        return withNewCompletionStage(completionStage.whenComplete(action));
+    public @NonNull ActionTicket<R> whenComplete(@NonNull Consumer1<? super TryResult<? super R, ? super Throwable>> action) {
+        return withNewCompletionStage(completionStage.whenComplete((r,t) -> action.accept(t != null ? TryResult.failure(t):TryResult.success(r))));
     }
 
     @Override
-    public @NonNull ActionTicket<Nil> thenAccept(@NonNull Consumer<? super R> action) {
+    public @NonNull ActionTicket<Nil> thenAccept(@NonNull Consumer1<? super R> action) {
         return withNewCompletionStage(completionStage.thenAccept(action).thenApply(v -> Nil.NULL));
     }
 
