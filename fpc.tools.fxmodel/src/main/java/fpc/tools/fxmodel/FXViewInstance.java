@@ -20,6 +20,9 @@ public interface FXViewInstance {
     @NonNull
     Optional<Node> node();
 
+    @NonNull
+    <C> Optional<C> controller(@NonNull Class<C> controllerType);
+
     void  showing();
 
     void  hiding();
@@ -33,10 +36,16 @@ public interface FXViewInstance {
         }
 
         @Override
+        public @NonNull <C> Optional<C> controller(@NonNull Class<C> controllerType) {
+            return Optional.empty();
+        }
+
+        @Override
         public void showing() {}
 
         @Override
         public void hiding() {}
+
     };
 
 

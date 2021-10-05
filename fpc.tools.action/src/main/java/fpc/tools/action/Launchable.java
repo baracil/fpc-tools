@@ -1,10 +1,7 @@
 package fpc.tools.action;
 
 import lombok.NonNull;
-import net.femtoparsec.tools.action.Head;
-import net.femtoparsec.tools.action.HeadOpt;
-import net.femtoparsec.tools.action.HeadStage;
-import net.femtoparsec.tools.action.HeadStageOpt;
+import net.femtoparsec.tools.action.*;
 
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
@@ -29,6 +26,11 @@ public interface Launchable<P,R>  {
     @NonNull
     static <P,R> Launchable<P,R> single(@NonNull Class<? extends Action<? super P,? extends R>> actionType) {
         return new Head<>(actionType);
+    }
+
+    @NonNull
+    static <P,R> Launchable<P,R> singleAsync(@NonNull Class<? extends AsyncAction<? super P,? extends R>> actionType) {
+        return new AsyncHead<>(actionType);
     }
 
     @NonNull

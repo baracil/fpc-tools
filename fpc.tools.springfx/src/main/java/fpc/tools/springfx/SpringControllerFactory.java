@@ -22,7 +22,7 @@ public class SpringControllerFactory implements ControllerFactory {
             try {
                 return controllerType.getConstructor().newInstance();
             } catch (NoSuchMethodException nme) {
-                throw new IllegalArgumentException("It seems that the controller "+controllerType+" should be a Spring bean. Forgot the @FXMLComponent annotation ?",nme);
+                throw new IllegalArgumentException("It seems that the controller "+controllerType+" should be a Spring bean. Forgot the @FXComponent annotation ?",nme);
             }
         }
     }

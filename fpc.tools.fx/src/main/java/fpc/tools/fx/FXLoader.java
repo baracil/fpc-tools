@@ -21,7 +21,6 @@ public interface FXLoader {
     @NonNull
     FXLoader cached();
 
-
     static @NonNull Optional<Object> retrieveController(@NonNull Node node) {
         return Optional.ofNullable(node.getProperties().get(CONTROLLER_KEY))
                        .filter(Reference.class::isInstance)

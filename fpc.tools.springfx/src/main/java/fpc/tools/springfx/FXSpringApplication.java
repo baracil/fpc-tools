@@ -69,6 +69,7 @@ public abstract class FXSpringApplication extends Application {
             ApplicationContextInitializer<?>... initializers) {
         final var springLauncher = new SpringLauncher(getParameters().getRaw(),
                 prepareApplicationClass(),
+                a -> a.setHeadless(false),
                 initializers,
                 this::processPackagesBeforeIncludingThemIntoSpring);
         return CompletableFuture.supplyAsync(springLauncher::launch);

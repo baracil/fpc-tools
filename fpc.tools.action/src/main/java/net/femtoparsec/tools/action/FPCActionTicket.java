@@ -48,8 +48,18 @@ public class FPCActionTicket<R> implements ActionTicket<R> {
     }
 
     @Override
+    public @NonNull <P, S> ActionTicket<S> thenExecute(@NonNull Class<? extends Action<P, S>> actionType, @NonNull P parameter) {
+        return withNewCompletionStage(completionStage.thenCompose(r -> actionExecutor.pushAction(actionType,parameter)));
+    }
+
+    @Override
     public @NonNull <S> ActionTicket<S> thenExecuteAsync(@NonNull Class<? extends AsyncAction<R, S>> actionType) {
         return withNewCompletionStage(completionStage.thenCompose(r -> actionExecutor.pushAction(actionType, r).thenCompose(c -> c)));
+    }
+
+    @Override
+    public @NonNull ActionTicket<R> onFailureReturn(@NonNull Function1<Throwable, ? extends R> action) {
+        return withNewCompletionStage(completionStage.exceptionally(action));
     }
 
     @Override

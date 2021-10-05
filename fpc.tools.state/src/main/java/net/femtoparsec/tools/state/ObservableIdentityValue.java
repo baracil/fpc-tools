@@ -34,7 +34,7 @@ public class ObservableIdentityValue<R,S> extends ObservableValueBase<S> impleme
     public void stateChanged(@NonNull R oldRoot, @NonNull R newRoot) {
         final S oldValue = getter.apply(oldRoot);
         final S newValue = getter.apply(newRoot);
-        LOG.trace("StateChanged : {} -> {}", oldValue, newValue);
+        LOG.warn("StateChanged : {} -> {}", oldValue, newValue);
         if (oldValue == newValue) {
             return;
         }

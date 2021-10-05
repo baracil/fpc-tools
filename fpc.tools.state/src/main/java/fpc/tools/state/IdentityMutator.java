@@ -21,7 +21,7 @@ public interface IdentityMutator<S> {
      */
     @NonNull
     default <V> CompletionStage<S> mutate(@NonNull Mutation<V> subMutation, @NonNull Accessor<S, V> accessor) {
-        return mutate(new SubMutation<>(subMutation,accessor));
+        return mutate(new SubMutation<>(accessor,subMutation));
     }
 
 }

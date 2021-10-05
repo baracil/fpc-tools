@@ -27,8 +27,6 @@ public abstract class DynamicController {
     protected abstract void initializeSlots(@NonNull SlotRegistry slotRegistry);
     protected abstract void performControllerInitialization();
 
-
-
     protected boolean setSlotViewEmpty(@NonNull String slotName) {
         return setSlotView(slotName,EmptyFXView.class);
     }

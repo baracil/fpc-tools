@@ -21,6 +21,6 @@ public interface Accessor<S, V> {
 
     @NonNull
     default fpc.tools.state.Mutation<S> wrap(@NonNull fpc.tools.state.Mutation<V> subMutation) {
-        return new SubMutation<>(subMutation,this);
+        return new SubMutation<S,V>(this,subMutation);
     }
 }

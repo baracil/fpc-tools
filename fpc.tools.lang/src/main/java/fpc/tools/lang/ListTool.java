@@ -1,10 +1,7 @@
 package fpc.tools.lang;
 
 import com.google.common.collect.ImmutableList;
-import fpc.tools.fp.FPUtils;
-import fpc.tools.fp.Function1;
-import fpc.tools.fp.Function2;
-import fpc.tools.fp.Function3;
+import fpc.tools.fp.*;
 import lombok.AccessLevel;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +19,13 @@ import java.util.stream.Stream;
  */
 @SuppressWarnings("unused")
 public class ListTool {
+
+
+    public static <A> ImmutableList<A> replace(@NonNull ImmutableList<A> source, @NonNull A value, @NonNull Predicate1<A> filter) {
+        return source.stream()
+                     .map(a -> filter.f(a)?value:a)
+                     .collect(ImmutableList.toImmutableList());
+    }
 
     /**
      * Add <code>v1</code> to the beginning of the list <code>list</code>

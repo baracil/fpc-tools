@@ -29,4 +29,9 @@ public class FPCFXViewInstance implements FXViewInstance {
     public @NonNull Optional<Node> node() {
         return result.getRoot(Node.class);
     }
+
+    @Override
+    public @NonNull <C> Optional<C> controller(@NonNull Class<C> controllerType) {
+        return result.getController(controllerType);
+    }
 }

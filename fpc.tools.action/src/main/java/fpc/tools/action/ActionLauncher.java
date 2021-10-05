@@ -37,6 +37,14 @@ public interface ActionLauncher {
         return pushAction(Launchable.single(actionType),Nil.NULL);
     }
 
+    default <R> ActionTicket<R> pushActionAsync(@NonNull Class<? extends AsyncAction<Nil,R>> actionType) {
+        return pushAction(Launchable.singleAsync(actionType),Nil.NULL);
+    }
+
+    default <P,R> ActionTicket<R> pushActionAsync(@NonNull Class<? extends AsyncAction<P,R>> actionType, @NonNull P parameter) {
+        return pushAction(Launchable.singleAsync(actionType),parameter);
+    }
+
     /**
      * short cut to <code>execute(actionType,Nil.NULL)</code>
      */

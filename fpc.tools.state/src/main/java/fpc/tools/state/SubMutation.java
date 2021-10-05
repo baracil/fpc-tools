@@ -1,26 +1,21 @@
 package fpc.tools.state;
 
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
-public class SubMutation<S, V> implements Mutation<S> {
+public class SubMutation<S, V> extends SubMutationBase<S,V> implements Mutation<S> {
 
     @NonNull
     private final Mutation<V> subMutation;
 
-    @NonNull
-    private final Accessor<S, V> accessor;
 
-    @NonNull
-    @Override
-    public S mutate(@NonNull S currentState) {
-        final V currentValue = accessor.getValue(currentState);
-        final V newValue = subMutation.mutate(currentValue);
-        if (newValue == currentValue) {
-            return currentState;
-        }
-
-        return accessor.subMutation(currentState,newValue);
+    public SubMutation(@NonNull Accessor<S, V> accessor, @NonNull Mutation<V> subMutation) {
+        super(accessor);
+        this.subMutation = subMutation;
     }
+
+    @Override
+    protected @NonNull V subMutate(@NonNull V currentValue) {
+        return subMutation.mutate(currentValue);
+    }
+
 }

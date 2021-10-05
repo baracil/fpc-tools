@@ -1,6 +1,8 @@
 package fpc.tools.spring;
 
+import fpc.tools.fp.Consumer1;
 import fpc.tools.fp.Predicate1;
+import fpc.tools.fp.UnaryOperator1;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -28,6 +30,9 @@ public class SpringLauncher {
     private final Class<?>[] applicationClasses;
 
     @NonNull
+    private final Consumer1<SpringApplication> modifier;
+
+    @NonNull
     private final ApplicationContextInitializer<?>[] initializers;
 
     @NonNull
@@ -35,10 +40,24 @@ public class SpringLauncher {
 
 
     public SpringLauncher(@NonNull List<String> arguments,
+                          @NonNull Class<?>[] applicationClasses,
+                          @NonNull ApplicationContextInitializer<?>[] initializers,
+                          @NonNull Predicate1<? super SpringModule> springModuleFilter) {
+        this(arguments,applicationClasses,a -> {}, initializers, springModuleFilter);
+   }
+    public SpringLauncher(@NonNull List<String> arguments,
                           @NonNull Class<?> applicationClass,
                           @NonNull ApplicationContextInitializer<?>[] initializers,
                           @NonNull Predicate1<? super SpringModule> springModuleFilter) {
-        this(arguments,new Class<?>[]{applicationClass},initializers, springModuleFilter);
+        this(arguments,new Class<?>[]{applicationClass},a -> {}, initializers, springModuleFilter);
+   }
+
+    public SpringLauncher(@NonNull List<String> arguments,
+                          @NonNull Class<?> applicationClass,
+                          @NonNull Consumer1<SpringApplication> modifier,
+                          @NonNull ApplicationContextInitializer<?>[] initializers,
+                          @NonNull Predicate1<? super SpringModule> springModuleFilter) {
+        this(arguments,new Class<?>[]{applicationClass},modifier, initializers, springModuleFilter);
    }
 
     @NonNull
@@ -67,6 +86,7 @@ public class SpringLauncher {
             application = new SpringApplication(applicationClasses);
             application.setBannerMode(Banner.Mode.OFF);
             application.addInitializers(initializers);
+            modifier.accept(application);
         }
 
         private void retrieveAllExtraPackagesToScan() {
