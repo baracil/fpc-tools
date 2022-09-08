@@ -20,7 +20,7 @@ public class ThrowableTool {
     }
 
     public static void interruptIfCausedByInterruption(@NonNull Throwable throwable) {
-        FPUtils.interruptIfCausedByInterruption(throwable);
+        FPUtils.interruptIfCausedByAnInterruption(throwable);
     }
 
     public static String oneLineMessage(@NonNull Throwable throwable) {

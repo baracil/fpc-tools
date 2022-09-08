@@ -8,9 +8,9 @@ import fpc.tools.lang.ListenersFactory;
 import fpc.tools.lang.Subscription;
 import lombok.NonNull;
 import lombok.Synchronized;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
-@Log4j2
+@Slf4j
 public class FPCListeners<L> implements Listeners<L> {
 
     public static @NonNull ListenersFactory provider() {
@@ -29,7 +29,7 @@ public class FPCListeners<L> implements Listeners<L> {
 
     @Synchronized
     private void remove(@NonNull L listener) {
-        listeners = ListTool.removeOnceFrom(listeners).f(l -> l == listener);
+        listeners = ListTool.removeOnceFrom(listeners).apply(l -> l == listener);
     }
 
     public void forEachListeners(@NonNull Consumer1<? super L> action) {

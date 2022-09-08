@@ -27,7 +27,7 @@ public class FPCActionChainOpt<P, U, R, RR> extends ActionChainOptBase<P,R> {
 
     @Override
     public @NonNull CompletionStage<Optional<R>> launch(@NonNull ActionExecutor executor, @NonNull P parameter) {
-        return before.f(executor, parameter)
+        return before.apply(executor, parameter)
                      .thenCompose(u -> {
                          if (u.isPresent()) {
                              return executor.pushAction(then, u.get()).thenApply(finalizer);

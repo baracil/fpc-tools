@@ -22,7 +22,7 @@ public class BasicCellValueFactory<S,T> implements Callback<TableColumn.CellData
     @Override
     public ObservableValue<T> call(TableColumn.CellDataFeatures<S, T> cellDataFeatures) {
         final S value = cellDataFeatures.getValue();
-        final T cellValue = value == null ? null : getter.f(value);
+        final T cellValue = value == null ? null : getter.apply(value);
         return new ReadOnlyObjectWrapper<>(cellValue);
     }
 }

@@ -4,11 +4,12 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Deque;
 import java.util.LinkedList;
 
-@Log4j2
+@Slf4j
 public class FXCursorSetter implements CursorSetter {
 
     private final Deque<Cursor> stack = new LinkedList<>();

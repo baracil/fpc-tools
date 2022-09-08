@@ -7,11 +7,11 @@
     <parent>
         <groupId>net.femtoparsec.tools</groupId>
         <artifactId>fpc-tools</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>fpc-tools-validation</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
 
     <name>${application.name} - ${module.name}</name>
 
@@ -21,10 +21,6 @@
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>net.femtoparsec.tools</groupId>-->
-<!--            <artifactId>fpc-tools-lang</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>net.femtoparsec.tools</groupId>
             <artifactId>fpc-tools-fp</artifactId>
@@ -33,23 +29,9 @@
             <groupId>net.femtoparsec.tools</groupId>
             <artifactId>fpc-tools-lang</artifactId>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.openjfx</groupId>-->
-<!--            <artifactId>javafx-base</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.openjfx</groupId>-->
-<!--            <artifactId>javafx-graphics</artifactId>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
         </dependency>
     </dependencies>
 

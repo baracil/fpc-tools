@@ -104,7 +104,7 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
                                                      .stream()
                                                      .filter(predicate.negate())
                                                      .collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, Map.Entry::getValue));
-        return factory.f(newContent);
+        return factory.apply(newContent);
     }
 
     /**
@@ -257,7 +257,7 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
                     this.content.entrySet().stream().filter(e -> isNotRemovedNorAdded(e.getKey())),
                     addedValues.entrySet().stream()
             ).collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, Map.Entry::getValue));
-            return factory.f(content);
+            return factory.apply(content);
         }
 
         private boolean isNotRemovedNorAdded(K key) {

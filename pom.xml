@@ -6,7 +6,7 @@
 
     <groupId>net.femtoparsec.tools</groupId>
     <artifactId>fpc-tools</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>FPC Tools</name>
@@ -15,12 +15,14 @@
         <application.name>FPC Tools</application.name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        <lombok.version>1.18.20</lombok.version>
-        <guava.version>30.1.1-jre</guava.version>
-        <log4j.version>2.14.1</log4j.version>
-        <javafx.version>17.0.0.1</javafx.version>
+        <micronaut.version>3.6.1</micronaut.version>
+        <lombok.version>1.18.24</lombok.version>
+        <guava.version>31.0.1-jre</guava.version>
+        <javafx.version>17.0.2</javafx.version>
         <controlsfx.version>11.1.0</controlsfx.version>
         <spring-boot.version>2.5.4</spring-boot.version>
+        <slf4j.version>1.7.36</slf4j.version>
+        <jakarta-persistence.version>2.2.3</jakarta-persistence.version>
     </properties>
 
     <modules>
@@ -34,6 +36,14 @@
         <module>fpc.tools.springfx</module>
         <module>fpc.tools.fxmodel</module>
         <module>fpc.tools.action</module>
+        <module>fpc.tools.persistence</module>
+        <module>fpc.tools.hibernate</module>
+        <module>fpc.tools.cipher</module>
+        <module>fpc.tools.jackson</module>
+        <module>fpc.tools.serde</module>
+        <module>fpc.tools.micronaut</module>
+        <module>test</module>
+        <module>bom</module>
     </modules>
 
 
@@ -43,6 +53,10 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
     </dependencies>
 
@@ -56,6 +70,11 @@
             <dependency>
                 <groupId>net.femtoparsec.tools</groupId>
                 <artifactId>fpc-tools-lang</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.femtoparsec.tools</groupId>
+                <artifactId>fpc-tools-cipher</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -94,6 +113,50 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>io.micronaut</groupId>
+                <artifactId>micronaut-bom</artifactId>
+                <version>${micronaut.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+<!--            <dependency>-->
+<!--                <groupId>org.hibernate</groupId>-->
+<!--                <artifactId>hibernate-core</artifactId>-->
+<!--                <version>${hibernate.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>io.micronaut.serde</groupId>-->
+<!--                <artifactId>micronaut-serde-jackson</artifactId>-->
+<!--                <version>${micronaut-serde-jackson.version}</version>-->
+<!--            </dependency>-->
+
+<!--            <dependency>-->
+<!--                <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--                <artifactId>jackson-databind</artifactId>-->
+<!--                <version>${jackson.version}</version>-->
+<!--            </dependency>-->
+
+<!--            <dependency>-->
+<!--                <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--                <artifactId>jackson-core</artifactId>-->
+<!--                <version>${jackson.version}</version>-->
+<!--            </dependency>-->
+
+            <!--            <dependency>-->
+<!--                <groupId>jakarta.persistence</groupId>-->
+<!--                <artifactId>jakarta.persistence-api</artifactId>-->
+<!--                <version>${jakarta-persistence.version}</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>org.openjfx</groupId>
@@ -127,9 +190,9 @@
             </dependency>
 
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
-                <version>${log4j.version}</version>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.controlsfx</groupId>
@@ -137,13 +200,8 @@
                 <version>${controlsfx.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+
+
 
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -156,6 +214,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 

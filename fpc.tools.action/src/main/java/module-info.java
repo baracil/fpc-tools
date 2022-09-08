@@ -7,7 +7,7 @@ module fpc.tools.action {
     requires fpc.tools.lang;
     requires fpc.tools.state;
 
-    requires org.apache.logging.log4j;
+    requires org.slf4j;
     requires com.google.common;
 
 

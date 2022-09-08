@@ -95,7 +95,7 @@ public abstract class AbstractValidator<O,V extends Validator<O,V>> implements V
             return f.apply(null);
         } else {
             try {
-                final T converted = mapper.f(value);
+                final T converted = mapper.apply(value);
                 return f.apply(converted);
             } catch (Throwable t) {
                 return f.apply(null).addError(ErrorType.INVALID_VALUE);

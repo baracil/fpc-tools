@@ -24,6 +24,6 @@ public class SimpleAccessor<S,V> implements Accessor<S,V> {
     @NonNull
     @Override
     public S subMutation(@NonNull S currentState, @NonNull V newValue) {
-        return updater.f(currentState,newValue);
+        return updater.apply(currentState,newValue);
     }
 }

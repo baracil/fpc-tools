@@ -17,7 +17,7 @@ public interface Try2<A,B, Z,T extends Throwable> {
         try {
             return TryResult.success(f(a,b));
         } catch (Throwable throwable) {
-            FPUtils.interruptIfCausedByInterruption(throwable);
+            FPUtils.interruptIfCausedByAnInterruption(throwable);
             return TryResult.failure(throwable);
         }
     }
@@ -28,7 +28,7 @@ public interface Try2<A,B, Z,T extends Throwable> {
             try {
                 return f(a,b);
             } catch (Throwable t) {
-                throw  errorWrapper.f(t);
+                throw  errorWrapper.apply(t);
             }
         };
     }
@@ -42,11 +42,11 @@ public interface Try2<A,B, Z,T extends Throwable> {
     }
 
     default Try1<B,Z,T> f1(Function0<? extends A> a) {
-        return b -> f(a.f(), b);
+        return b -> f(a.apply(), b);
     }
 
     default Try1<A,Z,T> f2(Function0<? extends B> b) {
-        return a -> f(a, b.f());
+        return a -> f(a, b.apply());
     }
 
     @NonNull

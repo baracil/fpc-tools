@@ -105,7 +105,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
                                                      .stream()
                                                      .filter(predicate.negate())
                                                      .collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, Map.Entry::getValue));
-        return factory.f(newContent);
+        return factory.apply(newContent);
     }
 
     /**
@@ -127,7 +127,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
         if (toRemove.isEmpty()) {
             return getThis();
         } else if (toRemove.size() == content.size()) {
-            return factory.f(ImmutableMap.of());
+            return factory.apply(ImmutableMap.of());
         }
         return removeIfKeyMatches(toRemove::contains);
     }
@@ -286,7 +286,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
                     this.content.entrySet().stream().filter(e -> isNotRemovedNorAdded(e.getKey())),
                     addedValues.entrySet().stream()
             ).collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, Map.Entry::getValue));
-            return factory.f(content);
+            return factory.apply(content);
         }
 
         private boolean isNotRemovedNorAdded(K key) {
@@ -295,7 +295,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
 
         public  Builder<K, V, M> putAll(@NonNull ImmutableCollection<K> keys,
                                                      Function1<? super K, ? extends V> valueGetter) {
-            keys.forEach(k -> put(k,valueGetter.f(k)));
+            keys.forEach(k -> put(k,valueGetter.apply(k)));
             return this;
         }
     }

@@ -21,7 +21,7 @@ public class FPCActionChain<P, U, R> extends ActionChainBase<P, R> {
 
     @Override
     public @NonNull CompletionStage<R> launch(@NonNull ActionExecutor executor, @NonNull P parameter) {
-        return before.f(executor, parameter)
+        return before.apply(executor, parameter)
                      .thenCompose(r -> executor.pushAction(then, r));
     }
 

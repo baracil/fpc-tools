@@ -3,7 +3,7 @@ package fpc.tools.lang;
 import com.google.common.collect.ImmutableMap;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Function2;
-import fpc.tools.fp.Value2;
+import fpc.tools.fp.Tuple2;
 import lombok.AccessLevel;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -41,16 +41,16 @@ public class MapTool {
         return collector(keyGetter, Function1.identity());
     }
 
-    public static <A,K> Collector<Value2<K,A>, ?, ImmutableMap<K,A>> value2Collector() {
-        return ImmutableMap.toImmutableMap(Value2::v1, Value2::v2);
+    public static <A,K> Collector<Tuple2<K,A>, ?, ImmutableMap<K,A>> value2Collector() {
+        return ImmutableMap.toImmutableMap(Tuple2::v1, Tuple2::v2);
     }
 
-    public static <A,K,T> Collector<Value2<K,A>, ?, ImmutableMap<K,T>> simpleValue2Collector(Function<? super A, ? extends T> valueGetter) {
-        return ImmutableMap.toImmutableMap(Value2::v1, v -> valueGetter.apply(v.v2()));
+    public static <A,K,T> Collector<Tuple2<K,A>, ?, ImmutableMap<K,T>> simpleValue2Collector(Function<? super A, ? extends T> valueGetter) {
+        return ImmutableMap.toImmutableMap(Tuple2::v1, v -> valueGetter.apply(v.v2()));
     }
 
-    public static <A,K,T> Collector<Value2<K,A>, ?, ImmutableMap<K,T>> value2Collector(Function<? super Value2<K,A>, ? extends T> valueGetter) {
-        return ImmutableMap.toImmutableMap(Value2::v1, valueGetter::apply);
+    public static <A,K,T> Collector<Tuple2<K,A>, ?, ImmutableMap<K,T>> value2Collector(Function<? super Tuple2<K,A>, ? extends T> valueGetter) {
+        return ImmutableMap.toImmutableMap(Tuple2::v1, valueGetter::apply);
     }
 
     public static <A,K,V> Function1<Stream<? extends A>, ImmutableMap<K,V>> collect(Function<A, ? extends K> keyGetter, Function<A, ? extends V> valueGetter) {
@@ -115,12 +115,12 @@ public class MapTool {
 
         @NonNull
         @Override
-        public ImmutableMap<K,V> f(@NonNull Predicate<? super K> predicate) {
+        public ImmutableMap<K,V> apply(@NonNull Predicate<? super K> predicate) {
             return target.keySet().stream().filter(predicate).collect(collector(k -> k, target::get));
         }
 
         public ImmutableMap<K,V> with(Predicate<? super K> predicate) {
-            return f(predicate);
+            return apply(predicate);
         }
 
     }

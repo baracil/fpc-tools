@@ -19,7 +19,7 @@ public class StringTool {
 
     public static class IsEndingWithSuffix implements Predicate2<String,String> {
         @Override
-        public boolean f(@NonNull String str, @NonNull String suffix) {
+        public boolean test(@NonNull String str, @NonNull String suffix) {
             return str.endsWith(suffix);
         }
 
@@ -45,15 +45,15 @@ public class StringTool {
     }
 
     public static <A> Object toStringLazy(Function1<A, Object> transformer, A a) {
-        return new LazyToString(() -> transformer.f(a));
+        return new LazyToString(() -> transformer.apply(a));
     }
 
     public static <A,B> Object toStringLazy(Function2<A, B,Object> transformer, A a, B b) {
-        return new LazyToString(() -> transformer.f(a,b));
+        return new LazyToString(() -> transformer.apply(a,b));
     }
 
     public static <A,B,C> Object toStringLazy(Function3<A, B, C,Object> transformer, A a, B b, C c) {
-        return new LazyToString(() -> transformer.f(a,b,c));
+        return new LazyToString(() -> transformer.apply(a,b,c));
     }
 
     @RequiredArgsConstructor

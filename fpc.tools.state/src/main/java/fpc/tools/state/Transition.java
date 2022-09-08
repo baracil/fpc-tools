@@ -1,7 +1,7 @@
 package fpc.tools.state;
 
 import fpc.tools.fp.Predicate1;
-import fpc.tools.lang.Tools;
+import fpc.tools.lang.Todo;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class Transition<S> implements Predicate1<Function<? super S, ?>> {
     }
 
     @Override
-    public boolean f(@NonNull Function<? super S, ?> function) {
-        return Tools.same(previous,current,function);
+    public boolean test(@NonNull Function<? super S, ?> function) {
+        return Todo.same(previous,current,function);
     }
 }

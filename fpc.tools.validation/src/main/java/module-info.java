@@ -4,6 +4,7 @@ import net.femtoparsec.tools.validation.FPCValidation;
 module fpc.tools.validation {
     requires static lombok;
     requires java.desktop;
+
     requires fpc.tools.fp;
     requires fpc.tools.lang;
     requires com.google.common;

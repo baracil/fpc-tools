@@ -10,7 +10,7 @@ public class SubscriptionHolder {
 
     public void replace(@NonNull Function0<Subscription> subscriber) {
         subscription.unsubscribe();
-        subscription = subscriber.f();
+        subscription = subscriber.apply();
     }
 
     public void append(Subscription subscription) {

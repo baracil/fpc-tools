@@ -6,7 +6,7 @@ module fpc.tools.fxmodel {
     requires fpc.tools.state;
     requires fpc.tools.fp;
 
-    requires org.apache.logging.log4j;
+    requires org.slf4j;
     requires javafx.graphics;
     requires com.google.common;
 

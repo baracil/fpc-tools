@@ -6,15 +6,10 @@ import java.util.function.Function;
 
 public interface Function1<A,R> extends Function<A,R> {
 
-    @NonNull R f(@NonNull A value);
+    @NonNull R apply(@NonNull A value);
 
     static @NonNull <A> Function1<A,A> identity() {
         return a -> a;
-    }
-
-    @Override
-    default R apply(A a) {
-        return f(a);
     }
 
     /**
@@ -26,15 +21,15 @@ public interface Function1<A,R> extends Function<A,R> {
     @NonNull
     default TryResult<R,RuntimeException> fSafe(@NonNull A a) {
         try {
-            return TryResult.success(f(a));
+            return TryResult.success(apply(a));
         } catch (RuntimeException e) {
-            FPUtils.interruptIfCausedByInterruption(e);
+            FPUtils.interruptIfCausedByAnInterruption(e);
             return TryResult.failure(e);
         }
     }
 
     default <S> @NonNull Function1<A,S> then(@NonNull Function1<? super R, ? extends S> after) {
-        return r ->after.f(f(r));
+        return r ->after.apply(apply(r));
     }
 
 }

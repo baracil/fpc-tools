@@ -74,9 +74,9 @@ public final class Either<A,B> {
 
     public <C,D> @NonNull Either<C,D> flatMap(@NonNull Function1<? super A, Either<C,D>> leftMapper,@NonNull Function1<? super B, Either<C,D>> rightMapper) {
         if (left != null) {
-            return leftMapper.f(left);
+            return leftMapper.apply(left);
         }
-        return rightMapper.f(right);
+        return rightMapper.apply(right);
     }
 
     /**
@@ -96,9 +96,9 @@ public final class Either<A,B> {
     public@NonNull <C,T extends Throwable> C tryMerge(@NonNull Try1<? super A, ? extends C,? extends T> leftMapper,
                                                       @NonNull Try1<? super B, ? extends C,? extends T> rightMapper) throws T {
         if (left != null) {
-            return leftMapper.f(left);
+            return leftMapper.apply(left);
         }
-        return rightMapper.f(right);
+        return rightMapper.apply(right);
     }
 
     public void acceptMerge(Consumer1<? super A> leftConsumer, Consumer1<? super B> rightConsumer) {
@@ -110,8 +110,15 @@ public final class Either<A,B> {
 
     public @NonNull B toRightValue(Function1<? super A, ? extends B> switcher) {
         if (left != null) {
-            return switcher.f(left);
+            return switcher.apply(left);
         }
         return right;
+    }
+
+    public @NonNull A toLeftValue(Function1<? super B, ? extends A> switcher) {
+        if (right != null) {
+            return switcher.apply(right);
+        }
+        return left;
     }
 }

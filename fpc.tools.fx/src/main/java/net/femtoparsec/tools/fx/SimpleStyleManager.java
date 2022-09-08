@@ -1,14 +1,12 @@
 package net.femtoparsec.tools.fx;
 
 import fpc.tools.fp.Function1;
-import fpc.tools.fp.Nil;
 import fpc.tools.fx.StyleManager;
 import fpc.tools.fx.Theme;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -83,7 +81,7 @@ public class SimpleStyleManager implements StyleManager {
         public boolean tryToSetStyle(@NonNull Theme oldTheme, @NonNull Theme newTheme) {
             final T value = reference.get();
             if (value != null) {
-                updateScene(stylesheets.f(value),oldTheme,newTheme);
+                updateScene(stylesheets.apply(value),oldTheme,newTheme);
             }
             return value != null;
         }

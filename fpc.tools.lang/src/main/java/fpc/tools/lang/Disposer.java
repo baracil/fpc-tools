@@ -2,6 +2,7 @@ package fpc.tools.lang;
 
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
@@ -15,7 +16,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Can be used to launch an action when a reference is garbage collected.
  *
  */
-@Log4j2
+@Slf4j
 public class Disposer {
 
     public static final Runnable NOPE = () -> {};
@@ -41,7 +42,7 @@ public class Disposer {
     }
 
 
-    public void stop() throws InterruptedException {
+    public void stop() {
         lock.writeLock().lock();
         try {
             thread.interrupt();

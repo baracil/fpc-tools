@@ -83,7 +83,7 @@ public class BasicLoader<P, R> implements Loader<P,R> {
                 completableFuture.completeExceptionally(new InterruptedException());
             }
             try {
-                completableFuture.complete(function.f(parameter));
+                completableFuture.complete(function.apply(parameter));
             } catch (Throwable t) {
                 ThrowableTool.interruptIfCausedByInterruption(t);
                 completableFuture.completeExceptionally(t);

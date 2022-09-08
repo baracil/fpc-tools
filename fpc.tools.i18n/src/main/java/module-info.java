@@ -3,7 +3,7 @@ module fpc.tools.i18n {
     requires java.desktop;
 
     requires com.google.common;
-    requires org.apache.logging.log4j;
+    requires org.slf4j;
 
     exports fpc.tools.i18n;
 }

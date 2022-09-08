@@ -32,7 +32,7 @@ public interface UnaryOperator1<A> extends Function1<A,A> {
         if (f1 instanceof UnaryOperator1) {
             return (UnaryOperator1<A>)f1;
         }
-        return f1::f;
+        return f1::apply;
     }
 
     static <A> UnaryOperator1<A> cons(@NonNull A value) {
@@ -40,10 +40,10 @@ public interface UnaryOperator1<A> extends Function1<A,A> {
     }
 
     default UnaryOperator1<A> then(UnaryOperator1<A> after) {
-        return a -> after.f(f(a));
+        return a -> after.apply(apply(a));
     }
     
     default <B> UnaryOperator1<B> map(Function<? super B, ? extends A> to, Function<? super A, ? extends B> from) {
-        return b -> from.apply(this.f(to.apply(b)));
+        return b -> from.apply(this.apply(to.apply(b)));
     }
 }

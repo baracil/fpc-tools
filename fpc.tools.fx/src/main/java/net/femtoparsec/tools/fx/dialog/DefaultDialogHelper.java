@@ -42,7 +42,7 @@ public class DefaultDialogHelper<K extends DialogKindBase<K>> implements DialogH
             @NonNull Class<C> controllerClass,
             @NonNull Function1<? super Class<C>, ? extends FXLoader> loaderFactory,
             @NonNull I input) {
-        final var result = loaderFactory.f(controllerClass).load();
+        final var result = loaderFactory.apply(controllerClass).load();
         final var controller = result.getController(controllerClass).orElseThrow(() -> new RuntimeException("Invalid controller class " + controllerClass));
         return showDialog(dialogKind, controller, result.getRoot(), input);
     }

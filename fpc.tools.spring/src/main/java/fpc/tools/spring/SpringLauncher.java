@@ -6,6 +6,7 @@ import fpc.tools.fp.UnaryOperator1;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
@@ -19,7 +20,7 @@ import java.util.ServiceLoader;
 /**
  * @author Bastien Aracil
  */
-@Log4j2
+@Slf4j
 @RequiredArgsConstructor
 public class SpringLauncher {
 

@@ -50,7 +50,7 @@ public class UpdaterWithAction<I, T> {
         private final Function1<? super Modification<I, T>, ? extends P> parameterFactory;
 
         public ActionTicket<?> pushAction(@NonNull Modification<I, T> modification) {
-            final P parameter = parameterFactory.f(modification);
+            final P parameter = parameterFactory.apply(modification);
             return actionLauncher.pushAction(launchable, parameter);
         }
 

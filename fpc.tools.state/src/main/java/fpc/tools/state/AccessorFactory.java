@@ -21,7 +21,7 @@ public class AccessorFactory<S,B> {
             ) {
         return Accessor.with(
                 getter,
-                (s,v) -> toState.f(setter.f(toBuilder.f(s),v))
+                (s,v) -> toState.apply(setter.apply(toBuilder.apply(s),v))
         );
     }
 }

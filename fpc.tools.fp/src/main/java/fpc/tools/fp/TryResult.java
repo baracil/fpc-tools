@@ -120,7 +120,7 @@ public final class TryResult<A, E extends Throwable> {
      */
     public <Y extends Exception> Optional<TryResult<A,Y>> filter(Class<Y> exceptionType) {
         final Function1<A,Optional<TryResult<A,Y>>> successMerger = a -> Optional.of(TryResult.success(a));
-        final Function1<E,Optional<TryResult<A,Y>>> failureMerger = e -> FPUtils.as(exceptionType).f(e).map(TryResult::<A,Y>failure);
+        final Function1<E,Optional<TryResult<A,Y>>> failureMerger = e -> FPUtils.as(exceptionType).apply(e).map(TryResult::<A,Y>failure);
 
         return result.merge(failureMerger,successMerger);
     }

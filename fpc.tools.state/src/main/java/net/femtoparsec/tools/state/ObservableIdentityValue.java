@@ -6,10 +6,11 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValueBase;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-@Log4j2
+@Slf4j
 public class ObservableIdentityValue<R,S> extends ObservableValueBase<S> implements IdentityListener<R> {
 
     @NonNull

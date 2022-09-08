@@ -182,7 +182,7 @@ public class FXTools {
         }
         if (difference > 0) {
             final List<T> newElements = IntStream.range(0, difference)
-                                                 .mapToObj(i -> factory.f())
+                                                 .mapToObj(i -> factory.apply())
                                                  .collect(Collectors.toList());
             observableList.addAll(newElements);
         }

@@ -35,17 +35,17 @@ public class FPCIdVMapState<I, V extends Versioned> extends FPCMapStateBase<I, V
 
     @Override
     public @NonNull IdVMapState<I, V> put(@NonNull V value) {
-        return put(idGetter.f(value), value);
+        return put(idGetter.apply(value), value);
     }
 
     @Override
     public @NonNull IdVMapState<I, V> replace(@NonNull V value) {
-        return replace(idGetter.f(value), value);
+        return replace(idGetter.apply(value), value);
     }
 
     @Override
     public @NonNull IdVMapState<I, V> updateValue(@NonNull V value) {
-        return update(idGetter.f(value), value, Versioned.VERSIONED_COMPARATOR);
+        return update(idGetter.apply(value), value, Versioned.VERSIONED_COMPARATOR);
     }
 
     @Override

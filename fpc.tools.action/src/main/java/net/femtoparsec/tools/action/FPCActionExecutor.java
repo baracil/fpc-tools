@@ -7,13 +7,14 @@ import fpc.tools.lang.ThrowableTool;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class FPCActionExecutor implements ActionExecutor {
 
     public static final boolean TRACE_ACTIONS = Boolean.getBoolean("action.trace");

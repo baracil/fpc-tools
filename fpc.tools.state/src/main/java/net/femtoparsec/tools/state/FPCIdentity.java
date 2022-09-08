@@ -115,7 +115,7 @@ public class FPCIdentity<R> implements Identity<R> {
 
         heavyActionExecutor.execute(() -> {
             try {
-                result.complete(heavyComputation.f());
+                result.complete(heavyComputation.apply());
             } catch (Throwable t) {
                 ThrowableTool.interruptIfCausedByInterruption(t);
                 result.completeExceptionally(t);

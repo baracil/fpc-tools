@@ -1,8 +1,9 @@
 package fpc.tools.lang;
 
 import fpc.tools.fp.Predicate1;
+import fpc.tools.fp.Try0;
 import lombok.NonNull;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -10,8 +11,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 
-@Log4j2
-public class Tools {
+@Slf4j
+public class Todo {
 
     public static <T> T TODO() {
         throw new NotImplemented();
@@ -21,7 +22,8 @@ public class Tools {
         throw new NotImplemented(message);
     }
 
-    public static <T> @NonNull T WARN(@NonNull T value, @NonNull String message) {
+    public static <T> @NonNull T WARN(@NonNull Object callerObject, @NonNull T value, @NonNull String message) {
+        display(callerObject,message,false);
         return value;
     }
 
@@ -45,6 +47,18 @@ public class Tools {
             display(callerObject,"   : Done -> OK",false);
         } catch (Throwable t) {
             display(callerObject,"   : Done -> OK"+t.getMessage(),true);
+            throw t;
+        }
+    }
+
+    public static <T,E extends Exception> T TRACE_AROUND(@NonNull Object callerObject, @NonNull Try0<T,E> action, @NonNull String message) throws E {
+        display(callerObject,message+" : Start",false);
+        try {
+            var value = action.apply();
+            display(callerObject,message+" : Done -> "+value,false);
+            return value;
+        } catch (Throwable t) {
+            display(callerObject,message+" : Done -> "+t.getMessage(),true);
             throw t;
         }
     }

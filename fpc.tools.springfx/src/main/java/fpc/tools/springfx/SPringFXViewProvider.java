@@ -6,12 +6,13 @@ import fpc.tools.fxmodel.FXViewProvider;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 
 import java.util.Optional;
 
-@Log4j2
+@Slf4j
 @RequiredArgsConstructor
 public class SPringFXViewProvider implements FXViewProvider {
 

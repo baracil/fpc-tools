@@ -87,7 +87,7 @@ public class FPUtils {
         };
     }
 
-    public static void interruptIfCausedByInterruption(@NonNull Throwable throwable) {
+    public static void interruptIfCausedByAnInterruption(@NonNull Throwable throwable) {
         if (isCausedByInterruption(throwable)) {
             Thread.currentThread().interrupt();
         }

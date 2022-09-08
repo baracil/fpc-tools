@@ -2,7 +2,7 @@ package fpc.tools.fx;
 
 import fpc.tools.fp.Function0;
 import fpc.tools.fp.Nil;
-import fpc.tools.lang.Tools;
+import fpc.tools.lang.Todo;
 import lombok.NonNull;
 
 public class FXDebug {
@@ -19,7 +19,7 @@ public class FXDebug {
         FXTools.checkIsFXThread();
         depth++;
         try {
-            return Tools.TRACE_AROUND(REF, call, "  ".repeat(depth));
+            return Todo.TRACE_AROUND(REF, call, "  ".repeat(depth));
         } finally {
             depth--;
         }

@@ -12,7 +12,7 @@ module fpc.tools.springfx {
     requires spring.beans;
     requires spring.boot;
 
-    requires org.apache.logging.log4j;
+    requires org.slf4j;
     requires fpc.tools.fxmodel;
 
     exports fpc.tools.springfx;

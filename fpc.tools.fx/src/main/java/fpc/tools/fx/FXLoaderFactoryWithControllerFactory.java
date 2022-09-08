@@ -37,7 +37,7 @@ public class FXLoaderFactoryWithControllerFactory implements FXLoaderFactory {
 
     @Override
     public @NonNull FXLoader create(@NonNull URL fxmlFile, @NonNull Dictionary dictionary) {
-        return fxLoaderWrapper.f(createRawLoader(fxmlFile,dictionary));
+        return fxLoaderWrapper.apply(createRawLoader(fxmlFile,dictionary));
     }
 
     @Override

@@ -7,11 +7,11 @@ import java.util.function.Supplier;
 public interface Function0<R> extends Supplier<R> {
 
 
-    @NonNull R f();
+    @NonNull R apply();
 
     @Override
     default R get() {
-        return f();
+        return apply();
     }
 
     /**
@@ -19,16 +19,16 @@ public interface Function0<R> extends Supplier<R> {
      */
     @NonNull
     default TryResult<R,RuntimeException> fSafe() {
-        return safe().f();
+        return safe().apply();
     }
 
     @NonNull
     default Function0<TryResult<R,RuntimeException>> safe() {
         return () -> {
             try {
-                return TryResult.success(f());
+                return TryResult.success(apply());
             } catch (RuntimeException e) {
-                FPUtils.interruptIfCausedByInterruption(e);
+                FPUtils.interruptIfCausedByAnInterruption(e);
                 return TryResult.failure(e);
             }
         };

@@ -13,7 +13,7 @@ public class DebugFXView implements Function2<FXView, Node, Node> {
 
     @NonNull
     @Override
-    public Node f(@NonNull FXView fxView, @NonNull Node node) {
+    public Node apply(@NonNull FXView fxView, @NonNull Node node) {
         return nodeMapper.apply(fxView.getClass().getSimpleName(), node);
     }
 

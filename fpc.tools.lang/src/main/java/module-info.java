@@ -9,9 +9,8 @@ module fpc.tools.lang {
 
     requires transitive fpc.tools.fp;
 
-    requires org.apache.logging.log4j;
     requires com.google.common;
-
+    requires org.slf4j;
 
     exports fpc.tools.lang;
 

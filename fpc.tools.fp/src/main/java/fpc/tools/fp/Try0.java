@@ -10,14 +10,14 @@ import java.util.function.Function;
 public interface Try0<Z,T extends Throwable> {
 
     @NonNull
-    Z f() throws T;
+    Z apply() throws T;
 
     @NonNull
     default TryResult<Z,Throwable> fSafe() {
         try {
-            return TryResult.success(f());
+            return TryResult.success(apply());
         } catch (Throwable throwable) {
-            FPUtils.interruptIfCausedByInterruption(throwable);
+            FPUtils.interruptIfCausedByAnInterruption(throwable);
             return TryResult.failure(throwable);
         }
     }
@@ -26,9 +26,9 @@ public interface Try0<Z,T extends Throwable> {
     default Function0<Z> wrapError(@NonNull Function1<? super Throwable, ? extends RuntimeException> errorWrapper) {
         return () -> {
             try {
-                return f();
+                return apply();
             } catch (Throwable t) {
-                throw  errorWrapper.f(t);
+                throw  errorWrapper.apply(t);
             }
         };
     }
@@ -39,12 +39,12 @@ public interface Try0<Z,T extends Throwable> {
 
     @NonNull
     default <Y> Try0<Y,T> then(Function<? super Z, ? extends Y> after) {
-        return () -> after.apply(this.f());
+        return () -> after.apply(this.apply());
     }
 
     @NonNull
     default <Y> Try0<Y,T> thenTry(Try1<? super Z, ? extends Y, ? extends T> after) {
-        return () -> after.f(this.f());
+        return () -> after.apply(this.apply());
     }
 
     @NonNull

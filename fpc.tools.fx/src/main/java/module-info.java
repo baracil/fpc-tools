@@ -15,8 +15,7 @@ module fpc.tools.fx {
     requires javafx.fxml;
     requires com.google.common;
     requires org.controlsfx.controls;
-    requires org.apache.logging.log4j;
-
+    requires org.slf4j;
 
     exports fpc.tools.fx;
     exports fpc.tools.fx.dialog;

@@ -2,7 +2,7 @@ package fpc.tools.state;
 
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Predicate1;
-import fpc.tools.lang.Tools;
+import fpc.tools.lang.Todo;
 import lombok.NonNull;
 import net.femtoparsec.tools.state.LinkedStateHistory;
 import net.femtoparsec.tools.state.TwoStateHistory;
@@ -27,7 +27,7 @@ public interface StateHistory<S> {
      */
     default boolean mutateCurrent(@NonNull Function1<? super S, ? extends S> operator) {
         final S current = this.getCurrent();
-        final S newState = operator.f(current);
+        final S newState = operator.apply(current);
         return pushNewState(newState);
     }
 
@@ -38,7 +38,7 @@ public interface StateHistory<S> {
     @NonNull S getAt(int depth);
 
     default @NonNull Predicate1<Function<? super S, ?>> previousCurrentTester() {
-        return Tools.tester(getCurrent(),getPrevious());
+        return Todo.tester(getCurrent(),getPrevious());
     }
 
     int capacity();

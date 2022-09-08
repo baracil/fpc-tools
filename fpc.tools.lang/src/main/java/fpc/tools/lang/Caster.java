@@ -11,7 +11,7 @@ public interface Caster<T> extends Function1<Object,Optional<T>> {
 
     @Override
     @NonNull
-    default Optional<T> f(@NonNull Object o) {
+    default Optional<T> apply(@NonNull Object o) {
         return cast(o);
     }
 }

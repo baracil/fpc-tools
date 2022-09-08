@@ -7,11 +7,11 @@
     <parent>
         <groupId>net.femtoparsec.tools</groupId>
         <artifactId>fpc-tools</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>fpc-tools-springfx</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
 
     <name>${application.name} - ${module.name}</name>
 
@@ -36,11 +36,6 @@
         <dependency>
             <groupId>net.femtoparsec.tools</groupId>
             <artifactId>fpc-tools-spring</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
         </dependency>
 
         <dependency>

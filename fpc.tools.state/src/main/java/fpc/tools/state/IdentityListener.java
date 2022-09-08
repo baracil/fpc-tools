@@ -9,6 +9,6 @@ public interface IdentityListener<R> {
 
 
     static <R,T> @NonNull IdentityListener<T> wrap(@NonNull IdentityListener<R> listener, Function1<? super T, ? extends R> mapper) {
-        return (oldValue, newValue) -> listener.stateChanged(mapper.f(oldValue), mapper.f(newValue));
+        return (oldValue, newValue) -> listener.stateChanged(mapper.apply(oldValue), mapper.apply(newValue));
     }
 }

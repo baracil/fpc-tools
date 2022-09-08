@@ -39,17 +39,17 @@ public class FPCIdRemoteMap<K,V> extends FPCRemoteMapBase<K,V, FPCIdRemoteMap<K,
 
     @Override
     public IdRemoteMap<K, V> put(@NonNull V value) {
-        return put(idGetter.f(value),value);
+        return put(idGetter.apply(value),value);
     }
 
     @Override
     public IdRemoteMap<K, V> replace(@NonNull V value) {
-        return replace(idGetter.f(value),value);
+        return replace(idGetter.apply(value),value);
     }
 
     @Override
     public IdRemoteMap<K, V> updateValue(@NonNull V value, @NonNull Comparator<? super V> isNewer) {
-        return update(idGetter.f(value),value,isNewer);
+        return update(idGetter.apply(value),value,isNewer);
     }
 
     @Override

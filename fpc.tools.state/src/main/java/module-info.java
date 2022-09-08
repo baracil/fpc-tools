@@ -8,7 +8,7 @@ module fpc.tools.state {
     requires transitive fpc.tools.lang;
     requires transitive fpc.tools.fp;
 
-    requires org.apache.logging.log4j;
+    requires org.slf4j;
     requires com.google.common;
 
     requires transitive javafx.base;

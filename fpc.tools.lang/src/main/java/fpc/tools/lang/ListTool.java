@@ -23,7 +23,7 @@ public class ListTool {
 
     public static <A> ImmutableList<A> replace(@NonNull ImmutableList<A> source, @NonNull A value, @NonNull Predicate1<A> filter) {
         return source.stream()
-                     .map(a -> filter.f(a)?value:a)
+                     .map(a -> filter.test(a)?value:a)
                      .collect(ImmutableList.toImmutableList());
     }
 
@@ -81,16 +81,16 @@ public class ListTool {
     public static <A> Function1<Predicate<? super A>, ImmutableList<A>> removeOnceFrom(ImmutableList<A> list) {
         return p -> {
             final Function1<Stream<A>, Stream<A>> r = removeOnce(p);
-            return r.f(list.stream()).collect(ListTool.collector());
+            return r.apply(list.stream()).collect(ListTool.collector());
         };
     }
 
     public static <A> Function1<Predicate<? super A>, Function1<ImmutableList<A>, ImmutableList<A>>> removeOnceFromList(Class<A> type) {
-        return p -> l -> removeOnce(p, type).f(l.stream()).collect(ListTool.collector());
+        return p -> l -> removeOnce(p, type).apply(l.stream()).collect(ListTool.collector());
     }
 
     public static <A> Function1<Predicate<? super A>, Function1<ImmutableList<A>, ImmutableList<A>>> removeOnceFromList() {
-        return p -> l -> ListTool.<A>removeOnce(p).f(l.stream()).collect(ListTool.collector());
+        return p -> l -> ListTool.<A>removeOnce(p).apply(l.stream()).collect(ListTool.collector());
     }
 
     /**
@@ -214,12 +214,12 @@ public class ListTool {
 
         @NonNull
         @Override
-        public ImmutableList<A> f(@NonNull Predicate<? super A> predicate) {
+        public ImmutableList<A> apply(@NonNull Predicate<? super A> predicate) {
             return target.stream().filter(predicate).collect(collector());
         }
 
         public ImmutableList<A> with(Predicate<? super A> predicate) {
-            return f(predicate);
+            return apply(predicate);
         }
 
     }

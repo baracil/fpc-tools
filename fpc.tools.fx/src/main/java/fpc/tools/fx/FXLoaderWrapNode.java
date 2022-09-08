@@ -22,7 +22,7 @@ public class FXLoaderWrapNode implements FXLoader {
         final Object controller = result.getController();
         final Object root = result.getRoot();
         if (root instanceof Node) {
-            final Node wrapped = wrapper.f(controller.getClass().getSimpleName(),(Node)root);
+            final Node wrapped = wrapper.apply(controller.getClass().getSimpleName(),(Node)root);
             return new FXLoadingResult(controller,wrapped);
         }
         return result;

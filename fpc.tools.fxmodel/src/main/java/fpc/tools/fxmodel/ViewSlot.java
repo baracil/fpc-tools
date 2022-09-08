@@ -8,9 +8,9 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
-@Log4j2
+@Slf4j
 public class ViewSlot {
 
     /**
@@ -54,7 +54,7 @@ public class ViewSlot {
         oldViewInstance.hiding();
         this.viewInstance.showing();
         viewInstance.node()
-                    .map(node -> nodeMapper.f(newView,node))
+                    .map(node -> nodeMapper.apply(newView,node))
                     .ifPresentOrElse(setNode,clearNode);
     }
 

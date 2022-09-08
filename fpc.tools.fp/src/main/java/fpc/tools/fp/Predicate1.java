@@ -12,13 +12,8 @@ import java.util.stream.Stream;
  */
 public interface Predicate1<A> extends Predicate<A> {
 
-    boolean f(@NonNull A a);
-
-    @Override
-    default boolean test(@NonNull A a) {
-        return f(a);
-    }
-
+    boolean test(@NonNull A a);
+    
     @Override
     default Predicate1<A> and(@NonNull Predicate<? super A> other) {
         return a -> this.test(a) && other.test(a);
@@ -32,7 +27,7 @@ public interface Predicate1<A> extends Predicate<A> {
     default Predicate1<A> safe(boolean valueIfFails) {
         return a -> {
             try {
-                return this.f(a);
+                return this.test(a);
             } catch (Exception e) {
                 return valueIfFails;
             }
@@ -42,7 +37,7 @@ public interface Predicate1<A> extends Predicate<A> {
     default Predicate1<A> safe(Predicate2<? super A, ? super Exception> valueGetterForError) {
         return a -> {
             try {
-                return this.f(a);
+                return this.test(a);
             } catch (Exception e) {
                 return valueGetterForError.test(a,e);
             }
