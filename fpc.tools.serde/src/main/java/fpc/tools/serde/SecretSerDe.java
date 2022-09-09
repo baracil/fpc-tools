@@ -11,7 +11,6 @@ import jakarta.inject.Singleton;
 import lombok.NonNull;
 
 import java.io.IOException;
-import java.util.Base64;
 
 @Singleton
 @SerdeImport(Secret.class)
@@ -20,13 +19,12 @@ public class SecretSerDe implements Serde<Secret> {
 
     @Override
     public Secret deserialize(@NonNull Decoder decoder, @NonNull DecoderContext context, @NonNull Argument<? super Secret> type) throws IOException {
-        final var bytes = Base64.getDecoder().decode(decoder.decodeString());
-        return new Secret(bytes);
+        final var value = decoder.decodeString();
+        return Secret.of(value);
     }
 
     @Override
-    public void serialize(@NonNull Encoder encoder, @NonNull EncoderContext context, @NonNull Argument<? extends Secret> type, @NonNull Secret value) throws IOException {
-        final var secret = Base64.getEncoder().encodeToString(value.bytes());
-        encoder.encodeString(secret);
+    public void serialize(@NonNull Encoder encoder, @NonNull EncoderContext context, @NonNull Argument<? extends Secret> type, @NonNull Secret secret) throws IOException {
+        encoder.encodeString(secret.value());
     }
 }

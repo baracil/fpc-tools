@@ -27,7 +27,7 @@ public class AESCipherFactory {
 
     private @NonNull Cipher createCipher(int cipherMode, @NonNull Salt salt) throws GeneralSecurityException {
         final var factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-        final var spec = new PBEKeySpec(password.asString().toCharArray(), salt.bytes(), 65536, 256);
+        final var spec = new PBEKeySpec(password.value().toCharArray(), salt.bytes(), 65536, 256);
         final var secret = new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
         final var cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(cipherMode,secret);

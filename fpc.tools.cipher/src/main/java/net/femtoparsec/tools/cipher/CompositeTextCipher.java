@@ -10,10 +10,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CompositeTextCipher implements TextCipher {
 
-    public static @NonNull TextCipher createAES(@NonNull Secret password) {
-        return new CompositeTextCipher(TextDecryptor.createAES(password), TextEncryptor.createAES(password));
-    }
-
     private final @NonNull TextDecryptor textDecryptor;
     private final @NonNull TextEncryptor textEncryptor;
 

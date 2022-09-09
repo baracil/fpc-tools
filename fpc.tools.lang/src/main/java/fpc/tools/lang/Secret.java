@@ -2,16 +2,10 @@ package fpc.tools.lang;
 
 import lombok.NonNull;
 
-import java.nio.charset.StandardCharsets;
-
-public record Secret(byte@NonNull[] bytes) {
+public record Secret(@NonNull String value) {
 
     public static @NonNull Secret of(@NonNull String value) {
-        return new Secret(value.getBytes(StandardCharsets.UTF_8));
-    }
-
-    public @NonNull String asString() {
-        return new String(bytes,StandardCharsets.UTF_8);
+        return new Secret(value);
     }
 
     @Override
@@ -23,7 +17,7 @@ public record Secret(byte@NonNull[] bytes) {
         return EMPTY;
     }
 
-    private static final Secret EMPTY = new Secret(new byte[0]);
+    private static final Secret EMPTY = new Secret("");
 
 
 }
