@@ -4,8 +4,10 @@ import fpc.tools.fp.*;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,6 +16,20 @@ import java.util.stream.Stream;
  * @author bastien.a
  */
 public class StringTool {
+
+    private static final Random RANDOM = new SecureRandom();
+    private static final char[] CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+
+
+
+    public static @NonNull String random(int length) {
+        final var chars = new char[length];
+        for (int i = 0; i < length; i++) {
+            chars[i] = CHARS[RANDOM.nextInt(CHARS.length)];
+        }
+        return new String(chars);
+    }
+
 
     public static IsEndingWithSuffix IS_ENDING_WITH = new IsEndingWithSuffix();
 

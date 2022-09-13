@@ -9,7 +9,7 @@ import java.util.Base64;
 import java.util.Random;
 import java.util.regex.Pattern;
 
-public record Salt(@NonNull String salt) {
+public record Salt(@NonNull String value) {
 
 
     public @NonNull String prefixValue(@NonNull String value) {
@@ -18,12 +18,12 @@ public record Salt(@NonNull String salt) {
     }
 
     public byte @NonNull [] bytes() {
-        return Base64.getDecoder().decode(salt);
+        return Base64.getDecoder().decode(value);
     }
 
     @Override
     public String toString() {
-        return salt;
+        return value;
     }
 
     public static final Random RANDOM = new SecureRandom();

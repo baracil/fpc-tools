@@ -24,7 +24,7 @@ public class SaltAndValueParsingTest {
     @MethodSource("saltAndValues")
     public void shouldHaveRightSalt(@NonNull String saltAndValue, @NonNull String salt, @NonNull String value) {
         final var s = Salt.extractSalt(saltAndValue);
-        Assertions.assertEquals(salt,s.v1().salt());
+        Assertions.assertEquals(salt,s.v1().value());
     }
 
     @ParameterizedTest
