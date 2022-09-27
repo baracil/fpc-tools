@@ -20,4 +20,8 @@ public interface TextDecryptor {
         return new RSATextDecryptor(privateKey);
     }
 
+
+    default <T> @NonNull T decrypt(@NonNull Decryptable<T> decryptable) {
+        return decryptable.decrypt(this);
+    }
 }

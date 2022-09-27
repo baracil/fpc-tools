@@ -13,7 +13,7 @@ public interface Try0<Z,T extends Throwable> {
     Z apply() throws T;
 
     @NonNull
-    default TryResult<Z,Throwable> fSafe() {
+    default TryResult<Z,Throwable> applySafely() {
         try {
             return TryResult.success(apply());
         } catch (Throwable throwable) {
@@ -34,7 +34,7 @@ public interface Try0<Z,T extends Throwable> {
     }
 
     default Function0<TryResult<Z,Throwable>> safe() {
-        return this::fSafe;
+        return this::applySafely;
     }
 
     @NonNull

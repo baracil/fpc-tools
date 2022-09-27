@@ -74,6 +74,11 @@
             </dependency>
             <dependency>
                 <groupId>net.femtoparsec.tools</groupId>
+                <artifactId>fpc-tools-micronaut</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.femtoparsec.tools</groupId>
                 <artifactId>fpc-tools-cipher</artifactId>
                 <version>${project.version}</version>
             </dependency>

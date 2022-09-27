@@ -51,7 +51,7 @@ public class Todo {
         }
     }
 
-    public static <T,E extends Exception> T TRACE_AROUND(@NonNull Object callerObject, @NonNull Try0<T,E> action, @NonNull String message) throws E {
+    public static <T,E extends Throwable> T TRACE_AROUND(@NonNull Object callerObject, @NonNull Try0<T,E> action, @NonNull String message) throws E {
         display(callerObject,message+" : Start",false);
         try {
             var value = action.apply();

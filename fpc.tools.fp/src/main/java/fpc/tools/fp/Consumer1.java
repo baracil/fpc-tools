@@ -4,14 +4,10 @@ import lombok.NonNull;
 
 import java.util.function.Consumer;
 
-public interface Consumer1<A> extends Consumer<A> {
-
-    void f(@NonNull A a);
+public interface Consumer1<A> extends Consumer<A>, TryConsumer1<A,RuntimeException> {
 
     @Override
-    default void accept(A a) {
-        f(a);
-    }
+    void accept(@NonNull A a);
 
     default Function1<A, Nil> toFunction() {
         return a -> {
@@ -21,8 +17,15 @@ public interface Consumer1<A> extends Consumer<A> {
     }
 
     @NonNull
-    default TryResult<Nil,RuntimeException> acceptSafe(@NonNull A value) {
-        return toFunction().fSafe(value);
+    default TryResult<Nil,Throwable> acceptSafe(@NonNull A value) {
+        return toFunction().applySafely(value);
     }
+
+
+    @Deprecated
+    default void f(@NonNull A a) {
+        accept(a);
+    }
+
 
 }

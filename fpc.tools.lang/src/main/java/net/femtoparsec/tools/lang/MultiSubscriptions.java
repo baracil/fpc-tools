@@ -19,7 +19,7 @@ public class MultiSubscriptions implements Subscription {
 
     @Override
     public void unsubscribe() {
-        final ImmutableList<RuntimeException> errors =
+        final ImmutableList<Throwable> errors =
                 subscriptions.stream()
                              .map(s -> Consumer0.of(s::unsubscribe))
                              .map(Consumer0::acceptSafe)

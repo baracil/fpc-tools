@@ -1,7 +1,7 @@
 package fpc.tools.fx;
 
-import fpc.tools.fp.Function0;
 import fpc.tools.fp.Nil;
+import fpc.tools.fp.Try0;
 import fpc.tools.lang.Todo;
 import lombok.NonNull;
 
@@ -15,7 +15,7 @@ public class FXDebug {
         call(() -> {runnable.run();return Nil.NULL;},message);
     }
 
-    public static <T> @NonNull T call(@NonNull Function0<T> call, @NonNull String message) {
+    public static <T, E extends Throwable> @NonNull T call(@NonNull Try0<T,E> call, @NonNull String message) throws E {
         FXTools.checkIsFXThread();
         depth++;
         try {

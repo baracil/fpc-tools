@@ -80,7 +80,7 @@ public class StringTool {
 
         @Override
         public String toString() {
-            return supplier.fSafe().getEither().merge(ThrowableTool.ONE_LINE_MESSAGE_EXTRACTOR, String::valueOf);
+            return supplier.applySafely().getEither().merge(ThrowableTool.ONE_LINE_MESSAGE_EXTRACTOR, String::valueOf);
         }
     }
 

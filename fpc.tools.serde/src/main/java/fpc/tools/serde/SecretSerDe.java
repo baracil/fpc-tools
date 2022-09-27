@@ -1,6 +1,7 @@
 package fpc.tools.serde;
 
 import fpc.tools.lang.Secret;
+import fpc.tools.micronaut.EagerInit;
 import io.micronaut.core.annotation.Introspected;
 import io.micronaut.core.type.Argument;
 import io.micronaut.serde.Decoder;
@@ -13,6 +14,7 @@ import lombok.NonNull;
 import java.io.IOException;
 
 @Singleton
+@EagerInit
 @SerdeImport(Secret.class)
 @Introspected(classes = Secret.class)
 public class SecretSerDe implements Serde<Secret> {

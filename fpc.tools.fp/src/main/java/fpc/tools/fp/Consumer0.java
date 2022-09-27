@@ -2,7 +2,7 @@ package fpc.tools.fp;
 
 import lombok.NonNull;
 
-public interface Consumer0 extends Runnable {
+public interface Consumer0 extends Runnable, TryConsumer0<RuntimeException> {
 
     static Consumer0 of(@NonNull Runnable runnable) {
         if (runnable instanceof Consumer0 c0) {
@@ -11,22 +11,27 @@ public interface Consumer0 extends Runnable {
         return runnable::run;
     }
 
-    void f();
+    void accept();
+
+    @Deprecated
+    default void f() {
+        accept();
+    }
 
     @Override
     default void run() {
-        f();
+        accept();
     }
 
     default Function0<Nil> toFunction() {
         return () -> {
-            f();
+            accept();
             return Nil.NULL;
         };
     }
 
-    default TryResult<Nil,RuntimeException> acceptSafe() {
-        return toFunction().fSafe();
+    default TryResult<Nil,Throwable> acceptSafe() {
+        return toFunction().applySafely();
     }
 
 }

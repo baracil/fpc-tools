@@ -4,7 +4,11 @@ import lombok.NonNull;
 
 import java.util.function.Supplier;
 
-public interface Function0<R> extends Supplier<R> {
+public interface Function0<R> extends Supplier<R>, Try0<R, RuntimeException> {
+
+    static <R> @NonNull Function0<R> of(@NonNull Function0<R> function0) {
+        return function0;
+    }
 
 
     @NonNull R apply();
@@ -14,25 +18,6 @@ public interface Function0<R> extends Supplier<R> {
         return apply();
     }
 
-    /**
-     * @return the safe evaluation of this
-     */
-    @NonNull
-    default TryResult<R,RuntimeException> fSafe() {
-        return safe().apply();
-    }
-
-    @NonNull
-    default Function0<TryResult<R,RuntimeException>> safe() {
-        return () -> {
-            try {
-                return TryResult.success(apply());
-            } catch (RuntimeException e) {
-                FPUtils.interruptIfCausedByAnInterruption(e);
-                return TryResult.failure(e);
-            }
-        };
-    }
 
     static <R> @NonNull Function0<R> cons(@NonNull R parameter) {
         return () -> parameter;

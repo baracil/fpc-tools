@@ -2,9 +2,9 @@ package fpc.tools.fp;
 
 import lombok.NonNull;
 
-public interface TryConsumer1<A,E extends Exception> {
+public interface TryConsumer1<A,E extends Throwable> {
 
-    static <A,E extends Exception> TryConsumer1<A,E> of(@NonNull TryConsumer1<A,E> tryConsumer1) {
+    static <A,E extends Throwable> TryConsumer1<A,E> of(@NonNull TryConsumer1<A,E> tryConsumer1) {
         return tryConsumer1;
     }
 

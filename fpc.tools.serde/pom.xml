@@ -29,6 +29,10 @@
             <groupId>net.femtoparsec.tools</groupId>
             <artifactId>fpc-tools-lang</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.femtoparsec.tools</groupId>
+            <artifactId>fpc-tools-micronaut</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>

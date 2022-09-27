@@ -18,4 +18,9 @@ public interface TextEncryptor {
         return new RSATextEncryptor(encodedPublicKey);
     }
 
+    default <T> @NonNull T encrypt(@NonNull Encryptable<T> encryptable) {
+        return encryptable.encrypt(this);
+    }
+
+
 }

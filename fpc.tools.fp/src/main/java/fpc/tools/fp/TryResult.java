@@ -191,7 +191,7 @@ public final class TryResult<A, E extends Throwable> {
 
     @NonNull
     public <B> TryResult<B,Throwable> tryMap(Try1<? super A, ? extends B,?> t) {
-        final TryResult<? extends B, Throwable> result = getEither().merge(TryResult::failure, t::fSafe);
+        final TryResult<? extends B, Throwable> result = getEither().merge(TryResult::failure, t::applySafely);
         return result.map(b -> b);
     }
 

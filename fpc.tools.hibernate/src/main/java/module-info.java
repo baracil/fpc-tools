@@ -1,5 +1,6 @@
 module fpc.tools.hibernate {
     requires static lombok;
+    requires java.desktop;
 
     requires org.hibernate.orm.core;
     requires fpc.tools.lang;
