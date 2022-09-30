@@ -5,6 +5,7 @@ import fpc.tools.lang.Looper;
 import fpc.tools.lang.ThrowableTool;
 import lombok.NonNull;
 import lombok.Synchronized;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
@@ -12,6 +13,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+@Slf4j
 public class SimpleLooper implements Looper {
 
     private final @NonNull LoopAction loopAction;
@@ -51,6 +53,12 @@ public class SimpleLooper implements Looper {
         }
     }
 
+    @Override
+    public boolean isRunning() {
+        final var future = this.future;
+        return future != null && !future.isCancelled();
+    }
+
     private class Runner implements Runnable {
 
         private final Lock lock = new ReentrantLock();
@@ -85,6 +93,7 @@ public class SimpleLooper implements Looper {
                         error = e;
                         break;
                     }
+                    LOG.warn("Ignored error : {}",e.getMessage(),e);
                 }
             }
             loopAction.onDone(error);

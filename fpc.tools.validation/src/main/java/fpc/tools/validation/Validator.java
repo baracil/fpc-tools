@@ -28,7 +28,7 @@ public interface Validator<O,V extends Validator<O,V>> {
     Optional<O> getValidValue();
 
     /**
-     * @return the the validated value if it is valid and not null
+     * @return the validated value if it is valid and not null
      * @throws IllegalStateException if the value is null or invalid
      */
     @NonNull

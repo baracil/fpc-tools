@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.function.Function;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  */
 @MappedSuperclass
 public abstract class SimplePersistentObject extends PersistentObject<Long> {

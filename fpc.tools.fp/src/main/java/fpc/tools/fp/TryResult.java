@@ -204,4 +204,8 @@ public final class TryResult<A, E extends Throwable> {
     public <W extends Exception> TryResult<A,W> wrapException(Function1<? super E, ? extends W> exceptionWrapper) {
         return new TryResult<>(result.map(exceptionWrapper,Function1.identity()));
     }
+
+    public void accept(@NonNull Consumer<? super E> onError, @NonNull Consumer<? super A> onResult) {
+
+    }
 }

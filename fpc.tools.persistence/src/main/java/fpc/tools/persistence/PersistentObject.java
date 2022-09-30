@@ -11,7 +11,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  */
 @MappedSuperclass
 public abstract class PersistentObject<I> implements Serializable {

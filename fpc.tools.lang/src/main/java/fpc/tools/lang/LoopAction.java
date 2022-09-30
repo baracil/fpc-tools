@@ -31,9 +31,7 @@ public interface LoopAction {
      * Call when the loop is done
      * @param error the error that stop the iteration (can be null if the loop has been stop with {@link NextState#STOP}
      */
-    default void onDone(Throwable error) {
-
-    }
+    default void onDone(Throwable error) {}
 
     enum NextState {
         CONTINUE,

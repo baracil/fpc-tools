@@ -7,7 +7,7 @@ import java.io.Serial;
 import java.util.function.Function;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  */
 @MappedSuperclass
 public abstract class SimplePersistentObjectWithIdentityId extends PersistentObject<Long> {

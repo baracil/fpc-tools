@@ -24,6 +24,8 @@ public interface Looper {
      */
     void requestStop();
 
+    boolean isRunning();
+
     /**
      * Create a simple loop using a single thread executor
      * @param action the action to loop

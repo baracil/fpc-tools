@@ -10,4 +10,8 @@ public interface TryConsumer0<E extends Throwable> {
 
     void accept() throws E;
 
+    default Try0<Nil,E> toTry() {
+        return () -> {accept();return Nil.NULL;};
+    }
+
 }

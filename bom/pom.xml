@@ -24,6 +24,16 @@
             </dependency>
             <dependency>
                 <groupId>net.femtoparsec.tools</groupId>
+                <artifactId>fpc-tools-advanced-chat</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.femtoparsec.tools</groupId>
+                <artifactId>fpc-tools-chat</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.femtoparsec.tools</groupId>
                 <artifactId>fpc-tools-fp</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -45,6 +55,11 @@
             <dependency>
                 <groupId>net.femtoparsec.tools</groupId>
                 <artifactId>fpc-tools-i18n</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.femtoparsec.tools</groupId>
+                <artifactId>fpc-tools-irc</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
