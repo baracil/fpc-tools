@@ -15,7 +15,7 @@ import lombok.NonNull;
  * </ol>
  *
  *
- * @author perococco
+ * @author Bastien Aracil
  **/
 public abstract class ChatIOBase implements ChatIO {
 

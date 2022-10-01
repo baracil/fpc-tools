@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.Optional;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  **/
 @RequiredArgsConstructor
 public class ParsedString {

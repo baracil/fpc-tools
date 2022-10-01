@@ -74,6 +74,11 @@
             </dependency>
             <dependency>
                 <groupId>net.femtoparsec.tools</groupId>
+                <artifactId>fpc-tools-state-chat</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.femtoparsec.tools</groupId>
                 <artifactId>fpc-tools-spring</artifactId>
                 <version>${project.version}</version>
             </dependency>

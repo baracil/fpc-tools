@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Condition;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  **/
 @Slf4j
 public class WebSocketChat extends ChatIOBase implements Chat {

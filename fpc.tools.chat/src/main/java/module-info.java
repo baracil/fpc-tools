@@ -2,6 +2,8 @@ import fpc.tools.chat.ChatFactory;
 import net.femtoparsec.tool.chat.WebSocketChatFactory;
 
 module fpc.tools.chat {
+    uses ChatFactory;
+
     requires static lombok;
     requires java.desktop;
     requires fpc.tools.lang;

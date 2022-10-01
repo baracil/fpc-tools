@@ -6,7 +6,7 @@ import lombok.NonNull;
 import java.util.Optional;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  **/
 public class PrefixParser {
 

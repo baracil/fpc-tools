@@ -44,7 +44,8 @@
         <module>fpc.tools.micronaut</module>
         <module>fpc.tools.irc</module>
         <module>fpc.tools.chat</module>
-        <module>fpc.tools.advancedchat</module>
+        <module>fpc.tools.advanced.chat</module>
+        <module>fpc.tools.state.chat</module>
 <!--        <module>test</module>-->
         <module>bom</module>
     </modules>

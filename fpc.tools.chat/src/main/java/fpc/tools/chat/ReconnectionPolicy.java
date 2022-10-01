@@ -7,7 +7,7 @@ import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  **/
 public interface ReconnectionPolicy {
 

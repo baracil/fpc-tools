@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 /**
  * @author bastien.a
  */
+@SuppressWarnings("unused")
 public class MapTool {
 
     public static <K,V> Optional<Map.Entry<K,V>> getFirst(Map<K,V> map) {
@@ -41,15 +42,30 @@ public class MapTool {
         return collector(keyGetter, Function1.identity());
     }
 
+    @Deprecated
     public static <A,K> Collector<Tuple2<K,A>, ?, ImmutableMap<K,A>> value2Collector() {
+        return tuple2Collector();
+    }
+
+    @Deprecated
+    public static <A,K,T> Collector<Tuple2<K,A>, ?, ImmutableMap<K,T>> simpleValue2Collector(Function<? super A, ? extends T> valueGetter) {
+        return simpleTuple2Collector(valueGetter);
+    }
+
+    @Deprecated
+    public static <A,K,T> Collector<Tuple2<K,A>, ?, ImmutableMap<K,T>> value2Collector(Function<? super Tuple2<K,A>, ? extends T> valueGetter) {
+        return tuple2Collector(valueGetter);
+    }
+
+    public static <A,K> Collector<Tuple2<K,A>, ?, ImmutableMap<K,A>> tuple2Collector() {
         return ImmutableMap.toImmutableMap(Tuple2::v1, Tuple2::v2);
     }
 
-    public static <A,K,T> Collector<Tuple2<K,A>, ?, ImmutableMap<K,T>> simpleValue2Collector(Function<? super A, ? extends T> valueGetter) {
+    public static <A,K,T> Collector<Tuple2<K,A>, ?, ImmutableMap<K,T>> simpleTuple2Collector(Function<? super A, ? extends T> valueGetter) {
         return ImmutableMap.toImmutableMap(Tuple2::v1, v -> valueGetter.apply(v.v2()));
     }
 
-    public static <A,K,T> Collector<Tuple2<K,A>, ?, ImmutableMap<K,T>> value2Collector(Function<? super Tuple2<K,A>, ? extends T> valueGetter) {
+    public static <A,K,T> Collector<Tuple2<K,A>, ?, ImmutableMap<K,T>> tuple2Collector(Function<? super Tuple2<K,A>, ? extends T> valueGetter) {
         return ImmutableMap.toImmutableMap(Tuple2::v1, valueGetter::apply);
     }
 

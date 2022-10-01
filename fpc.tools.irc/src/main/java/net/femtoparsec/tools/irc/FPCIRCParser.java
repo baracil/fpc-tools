@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  **/
 public class FPCIRCParser implements IRCParser {
 

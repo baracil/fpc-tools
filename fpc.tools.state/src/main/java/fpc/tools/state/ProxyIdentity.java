@@ -57,4 +57,5 @@ public class ProxyIdentity<R> implements Identity<R> {
         return delegate.asFXObservableValue(getter);
     }
 
+
 }

@@ -10,7 +10,7 @@ import java.util.Optional;
 import static net.femtoparsec.tools.irc.FPCIRCParser.IRC_MARKER;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  **/
 @Slf4j
 public class TagParser {

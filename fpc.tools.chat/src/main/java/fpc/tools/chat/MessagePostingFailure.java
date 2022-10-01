@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  **/
 public class MessagePostingFailure extends ChatException {
 

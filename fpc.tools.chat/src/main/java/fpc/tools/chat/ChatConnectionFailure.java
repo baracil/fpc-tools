@@ -4,7 +4,7 @@ import lombok.NonNull;
 
 /**
  * Exception thrown when an error occurred during the chat connection
- * @author perococco
+ * @author Bastien Aracil
  **/
 public class ChatConnectionFailure extends ChatException {
 

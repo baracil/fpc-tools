@@ -6,7 +6,7 @@ import fpc.tools.lang.Priority;
 import lombok.NonNull;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  **/
 @Priority(Integer.MIN_VALUE)
 public class FPCIRCParserFactory extends IRCParserFactory {

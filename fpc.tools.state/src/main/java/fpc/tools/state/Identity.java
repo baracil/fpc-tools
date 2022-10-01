@@ -18,10 +18,10 @@ public interface Identity<S> extends ReadOnlyIdentity<S>, IdentityMutator<S> {
         return IdentityFactory.getInstance().createIdentity(initialState);
     }
 
-
     @Override
     @NonNull
     default CompletionStage<S> getState() {
         return mutate(r -> r);
     }
+
 }

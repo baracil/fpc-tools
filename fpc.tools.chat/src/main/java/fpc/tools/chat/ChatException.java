@@ -1,7 +1,7 @@
 package fpc.tools.chat;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  **/
 public class ChatException extends RuntimeException {
 

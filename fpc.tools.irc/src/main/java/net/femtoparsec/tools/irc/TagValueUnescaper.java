@@ -3,7 +3,7 @@ package net.femtoparsec.tools.irc;
 import lombok.NonNull;
 
 /**
- * @author perococco
+ * @author Bastien Aracil
  **/
 public class TagValueUnescaper {
 
@@ -37,13 +37,12 @@ public class TagValueUnescaper {
     }
 
     public char unescaped(char escaped) {
-        switch (escaped) {
-            case ':' : return ';';
-            case 's' : return ' ';
-            case 'r' : return '\r';
-            case 'n' : return '\n';
-            default:
-                return escaped;
-        }
+        return switch (escaped) {
+            case ':' -> ';';
+            case 's' -> ' ';
+            case 'r' -> '\r';
+            case 'n' -> '\n';
+            default -> escaped;
+        };
     }
 }
