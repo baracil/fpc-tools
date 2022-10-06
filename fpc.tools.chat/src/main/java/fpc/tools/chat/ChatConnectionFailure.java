@@ -11,4 +11,8 @@ public class ChatConnectionFailure extends ChatException {
     public ChatConnectionFailure(@NonNull String message, @NonNull Throwable cause) {
         super(message, cause);
     }
+
+    public ChatConnectionFailure(@NonNull String message) {
+        super(message);
+    }
 }

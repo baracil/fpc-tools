@@ -8,7 +8,7 @@ import java.time.Instant;
  * The slip for the request sent to the chat
  * @param <A>
  */
-public interface ReceiptSlip<A> {
+public interface ReceiptSlip<A,M> extends AdvancedIO<M> {
 
     /**
      * @return the instant when the request was sent

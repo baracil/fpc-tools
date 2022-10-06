@@ -21,7 +21,7 @@ public class WeakActionSpy implements ActionSpy {
     }
 
     @Override
-    public <R> void onActionResult(@NonNull ActionExecutor actionExecutor, long id, @NonNull TryResult<R, Throwable> result) {
+    public <R> void onActionResult(@NonNull ActionExecutor actionExecutor, long id, @NonNull TryResult<Throwable, R> result) {
         execute(actionExecutor, a -> a.onActionResult(actionExecutor,id,result));
     }
 

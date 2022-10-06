@@ -17,6 +17,7 @@ module fpc.tools.state {
     exports fpc.tools.state;
 
     uses IdentityFactory;
+
     provides IdentityFactory with FPCIdentityFactory;
 
 }

@@ -2,16 +2,21 @@ import fpc.tools.chat.ChatFactory;
 import net.femtoparsec.tool.chat.WebSocketChatFactory;
 
 module fpc.tools.chat {
-    uses ChatFactory;
-
     requires static lombok;
     requires java.desktop;
+
+    requires java.net.http;
+    requires org.slf4j;
+    requires io.github.bucket4j.core;
+
+    requires com.google.common;
+
     requires fpc.tools.lang;
-    requires jakarta.websocket;
 
     exports fpc.tools.chat;
     exports fpc.tools.chat.event;
 
+    uses ChatFactory;
     provides ChatFactory with WebSocketChatFactory;
 
 }

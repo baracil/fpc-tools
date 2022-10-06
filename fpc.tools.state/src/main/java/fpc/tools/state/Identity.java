@@ -1,5 +1,6 @@
 package fpc.tools.state;
 
+import fpc.tools.fp.Function1;
 import lombok.NonNull;
 
 import java.util.concurrent.CompletionStage;
@@ -16,6 +17,10 @@ public interface Identity<S> extends ReadOnlyIdentity<S>, IdentityMutator<S> {
      */
     static <S> Identity<S> create(@NonNull S initialState) {
         return IdentityFactory.getInstance().createIdentity(initialState);
+    }
+
+    static <S> Identity<S> create(@NonNull Function1<? super IdentityMutator<S>, ? extends S> initialStateFactory) {
+        return IdentityFactory.getInstance().<S>createIdentity(initialStateFactory);
     }
 
     @Override

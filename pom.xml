@@ -23,6 +23,7 @@
         <spring-boot.version>2.5.4</spring-boot.version>
         <slf4j.version>1.7.36</slf4j.version>
         <jakarta-persistence.version>2.2.3</jakarta-persistence.version>
+        <pulsar.version>2.6.0</pulsar.version>
     </properties>
 
     <modules>
@@ -46,6 +47,7 @@
         <module>fpc.tools.chat</module>
         <module>fpc.tools.advanced.chat</module>
         <module>fpc.tools.state.chat</module>
+        <module>fpc.tools.pulsar.client</module>
 <!--        <module>test</module>-->
         <module>bom</module>
     </modules>
@@ -176,6 +178,22 @@
 <!--                <artifactId>jakarta.persistence-api</artifactId>-->
 <!--                <version>${jakarta-persistence.version}</version>-->
 <!--            </dependency>-->
+
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-client</artifactId>
+                <version>${pulsar.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-client-admin</artifactId>
+                <version>${pulsar.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-client-all</artifactId>
+                <version>${pulsar.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.openjfx</groupId>

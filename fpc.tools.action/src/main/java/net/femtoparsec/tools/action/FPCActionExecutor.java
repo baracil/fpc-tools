@@ -6,7 +6,6 @@ import fpc.tools.fp.TryResult;
 import fpc.tools.lang.ThrowableTool;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CompletableFuture;
@@ -61,7 +60,7 @@ public class FPCActionExecutor implements ActionExecutor {
         final long id = actionId.getAndIncrement();
         dispatcher.onPushedAction(this, id, action, parameter);
         return this.<P, R>doPushAction(action, parameter).whenComplete((r, t) -> {
-            final TryResult<R, Throwable> result = r != null ? TryResult.success(r) : TryResult.failure(t);
+            final TryResult<Throwable, R> result = r != null ? TryResult.success(r) : TryResult.failure(t);
             dispatcher.onActionResult(this, id, result);
         });
     }
@@ -137,7 +136,7 @@ public class FPCActionExecutor implements ActionExecutor {
     }
 
     private <P, R> void postProcess(@NonNull Action<? super P, ? extends R> action,
-                                    @NonNull TryResult<R, Throwable> result) {
+                                    @NonNull TryResult<Throwable, R> result) {
         for (ActionFilter actionFilter : actionFilters.reverse()) {
             actionFilter.postProcessAction(action, result);
         }

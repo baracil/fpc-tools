@@ -45,5 +45,5 @@ public interface RequestAnswerMatcher<M> {
      * an empty optional if the message is not the answer of the request
      */
     @NonNull
-    <A> Optional<TryResult<A,Throwable>> performMatch(@NonNull Request<A> request, @NonNull M message);
+    <A> Optional<TryResult<Throwable, A>> performMatch(@NonNull Request<A> request, @NonNull M message);
 }

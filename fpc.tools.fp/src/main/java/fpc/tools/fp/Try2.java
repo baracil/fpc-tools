@@ -13,7 +13,7 @@ public interface Try2<A,B, Z,T extends Throwable> {
     Z apply(@NonNull A a, @NonNull B b) throws T;
 
     @NonNull
-    default TryResult<Z,Throwable> applySafely(@NonNull A a, @NonNull B b) {
+    default TryResult<Throwable, Z> applySafely(@NonNull A a, @NonNull B b) {
         try {
             return TryResult.success(apply(a,b));
         } catch (Throwable throwable) {
@@ -56,7 +56,7 @@ public interface Try2<A,B, Z,T extends Throwable> {
 
 
     @NonNull
-    default Function2<A,B, TryResult<Z,Throwable>> safe() {
+    default Function2<A,B, TryResult<Throwable, Z>> safe() {
         return this::applySafely;
     }
 

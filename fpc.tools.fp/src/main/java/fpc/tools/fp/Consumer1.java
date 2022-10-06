@@ -17,7 +17,7 @@ public interface Consumer1<A> extends Consumer<A>, TryConsumer1<A,RuntimeExcepti
     }
 
     @NonNull
-    default TryResult<Nil,Throwable> acceptSafe(@NonNull A value) {
+    default TryResult<Throwable, Nil> acceptSafe(@NonNull A value) {
         return toFunction().applySafely(value);
     }
 

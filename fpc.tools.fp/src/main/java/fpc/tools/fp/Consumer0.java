@@ -30,7 +30,7 @@ public interface Consumer0 extends Runnable, TryConsumer0<RuntimeException> {
         };
     }
 
-    default TryResult<Nil,Throwable> acceptSafe() {
+    default TryResult<Throwable, Nil> acceptSafe() {
         return toFunction().applySafely();
     }
 

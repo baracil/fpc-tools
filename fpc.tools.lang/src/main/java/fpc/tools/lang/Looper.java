@@ -1,10 +1,11 @@
 package fpc.tools.lang;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.NonNull;
+import net.femtoparsec.tools.lang.Loopers;
+import net.femtoparsec.tools.lang.ScheduledLooper;
 import net.femtoparsec.tools.lang.SimpleLooper;
 
-import java.util.concurrent.Executors;
+import java.time.Duration;
 
 public interface Looper {
 
@@ -13,8 +14,11 @@ public interface Looper {
      */
     void start();
 
+    void startAndWaitForStart();
+
     /**
      * Request the looper to stop and wait for the end of the loop
+     *
      * @throws InterruptedException if the wait has been interrupted
      */
     void stop() throws InterruptedException;
@@ -28,13 +32,19 @@ public interface Looper {
 
     /**
      * Create a simple loop using a single thread executor
+     *
      * @param action the action to loop
-     * @param daemon define if the thread used by the loop should be a daemon thread or not
      * @return the newly created looper
      */
-    static @NonNull Looper simple(@NonNull LoopAction action, boolean daemon) {
-        final var threadFactory = new ThreadFactoryBuilder().setDaemon(daemon).build();
-        final var executorService = Executors.newSingleThreadExecutor(threadFactory);
-        return new SimpleLooper(action, executorService);
+    static @NonNull Looper simple(@NonNull LoopAction action) {
+        return new SimpleLooper(action, Loopers.EXECUTOR_SERVICE);
+    }
+
+    static @NonNull Looper scheduled(@NonNull LoopAction action, @NonNull Duration period) {
+        return new ScheduledLooper(action, period, period);
+    }
+
+    static @NonNull Looper scheduled(@NonNull LoopAction action, @NonNull Duration delay, @NonNull Duration period) {
+        return new ScheduledLooper(action, delay, period);
     }
 }

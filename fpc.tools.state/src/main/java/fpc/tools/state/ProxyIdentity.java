@@ -1,6 +1,7 @@
 package fpc.tools.state;
 
 import fpc.tools.fp.Function1;
+import fpc.tools.fp.Function2;
 import fpc.tools.lang.Subscription;
 import javafx.beans.value.ObservableValue;
 import lombok.AccessLevel;
@@ -15,17 +16,23 @@ public class ProxyIdentity<R> implements Identity<R> {
     @NonNull
     private final Identity<R> delegate;
 
-    public ProxyIdentity(@NonNull R initialValue) {
-        this(Identity.create(initialValue));
-    }
-
-    public static <S> Identity<S> create(@NonNull S initialValue) {
-        return Identity.create(initialValue);
+    public ProxyIdentity(@NonNull Function1<? super IdentityMutator<R>, ? extends Identity<R>> factory) {
+        this.delegate = factory.apply(this);
     }
 
     @Override
     public @NonNull <V> CompletionStage<R> mutate(@NonNull Mutation<V> subMutation, @NonNull Accessor<R, V> accessor) {
         return delegate.mutate(subMutation,accessor);
+    }
+
+    @Override
+    public @NonNull <V> CompletionStage<V> mutate(@NonNull Mutation<R> mutation, @NonNull Function1<? super R, ? extends CompletionStage<V>> action) {
+        return delegate.mutate(mutation,action);
+    }
+
+    @Override
+    public @NonNull <V> CompletionStage<V> mutate(@NonNull Mutation<R> mutation, @NonNull Function2<? super R, ? super R, ? extends CompletionStage<V>> action) {
+        return delegate.mutate(mutation,action);
     }
 
     @Override

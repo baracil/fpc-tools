@@ -2,7 +2,7 @@ package net.femtoparsec.tools.state;
 
 import fpc.tools.fp.Consumer1;
 import fpc.tools.fp.Function0;
-import fpc.tools.fp.Function1;
+import fpc.tools.fp.Function2;
 import fpc.tools.lang.ThreadBuilder;
 import fpc.tools.lang.ThrowableTool;
 import fpc.tools.state.Mutation;
@@ -79,7 +79,7 @@ public class DefaultUpdater<R> implements Updater<R> {
             @NonNull Mutation<R> mutation,
             @NonNull Function0<? extends R> rootStateGetter,
             @NonNull Consumer1<? super R> newRootStateConsumer,
-            @NonNull Function1<? super R, ? extends S> subStateGetter) {
+            @NonNull Function2<? super R, ? super R, ? extends S> subStateGetter) {
         final Update<R, S> update = new Update<>(rootStateGetter, newRootStateConsumer,mutation, subStateGetter);
         final UpdateInformation<R,S> updateInformation = new UpdateInformation<>(update, new CompletableFuture<>());
         runLocked(() -> {

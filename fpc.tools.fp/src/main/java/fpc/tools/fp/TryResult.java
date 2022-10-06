@@ -11,14 +11,14 @@ import java.util.function.Function;
  *
  * @author Bastien Aracil
  */
-public final class TryResult<A, E extends Throwable> {
+public final class TryResult<E extends Throwable, A> {
 
-    public static <A,E extends Throwable> TryResult<A,E> failure(E e) {
+    public static <A,E extends Throwable> TryResult<E, A> failure(E e) {
         final Either<E,A> either = Either.left(e);
         return new TryResult<>(either);
     }
 
-    public static <A,E extends Throwable> TryResult<A,E> success(@NonNull A result) {
+    public static <A,E extends Throwable> TryResult<E, A> success(@NonNull A result) {
         return new TryResult<>(Either.right(result));
     }
 
@@ -83,7 +83,7 @@ public final class TryResult<A, E extends Throwable> {
      * @return this
      */
     @NonNull
-    public TryResult<A, E> ifFailedAccept(Consumer<? super E> failure) {
+    public TryResult<E, A> ifFailedAccept(Consumer<? super E> failure) {
         this.getException().ifPresent(failure);
         return this;
     }
@@ -95,7 +95,7 @@ public final class TryResult<A, E extends Throwable> {
      * @return this
      */
     @NonNull
-    public TryResult<A, E> ifFailedApply(Function<E, Nil> failure) {
+    public TryResult<E, A> ifFailedApply(Function<E, Nil> failure) {
         this.getException().ifPresent(failure::apply);
         return this;
     }
@@ -118,9 +118,9 @@ public final class TryResult<A, E extends Throwable> {
      * @return if this is a success then the returned optional is not empty and contained a new successful TryResult with this result, otherwise an optional
      * containing the exception casted to the provide type if possible, otherwise an empty optional
      */
-    public <Y extends Exception> Optional<TryResult<A,Y>> filter(Class<Y> exceptionType) {
-        final Function1<A,Optional<TryResult<A,Y>>> successMerger = a -> Optional.of(TryResult.success(a));
-        final Function1<E,Optional<TryResult<A,Y>>> failureMerger = e -> FPUtils.as(exceptionType).apply(e).map(TryResult::<A,Y>failure);
+    public <Y extends Exception> Optional<TryResult<Y, A>> filter(Class<Y> exceptionType) {
+        final Function1<A,Optional<TryResult<Y, A>>> successMerger = a -> Optional.of(TryResult.success(a));
+        final Function1<E,Optional<TryResult<Y, A>>> failureMerger = e -> FPUtils.as(exceptionType).apply(e).map(TryResult::<A,Y>failure);
 
         return result.merge(failureMerger,successMerger);
     }
@@ -134,7 +134,7 @@ public final class TryResult<A, E extends Throwable> {
      * to the provided type. If it succeed, returns a new <code>TryResult</code> with the new type, otherwise throws the exception of the try
      * @throws E if this is a failure and the exception of this try cannot be casted to <code>Y</code>
      */
-    public <Y extends Exception> TryResult<A,Y> filterOrThrow(Class<Y> exceptionType) throws E {
+    public <Y extends Exception> TryResult<Y, A> filterOrThrow(Class<Y> exceptionType) throws E {
         return filter(exceptionType).orElseThrow(() -> getException().get());
     }
 
@@ -185,27 +185,27 @@ public final class TryResult<A, E extends Throwable> {
      * @param <B> the type of the result of the provided function
      * @return a new <code>TryResult</code> with its result equals to the application of the provided function to this result (if a success), this otherwise
      */
-    public <B> TryResult<B, E> map(Function1<? super A, ? extends B> f) {
+    public <B> TryResult<E, B> map(Function1<? super A, ? extends B> f) {
         return new TryResult<>(result.map(Function1.identity(),f));
     }
 
     @NonNull
-    public <B> TryResult<B,Throwable> tryMap(Try1<? super A, ? extends B,?> t) {
-        final TryResult<? extends B, Throwable> result = getEither().merge(TryResult::failure, t::applySafely);
+    public <B> TryResult<Throwable, B> tryMap(Try1<? super A, ? extends B,?> t) {
+        final TryResult<Throwable, ? extends B> result = getEither().merge(TryResult::failure, t::applySafely);
         return result.map(b -> b);
     }
 
     @NonNull
-    public <B> TryResult<B, E> bind(Function1<? super A, TryResult<B, E>> f) {
+    public <B> TryResult<E, B> bind(Function1<? super A, TryResult<E, B>> f) {
         return result.merge(TryResult::failure, f);
     }
 
     @NonNull
-    public <W extends Exception> TryResult<A,W> wrapException(Function1<? super E, ? extends W> exceptionWrapper) {
+    public <W extends Exception> TryResult<W, A> wrapException(Function1<? super E, ? extends W> exceptionWrapper) {
         return new TryResult<>(result.map(exceptionWrapper,Function1.identity()));
     }
 
-    public void accept(@NonNull Consumer<? super E> onError, @NonNull Consumer<? super A> onResult) {
-
+    public void accept(@NonNull Consumer1<? super E> onError, @NonNull Consumer1<? super A> onResult) {
+        result.acceptMerge(onError,onResult);
     }
 }

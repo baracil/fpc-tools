@@ -24,5 +24,5 @@ public interface ActionFilter {
      * @param action the action that has been executed
      * @param result the result of the action
      */
-    <P,R> void postProcessAction(@NonNull Action<? super P, ? extends R> action, @NonNull TryResult<R,Throwable> result);
+    <P,R> void postProcessAction(@NonNull Action<? super P, ? extends R> action, @NonNull TryResult<Throwable, R> result);
 }

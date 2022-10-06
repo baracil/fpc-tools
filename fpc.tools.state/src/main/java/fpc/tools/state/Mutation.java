@@ -6,7 +6,7 @@ public interface Mutation<S> {
 
     /**
      * @param <S> the type of the state to mutate
-     * @return a mutation that changes nothings
+     * @return a mutation that changes nothing
      */
     @NonNull
     static <S> Mutation<S> identity() {
@@ -15,7 +15,7 @@ public interface Mutation<S> {
 
     /**
      * perform this mutation
-     * @param currentState
+     * @param currentState the current State
      * @return the mutated state
      */
     @NonNull

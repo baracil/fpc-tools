@@ -60,8 +60,8 @@ public class FPCAdvancedChat<M> implements AdvancedChat<M> {
         this.chatSender = new ChatSender<>(chat, listeners, postDataQueue, instants);
         this.chatReceiver = new ChatReceiver<>(matcher::shouldPerformMatching, postDataQueue);
 
-        this.senderLooper = Looper.simple(chatSender,false);
-        this.receiverLooper = Looper.simple(chatReceiver,false);
+        this.senderLooper = Looper.simple(chatSender);
+        this.receiverLooper = Looper.simple(chatReceiver);
     }
 
     @Override
@@ -70,8 +70,8 @@ public class FPCAdvancedChat<M> implements AdvancedChat<M> {
         subscription.unsubscribe();
         subscription = chat.addChatListener(this::onChatEvent);
         chat.connect();
-        senderLooper.start();
-        receiverLooper.start();
+        senderLooper.startAndWaitForStart();
+        receiverLooper.startAndWaitForStart();
     }
 
     @Override
@@ -102,13 +102,13 @@ public class FPCAdvancedChat<M> implements AdvancedChat<M> {
 
 
     @Override
-    public @NonNull CompletionStage<DispatchSlip> sendCommand(@NonNull Command command) {
-        return chatSender.send(new CommandPostData<>(command));
+    public @NonNull CompletionStage<DispatchSlip<M>> sendCommand(@NonNull Command command) {
+        return chatSender.send(new CommandPostData<>(this,command));
     }
 
     @Override
-    public @NonNull <A> CompletionStage<ReceiptSlip<A>> sendRequest(@NonNull Request<A> request) {
-        return chatSender.send(new RequestPostData<>(request, matcher));
+    public @NonNull <A> CompletionStage<ReceiptSlip<A,M>> sendRequest(@NonNull Request<A> request) {
+        return chatSender.send(new RequestPostData<>(this,request, matcher));
     }
 
     private void warnListeners(@NonNull AdvancedChatEvent<M> event) {

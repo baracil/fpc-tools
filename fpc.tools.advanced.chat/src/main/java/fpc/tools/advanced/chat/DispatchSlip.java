@@ -7,7 +7,7 @@ import java.time.Instant;
 /**
  * Slip for command sent to the chat
  */
-public interface DispatchSlip {
+public interface DispatchSlip<M> extends AdvancedIO<M> {
 
     /**
      * @return the command sent

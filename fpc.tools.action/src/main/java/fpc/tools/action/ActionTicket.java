@@ -11,7 +11,7 @@ import java.util.concurrent.CompletionStage;
 public interface ActionTicket<R> {
 
     @NonNull
-    ActionTicket<R> whenComplete(@NonNull Consumer1<? super TryResult<? super R, ? super Throwable>> action);
+    ActionTicket<R> whenComplete(@NonNull Consumer1<? super TryResult<? super Throwable, ? super R>> action);
 
     default ActionTicket<R> onFailureDo(@NonNull Consumer1<? super Throwable> action) {
         return whenComplete(t -> t.ifFailedAccept(action));

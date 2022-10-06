@@ -103,9 +103,10 @@ public final class Either<A,B> {
 
     public void acceptMerge(Consumer1<? super A> leftConsumer, Consumer1<? super B> rightConsumer) {
         if (left != null) {
-            leftConsumer.f(left);
+            leftConsumer.accept(left);
+        } else {
+            rightConsumer.accept(right);
         }
-        rightConsumer.f(right);
     }
 
     public @NonNull B toRightValue(Function1<? super A, ? extends B> switcher) {

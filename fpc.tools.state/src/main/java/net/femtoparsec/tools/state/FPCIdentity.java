@@ -2,6 +2,7 @@ package net.femtoparsec.tools.state;
 
 import fpc.tools.fp.Function0;
 import fpc.tools.fp.Function1;
+import fpc.tools.fp.Function2;
 import fpc.tools.lang.Listeners;
 import fpc.tools.lang.Subscription;
 import fpc.tools.lang.ThrowableTool;
@@ -11,15 +12,14 @@ import fpc.tools.state.Mutation;
 import javafx.beans.value.ObservableValue;
 import lombok.NonNull;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @author Bastien Aracil
  */
 public class FPCIdentity<R> implements Identity<R> {
+
+    public static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool();
 
     @NonNull
     private final Executor heavyActionExecutor;
@@ -44,11 +44,11 @@ public class FPCIdentity<R> implements Identity<R> {
     }
 
     public FPCIdentity(@NonNull R initialRootState, @NonNull Updater<R> updater) {
-        this(initialRootState, updater, Executors.newCachedThreadPool());
+        this(initialRootState, updater, EXECUTOR_SERVICE);
     }
 
     public FPCIdentity(@NonNull R initialRootState) {
-        this(initialRootState, Executors.newCachedThreadPool());
+        this(initialRootState, EXECUTOR_SERVICE);
     }
 
     @Override
@@ -57,8 +57,28 @@ public class FPCIdentity<R> implements Identity<R> {
                 mutation,
                 this::getRootState,
                 this::setRootState,
-                r -> r
+                (o,n) -> n
         ).thenApply(UpdateResult::getResult);
+    }
+
+    @Override
+    public @NonNull <V> CompletionStage<V> mutate(@NonNull Mutation<R> mutation, @NonNull Function1<? super R, ? extends CompletionStage<V>> action) {
+        return updater.offerUpdatingOperation(
+                mutation,
+                this::getRootState,
+                this::setRootState,
+                (o,n) -> action.apply(n)
+        ).thenCompose(UpdateResult::getResult);
+    }
+
+    @Override
+    public @NonNull <V> CompletionStage<V> mutate(@NonNull Mutation<R> mutation, @NonNull Function2<? super R, ? super R, ? extends CompletionStage<V>> action) {
+        return updater.offerUpdatingOperation(
+                mutation,
+                this::getRootState,
+                this::setRootState,
+                action
+        ).thenCompose(UpdateResult::getResult);
     }
 
     @Override

@@ -2,7 +2,7 @@ package net.femtoparsec.tools.state;
 
 import fpc.tools.fp.Consumer1;
 import fpc.tools.fp.Function0;
-import fpc.tools.fp.Function1;
+import fpc.tools.fp.Function2;
 import fpc.tools.state.Mutation;
 import lombok.Getter;
 import lombok.NonNull;
@@ -25,7 +25,7 @@ public class Update<R, S> {
     private final Mutation<R> mutation;
 
     @NonNull
-    private final Function1<? super R, ? extends S> getter;
+    private final Function2<? super R, ? super R, ? extends S> getter;
 
     @NonNull
     public UpdateResult<R, S> performMutation() {
@@ -35,7 +35,7 @@ public class Update<R, S> {
         final UpdateResult<R, S> result = UpdateResult.<R, S>builder()
                                                       .oldRoot(currentState)
                                                       .newRoot(newState)
-                                                      .result(getter.apply(newState))
+                                                      .result(getter.apply(currentState,newState))
                                                       .build();
 
         newRootStateConsumer.accept(newState);

@@ -12,8 +12,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.concurrent.CompletionStage;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 @RequiredArgsConstructor
 public class FPCActionTicket<R> implements ActionTicket<R> {
@@ -24,7 +22,7 @@ public class FPCActionTicket<R> implements ActionTicket<R> {
     private final CompletionStage<R> completionStage;
 
     @Override
-    public @NonNull ActionTicket<R> whenComplete(@NonNull Consumer1<? super TryResult<? super R, ? super Throwable>> action) {
+    public @NonNull ActionTicket<R> whenComplete(@NonNull Consumer1<? super TryResult<? super Throwable, ? super R>> action) {
         return withNewCompletionStage(completionStage.whenComplete((r,t) -> action.accept(t != null ? TryResult.failure(t):TryResult.success(r))));
     }
 

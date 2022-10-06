@@ -6,15 +6,18 @@ import fpc.tools.chat.event.Disconnection;
 import fpc.tools.chat.event.Error;
 import fpc.tools.chat.event.ReceivedMessage;
 import fpc.tools.lang.*;
-import jakarta.websocket.*;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.WebSocket;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Condition;
 
@@ -28,10 +31,9 @@ public class WebSocketChat extends ChatIOBase implements Chat {
 
     private final @NonNull Instants instants;
 
-    private final AtomicReference<Session> sessionReference = new AtomicReference<>(null);
+    private final AtomicReference<WebSocket> webSocketReference = new AtomicReference<>(null);
 
     private final SmartLock lock = SmartLock.reentrant();
-
     private final Condition disconnection = lock.newCondition();
 
     public WebSocketChat(@NonNull URI uri, @NonNull Instants instants) {
@@ -42,18 +44,13 @@ public class WebSocketChat extends ChatIOBase implements Chat {
         this(uri, policy, WaitStrategy.create(), instants);
     }
 
-    public WebSocketChat(@NonNull URI uri, @NonNull ReconnectionPolicy policy, @NonNull WaitStrategy waitStrategy, @NonNull Instants instants) {
-        this(ContainerProvider.getWebSocketContainer(), uri, policy, waitStrategy, instants);
-    }
-
     public WebSocketChat(
-            @NonNull WebSocketContainer webSocketContainer,
             @NonNull URI uri,
             @NonNull ReconnectionPolicy policy,
             @NonNull WaitStrategy waitStrategy,
             @NonNull Instants instants) {
-        final var action = new ChatLooper(webSocketContainer, uri, policy, waitStrategy);
-        this.looper = Looper.simple(action,false);
+        final var action = new ChatLoopAction(uri, policy, waitStrategy);
+        this.looper = Looper.simple(action);
         this.instants = instants;
     }
 
@@ -74,22 +71,22 @@ public class WebSocketChat extends ChatIOBase implements Chat {
 
     @Override
     public void postMessage(@NonNull String message) {
-        final Session session = sessionReference.get();
-        if (session == null) {
+        final var websocket = webSocketReference.get();
+        if (websocket == null) {
             throw new ChatNotConnected();
         }
         try {
-            session.getBasicRemote().sendText(message);
-        } catch (IOException e) {
-            throw new MessagePostingFailure(message, e);
+            websocket.sendText(message, true).get();
+        } catch (InterruptedException e) {
+            LOG.warn("Message posting has been interrupted");
+        } catch (ExecutionException e) {
+            LOG.warn("Message posting failed", e.getCause());
+            throw new MessagePostingFailure(message, e.getCause());
         }
     }
 
     @RequiredArgsConstructor
-    private class ChatLooper implements LoopAction {
-
-        @NonNull
-        private final WebSocketContainer webSocketContainer;
+    private class ChatLoopAction implements LoopAction {
 
         @NonNull
         private final URI uri;
@@ -100,6 +97,7 @@ public class WebSocketChat extends ChatIOBase implements Chat {
         @NonNull
         private final WaitStrategy waitStrategy;
 
+
         @Override
         public @NonNull NextState beforeLooping() {
             this.connect();
@@ -108,9 +106,19 @@ public class WebSocketChat extends ChatIOBase implements Chat {
 
         private void connect() {
             try {
-                webSocketContainer.connectToServer(new ChatEndPoint(), uri);
-            } catch (DeploymentException | IOException e) {
-                throw new ChatConnectionFailure("Connection failed", e);
+                webSocketReference.set(null);
+                LOG.info("Try websocket connection to {}", uri);
+                webSocketReference.set(HttpClient.newHttpClient()
+                                                 .newWebSocketBuilder()
+                                                 .buildAsync(uri, new ChatEndPoint()).get());
+
+                LOG.info("Websocket connection to {} done", uri);
+            } catch (InterruptedException e) {
+                LOG.info("Websocket connection to {} has been interrupted", uri);
+                throw new ChatConnectionFailure("Websocket connection has been interrupted failed", e);
+            } catch (ExecutionException e) {
+                LOG.info("Websocket connection to {} has failed", uri);
+                throw new ChatConnectionFailure("Websocket connection failed", e);
             }
         }
 
@@ -122,8 +130,8 @@ public class WebSocketChat extends ChatIOBase implements Chat {
 
             while (
                     !connected
-                    && reconnectionPolicy.shouldReconnect(attemptIndex)
-                    && !Thread.currentThread().isInterrupted()
+                            && reconnectionPolicy.shouldReconnect(attemptIndex)
+                            && !Thread.currentThread().isInterrupted()
             ) {
                 attemptIndex++;
                 LOG.warn("Try reconnection : attempt #{} ", attemptIndex);
@@ -157,10 +165,10 @@ public class WebSocketChat extends ChatIOBase implements Chat {
 
         @Override
         public void onDone(Throwable error) {
-            Optional.ofNullable(sessionReference.get()).ifPresent(s -> {
+            Optional.ofNullable(webSocketReference.get()).ifPresent(s -> {
                 try {
-                    s.close();
-                } catch (IOException e) {
+                    s.sendClose(WebSocket.NORMAL_CLOSURE, "Ok").get();
+                } catch (Exception e) {
                     ThrowableTool.interruptIfCausedByInterruption(e);
                     LOG.warn("Error while closing websocket", e);
                 }
@@ -170,33 +178,39 @@ public class WebSocketChat extends ChatIOBase implements Chat {
     }
 
 
-    private class ChatEndPoint extends Endpoint implements MessageHandler.Whole<String> {
+    private class ChatEndPoint implements WebSocket.Listener {
 
         @Override
-        public void onClose(Session session, CloseReason closeReason) {
-            super.onClose(session, closeReason);
-            session.removeMessageHandler(this);
-            sessionReference.set(null);
+        public CompletionStage<?> onClose(WebSocket webSocket, int statusCode, String reason) {
+            webSocketReference.set(null);
             warnListeners(Disconnection.create());
             lock.runLocked(disconnection::signalAll);
+            return null;
         }
 
         @Override
-        public void onError(Session session, Throwable thr) {
-            super.onError(session, thr);
-            warnListeners(Error.with(thr));
+        public void onError(WebSocket webSocket, Throwable error) {
+            WebSocket.Listener.super.onError(webSocket, error);
+            warnListeners(Error.with(error));
         }
 
         @Override
-        public void onOpen(Session session, EndpointConfig config) {
-            session.addMessageHandler(this);
-            sessionReference.set(session);
+        public void onOpen(WebSocket webSocket) {
+            WebSocket.Listener.super.onOpen(webSocket);
+            webSocketReference.set(webSocket);
             warnListeners(Connection.create());
         }
 
         @Override
-        public void onMessage(String message) {
-            warnListeners(new ReceivedMessage(instants.now(), message));
+        public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
+//            displayData(data.toString());
+            WebSocket.Listener.super.onText(webSocket,data,last);
+            warnListeners(new ReceivedMessage(instants.now(), data.toString()));
+            return null;
+        }
+
+        private void displayData(String toString) {
+            Arrays.stream(toString.split("\\R")).forEach(s -> System.out.println(">>>>  "+s));
         }
     }
 

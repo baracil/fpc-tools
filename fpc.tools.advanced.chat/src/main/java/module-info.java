@@ -9,7 +9,7 @@ module fpc.tools.advanced.chat {
     requires com.google.common;
 
     requires transitive fpc.tools.chat;
-    requires fpc.tools.lang;
+    requires transitive fpc.tools.lang;
 
     exports fpc.tools.advanced.chat;
     exports fpc.tools.advanced.chat.event;

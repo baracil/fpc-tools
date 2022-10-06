@@ -11,7 +11,6 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContextInitializer;
 
@@ -52,7 +51,7 @@ public abstract class FXSpringApplication extends Application {
     }
 
     private void handleSpringLaunchCompletion(@NonNull Stage primaryStage, ApplicationCloser applicationCloser, Throwable error) {
-        final TryResult<ApplicationCloser, Throwable> result = error == null ? TryResult.success(applicationCloser) : TryResult.failure(error);
+        final TryResult<Throwable, ApplicationCloser> result = error == null ? TryResult.success(applicationCloser) : TryResult.failure(error);
         this.afterLaunchingSpring(primaryStage, result);
 
         result.ifFailedAccept(e -> {
@@ -95,6 +94,6 @@ public abstract class FXSpringApplication extends Application {
 
     protected void afterLaunchingSpring(
             @NonNull Stage primaryStage,
-            @NonNull TryResult<ApplicationCloser, Throwable> result) {
+            @NonNull TryResult<Throwable, ApplicationCloser> result) {
     }
 }

@@ -1,9 +1,9 @@
 package net.femtoparsec.tools.advanced.chat;
 
+import fpc.tools.advanced.chat.AdvancedIO;
 import fpc.tools.advanced.chat.ReceiptSlip;
 import fpc.tools.advanced.chat.Request;
 import fpc.tools.advanced.chat.RequestAnswerMatcher;
-import fpc.tools.fp.TryResult;
 import lombok.NonNull;
 
 import java.time.Duration;
@@ -14,20 +14,23 @@ import java.util.concurrent.TimeoutException;
 /**
  * @author Bastien Aracil
  **/
-public class RequestPostData<A,M> extends AbstractPostData<ReceiptSlip<A>, Request<A>,M> {
+public class RequestPostData<A, M> extends AbstractPostData<ReceiptSlip<A,M>, Request<A>, M> {
+
+    private final @NonNull AdvancedIO<M> advancedIO;
 
     @NonNull
     private final RequestAnswerMatcher<M> matcher;
 
     private Instant dispatchingTime = null;
 
-    public RequestPostData(@NonNull Request<A> request, @NonNull RequestAnswerMatcher<M> matcher) {
+    public RequestPostData(@NonNull AdvancedIO<M> advancedIO, @NonNull Request<A> request, @NonNull RequestAnswerMatcher<M> matcher) {
         super(request);
+        this.advancedIO = advancedIO;
         this.matcher = matcher;
     }
 
     @Override
-    public @NonNull Optional<RequestPostData<?,M>> asRequestPostData() {
+    public @NonNull Optional<RequestPostData<?, M>> asRequestPostData() {
         return Optional.of(this);
     }
 
@@ -37,19 +40,26 @@ public class RequestPostData<A,M> extends AbstractPostData<ReceiptSlip<A>, Reque
     }
 
     public void onRequestTimeout(@NonNull Duration duration) {
-        completeExceptionallyWith(new TimeoutException("Timeout after "+duration));
+        completeExceptionallyWith(new TimeoutException("Timeout after " + duration));
     }
 
     public boolean tryToCompleteWith(@NonNull M incomingMessage, @NonNull Instant receptionTime) {
-        final Optional<TryResult<A,Throwable>> match = matcher.performMatch(message(), incomingMessage);
-        match.map(t -> t.map(a -> buildReceiptSlip(a,receptionTime)))
-             .ifPresent(t -> t.accept(this::completeExceptionallyWith, this::completeWith));
-        return match.isPresent();
+        try {
+            final var match = matcher.performMatch(message(), incomingMessage).orElse(null);
+            if (match != null) {
+                final var map = match.map(a -> buildReceiptSlip(a, receptionTime));
+                map.accept(this::completeExceptionallyWith, this::completeWith);
+            }
+            return match != null;
+        } catch (Throwable t) {
+            t.printStackTrace();
+            throw t;
+        }
     }
 
     @NonNull
-    private BasicReceiptSlip<A> buildReceiptSlip(@NonNull A answer, @NonNull Instant receptionTime) {
-        return new BasicReceiptSlip<>(dispatchingTime,receptionTime,message(),answer);
+    private BasicReceiptSlip<A,M> buildReceiptSlip(@NonNull A answer, @NonNull Instant receptionTime) {
+        return new BasicReceiptSlip<>(advancedIO, dispatchingTime, receptionTime, message(), answer);
     }
 
 }

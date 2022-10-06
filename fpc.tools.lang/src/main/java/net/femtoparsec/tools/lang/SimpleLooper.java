@@ -36,6 +36,18 @@ public class SimpleLooper implements Looper {
     }
 
     @Override
+    public void startAndWaitForStart() {
+        this.requestStop();
+        runner = new Runner();
+        future = executorService.submit(runner);
+        try {
+            runner.waitStartOfLoop();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    @Override
     @Synchronized
     public void stop() throws InterruptedException {
         this.requestStop();
@@ -44,6 +56,7 @@ public class SimpleLooper implements Looper {
             r.waitEndOfLoop();
         }
     }
+
 
     @Override
     @Synchronized
@@ -63,6 +76,8 @@ public class SimpleLooper implements Looper {
 
         private final Lock lock = new ReentrantLock();
         private final Condition loopDone = lock.newCondition();
+        private final Condition loopStarted = lock.newCondition();
+        private volatile boolean started = false;
 
         public void waitEndOfLoop() throws InterruptedException {
             lock.lock();
@@ -75,10 +90,23 @@ public class SimpleLooper implements Looper {
             }
         }
 
+
+        public void waitStartOfLoop() throws InterruptedException {
+            lock.lock();
+            try {
+                while (!started) {
+                    loopStarted.await();
+                }
+            } finally {
+                lock.unlock();
+            }
+        }
+
         @Override
         public void run() {
-
-            if (loopAction.beforeLooping() == LoopAction.NextState.STOP) {
+            setStarted();
+            final var next = loopAction.beforeLooping();
+            if (next == LoopAction.NextState.STOP) {
                 return;
             }
             Throwable error = null;
@@ -93,7 +121,7 @@ public class SimpleLooper implements Looper {
                         error = e;
                         break;
                     }
-                    LOG.warn("Ignored error : {}",e.getMessage(),e);
+                    LOG.warn("Ignored error : {}", e.getMessage(), e);
                 }
             }
             loopAction.onDone(error);
@@ -101,6 +129,16 @@ public class SimpleLooper implements Looper {
             try {
                 SimpleLooper.this.runner = null;
                 loopDone.signalAll();
+            } finally {
+                lock.unlock();
+            }
+        }
+
+        private void setStarted() {
+            lock.lock();
+            try {
+                started = true;
+                loopStarted.signalAll();
             } finally {
                 lock.unlock();
             }
