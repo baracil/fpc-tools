@@ -44,7 +44,7 @@ public final class ConnectingChatImpl<M> implements ConnectingChat<M> {
 
     private ChatState<M> handleRetry() {
         subscription.unsubscribe();
-        context.onDisconnected();
+        context.onRetry();
         return new DisconnectedChatImpl<>(context.requestReconnection());
     }
 

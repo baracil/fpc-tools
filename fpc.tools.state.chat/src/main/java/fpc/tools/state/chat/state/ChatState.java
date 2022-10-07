@@ -7,9 +7,7 @@ public sealed interface ChatState<M> permits DisconnectedChat, ConnectedChat, Co
 
     <T> @NonNull T accept(@NonNull Visitor<M,T> visitor);
 
-    default void onEnter(@NonNull State oldState) {
-        System.out.println("Entering "+this.getClass().getSimpleName());
-    }
+    default void onEnter(@NonNull State oldState) {}
 
     @NonNull State getState();
 
@@ -26,7 +24,7 @@ public sealed interface ChatState<M> permits DisconnectedChat, ConnectedChat, Co
 
 
     static <M> ChatState<M> createInitial(@NonNull ChatStateContext<M> context) {
-        return new DisconnectedChatImpl<M>(context);
+        return new DisconnectedChatImpl<>(context);
     }
 
 

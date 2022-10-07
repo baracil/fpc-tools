@@ -55,4 +55,8 @@ public class ChatStateContext<M> {
     public @NonNull OnConnectedResult onConnected(@NonNull AdvancedChat<M> chat) throws InterruptedException {
         return chatInfo.onConnected(chat, nbTries);
     }
+
+    public void onRetry() {
+        chatInfo.onRetry();
+    }
 }

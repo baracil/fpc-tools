@@ -49,5 +49,5 @@ public class ChatInfo<M> implements ChatStateListener<M> {
         }
         return new ThrottledChat(chat, bandwidthLimits);
     }
-    
+
 }

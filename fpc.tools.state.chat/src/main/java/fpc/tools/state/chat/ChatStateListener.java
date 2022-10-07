@@ -11,6 +11,8 @@ public interface ChatStateListener<M>  {
 
     @NonNull OnConnectedResult onConnected(@NonNull AdvancedChat<M> chat, int nbTries) throws InterruptedException;
 
+    void onRetry();
+
     void onDisconnected();
 
 }
