@@ -3,12 +3,12 @@ package fpc.tools.state.chat.state;
 import fpc.tools.state.chat.state.impl.ReconnectingChatImpl;
 import lombok.NonNull;
 
-public sealed interface ReconnectingChat<M> extends ChatState<M> permits ReconnectingChatImpl {
+public sealed interface ReconnectingChat extends ChatState permits ReconnectingChatImpl {
 
-    @NonNull ChatState<M> onConnectionRequested();
+    @NonNull ChatState onConnectionRequested();
 
     @Override
-    default <T> @NonNull T accept(@NonNull Visitor<M, T> visitor) {
+    default <T> @NonNull T accept(@NonNull Visitor<T> visitor) {
         return visitor.visit(this);
     }
 

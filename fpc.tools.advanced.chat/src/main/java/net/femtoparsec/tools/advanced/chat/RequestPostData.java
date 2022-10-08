@@ -1,6 +1,5 @@
 package net.femtoparsec.tools.advanced.chat;
 
-import fpc.tools.advanced.chat.AdvancedIO;
 import fpc.tools.advanced.chat.ReceiptSlip;
 import fpc.tools.advanced.chat.Request;
 import fpc.tools.advanced.chat.RequestAnswerMatcher;
@@ -14,18 +13,15 @@ import java.util.concurrent.TimeoutException;
 /**
  * @author Bastien Aracil
  **/
-public class RequestPostData<A, M> extends AbstractPostData<ReceiptSlip<A,M>, Request<A>, M> {
-
-    private final @NonNull AdvancedIO<M> advancedIO;
+public class RequestPostData<A, M> extends AbstractPostData<ReceiptSlip<A>, Request<A>, M> {
 
     @NonNull
     private final RequestAnswerMatcher<M> matcher;
 
     private Instant dispatchingTime = null;
 
-    public RequestPostData(@NonNull AdvancedIO<M> advancedIO, @NonNull Request<A> request, @NonNull RequestAnswerMatcher<M> matcher) {
+    public RequestPostData(@NonNull Request<A> request, @NonNull RequestAnswerMatcher<M> matcher) {
         super(request);
-        this.advancedIO = advancedIO;
         this.matcher = matcher;
     }
 
@@ -58,8 +54,8 @@ public class RequestPostData<A, M> extends AbstractPostData<ReceiptSlip<A,M>, Re
     }
 
     @NonNull
-    private BasicReceiptSlip<A,M> buildReceiptSlip(@NonNull A answer, @NonNull Instant receptionTime) {
-        return new BasicReceiptSlip<>(advancedIO, dispatchingTime, receptionTime, message(), answer);
+    private BasicReceiptSlip<A> buildReceiptSlip(@NonNull A answer, @NonNull Instant receptionTime) {
+        return new BasicReceiptSlip<>(dispatchingTime, receptionTime, message(), answer);
     }
 
 }

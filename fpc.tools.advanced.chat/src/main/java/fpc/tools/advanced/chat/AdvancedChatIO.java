@@ -6,7 +6,7 @@ import lombok.NonNull;
 /**
  * @author Bastien Aracil
  **/
-public interface AdvancedChatIO<M> extends AdvancedIO<M> {
+public interface AdvancedChatIO<M> extends AdvancedIO {
 
     /**
      * Add a listener that will received all event from this {@link AdvancedChatIO}

@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -20,6 +21,14 @@ import java.util.stream.Stream;
 @SuppressWarnings("unused")
 public class ListTool {
 
+
+    public static <A> List<A> arrayList(int capacity) {
+        return new ArrayList<>(capacity);
+    }
+
+    public static <A> List<A> arrayList() {
+        return new ArrayList<>();
+    }
 
     public static <A> ImmutableList<A> replace(@NonNull ImmutableList<A> source, @NonNull A value, @NonNull Predicate1<A> filter) {
         return source.stream()

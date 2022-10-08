@@ -4,7 +4,7 @@ import lombok.NonNull;
 
 import java.util.concurrent.CompletionStage;
 
-public interface AdvancedIO<M> {
+public interface AdvancedIO {
 
     /**
      * Send a command
@@ -12,7 +12,7 @@ public interface AdvancedIO<M> {
      * @return a {@link CompletionStage} that completes when the command is sent
      */
     @NonNull
-    CompletionStage<DispatchSlip<M>> sendCommand(@NonNull Command command);
+    CompletionStage<DispatchSlip> sendCommand(@NonNull Command command);
 
     /**
      * Send a request
@@ -21,7 +21,7 @@ public interface AdvancedIO<M> {
      * is received or the request timed out
      */
     @NonNull
-    <A> CompletionStage<ReceiptSlip<A,M>> sendRequest(@NonNull Request<A> request);
+    <A> CompletionStage<ReceiptSlip<A>> sendRequest(@NonNull Request<A> request);
 
 
 }

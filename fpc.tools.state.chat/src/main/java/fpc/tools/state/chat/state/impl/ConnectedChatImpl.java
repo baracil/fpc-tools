@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.concurrent.CompletionStage;
 
 @RequiredArgsConstructor
-public final class ConnectedChatImpl<M> implements ConnectedChat<M> {
+public final class ConnectedChatImpl<M> implements ConnectedChat {
 
     private final @NonNull ChatStateContext<M> context;
     private final @NonNull AdvancedChat<M> chat;
@@ -19,25 +19,25 @@ public final class ConnectedChatImpl<M> implements ConnectedChat<M> {
 
 
     @Override
-    public @NonNull ChatState<M> onDisconnectionEvent() {
+    public @NonNull ChatState onDisconnectionEvent() {
         subscription.unsubscribe();
         context.onDisconnected();
         return new DisconnectedChatImpl<>(context);
     }
 
     @Override
-    public @NonNull ChatState<M> onDisconnectionRequested() {
+    public @NonNull ChatState onDisconnectionRequested() {
         chat.requestDisconnection();
         return this;
     }
 
     @Override
-    public @NonNull CompletionStage<DispatchSlip<M>> sendCommand(@NonNull Command command) {
+    public @NonNull CompletionStage<DispatchSlip> sendCommand(@NonNull Command command) {
         return chat.sendCommand(command);
     }
 
     @Override
-    public @NonNull <A> CompletionStage<ReceiptSlip<A, M>> sendRequest(@NonNull Request<A> request) {
+    public @NonNull <A> CompletionStage<ReceiptSlip<A>> sendRequest(@NonNull Request<A> request) {
         return chat.sendRequest(request);
     }
 }

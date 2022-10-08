@@ -13,12 +13,12 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Slf4j
-public final class ReconnectingChatImpl<M> implements ReconnectingChat<M> {
+public final class ReconnectingChatImpl<M> implements ReconnectingChat {
 
     private final @NonNull ChatStateContext<M> context;
 
     @Override
-    public @NonNull ChatState<M> onConnectionRequested() {
+    public @NonNull ChatState onConnectionRequested() {
         Subscription subscription = Subscription.NONE;
         AdvancedChat<M> chat = null;
         try {
@@ -35,38 +35,5 @@ public final class ReconnectingChatImpl<M> implements ReconnectingChat<M> {
             return new DisconnectedChatImpl<>(context);
         }
     }
-
-
-    //    @NonNull ChatState<M> connect(boolean retry) {
-//        Subscription subscription = Subscription.NONE;
-//        AdvancedChat<M> chat = null;
-//        try {
-//            chat = chatInfo.createChat();
-//            subscription = chat.addChatListener(listener);
-//            if (retry) {
-//                chatInfo.prepareRetry();
-//            } else {
-//                chatInfo.onConnectionStarted();
-//            }
-//            chat.connect();
-//            return new Connector<>(chatInfo,listener,chat,subscription).performConnection();
-//        } catch (RuntimeException t) {
-//            subscription.unsubscribe();
-//            Optional.ofNullable(chat).ifPresent(AdvancedChat::requestDisconnection);
-//            LOG.warn("Fail to connect to chat",t);
-//            chatInfo.canRetryIfFailed(t);
-//            chatInfo.onDisconnected();
-//            return new DisconnectedChatImpl<>(chatInfo,listener,t);
-//        }
-//    }
-//
-//    @Override
-//    public @NonNull ChatState<M> connect() {
-//        return connect(false);
-//    }
-
-
-
-
 
 }

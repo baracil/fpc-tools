@@ -5,15 +5,15 @@ import fpc.tools.state.chat.state.ConnectedChat;
 import fpc.tools.state.chat.state.ConnectingChat;
 import lombok.NonNull;
 
-public class OnDisconnectionEventMutation<M> extends VisitorMutation<M> {
+public class OnDisconnectionEventMutation extends VisitorMutation {
 
     @Override
-    public @NonNull ChatState<M> visit(@NonNull ConnectingChat<M> state) {
+    public @NonNull ChatState visit(@NonNull ConnectingChat state) {
         return state.onDisconnectionEvent();
     }
 
     @Override
-    public @NonNull ChatState<M> visit(@NonNull ConnectedChat<M> state) {
+    public @NonNull ChatState visit(@NonNull ConnectedChat state) {
         return state.onDisconnectionEvent();
     }
 }

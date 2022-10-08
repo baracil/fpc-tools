@@ -13,12 +13,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public class ChatStateContext<M> {
-    private final @NonNull ChatStateMutator<M> mutator;
+    private final @NonNull ChatStateMutator mutator;
     private final @NonNull ChatInfo<M> chatInfo;
     private final @NonNull AdvancedChatListener<M> listener;
     private final int nbTries;
 
-    public ChatStateContext(@NonNull ChatStateMutator<M> mutator, @NonNull ChatInfo<M> chatInfo, @NonNull AdvancedChatListener<M> listener) {
+    public ChatStateContext(@NonNull ChatStateMutator mutator, @NonNull ChatInfo<M> chatInfo, @NonNull AdvancedChatListener<M> listener) {
         this.mutator = mutator;
         this.chatInfo = chatInfo;
         this.listener = listener;
@@ -36,7 +36,7 @@ public class ChatStateContext<M> {
 
     public @NonNull ChatStateContext<M> requestReconnection() {
         final var nextContext = new ChatStateContext<>(mutator,chatInfo,listener,nbTries+1);
-        mutator.mutate(new ConnectMutation<>());
+        mutator.mutate(new ConnectMutation());
         return nextContext;
     }
 

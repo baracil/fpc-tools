@@ -6,7 +6,7 @@ import lombok.NonNull;
 
 import java.util.concurrent.CompletionStage;
 
-public interface ChatStateMutator<M> {
+public interface ChatStateMutator {
 
-    @NonNull CompletionStage<ChatState<M>> mutate(@NonNull Mutation<ChatState<M>> mutation);
+    @NonNull CompletionStage<ChatState> mutate(@NonNull Mutation<ChatState> mutation);
 }

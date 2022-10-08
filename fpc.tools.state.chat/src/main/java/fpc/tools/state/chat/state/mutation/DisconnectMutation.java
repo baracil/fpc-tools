@@ -7,15 +7,15 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class DisconnectMutation<M> extends VisitorMutation<M> {
+public class DisconnectMutation extends VisitorMutation {
 
     @Override
-    public @NonNull ChatState<M> visit(@NonNull ConnectingChat<M> state) {
+    public @NonNull ChatState visit(@NonNull ConnectingChat state) {
         return state.onDisconnectionRequested();
     }
 
     @Override
-    public @NonNull ChatState<M> visit(@NonNull ConnectedChat<M> state) {
+    public @NonNull ChatState visit(@NonNull ConnectedChat state) {
         return state.onDisconnectionRequested();
     }
 }

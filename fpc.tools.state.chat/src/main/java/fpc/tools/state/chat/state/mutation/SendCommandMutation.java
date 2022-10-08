@@ -11,31 +11,31 @@ import lombok.RequiredArgsConstructor;
 import java.util.concurrent.CompletableFuture;
 
 @RequiredArgsConstructor
-public class SendCommandMutation<M> extends VisitorMutation<M> {
+public class SendCommandMutation extends VisitorMutation {
 
     private final Command command;
-    private final CompletableFuture<DispatchSlip<M>> future;
+    private final CompletableFuture<DispatchSlip> future;
 
     @Override
-    public @NonNull ChatState<M> visit(@NonNull ConnectedChat<M> state) {
+    public @NonNull ChatState visit(@NonNull ConnectedChat state) {
         Futures.join(state.sendCommand(command),future);
         return state;
     }
 
     @Override
-    public @NonNull ChatState<M> visit(@NonNull DisconnectedChat<M> state) {
+    public @NonNull ChatState visit(@NonNull DisconnectedChat state) {
         future.completeExceptionally(new ChatNotConnected());
         return state;
     }
 
     @Override
-    public @NonNull ChatState<M> visit(ReconnectingChat<M> state) {
+    public @NonNull ChatState visit(ReconnectingChat state) {
         future.completeExceptionally(new ChatNotConnected());
         return state;
     }
 
     @Override
-    public @NonNull ChatState<M> visit(@NonNull ConnectingChat<M> state) {
+    public @NonNull ChatState visit(@NonNull ConnectingChat state) {
         future.completeExceptionally(new ChatNotConnected());
         return state;
     }

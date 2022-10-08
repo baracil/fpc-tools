@@ -102,13 +102,13 @@ public class FPCAdvancedChat<M> implements AdvancedChat<M> {
 
 
     @Override
-    public @NonNull CompletionStage<DispatchSlip<M>> sendCommand(@NonNull Command command) {
-        return chatSender.send(new CommandPostData<>(this,command));
+    public @NonNull CompletionStage<DispatchSlip> sendCommand(@NonNull Command command) {
+        return chatSender.send(new CommandPostData<>(command));
     }
 
     @Override
-    public @NonNull <A> CompletionStage<ReceiptSlip<A,M>> sendRequest(@NonNull Request<A> request) {
-        return chatSender.send(new RequestPostData<>(this,request, matcher));
+    public @NonNull <A> CompletionStage<ReceiptSlip<A>> sendRequest(@NonNull Request<A> request) {
+        return chatSender.send(new RequestPostData<>(request, matcher));
     }
 
     private void warnListeners(@NonNull AdvancedChatEvent<M> event) {
