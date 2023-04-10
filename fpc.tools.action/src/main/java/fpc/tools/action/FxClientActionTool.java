@@ -1,10 +1,11 @@
 package fpc.tools.action;
 
-import com.google.common.collect.ImmutableList;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import net.femtoparsec.tools.action.FPCActionExecutor;
 import net.femtoparsec.tools.action.FPCActionManager;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 public class FxClientActionTool {
@@ -19,7 +20,7 @@ public class FxClientActionTool {
     private final ActionProvider actionProvider;
 
     @NonNull
-    private final ImmutableList<ActionFilter> actionFilters;
+    private final List<ActionFilter> actionFilters;
 
 
     private ActionManager actionManager;

@@ -1,6 +1,5 @@
 package net.femtoparsec.tools.irc;
 
-import com.google.common.collect.ImmutableMap;
 import fpc.tools.irc.*;
 import fpc.tools.lang.MapTool;
 import lombok.NonNull;
@@ -8,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -38,7 +38,7 @@ public class FPCIRCParser implements IRCParser {
 
         private Prefix prefix;
 
-        private ImmutableMap<String, Tag> tags = ImmutableMap.of();
+        private Map<String, Tag> tags = Map.of();
 
         private String command;
 

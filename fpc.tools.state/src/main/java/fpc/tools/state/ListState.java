@@ -1,6 +1,5 @@
 package fpc.tools.state;
 
-import com.google.common.collect.ImmutableList;
 import fpc.tools.lang.ListTool;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -19,7 +18,7 @@ import java.util.stream.Stream;
 @EqualsAndHashCode(of = "content")
 public class ListState<V> implements Iterable<V> {
 
-    private static final ListState EMPTY = new ListState<>(ImmutableList.of());
+    private static final ListState EMPTY = new ListState<>(List.of());
 
     @SuppressWarnings("unchecked")
     public static <V> ListState<V> empty() {
@@ -27,12 +26,12 @@ public class ListState<V> implements Iterable<V> {
     }
 
     @NonNull
-    public static <V> ListState<V> of(@NonNull ImmutableList<V> content) {
+    public static <V> ListState<V> of(@NonNull List<V> content) {
         return new ListState<>(content);
     }
 
     @NonNull
-    private final ImmutableList<V> content;
+    private final List<V> content;
 
 
     public int size() {
@@ -101,7 +100,7 @@ public class ListState<V> implements Iterable<V> {
 
     @NonNull
     public ListState<V> removeIf(@NonNull Predicate<? super V> test) {
-        return new ListState<>(content.stream().filter(test.negate()).collect(ImmutableList.toImmutableList()));
+        return new ListState<>(content.stream().filter(test.negate()).toList());
     }
 
     @NonNull
@@ -156,7 +155,7 @@ public class ListState<V> implements Iterable<V> {
         }
 
         public ListState<V> build() {
-            return new ListState<>(ImmutableList.copyOf(content));
+            return new ListState<>(List.copyOf(content));
         }
     }
 }

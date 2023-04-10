@@ -1,6 +1,5 @@
 package net.femtoparsec.tools.state;
 
-import com.google.common.collect.ImmutableMap;
 import fpc.tools.fp.Function1;
 import fpc.tools.state.IdMapState;
 import lombok.EqualsAndHashCode;
@@ -8,6 +7,7 @@ import lombok.NonNull;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Map;
 
 /**
  * An immutable map with convenient methods to get a modified
@@ -20,14 +20,14 @@ public class FPCIdMapState<I, V> extends FPCMapStateBase<I, V, FPCIdMapState<I, 
 
     @SuppressWarnings("unchecked")
     public static <I, V> FPCIdMapState<I, V> empty(@NonNull Function1<? super V, ? extends I> idGetter) {
-        return new FPCIdMapState<>(ImmutableMap.of(), idGetter);
+        return new FPCIdMapState<>(Map.of(), idGetter);
     }
 
     @NonNull
     private final Function1<? super V, ? extends I> idGetter;
 
     public FPCIdMapState(
-            @NonNull ImmutableMap<I, V> content,
+            @NonNull Map<I, V> content,
             @NonNull Function1<? super V, ? extends I> idGetter) {
         super(content, c -> new FPCIdMapState<>(c, idGetter));
         this.idGetter = idGetter;

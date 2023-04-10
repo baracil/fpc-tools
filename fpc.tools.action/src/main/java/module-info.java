@@ -8,9 +8,6 @@ module fpc.tools.action {
     requires fpc.tools.state;
 
     requires org.slf4j;
-    requires com.google.common;
-
 
     exports fpc.tools.action;
-    exports net.femtoparsec.tools.action;
 }

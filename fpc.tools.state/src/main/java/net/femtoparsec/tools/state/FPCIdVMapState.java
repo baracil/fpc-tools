@@ -1,6 +1,5 @@
 package net.femtoparsec.tools.state;
 
-import com.google.common.collect.ImmutableMap;
 import fpc.tools.fp.Function1;
 import fpc.tools.state.IdVMapState;
 import fpc.tools.state.Versioned;
@@ -8,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * An immutable map with convenient methods to get a modified
@@ -22,7 +22,7 @@ public class FPCIdVMapState<I, V extends Versioned> extends FPCMapStateBase<I, V
     private final Function1<? super V, ? extends I> idGetter;
 
     public FPCIdVMapState(
-            @NonNull ImmutableMap<I, V> content,
+            @NonNull Map<I, V> content,
             @NonNull Function1<? super V, ? extends I> idGetter) {
         super(content, c -> new FPCIdVMapState<>(c, idGetter));
         this.idGetter = idGetter;

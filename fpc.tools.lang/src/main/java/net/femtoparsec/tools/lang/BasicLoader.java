@@ -1,8 +1,8 @@
 package net.femtoparsec.tools.lang;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import fpc.tools.fp.Function1;
 import fpc.tools.lang.Loader;
+import fpc.tools.lang.ThreadFactoryBuilder;
 import fpc.tools.lang.ThrowableTool;
 import lombok.Getter;
 import lombok.NonNull;

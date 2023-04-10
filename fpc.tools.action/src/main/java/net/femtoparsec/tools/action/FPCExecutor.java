@@ -1,7 +1,7 @@
 package net.femtoparsec.tools.action;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import fpc.tools.action.Executor;
+import fpc.tools.lang.ThreadFactoryBuilder;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

@@ -1,8 +1,5 @@
 package net.femtoparsec.tools.validation;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import fpc.tools.validation.ValidationContext;
 import fpc.tools.validation.ValidationError;
 import fpc.tools.validation.ValidationResult;
@@ -10,14 +7,12 @@ import lombok.NonNull;
 
 import java.util.*;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class FPCValidationContext implements ValidationContext  {
 
-    private static final Collector<Map.Entry<String, Set<ValidationError>>, ?, ImmutableMap<String, ImmutableList<ValidationError>>> COLLECTOR
-            = ImmutableMap.toImmutableMap(
-            Map.Entry::getKey,
-            e -> ImmutableList.copyOf(e.getValue())
-    );
+    private static final Collector<Map.Entry<String, Set<ValidationError>>, ?, Map<String, List<ValidationError>>> COLLECTOR
+        = Collectors.toMap(Map.Entry::getKey, e -> List.copyOf(e.getValue()));
 
     @NonNull
     private final Set<String> validatedFields = new HashSet<>();
@@ -39,10 +34,10 @@ public class FPCValidationContext implements ValidationContext  {
 
     @NonNull
     public ValidationResult getResult() {
-        final ImmutableMap<String, ImmutableList<ValidationError>> errorByField = errors.entrySet()
+        final Map<String, List<ValidationError>> errorByField = errors.entrySet()
                                                                                         .stream()
                                                                                         .collect(COLLECTOR);
-        return new ValidationResult(ImmutableSet.copyOf(validatedFields), errorByField);
+        return new ValidationResult(Set.copyOf(validatedFields), errorByField);
     }
 
     public boolean isValid() {

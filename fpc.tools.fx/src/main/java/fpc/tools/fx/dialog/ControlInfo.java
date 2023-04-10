@@ -1,6 +1,5 @@
 package fpc.tools.fx.dialog;
 
-import com.google.common.collect.ImmutableList;
 import fpc.tools.i18n.Dictionary;
 import fpc.tools.validation.ValidationError;
 import javafx.geometry.Pos;
@@ -21,6 +20,7 @@ import org.controlsfx.validation.decoration.ValidationDecoration;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Builder
@@ -35,7 +35,7 @@ public class ControlInfo {
     @NonNull
     private final ValidationDecoration validationDecoration = new CompoundValidationDecoration(new GraphDeco(), new StyleClassValidationDecoration());
 
-    public void updateDecoration(@NonNull ImmutableList<ValidationError> errors) {
+    public void updateDecoration(@NonNull List<ValidationError> errors) {
         final Optional<ValidationMessage> message = errors.stream()
                                                           .findFirst()
                                                           .map(ValidationError::getErrorType)

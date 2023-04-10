@@ -1,8 +1,9 @@
 package net.femtoparsec.tools.state;
 
-import com.google.common.collect.ImmutableMap;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
+
+import java.util.Map;
 
 /**
  * An immutable map with convenient methods to get a modified
@@ -13,14 +14,14 @@ import lombok.NonNull;
 public class FPCMapState<K, V> extends FPCMapStateBase<K,V, FPCMapState<K,V>> {
 
     @SuppressWarnings("rawtypes")
-    public static final FPCMapState EMPTY = new FPCMapState<>(ImmutableMap.of());
+    public static final FPCMapState EMPTY = new FPCMapState<>(Map.of());
 
     @SuppressWarnings("unchecked")
     public static <K,V> FPCMapState<K,V> empty() {
         return EMPTY;
     }
 
-    public FPCMapState(@NonNull ImmutableMap<K, V> content) {
+    public FPCMapState(@NonNull Map<K, V> content) {
         super(content, FPCMapState::new);
     }
 

@@ -1,9 +1,7 @@
 package net.femtoparsec.tools.state;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import fpc.tools.fp.Function1;
+import fpc.tools.lang.MapTool;
 import fpc.tools.state.RemoteData;
 import fpc.tools.state.RemoteMap;
 import lombok.*;
@@ -26,10 +24,10 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private final ImmutableMap<K, RemoteData<V>> content;
+    private final Map<K, RemoteData<V>> content;
 
     @NonNull
-    private final Function1<? super ImmutableMap<K,RemoteData<V>>,? extends M> factory;
+    private final Function1<? super Map<K,RemoteData<V>>,? extends M> factory;
 
     /**
      * @return the size of this map
@@ -56,7 +54,7 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * @return the set of the entries of this map
      */
     @Override
-    public @NonNull ImmutableSet<Map.Entry<K, RemoteData<V>>> entrySet() {
+    public @NonNull Set<Map.Entry<K, RemoteData<V>>> entrySet() {
         return content.entrySet();
     }
 
@@ -64,7 +62,7 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * @return the set of the keys of this map
      */
     @NonNull
-    public ImmutableSet<K> keySet() {
+    public Set<K> keySet() {
         return content.keySet();
     }
 
@@ -72,7 +70,7 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * @return the collection of the values of this map
      */
     @NonNull
-    public ImmutableCollection<RemoteData<V>> values() {
+    public Collection<RemoteData<V>> values() {
         return content.values();
     }
 
@@ -100,10 +98,10 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * @return a new {@link FPCRemoteMapBase} with the entries matching the predicate remove
      */
     private M removeIfEntryMatches(@NonNull Predicate<Map.Entry<K, RemoteData<V>>> predicate) {
-        final ImmutableMap<K, RemoteData<V>> newContent = content.entrySet()
+        final Map<K, RemoteData<V>> newContent = content.entrySet()
                                                      .stream()
                                                      .filter(predicate.negate())
-                                                     .collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, Map.Entry::getValue));
+                                                     .collect(MapTool.collector(Map.Entry::getKey, Map.Entry::getValue));
         return factory.apply(newContent);
     }
 
@@ -161,7 +159,7 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
     /**
      * Same as {@link #update(Object, Object, Comparator)} but for several values at once
      */
-    public M update(@NonNull ImmutableMap<K, V> newValues,
+    public M update(@NonNull Map<K, V> newValues,
                                        @NonNull Comparator<? super V> isNewer) {
         return this.update(newValues.entrySet(), Map.Entry::getKey, Map.Entry::getValue, isNewer);
     }
@@ -226,10 +224,10 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
         @NonNull
         private final M reference;
 
-        private final ImmutableMap<K, RemoteData<V>> content;
+        private final Map<K, RemoteData<V>> content;
 
         @NonNull
-        private final Function1<? super ImmutableMap<K,RemoteData<V>>,? extends M> factory;
+        private final Function1<? super Map<K,RemoteData<V>>,? extends M> factory;
 
         @NonNull
         private final Set<K> removedKeys = new HashSet<>();
@@ -253,10 +251,10 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
             if (removedKeys.isEmpty() && addedValues.isEmpty()) {
                 return reference;
             }
-            final ImmutableMap<K, RemoteData<V>> content = Stream.concat(
+            final Map<K, RemoteData<V>> content = Stream.concat(
                     this.content.entrySet().stream().filter(e -> isNotRemovedNorAdded(e.getKey())),
                     addedValues.entrySet().stream()
-            ).collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, Map.Entry::getValue));
+            ).collect(MapTool.collector(Map.Entry::getKey, Map.Entry::getValue));
             return factory.apply(content);
         }
 

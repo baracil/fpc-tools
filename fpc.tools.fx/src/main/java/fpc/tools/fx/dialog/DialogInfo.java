@@ -1,6 +1,5 @@
 package fpc.tools.fx.dialog;
 
-import com.google.common.collect.ImmutableMap;
 import fpc.tools.validation.ValidationResult;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
@@ -9,6 +8,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Singular;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Builder(builderClassName = "Builder")
@@ -25,7 +25,7 @@ public class DialogInfo<O> {
     private final Button applyButton;
 
     @Singular
-    private final ImmutableMap<String, ControlInfo> validatableFields;
+    private final Map<String, ControlInfo> validatableFields;
 
     @NonNull
     public Optional<ControlInfo> getControl(@NonNull String fieldName) {

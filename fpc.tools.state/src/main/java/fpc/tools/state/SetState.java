@@ -1,16 +1,16 @@
 package fpc.tools.state;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableSet;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 @EqualsAndHashCode(of = "content")
 public class SetState<V> implements Iterable<V> {
 
-    private static final SetState EMPTY = new SetState<>(ImmutableSet.of());
+    private static final SetState EMPTY = new SetState<>(Set.of());
 
     @SuppressWarnings("unchecked")
     public static <V> SetState<V> empty() {
@@ -29,7 +29,7 @@ public class SetState<V> implements Iterable<V> {
 
     @NonNull
     @Getter
-    private final ImmutableSet<V> content;
+    private final Set<V> content;
 
     @SuppressWarnings("SuspiciousMethodCalls")
     public boolean contains(Object value) {
@@ -53,7 +53,7 @@ public class SetState<V> implements Iterable<V> {
 
     @NonNull
     public SetState<V> removeIf(@NonNull Predicate<? super V> test) {
-        return new SetState<>(content.stream().filter(test.negate()).collect(ImmutableSet.toImmutableSet()));
+        return new SetState<>(content.stream().filter(test.negate()).collect(Collectors.toSet()));
     }
 
     @NonNull
@@ -93,7 +93,7 @@ public class SetState<V> implements Iterable<V> {
         @NonNull
         private final Set<V> addedValues = new HashSet<>();
 
-        public Builder<V> addAll(@NonNull ImmutableCollection<V> values) {
+        public Builder<V> addAll(@NonNull Collection<V> values) {
             addedValues.addAll(values);
             removedValues.removeAll(values);
             return this;
@@ -112,17 +112,17 @@ public class SetState<V> implements Iterable<V> {
             return this;
         }
 
-        public Builder<V> removeAll(@NonNull ImmutableCollection<V> values) {
+        public Builder<V> removeAll(@NonNull Collection<V> values) {
             addedValues.removeAll(values);
             removedValues.addAll(values);
             return this;
         }
 
         public SetState<V> build() {
-            final ImmutableSet<V> content = Stream.concat(
+            final Set<V> content = Stream.concat(
                     reference.content.stream().filter(this::isNotRemovedNorAdded),
                     addedValues.stream()
-            ).collect(ImmutableSet.toImmutableSet());
+            ).collect(Collectors.toSet());
             return new SetState<>(content);
         }
 

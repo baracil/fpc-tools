@@ -1,8 +1,8 @@
 package fpc.tools.fp;
 
-import com.google.common.collect.ImmutableList;
 import lombok.NonNull;
 
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -11,7 +11,7 @@ import java.util.function.Function;
 public interface UnaryOperator1<A> extends Function1<A,A> {
 
     @NonNull
-    static <T> UnaryOperator1<T> chain(@NonNull ImmutableList<? extends UnaryOperator1<T>> functions) {
+    static <T> UnaryOperator1<T> chain(@NonNull List<? extends UnaryOperator1<T>> functions) {
         if (functions.isEmpty()) {
             return t -> t;
         }

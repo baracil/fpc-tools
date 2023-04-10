@@ -1,7 +1,5 @@
 package fpc.tools.state;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableMap;
 import fpc.tools.fp.Consumer2;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.UnaryOperator1;
@@ -10,6 +8,7 @@ import net.femtoparsec.tools.state.FPCMapState;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.function.Predicate;
 
 /**
@@ -23,11 +22,11 @@ public interface MapState<K, V> extends fpc.tools.state.MapStateBase<K,V> {
         return FPCMapState.empty();
     }
 
-    static <K,V> MapState<K,V> with(@NonNull ImmutableMap<K, V> content) {
+    static <K,V> MapState<K,V> with(@NonNull Map<K, V> content) {
         return new FPCMapState<>(content);
     }
 
-    @NonNull ImmutableMap<K,V> getContent();
+    @NonNull Map<K,V> getContent();
 
     MapState<K,V> remove(@NonNull K key);
 
@@ -47,7 +46,7 @@ public interface MapState<K, V> extends fpc.tools.state.MapStateBase<K,V> {
     MapState<K, V> put(@NonNull K key, @NonNull V value);
 
     @NonNull
-    MapState<K,V> onlyKeepTheKeys(@NonNull ImmutableCollection<K> keys);
+    MapState<K,V> onlyKeepTheKeys(@NonNull Collection<K> keys);
 
     /**
      * @param keys the keys of the entry to add
@@ -55,10 +54,10 @@ public interface MapState<K, V> extends fpc.tools.state.MapStateBase<K,V> {
      * @return a new MapState with the same values of this plus the provided entry.
      */
     @NonNull
-    MapState<K, V> putAll(@NonNull ImmutableCollection<K> keys, @NonNull Function1<? super K, ? extends V> valueGetter);
+    MapState<K, V> putAll(@NonNull Collection<K> keys, @NonNull Function1<? super K, ? extends V> valueGetter);
 
     @NonNull
-    default MapState<K, V> putAll(@NonNull ImmutableCollection<K> keys, @NonNull V value) {
+    default MapState<K, V> putAll(@NonNull Collection<K> keys, @NonNull V value) {
         return putAll(keys,k -> value);
     }
 
@@ -100,7 +99,7 @@ public interface MapState<K, V> extends fpc.tools.state.MapStateBase<K,V> {
     /**
      * Same as {@link #update(Object, Object, Comparator)} but for several values at once
      */
-    MapState<K, V> update(@NonNull ImmutableMap<K, V> newValues,
+    MapState<K, V> update(@NonNull Map<K, V> newValues,
                             @NonNull Comparator<? super V> isNewer);
 
     /**

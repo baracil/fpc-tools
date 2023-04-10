@@ -1,9 +1,9 @@
 package fpc.tools.lang;
 
-import com.google.common.collect.ImmutableList;
 import lombok.NonNull;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.ServiceLoader;
 
 public class ServiceLoaderHelper {
@@ -21,10 +21,10 @@ public class ServiceLoaderHelper {
         return priority == null ? Integer.MIN_VALUE : priority.value();
     }
 
-    public static <S> @NonNull ImmutableList<S> loadAll(@NonNull ServiceLoader<S> serviceLoader) {
+    public static <S> @NonNull List<S> loadAll(@NonNull ServiceLoader<S> serviceLoader) {
         return serviceLoader.stream()
                             .sorted(Comparator.comparing(ServiceLoaderHelper::getProviderPriority))
                             .map(ServiceLoader.Provider::get)
-                            .collect(ImmutableList.toImmutableList());
+                            .toList();
     }
 }

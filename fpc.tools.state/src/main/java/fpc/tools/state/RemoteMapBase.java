@@ -1,11 +1,11 @@
 package fpc.tools.state;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableSet;
 import lombok.NonNull;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * An immutable map with convenient methods to get a modified
@@ -33,19 +33,19 @@ public interface RemoteMapBase<K, V> {
      * @return the set of the entries of this map
      */
     @NonNull
-    ImmutableSet<Map.Entry<K, RemoteData<V>>> entrySet();
+    Set<Map.Entry<K, RemoteData<V>>> entrySet();
 
     /**
      * @return the set of the keys of this map
      */
     @NonNull
-    ImmutableSet<K> keySet();
+    Set<K> keySet();
 
     /**
      * @return the collection of the values of this map
      */
     @NonNull
-    ImmutableCollection<RemoteData<V>> values();
+    Collection<RemoteData<V>> values();
 
     boolean containsKey(@NonNull K key);
 

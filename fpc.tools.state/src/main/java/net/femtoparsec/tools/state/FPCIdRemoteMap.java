@@ -1,6 +1,5 @@
 package net.femtoparsec.tools.state;
 
-import com.google.common.collect.ImmutableMap;
 import fpc.tools.fp.Function1;
 import fpc.tools.state.IdRemoteMap;
 import fpc.tools.state.Identified;
@@ -9,24 +8,25 @@ import lombok.NonNull;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Map;
 
 public class FPCIdRemoteMap<K,V> extends FPCRemoteMapBase<K,V, FPCIdRemoteMap<K,V>> implements IdRemoteMap<K,V> {
 
     @NonNull
     public static <K,V> FPCIdRemoteMap<K,V> empty(@NonNull Function1<? super V, ? extends K> idGetter) {
-        return new FPCIdRemoteMap<>(ImmutableMap.of(), idGetter);
+        return new FPCIdRemoteMap<>(Map.of(), idGetter);
     }
 
     @NonNull
     public static <K,V extends Identified<K>> FPCIdRemoteMap<K,V> empty() {
-        return new FPCIdRemoteMap<>(ImmutableMap.of(), Identified::getIdentification);
+        return new FPCIdRemoteMap<>(Map.of(), Identified::getIdentification);
     }
 
     @NonNull
     private final Function1<? super V, ? extends K> idGetter;
 
     public FPCIdRemoteMap(
-            @NonNull ImmutableMap<K, RemoteData<V>> content,
+            @NonNull Map<K, RemoteData<V>> content,
             @NonNull Function1<? super V, ? extends K> idGetter) {
         super(content, c-> new FPCIdRemoteMap<>(c,idGetter));
         this.idGetter = idGetter;

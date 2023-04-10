@@ -1,8 +1,8 @@
 package fpc.tools.irc;
 
-import com.google.common.collect.ImmutableMap;
 import lombok.*;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -21,7 +21,7 @@ public class IRCParsing {
     /**
      * A map of tags
      */
-    @NonNull ImmutableMap<String,Tag> tags;
+    @NonNull Map<String,Tag> tags;
 
     /**
      * The optional prefix of the IRC message

@@ -34,7 +34,7 @@ public class IdentifiedEnumTools {
         throw new IllegalArgumentException("Could not convert '" + id + "' to a " + values[0].getClass());
     }
 
-    private static <E extends IdentifiedEnum> E findEnum(@NonNull String id, @NonNull E[] values) {
+    public static <E extends IdentifiedEnum> E findEnum(@NonNull String id, @NonNull E[] values) {
         for (E value : values) {
             if (value.getIdentification().equals(id)) {
                 return value;

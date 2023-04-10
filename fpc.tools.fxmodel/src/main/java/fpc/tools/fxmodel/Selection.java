@@ -1,10 +1,10 @@
 package fpc.tools.fxmodel;
 
-import com.google.common.collect.ImmutableSet;
 import lombok.NonNull;
 import net.femtoparsec.tools.fxmodel.FPCSelection;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author Bastien Aracil
@@ -15,7 +15,7 @@ public interface Selection<T> {
         return FPCSelection.empty();
     }
 
-    static <T> Selection<T> with(@NonNull T mainSelection, @NonNull ImmutableSet<T> selectedElements) {
+    static <T> Selection<T> with(@NonNull T mainSelection, @NonNull Set<T> selectedElements) {
         return FPCSelection.with(mainSelection,selectedElements);
     }
 
@@ -30,7 +30,7 @@ public interface Selection<T> {
      * All the selected elements, including the main selection.
      */
     @NonNull
-    ImmutableSet<T> getSelectedElements();
+    Set<T> getSelectedElements();
 
     @NonNull
     Selection<T> removeFromSelection(@NonNull T item);

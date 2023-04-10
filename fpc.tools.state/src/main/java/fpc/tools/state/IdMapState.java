@@ -1,12 +1,12 @@
 package fpc.tools.state;
 
-import com.google.common.collect.ImmutableMap;
 import fpc.tools.fp.Function1;
 import lombok.NonNull;
 import net.femtoparsec.tools.state.FPCIdMapState;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.function.Predicate;
 
 /**
@@ -24,7 +24,7 @@ public interface IdMapState<I, V> extends fpc.tools.state.MapStateBase<I,V> {
         return FPCIdMapState.empty(Identified::getIdentification);
     }
 
-    static <I, V extends Identified<I>> @NonNull IdMapState<I, V> with(@NonNull ImmutableMap<I,V> content) {
+    static <I, V extends Identified<I>> @NonNull IdMapState<I, V> with(@NonNull Map<I,V> content) {
         return new FPCIdMapState<>(content, Identified::getIdentification);
     }
 

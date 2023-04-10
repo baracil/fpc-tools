@@ -1,10 +1,10 @@
 package fpc.tools.fxmodel;
 
-import com.google.common.collect.ImmutableSet;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RequiredArgsConstructor
 public abstract class ProxySelection<T,R extends Selection<T>> implements Selection<T> {
@@ -18,7 +18,7 @@ public abstract class ProxySelection<T,R extends Selection<T>> implements Select
     }
 
     @Override
-    public @NonNull ImmutableSet<T> getSelectedElements() {
+    public @NonNull Set<T> getSelectedElements() {
         return delegate.getSelectedElements();
     }
 

@@ -1,14 +1,15 @@
 package fpc.tools.action;
 
-import com.google.common.collect.ImmutableList;
 import fpc.tools.fp.TryResult;
 import fpc.tools.lang.ListTool;
 import lombok.NonNull;
 import lombok.Synchronized;
 
+import java.util.List;
+
 public class ActionSpyDispatcher implements ActionSpy {
 
-    private @NonNull ImmutableList<ActionSpy> spies = ImmutableList.of();
+    private @NonNull List<ActionSpy> spies = List.of();
 
     @Synchronized
     public void addActionSpy(@NonNull ActionSpy actionSpy) {

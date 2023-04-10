@@ -1,6 +1,5 @@
 package net.femtoparsec.tools.lang;
 
-import com.google.common.collect.ImmutableList;
 import fpc.tools.fp.Consumer1;
 import fpc.tools.lang.ListTool;
 import fpc.tools.lang.Listeners;
@@ -10,15 +9,30 @@ import lombok.NonNull;
 import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 @Slf4j
 public class FPCListeners<L> implements Listeners<L> {
 
     public static @NonNull ListenersFactory provider() {
-        return FPCListeners::new;
+        return new Factory();
     }
 
     @NonNull
-    private ImmutableList<L> listeners = ImmutableList.of();
+    private List<L> listeners;
+
+    public FPCListeners() {
+        this(List.of());
+    }
+
+    public FPCListeners(@NonNull List<L> listeners) {
+        this.listeners = listeners;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return listeners.isEmpty();
+    }
 
     @NonNull
     @Synchronized
@@ -39,5 +53,17 @@ public class FPCListeners<L> implements Listeners<L> {
     private void forOneListener(@NonNull L listener, @NonNull Consumer1<? super L> action) {
         action.acceptSafe(listener)
               .ifFailedAccept(e -> LOG.warn("Error while calling listener : ",e));
+    }
+
+    private static class Factory implements ListenersFactory {
+        @Override
+        public @NonNull <L> Listeners<L> create() {
+            return new FPCListeners<>();
+        }
+
+        @Override
+        public @NonNull <L> Listeners<L> create(@NonNull List<L> initialListeners) {
+            return new FPCListeners<>(initialListeners);
+        }
     }
 }

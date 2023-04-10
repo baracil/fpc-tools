@@ -9,8 +9,6 @@ module fpc.tools.chat {
     requires org.slf4j;
     requires io.github.bucket4j.core;
 
-    requires com.google.common;
-
     requires fpc.tools.lang;
 
     exports fpc.tools.chat;

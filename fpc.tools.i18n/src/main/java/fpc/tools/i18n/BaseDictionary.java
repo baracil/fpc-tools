@@ -1,12 +1,12 @@
 package fpc.tools.i18n;
 
-import com.google.common.collect.ImmutableList;
 import lombok.NonNull;
 import net.femtoparsec.tools.i18n.FPCResourceBundle;
 import net.femtoparsec.tools.i18n.LocalizedStringFromResource;
 import net.femtoparsec.tools.i18n.PrefixedDictionary;
 import net.femtoparsec.tools.i18n.ResourceReference;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.spi.ResourceBundleProvider;
@@ -34,13 +34,13 @@ public class BaseDictionary implements Dictionary {
     @NonNull
     public LocalizedString localizedString(@NonNull String i18nKey) {
         final var resourceReference = new ResourceReference(baseResourceName,i18nKey);
-        return new LocalizedStringFromResource(this::getResourceBundle, resourceReference, ImmutableList.of());
+        return new LocalizedStringFromResource(this::getResourceBundle, resourceReference, List.of());
     }
 
     @NonNull
     public LocalizedString localizedString(@NonNull String i18nKey, @NonNull Object... parameters) {
         final ResourceReference resourceReference = new ResourceReference(baseResourceName,i18nKey);
-        return new LocalizedStringFromResource(this::getResourceBundle, resourceReference, ImmutableList.copyOf(parameters));
+        return new LocalizedStringFromResource(this::getResourceBundle, resourceReference, List.of(parameters));
     }
 
     @NonNull

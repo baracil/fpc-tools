@@ -5,12 +5,21 @@ import fpc.tools.fp.Consumer2;
 import fpc.tools.fp.Consumer3;
 import lombok.NonNull;
 
+import java.util.List;
+
 public interface Listeners<L> {
 
     @NonNull
     static <L> Listeners<L> create() {
         return ListenersFactory.getInstance().create();
     }
+
+    @NonNull
+    static <L> Listeners<L> create(@NonNull List<L> initialListeners) {
+        return ListenersFactory.getInstance().create(initialListeners);
+    }
+
+    boolean isEmpty();
 
     @NonNull
     Subscription addListener(@NonNull L listener);

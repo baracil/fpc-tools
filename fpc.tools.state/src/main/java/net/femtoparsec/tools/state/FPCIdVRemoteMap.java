@@ -1,6 +1,5 @@
 package net.femtoparsec.tools.state;
 
-import com.google.common.collect.ImmutableMap;
 import fpc.tools.fp.Function1;
 import fpc.tools.state.IdVRemoteMap;
 import fpc.tools.state.Identified;
@@ -9,12 +8,13 @@ import fpc.tools.state.Versioned;
 import lombok.NonNull;
 
 import java.util.Collection;
+import java.util.Map;
 
 public class FPCIdVRemoteMap<K,V extends Versioned> extends FPCRemoteMapBase<K,V, FPCIdVRemoteMap<K,V>> implements IdVRemoteMap<K,V> {
 
     @NonNull
     public static <K,V extends Versioned> FPCIdVRemoteMap<K,V> empty(@NonNull Function1<? super V, ? extends K> idGetter) {
-        return new FPCIdVRemoteMap<>(ImmutableMap.of(),idGetter);
+        return new FPCIdVRemoteMap<>(Map.of(),idGetter);
     }
 
     @NonNull
@@ -26,7 +26,7 @@ public class FPCIdVRemoteMap<K,V extends Versioned> extends FPCRemoteMapBase<K,V
     private final Function1<? super V, ? extends K> idGetter;
 
     public FPCIdVRemoteMap(
-            @NonNull ImmutableMap<K, RemoteData<V>> content,
+            @NonNull Map<K, RemoteData<V>> content,
             @NonNull Function1<? super V, ? extends K> idGetter) {
         super(content, c-> new FPCIdVRemoteMap<>(c,idGetter));
         this.idGetter = idGetter;

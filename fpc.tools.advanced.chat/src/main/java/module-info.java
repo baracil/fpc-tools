@@ -6,10 +6,10 @@ module fpc.tools.advanced.chat {
     requires static lombok;
     requires java.desktop;
 
-    requires com.google.common;
-
     requires transitive fpc.tools.chat;
     requires transitive fpc.tools.lang;
+
+    requires org.slf4j;
 
     exports fpc.tools.advanced.chat;
     exports fpc.tools.advanced.chat.event;

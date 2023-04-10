@@ -33,22 +33,15 @@
             <groupId>net.femtoparsec.tools</groupId>
             <artifactId>fpc-tools-micronaut</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>io.micronaut.serde</groupId>
-            <artifactId>micronaut-serde-jackson</artifactId>
-            <scope>provided</scope>
+            <artifactId>micronaut-serde-api</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-inject</artifactId>
+            <artifactId>micronaut-context</artifactId>
         </dependency>
+
 
     </dependencies>
 

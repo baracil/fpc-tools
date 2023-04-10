@@ -1,7 +1,7 @@
 package fpc.tools.chat;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import fpc.tools.lang.Subscription;
+import fpc.tools.lang.ThreadFactoryBuilder;
 import fpc.tools.lang.ThrowableTool;
 import io.github.bucket4j.Bucket;
 import io.github.bucket4j.BucketConfiguration;

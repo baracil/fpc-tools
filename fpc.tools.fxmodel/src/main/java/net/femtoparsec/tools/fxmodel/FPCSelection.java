@@ -1,11 +1,11 @@
 package net.femtoparsec.tools.fxmodel;
 
-import com.google.common.collect.ImmutableSet;
 import fpc.tools.fxmodel.Selection;
 import fpc.tools.state.SetState;
 import lombok.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @EqualsAndHashCode
 @RequiredArgsConstructor
@@ -15,7 +15,7 @@ public class FPCSelection<T> implements Selection<T> {
         return new FPCSelection<>();
     }
 
-    public static <T> FPCSelection<T> with(@NonNull T mainSelection, @NonNull ImmutableSet<T> selectedElements) {
+    public static <T> FPCSelection<T> with(@NonNull T mainSelection, @NonNull Set<T> selectedElements) {
         assert selectedElements.contains(mainSelection) : "Main selection is not in the selected elements";
         return new FPCSelection<>(mainSelection, new SetState<>(selectedElements));
     }
@@ -72,7 +72,7 @@ public class FPCSelection<T> implements Selection<T> {
     }
 
     @Override
-    public @NonNull ImmutableSet<T> getSelectedElements() {
+    public @NonNull Set<T> getSelectedElements() {
         return selectedElements.getContent();
     }
 

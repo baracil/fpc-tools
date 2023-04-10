@@ -1,10 +1,11 @@
 package fpc.tools.irc;
 
-import com.google.common.collect.ImmutableList;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Singular;
 import lombok.Value;
+
+import java.util.List;
 
 /**
  * @author Bastien Aracil
@@ -15,7 +16,7 @@ public class Params {
 
     @NonNull
     @Singular
-    ImmutableList<String> parameters;
+    List<String> parameters;
 
     public boolean isEmpty() {
         return parameters.isEmpty();

@@ -9,7 +9,6 @@ module fpc.tools.state {
     requires transitive fpc.tools.fp;
 
     requires org.slf4j;
-    requires com.google.common;
 
     requires transitive javafx.base;
     requires transitive javafx.graphics;

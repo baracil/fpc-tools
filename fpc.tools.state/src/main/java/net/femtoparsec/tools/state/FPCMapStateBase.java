@@ -1,11 +1,9 @@
 package net.femtoparsec.tools.state;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.UnaryOperator1;
+import fpc.tools.lang.MapTool;
+import fpc.tools.lang.SetTool;
 import fpc.tools.state.MapState;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,10 +28,10 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      */
     @NonNull
     @Getter
-    private final ImmutableMap<K, V> content;
+    private final Map<K, V> content;
 
     @NonNull
-    private final Function1<? super ImmutableMap<K,V>,? extends M> factory;
+    private final Function1<? super Map<K,V>,? extends M> factory;
 
     /**
      * @return the size of this map
@@ -59,7 +57,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      * @return the set of the entries of this map
      */
     @NonNull
-    public ImmutableSet<Map.Entry<K, V>> entrySet() {
+    public Set<Map.Entry<K, V>> entrySet() {
         return content.entrySet();
     }
 
@@ -67,7 +65,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      * @return the set of the keys of this map
      */
     @NonNull
-    public ImmutableSet<K> keySet() {
+    public Set<K> keySet() {
         return content.keySet();
     }
 
@@ -75,7 +73,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      * @return the collection of the values of this map
      */
     @NonNull
-    public ImmutableCollection<V> values() {
+    public Collection<V> values() {
         return content.values();
     }
 
@@ -101,10 +99,10 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      * @return a new {@link FPCMapStateBase} with the entries matching the predicate remove
      */
     private M removeIfEntryMatches(@NonNull Predicate<Map.Entry<K, V>> predicate) {
-        final ImmutableMap<K, V> newContent = content.entrySet()
+        final Map<K, V> newContent = content.entrySet()
                                                      .stream()
                                                      .filter(predicate.negate())
-                                                     .collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, Map.Entry::getValue));
+                                                     .collect(MapTool.collector(Map.Entry::getKey, Map.Entry::getValue));
         return factory.apply(newContent);
     }
 
@@ -121,19 +119,18 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
     }
 
     @Override
-    public @NonNull M onlyKeepTheKeys(@NonNull ImmutableCollection<K> keys) {
-        final Set<K> keysToRemove = keys instanceof Set?(Set<K>) keys:new HashSet<>(keys);
-        final var toRemove = Sets.difference(content.keySet(),keysToRemove);
+    public @NonNull M onlyKeepTheKeys(@NonNull Collection<K> keys) {
+        final var toRemove = SetTool.difference(content.keySet(),keys);
         if (toRemove.isEmpty()) {
             return getThis();
         } else if (toRemove.size() == content.size()) {
-            return factory.apply(ImmutableMap.of());
+            return factory.apply(Map.of());
         }
         return removeIfKeyMatches(toRemove::contains);
     }
 
     @Override
-    public @NonNull M putAll(@NonNull ImmutableCollection<K> keys,
+    public @NonNull M putAll(@NonNull Collection<K> keys,
                                           @NonNull Function1<? super K, ? extends V> valueGetter) {
         return toBuilder().putAll(keys,valueGetter).build();
     }
@@ -192,7 +189,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
     /**
      * Same as {@link #update(Object, Object, Comparator)} but for several values at once
      */
-    public M update(@NonNull ImmutableMap<K, V> newValues,
+    public M update(@NonNull Map<K, V> newValues,
                                        @NonNull Comparator<? super V> isNewer) {
         return this.update(newValues.entrySet(), Map.Entry::getKey, Map.Entry::getValue, isNewer);
     }
@@ -255,10 +252,10 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
         @NonNull
         private final M reference;
 
-        private final ImmutableMap<K,V> content;
+        private final Map<K,V> content;
 
         @NonNull
-        private final Function1<? super ImmutableMap<K,V>,? extends M> factory;
+        private final Function1<? super Map<K,V>,? extends M> factory;
 
         @NonNull
         private final Set<K> removedKeys = new HashSet<>();
@@ -282,10 +279,10 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
             if (removedKeys.isEmpty() && addedValues.isEmpty()) {
                 return reference;
             }
-            final ImmutableMap<K, V> content = Stream.concat(
+            final Map<K, V> content = Stream.concat(
                     this.content.entrySet().stream().filter(e -> isNotRemovedNorAdded(e.getKey())),
                     addedValues.entrySet().stream()
-            ).collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, Map.Entry::getValue));
+            ).collect(MapTool.collector(Map.Entry::getKey, Map.Entry::getValue));
             return factory.apply(content);
         }
 
@@ -293,7 +290,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
             return !removedKeys.contains(key) && !addedValues.containsKey(key);
         }
 
-        public  Builder<K, V, M> putAll(@NonNull ImmutableCollection<K> keys,
+        public  Builder<K, V, M> putAll(@NonNull Collection<K> keys,
                                                      Function1<? super K, ? extends V> valueGetter) {
             keys.forEach(k -> put(k,valueGetter.apply(k)));
             return this;

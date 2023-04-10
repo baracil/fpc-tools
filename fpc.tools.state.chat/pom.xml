@@ -34,10 +34,6 @@
             <artifactId>fpc-tools-state</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
             <groupId>net.femtoparsec.tools</groupId>
             <artifactId>fpc-tools-advanced-chat</artifactId>
         </dependency>

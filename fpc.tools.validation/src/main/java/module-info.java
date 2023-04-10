@@ -7,9 +7,6 @@ module fpc.tools.validation {
 
     requires fpc.tools.fp;
     requires fpc.tools.lang;
-    requires com.google.common;
-
-
 
     exports fpc.tools.validation;
     exports net.femtoparsec.tools.validation;

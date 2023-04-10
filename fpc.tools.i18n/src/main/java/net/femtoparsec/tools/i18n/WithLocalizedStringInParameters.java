@@ -1,10 +1,10 @@
 package net.femtoparsec.tools.i18n;
 
-import com.google.common.collect.ImmutableList;
 import fpc.tools.i18n.LocalizedString;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -14,7 +14,7 @@ import java.util.Locale;
 public class WithLocalizedStringInParameters implements ParametersTranslator {
 
     @NonNull
-    private final ImmutableList<Object> parameters;
+    private final List<Object> parameters;
 
     @Override
     public @NonNull Object[] translate(@NonNull Locale locale) {

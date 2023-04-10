@@ -8,7 +8,6 @@ module fpc.tools.fxmodel {
 
     requires org.slf4j;
     requires javafx.graphics;
-    requires com.google.common;
 
     exports fpc.tools.fxmodel;
 }

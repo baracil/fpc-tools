@@ -1,8 +1,9 @@
 package fpc.tools.lang;
 
-import com.google.common.collect.ImmutableList;
 import lombok.NonNull;
 import net.femtoparsec.tools.lang.MultiSubscriptions;
+
+import java.util.List;
 
 public interface Subscription {
 
@@ -18,7 +19,7 @@ public interface Subscription {
 
     @NonNull
     static Subscription multi(@NonNull Subscription... subscriptions) {
-        return new MultiSubscriptions(ImmutableList.copyOf(subscriptions));
+        return new MultiSubscriptions(List.of(subscriptions));
     }
 
     @NonNull

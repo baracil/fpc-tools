@@ -1,10 +1,8 @@
 package net.femtoparsec.tools.i18n;
 
-import com.google.common.collect.ImmutableList;
 import fpc.tools.i18n.LocalizedString;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -29,7 +27,7 @@ public class LocalizedStringFromResource implements LocalizedString {
     public LocalizedStringFromResource(
             @NonNull Function<? super Locale,? extends ResourceBundle> resourceBundleProviders,
             @NonNull ResourceReference resourceReference,
-            @NonNull ImmutableList<Object> parameters) {
+            @NonNull List<Object> parameters) {
         this.resourceBundleProviders = resourceBundleProviders;
         this.resourceReference = resourceReference;
         this.parametersTranslator = ParametersTranslator.create(parameters);

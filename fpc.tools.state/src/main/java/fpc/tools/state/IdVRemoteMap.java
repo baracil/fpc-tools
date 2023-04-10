@@ -1,12 +1,12 @@
 package fpc.tools.state;
 
-import com.google.common.collect.ImmutableMap;
 import fpc.tools.fp.Function1;
 import fpc.tools.lang.MapTool;
 import lombok.NonNull;
 import net.femtoparsec.tools.state.FPCIdVRemoteMap;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.function.Predicate;
 
 /**
@@ -20,15 +20,15 @@ public interface IdVRemoteMap<I, V extends Versioned> extends fpc.tools.state.Re
         return empty(Identified::getIdentification);
     }
 
-    static <I, V extends Versioned & Identified<I>> @NonNull IdVRemoteMap<I, V> create(@NonNull ImmutableMap<I,V> content) {
+    static <I, V extends Versioned & Identified<I>> @NonNull IdVRemoteMap<I, V> create(@NonNull Map<I,V> content) {
         return create(content, Identified::getIdentification);
     }
 
     static <I, V extends Versioned> @NonNull IdVRemoteMap<I, V> empty(@NonNull Function1<? super V, ? extends I> idGetter) {
-        return create(ImmutableMap.of(),idGetter);
+        return create(Map.of(),idGetter);
     }
 
-    static <I, V extends Versioned> @NonNull IdVRemoteMap<I, V> create(@NonNull ImmutableMap<I,V> content, @NonNull Function1<? super V, ? extends I> idGetter) {
+    static <I, V extends Versioned> @NonNull IdVRemoteMap<I, V> create(@NonNull Map<I,V> content, @NonNull Function1<? super V, ? extends I> idGetter) {
         return new FPCIdVRemoteMap<>(MapTool.mapValue(content,RemoteData::loaded),idGetter);
     }
 

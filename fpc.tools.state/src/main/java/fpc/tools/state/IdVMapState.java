@@ -1,13 +1,12 @@
 package fpc.tools.state;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableMap;
 import fpc.tools.fp.Function1;
 import fpc.tools.lang.MapTool;
 import lombok.NonNull;
 import net.femtoparsec.tools.state.FPCIdVMapState;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.function.Predicate;
 
 /**
@@ -18,14 +17,14 @@ import java.util.function.Predicate;
 public interface IdVMapState<I, V extends Versioned> extends fpc.tools.state.MapStateBase<I,V> {
 
     static <I, V extends Versioned> @NonNull IdVMapState<I, V> empty(@NonNull Function1<? super V, ? extends I> idGetter) {
-        return create(ImmutableMap.of(),idGetter);
+        return create(Map.of(),idGetter);
     }
 
-    static <I, V extends Versioned> @NonNull IdVMapState<I, V> create(@NonNull ImmutableMap<I,V> content, @NonNull Function1<? super V, ? extends I> idGetter) {
+    static <I, V extends Versioned> @NonNull IdVMapState<I, V> create(@NonNull Map<I,V> content, @NonNull Function1<? super V, ? extends I> idGetter) {
         return new FPCIdVMapState<>(content,idGetter);
     }
 
-    static <I, V extends Versioned> @NonNull IdVMapState<I, V> create(@NonNull ImmutableCollection<V> content, @NonNull Function1<? super V, ? extends I> idGetter) {
+    static <I, V extends Versioned> @NonNull IdVMapState<I, V> create(@NonNull Collection<V> content, @NonNull Function1<? super V, ? extends I> idGetter) {
         return new FPCIdVMapState<>(content.stream().collect(MapTool.collector(idGetter)),idGetter);
     }
 
@@ -33,11 +32,11 @@ public interface IdVMapState<I, V extends Versioned> extends fpc.tools.state.Map
         return empty(Identified::getIdentification);
     }
 
-    static <I, V extends Versioned & Identified<I>> @NonNull IdVMapState<I, V> create(@NonNull ImmutableMap<I,V> content) {
+    static <I, V extends Versioned & Identified<I>> @NonNull IdVMapState<I, V> create(@NonNull Map<I,V> content) {
         return create(content, Identified::getIdentification);
     }
 
-    static <I, V extends Versioned & Identified<I>> @NonNull IdVMapState<I, V> create(@NonNull ImmutableCollection<V> content) {
+    static <I, V extends Versioned & Identified<I>> @NonNull IdVMapState<I, V> create(@NonNull Collection<V> content) {
         return create(content, Identified::getIdentification);
     }
 
