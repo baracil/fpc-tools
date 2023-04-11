@@ -7,8 +7,7 @@ import lombok.AccessLevel;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -40,6 +39,17 @@ public class MapTool {
 
   public static <A, K> Collector<A, ?, Map<K, A>> collector(Function<? super A, ? extends K> keyGetter) {
     return collector(keyGetter, Function1.identity());
+  }
+
+  public static <K,V> Map<K,V> addOneEntry(@NonNull Map<K,V> reference, @NonNull K key, @NonNull V value) {
+    final var result = MapTool.<K,V>hashMap();
+    result.putAll(reference);
+    result.put(key,value);
+    return Collections.unmodifiableMap(result);
+  }
+
+  public static <K,V> Map<K,V> hashMap() {
+    return new HashMap<>();
   }
 
   @Deprecated
