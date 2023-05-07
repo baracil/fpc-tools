@@ -11,11 +11,11 @@ public class FXDebug {
 
     private static int depth = 0;
 
-    public static void run(@NonNull Runnable runnable, @NonNull String message) {
+    public static void run(Runnable runnable, String message) {
         call(() -> {runnable.run();return Nil.NULL;},message);
     }
 
-    public static <T, E extends Throwable> @NonNull T call(@NonNull Try0<T,E> call, @NonNull String message) throws E {
+    public static <T, E extends Throwable> T call(Try0<T,E> call, String message) throws E {
         FXTools.checkIsFXThread();
         depth++;
         try {

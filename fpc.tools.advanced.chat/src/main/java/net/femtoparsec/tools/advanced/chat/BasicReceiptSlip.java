@@ -10,12 +10,12 @@ import java.time.Instant;
 @Value
 public class BasicReceiptSlip<A> implements ReceiptSlip<A> {
 
-    @NonNull Instant dispatchingTime;
+    Instant dispatchingTime;
 
-    @NonNull Instant receptionTime;
+    Instant receptionTime;
 
-    @NonNull Request<A> sentRequest;
+    Request<A> sentRequest;
 
-    @NonNull A answer;
+    A answer;
 
 }

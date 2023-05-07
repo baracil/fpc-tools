@@ -5,5 +5,5 @@ import lombok.NonNull;
 
 public interface Registrable {
 
-    void register(@NonNull SimpleModule simpleModule);
+    void register(SimpleModule simpleModule);
 }

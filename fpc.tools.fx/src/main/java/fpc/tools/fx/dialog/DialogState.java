@@ -6,28 +6,28 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Value;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 @Value
 public class DialogState<O> {
 
-    public static <O> @NonNull DialogState<O> empty() {
+    public static <O> DialogState<O> empty() {
         return new DialogState<>(ValidationResult.empty(),null);
     }
 
-    public static <O> @NonNull DialogState<O> valid(@NonNull O value) {
+    public static <O> DialogState<O> valid(O value) {
         return new DialogState<>(ValidationResult.empty(),value);
     }
 
-    @NonNull ValidationResult validationResult;
+    ValidationResult validationResult;
 
-    @Getter(AccessLevel.NONE) O value;
+    @Getter(AccessLevel.NONE) @Nullable O value;
 
     public boolean isValid() {
         return value != null && validationResult.isValid();
     }
 
-    @NonNull
     public Optional<O> getValue() {
         if (isValid()) {
             return Optional.ofNullable(value);

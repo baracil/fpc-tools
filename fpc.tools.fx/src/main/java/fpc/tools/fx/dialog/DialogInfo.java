@@ -8,51 +8,46 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Singular;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Optional;
 
 @Builder(builderClassName = "Builder")
 public class DialogInfo<O> {
 
-    @NonNull
     @Getter
     private final DialogController<?,O> dialogController;
 
-    private final Button cancelButton;
+    private final @Nullable Button cancelButton;
 
-    private final Button validateButton;
+    private final @Nullable Button validateButton;
 
-    private final Button applyButton;
+    private final @Nullable Button applyButton;
 
     @Singular
     private final Map<String, ControlInfo> validatableFields;
 
-    @NonNull
-    public Optional<ControlInfo> getControl(@NonNull String fieldName) {
+    public Optional<ControlInfo> getControl(String fieldName) {
         return Optional.ofNullable(validatableFields.get(fieldName));
     }
 
-    @NonNull
     public Optional<Button> getCancelButton() {
         return Optional.ofNullable(cancelButton);
     }
 
-    @NonNull
     public Optional<Button> getValidateButton() {
         return Optional.ofNullable(validateButton);
     }
 
-    @NonNull
     public Optional<Button> getApplyButton() {
         return Optional.ofNullable(applyButton);
     }
 
-    @NonNull
     public ObservableValue<DialogState<O>> resultProperty() {
         return dialogController.dialogStateProperty();
     }
 
-    public void updateDecoration(@NonNull ValidationResult validationResult) {
+    public void updateDecoration(ValidationResult validationResult) {
         for (String fieldName : validationResult.getValidatedFields()) {
             getControl(fieldName)
                       .ifPresent(control -> control.updateDecoration(validationResult.getErrors(fieldName)));

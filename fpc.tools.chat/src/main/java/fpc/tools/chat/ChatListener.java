@@ -5,6 +5,6 @@ import lombok.NonNull;
 
 public interface ChatListener {
 
-    void onChatEvent(@NonNull ChatEvent event);
+    void onChatEvent(ChatEvent event);
 
 }

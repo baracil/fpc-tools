@@ -13,25 +13,19 @@ public class WeakIdentityListener<R> implements IdentityListener<R> {
 
     private static final Disposer DISPOSER = new Disposer("WeakIdentityListener");
 
-    @NonNull
     private final Reference<IdentityListener<R>> delegate;
 
-    @NonNull
     @Getter
     private final Subscription subscription;
 
-    public WeakIdentityListener(@NonNull ReadOnlyIdentity<R> identity,
-                                @NonNull IdentityListener<R> delegate) {
+    public WeakIdentityListener(ReadOnlyIdentity<R> identity,
+                                IdentityListener<R> delegate) {
         this.subscription = identity.addListener(this);
         this.delegate = DISPOSER.add(delegate,subscription::unsubscribe);
     }
 
-    private IdentityListener<R> value() {
-        return delegate.get();
-    }
-
     @Override
-    public void stateChanged(@NonNull R oldValue, @NonNull R newValue) {
+    public void stateChanged(R oldValue, R newValue) {
         final IdentityListener<R> listener = delegate.get();
         if (listener != null) {
             listener.stateChanged(oldValue,newValue);

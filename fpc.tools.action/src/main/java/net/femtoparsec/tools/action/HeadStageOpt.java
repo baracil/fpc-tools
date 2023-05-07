@@ -13,10 +13,10 @@ import java.util.concurrent.CompletionStage;
 public class HeadStageOpt<P, R> extends ActionChainOptBase<P, R> {
 
     @Getter
-    private final @NonNull Class<? extends Action<P, CompletionStage<Optional<R>>>> initialAction;
+    private final Class<? extends Action<P, CompletionStage<Optional<R>>>> initialAction;
 
     @Override
-    public @NonNull CompletionStage<Optional<R>> launch(@NonNull ActionExecutor executor, @NonNull P parameter) {
+    public CompletionStage<Optional<R>> launch(ActionExecutor executor, P parameter) {
         return executor.pushAction(initialAction, parameter)
                        .thenCompose(s -> s);
     }

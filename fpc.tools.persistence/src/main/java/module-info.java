@@ -3,6 +3,7 @@ module fpc.tools.persistence {
 
     requires org.slf4j;
     requires java.persistence;
+  requires fpc.tools.annotation;
 
-    exports fpc.tools.persistence;
+  exports fpc.tools.persistence;
 }

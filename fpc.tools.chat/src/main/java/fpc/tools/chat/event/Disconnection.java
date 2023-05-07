@@ -6,13 +6,12 @@ public record Disconnection() implements ChatEvent {
 
     private static final Disconnection DISCONNECTION = new Disconnection();
 
-    @NonNull
     public static Disconnection create() {
         return DISCONNECTION;
     }
 
     @Override
-    public void accept(@NonNull ChatEventVisitor visitor) {
+    public void accept(ChatEventVisitor visitor) {
         visitor.visit(this);
     }
 }

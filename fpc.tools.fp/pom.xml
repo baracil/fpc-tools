@@ -20,5 +20,11 @@
         <module.name>FP</module.name>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>net.femtoparsec.tools</groupId>
+            <artifactId>fpc-tools-annotation</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

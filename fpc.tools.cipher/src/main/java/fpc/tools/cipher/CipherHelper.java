@@ -8,27 +8,27 @@ import java.util.Base64;
 
 public class CipherHelper {
 
-    public static @NonNull String toBase64(byte @NonNull [] bytes) {
+    public static String toBase64(byte [] bytes) {
         return Base64.getEncoder().encodeToString(bytes);
     }
 
-    public static byte @NonNull [] fromBase64(@NonNull String base64String) {
+    public static byte [] fromBase64(String base64String) {
         return Base64.getDecoder().decode(base64String);
     }
 
-    public static @NonNull String bytes2String(byte @NonNull [] bytes) {
+    public static String bytes2String(byte [] bytes) {
         return new String(bytes, StandardCharsets.UTF_8);
     }
 
-    public static byte @NonNull [] string2Bytes(@NonNull String value) {
+    public static byte [] string2Bytes(String value) {
         return value.getBytes(StandardCharsets.UTF_8);
     }
 
-    public static byte @NonNull [] secret2Bytes(@NonNull Secret secret) {
+    public static byte [] secret2Bytes(Secret secret) {
         return secret.value().getBytes(StandardCharsets.UTF_8);
     }
 
-    public static @NonNull Secret bytes2Secret(byte @NonNull [] bytes) {
+    public static Secret bytes2Secret(byte [] bytes) {
         return Secret.of(new String(bytes, StandardCharsets.UTF_8));
     }
 

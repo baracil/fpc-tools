@@ -1,7 +1,5 @@
 package fpc.tools.fp;
 
-import lombok.NonNull;
-
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -12,15 +10,15 @@ import java.util.stream.Stream;
  */
 public interface Predicate1<A> extends Predicate<A> {
 
-    boolean test(@NonNull A a);
+    boolean test(A a);
     
     @Override
-    default Predicate1<A> and(@NonNull Predicate<? super A> other) {
+    default Predicate1<A> and(Predicate<? super A> other) {
         return a -> this.test(a) && other.test(a);
     }
 
     @Override
-    default Predicate1<A> or(@NonNull Predicate<? super A> other) {
+    default Predicate1<A> or(Predicate<? super A> other) {
         return a -> this.test(a) || other.test(a);
     }
 

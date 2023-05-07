@@ -36,15 +36,15 @@ public interface Looper {
      * @param action the action to loop
      * @return the newly created looper
      */
-    static @NonNull Looper simple(@NonNull LoopAction action) {
+    static Looper simple(LoopAction action) {
         return new SimpleLooper(action, Loopers.EXECUTOR_SERVICE);
     }
 
-    static @NonNull Looper scheduled(@NonNull LoopAction action, @NonNull Duration period) {
+    static Looper scheduled(LoopAction action, Duration period) {
         return new ScheduledLooper(action, period, period);
     }
 
-    static @NonNull Looper scheduled(@NonNull LoopAction action, @NonNull Duration delay, @NonNull Duration period) {
+    static Looper scheduled(LoopAction action, Duration delay, Duration period) {
         return new ScheduledLooper(action, delay, period);
     }
 }

@@ -5,16 +5,13 @@ import lombok.NonNull;
 
 public interface ControllerFactory {
 
-    @NonNull
-    Object getController(@NonNull Class<?> controllerType) throws Exception;
+    Object getController(Class<?> controllerType) throws Exception;
 
-    @NonNull
     static ControllerFactory withNewInstance() {
         return controllerType -> controllerType.getDeclaredConstructor().newInstance();
     }
 
 
-    @NonNull
     default Callback<Class<?>,Object> asCallbackForFXMLLoader() {
         return c -> {
             try {

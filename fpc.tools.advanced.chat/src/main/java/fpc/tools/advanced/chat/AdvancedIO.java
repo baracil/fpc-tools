@@ -11,8 +11,7 @@ public interface AdvancedIO {
      * @param command the command to send
      * @return a {@link CompletionStage} that completes when the command is sent
      */
-    @NonNull
-    CompletionStage<DispatchSlip> sendCommand(@NonNull Command command);
+    CompletionStage<DispatchSlip> sendCommand(Command command);
 
     /**
      * Send a request
@@ -20,8 +19,7 @@ public interface AdvancedIO {
      * @return a {@link CompletionStage} that completes when the answer to the request
      * is received or the request timed out
      */
-    @NonNull
-    <A> CompletionStage<ReceiptSlip<A>> sendRequest(@NonNull Request<A> request);
+    <A> CompletionStage<ReceiptSlip<A>> sendRequest(Request<A> request);
 
 
 }

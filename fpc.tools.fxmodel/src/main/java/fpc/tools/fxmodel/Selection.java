@@ -15,7 +15,7 @@ public interface Selection<T> {
         return FPCSelection.empty();
     }
 
-    static <T> Selection<T> with(@NonNull T mainSelection, @NonNull Set<T> selectedElements) {
+    static <T> Selection<T> with(T mainSelection, Set<T> selectedElements) {
         return FPCSelection.with(mainSelection,selectedElements);
     }
 
@@ -29,15 +29,12 @@ public interface Selection<T> {
     /**
      * All the selected elements, including the main selection.
      */
-    @NonNull
     Set<T> getSelectedElements();
 
-    @NonNull
-    Selection<T> removeFromSelection(@NonNull T item);
+    Selection<T> removeFromSelection(T item);
 
-    @NonNull
-    Selection<T> addToSelection(@NonNull T item);
+    Selection<T> addToSelection(T item);
 
-    boolean isSelected(@NonNull T item);
+    boolean isSelected(T item);
 
 }

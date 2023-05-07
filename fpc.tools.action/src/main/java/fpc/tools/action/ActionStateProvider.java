@@ -5,5 +5,5 @@ import lombok.NonNull;
 
 public interface ActionStateProvider {
 
-    @NonNull BooleanBinding disabledBinding(@NonNull Class<? extends Action<?,?>> actionType);
+    BooleanBinding disabledBinding(Class<? extends Action<?,?>> actionType);
 }

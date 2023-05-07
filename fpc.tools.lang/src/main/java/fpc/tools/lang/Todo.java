@@ -18,28 +18,28 @@ public class Todo {
         throw new NotImplemented();
     }
 
-    public static <T> T TODO(@NonNull String message) {
+    public static <T> T TODO(String message) {
         throw new NotImplemented(message);
     }
 
-    public static <T> @NonNull T WARN(@NonNull Object callerObject, @NonNull T value, @NonNull String message) {
+    public static <T> T WARN(Object callerObject, T value, String message) {
         display(callerObject,message,false);
         return value;
     }
 
-    public static <T> @NonNull T TRACE(@NonNull Object callerObject, @NonNull T value, @NonNull String message) {
+    public static <T> T TRACE(Object callerObject, T value, String message) {
         display(callerObject,message,false);
         return value;
     }
 
-    public static void TRACE(@NonNull Object callerObject, @NonNull String message) {
+    public static void TRACE(Object callerObject, String message) {
         display(callerObject,message,false);
     }
-    public static void TRACE_ERR(@NonNull Object callerObject, @NonNull String message) {
+    public static void TRACE_ERR(Object callerObject, String message) {
         display(callerObject,message,true);
     }
 
-    public static void TRACE_AROUND(@NonNull Object callerObject, @NonNull Runnable action, @NonNull String message) {
+    public static void TRACE_AROUND(Object callerObject, Runnable action, String message) {
         display(callerObject,message,false);
         display(callerObject,"   : Start",false);
         try {
@@ -51,7 +51,7 @@ public class Todo {
         }
     }
 
-    public static <T,E extends Throwable> T TRACE_AROUND(@NonNull Object callerObject, @NonNull Try0<T,E> action, @NonNull String message) throws E {
+    public static <T,E extends Throwable> T TRACE_AROUND(Object callerObject, Try0<T,E> action, String message) throws E {
         display(callerObject,message+" : Start",false);
         try {
             var value = action.apply();
@@ -63,7 +63,7 @@ public class Todo {
         }
     }
 
-    public static <T> T TRACE_AROUND(@NonNull Object callerObject, @NonNull Supplier<T> action, @NonNull String message) {
+    public static <T> T TRACE_AROUND(Object callerObject, Supplier<T> action, String message) {
         display(callerObject,message+" : Start",false);
         try {
             var value = action.get();
@@ -75,7 +75,7 @@ public class Todo {
         }
     }
 
-    private static void display(@NonNull Object caller, @NonNull String message, boolean error) {
+    private static void display(Object caller, String message, boolean error) {
         final String msg = "["+caller.getClass().getSimpleName()+" #"+Integer.toHexString(System.identityHashCode(caller))+"] "+message;
         ((error)?System.err:System.out).println(msg);
     }
@@ -88,7 +88,7 @@ public class Todo {
         return Math.min(value, maxValue);
     }
 
-    public static <A,T> boolean same(A a1, A a2, @NonNull Function<? super A, ? extends T> getter) {
+    public static <A,T> boolean same(A a1, A a2, Function<? super A, ? extends T> getter) {
         if (a1 == a2) {
             return true;
         }
@@ -98,7 +98,7 @@ public class Todo {
         return Objects.equals(getter.apply(a1),getter.apply(a2));
     }
 
-    public static <A,T> boolean notSame(A a1, A a2, @NonNull Function<? super A, ? extends T> getter) {
+    public static <A,T> boolean notSame(A a1, A a2, Function<? super A, ? extends T> getter) {
         return !same(a1,a2,getter);
     }
 

@@ -9,6 +9,7 @@ module fpc.tools.fx {
     requires fpc.tools.i18n;
     requires fpc.tools.validation;
     requires fpc.tools.lang;
+    requires fpc.tools.annotation;
 
     requires javafx.graphics;
     requires javafx.controls;
@@ -16,8 +17,11 @@ module fpc.tools.fx {
     requires org.controlsfx.controls;
     requires org.slf4j;
 
+
     exports fpc.tools.fx;
     exports fpc.tools.fx.dialog;
+
+
 
     uses fpc.tools.fx.KeyTrackerFactory;
     provides KeyTrackerFactory with FPCKeyTrackerFactory;

@@ -13,31 +13,31 @@ import java.util.concurrent.CompletionStage;
 @RequiredArgsConstructor
 public final class ConnectedChatImpl<M> implements ConnectedChat {
 
-    private final @NonNull ChatStateContext<M> context;
-    private final @NonNull AdvancedChat<M> chat;
-    private final @NonNull Subscription subscription;
+    private final ChatStateContext<M> context;
+    private final AdvancedChat<M> chat;
+    private final Subscription subscription;
 
 
     @Override
-    public @NonNull ChatState onDisconnectionEvent() {
+    public ChatState onDisconnectionEvent() {
         subscription.unsubscribe();
         context.onDisconnected();
         return new DisconnectedChatImpl<>(context);
     }
 
     @Override
-    public @NonNull ChatState onDisconnectionRequested() {
+    public ChatState onDisconnectionRequested() {
         chat.requestDisconnection();
         return this;
     }
 
     @Override
-    public @NonNull CompletionStage<DispatchSlip> sendCommand(@NonNull Command command) {
+    public CompletionStage<DispatchSlip> sendCommand(Command command) {
         return chat.sendCommand(command);
     }
 
     @Override
-    public @NonNull <A> CompletionStage<ReceiptSlip<A>> sendRequest(@NonNull Request<A> request) {
+    public <A> CompletionStage<ReceiptSlip<A>> sendRequest(Request<A> request) {
         return chat.sendRequest(request);
     }
 }

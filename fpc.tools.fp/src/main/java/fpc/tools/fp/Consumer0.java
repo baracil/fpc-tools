@@ -1,10 +1,8 @@
 package fpc.tools.fp;
 
-import lombok.NonNull;
-
 public interface Consumer0 extends Runnable, TryConsumer0<RuntimeException> {
 
-    static Consumer0 of(@NonNull Runnable runnable) {
+    static Consumer0 of(Runnable runnable) {
         if (runnable instanceof Consumer0 c0) {
             return c0;
         }

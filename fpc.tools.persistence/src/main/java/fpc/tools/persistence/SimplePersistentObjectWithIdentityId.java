@@ -33,7 +33,7 @@ public abstract class SimplePersistentObjectWithIdentityId extends PersistentObj
     }
 
     @Override
-    protected void setId(@NonNull Long id) {
+    protected void setId(Long id) {
         this.id = id;
     }
 }

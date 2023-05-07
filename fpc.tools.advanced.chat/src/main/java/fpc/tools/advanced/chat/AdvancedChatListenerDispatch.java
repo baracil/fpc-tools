@@ -7,14 +7,14 @@ import lombok.NonNull;
 
 public class AdvancedChatListenerDispatch<M> implements AdvancedChatListener<M> {
 
-    private final @NonNull Listeners<AdvancedChatListener<M>> listeners = Listeners.create();
+    private final Listeners<AdvancedChatListener<M>> listeners = Listeners.create();
 
     @Override
-    public void onChatEvent(@NonNull AdvancedChatEvent<M> chatEvent) {
+    public void onChatEvent(AdvancedChatEvent<M> chatEvent) {
         listeners.forEachListeners(AdvancedChatListener::onChatEvent,chatEvent);
     }
 
-    public @NonNull Subscription addListener(@NonNull AdvancedChatListener<M> listener) {
+    public Subscription addListener(AdvancedChatListener<M> listener) {
         return listeners.addListener(listener);
     }
 }

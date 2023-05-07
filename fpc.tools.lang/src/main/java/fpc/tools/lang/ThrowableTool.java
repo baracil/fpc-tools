@@ -15,15 +15,15 @@ public class ThrowableTool {
 
     public static final Function1<Throwable,String> ONE_LINE_MESSAGE_EXTRACTOR = ThrowableTool::oneLineMessage;
 
-    public static boolean isCausedByInterruption(@NonNull Throwable throwable) {
+    public static boolean isCausedByInterruption(Throwable throwable) {
         return FPUtils.isCausedByInterruption(throwable);
     }
 
-    public static void interruptIfCausedByInterruption(@NonNull Throwable throwable) {
+    public static void interruptIfCausedByInterruption(Throwable throwable) {
         FPUtils.interruptIfCausedByAnInterruption(throwable);
     }
 
-    public static String oneLineMessage(@NonNull Throwable throwable) {
+    public static String oneLineMessage(Throwable throwable) {
         final String classType = throwable.getClass().getSimpleName();
         final String message = throwable.getMessage();
         StringBuilder sb = new StringBuilder();
@@ -36,7 +36,7 @@ public class ThrowableTool {
         return sb.toString();
     }
 
-    public static Object oneLineMessageLazy(@NonNull Throwable throwable) {
+    public static Object oneLineMessageLazy(Throwable throwable) {
         return StringTool.toStringLazy(ThrowableTool::oneLineMessage, throwable);
     }
 

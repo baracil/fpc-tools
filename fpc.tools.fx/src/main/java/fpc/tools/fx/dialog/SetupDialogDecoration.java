@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 public class SetupDialogDecoration implements DialogPreparer {
 
     @Override
-    public <O> void setup(@NonNull Stage dialogStage, @NonNull DialogInfo<O> dialogInfo) {
+    public <O> void setup(Stage dialogStage, DialogInfo<O> dialogInfo) {
         dialogInfo.resultProperty().addListener((l, o, n) -> {
             dialogInfo.updateDecoration(n.getValidationResult());
         });

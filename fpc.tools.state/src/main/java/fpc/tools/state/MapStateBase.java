@@ -26,27 +26,23 @@ public interface MapStateBase<K, V> {
      * @param key the key of the value to get
      * @return an optional containing the value if it exists, an empty optional otherwise
      */
-    @NonNull
-    Optional<V> get(@NonNull K key);
+    Optional<V> get(K key);
 
     /**
      * @return the set of the entries of this map
      */
-    @NonNull
     Set<Map.Entry<K, V>> entrySet();
 
     /**
      * @return the set of the keys of this map
      */
-    @NonNull
     Set<K> keySet();
 
     /**
      * @return the collection of the values of this map
      */
-    @NonNull
     Collection<V> values();
 
-    boolean containsKey(@NonNull K key);
+    boolean containsKey(K key);
 
 }

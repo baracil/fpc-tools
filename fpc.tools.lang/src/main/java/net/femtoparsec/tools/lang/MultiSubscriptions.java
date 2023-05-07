@@ -14,7 +14,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MultiSubscriptions implements Subscription {
 
-    @NonNull
     private final List<Subscription> subscriptions;
 
     @Override

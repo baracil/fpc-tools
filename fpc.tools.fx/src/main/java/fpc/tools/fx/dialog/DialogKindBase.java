@@ -10,13 +10,13 @@ import java.util.Optional;
 
 public interface DialogKindBase<K extends DialogKindBase<K>> {
 
-    @NonNull Optional<Stage> getOwnerStage(@NonNull Map<K, Stage> unmodifiableDialogStages);
+    Optional<Stage> getOwnerStage(Map<K, Stage> unmodifiableDialogStages);
 
-    @NonNull K getThis();
+    K getThis();
 
-    @NonNull Modality getModality();
+    Modality getModality();
 
-    @NonNull StageStyle getStageStyle();
+    StageStyle getStageStyle();
 
     boolean isAlwaysOnTop();
 

@@ -8,12 +8,12 @@ import lombok.NonNull;
 public class OnDisconnectionEventMutation extends VisitorMutation {
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectingChat state) {
+    public ChatState visit(ConnectingChat state) {
         return state.onDisconnectionEvent();
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectedChat state) {
+    public ChatState visit(ConnectedChat state) {
         return state.onDisconnectionEvent();
     }
 }

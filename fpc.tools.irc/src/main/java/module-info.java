@@ -8,9 +8,10 @@ module fpc.tools.irc {
     requires java.desktop;
     requires fpc.tools.lang;
     requires org.slf4j;
+  requires fpc.tools.annotation;
 
 
-    provides IRCParserFactory with FPCIRCParserFactory;
+  provides IRCParserFactory with FPCIRCParserFactory;
 
     exports fpc.tools.irc;
 }

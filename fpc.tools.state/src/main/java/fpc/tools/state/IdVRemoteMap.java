@@ -16,19 +16,19 @@ import java.util.function.Predicate;
  */
 public interface IdVRemoteMap<I, V extends Versioned> extends fpc.tools.state.RemoteMapBase<I,V> {
 
-    static <I, V extends Versioned & Identified<I>> @NonNull IdVRemoteMap<I, V> empty() {
+    static <I, V extends Versioned & Identified<I>> IdVRemoteMap<I, V> empty() {
         return empty(Identified::getIdentification);
     }
 
-    static <I, V extends Versioned & Identified<I>> @NonNull IdVRemoteMap<I, V> create(@NonNull Map<I,V> content) {
+    static <I, V extends Versioned & Identified<I>> IdVRemoteMap<I, V> create(Map<I,V> content) {
         return create(content, Identified::getIdentification);
     }
 
-    static <I, V extends Versioned> @NonNull IdVRemoteMap<I, V> empty(@NonNull Function1<? super V, ? extends I> idGetter) {
+    static <I, V extends Versioned> IdVRemoteMap<I, V> empty(Function1<? super V, ? extends I> idGetter) {
         return create(Map.of(),idGetter);
     }
 
-    static <I, V extends Versioned> @NonNull IdVRemoteMap<I, V> create(@NonNull Map<I,V> content, @NonNull Function1<? super V, ? extends I> idGetter) {
+    static <I, V extends Versioned> IdVRemoteMap<I, V> create(Map<I,V> content, Function1<? super V, ? extends I> idGetter) {
         return new FPCIdVRemoteMap<>(MapTool.mapValue(content,RemoteData::loaded),idGetter);
     }
 
@@ -37,23 +37,20 @@ public interface IdVRemoteMap<I, V extends Versioned> extends fpc.tools.state.Re
      * @param predicate a predicate that returns true for the keys that must be to remove
      * @return a new {@link IdVRemoteMap} with the key matching the predicate remove
      */
-    @NonNull
-    IdVRemoteMap<I,V> removeIfKeyMatches(@NonNull Predicate<? super I> predicate);
+    IdVRemoteMap<I,V> removeIfKeyMatches(Predicate<? super I> predicate);
 
     /**
      * @param value the value to put
      * @return a new MapState with the same values of this plus the provided entry.
      */
-    @NonNull
-    IdVRemoteMap<I, V> put(@NonNull V value);
+    IdVRemoteMap<I, V> put(V value);
 
     /**
      * @param value the value to replace
      * @return this if this does not contain the provided key, otherwise a new MapState with the same values of
      * this plus the provided entry
      */
-    @NonNull
-    IdVRemoteMap<I, V> replace(@NonNull V value);
+    IdVRemoteMap<I, V> replace(V value);
 
     /**
      * <p>
@@ -72,14 +69,12 @@ public interface IdVRemoteMap<I, V extends Versioned> extends fpc.tools.state.Re
      * entry (key,value) added.
      *
      */
-    @NonNull
-    IdVRemoteMap<I, V> updateValue(@NonNull V value);
+    IdVRemoteMap<I, V> updateValue(V value);
 
     /**
      * Same as {@link #updateValue(Versioned)}  but for several values at once
      */
-    @NonNull
-    IdVRemoteMap<I, V> updateValues(@NonNull Collection<V> newValues);
+    IdVRemoteMap<I, V> updateValues(Collection<V> newValues);
 
     /**
      * Same as {@link #updateValue(Versioned)}} but for several values at once.
@@ -89,9 +84,8 @@ public interface IdVRemoteMap<I, V extends Versioned> extends fpc.tools.state.Re
      * @param valueGetter a function to get the value from one item
      * @return a new updated {@link IdVRemoteMap}
      */
-    @NonNull
-    <T> IdVRemoteMap<I, V> updateItems(@NonNull Collection<T> items,
-                                       @NonNull Function1<? super T, ? extends V> valueGetter);
+    <T> IdVRemoteMap<I, V> updateItems(Collection<T> items,
+                                       Function1<? super T, ? extends V> valueGetter);
 
 
 }

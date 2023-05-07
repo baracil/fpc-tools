@@ -7,8 +7,7 @@ import java.util.Map;
 
 public interface SlotMapperFactory {
 
-    @NonNull
-    SlotMapper create(@NonNull Map<String,ViewSlot> mapping);
+    SlotMapper create(Map<String,ViewSlot> mapping);
 
     static SlotMapperFactory createDefault() {
         return m -> new SlotMapper(m, (fxView, node) -> node);

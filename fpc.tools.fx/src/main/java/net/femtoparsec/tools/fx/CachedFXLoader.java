@@ -5,6 +5,7 @@ import fpc.tools.fx.FXLoadingResult;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import javax.annotation.Nullable;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.Locale;
@@ -12,13 +13,12 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class CachedFXLoader implements FXLoader {
 
-    @NonNull
     private final FXLoader delegate;
 
-    private Reference<FXLoadingResult> reference = null;
+    private @Nullable Reference<FXLoadingResult> reference = null;
 
     @Override
-    public @NonNull FXLoadingResult load(@NonNull Locale locale) {
+    public FXLoadingResult load(Locale locale) {
         final FXLoadingResult cached = reference != null ? reference.get():null;
         final FXLoadingResult result;
         if (cached != null) {
@@ -31,7 +31,7 @@ public class CachedFXLoader implements FXLoader {
     }
 
     @Override
-    public @NonNull FXLoader cached() {
+    public FXLoader cached() {
         return this;
     }
 }

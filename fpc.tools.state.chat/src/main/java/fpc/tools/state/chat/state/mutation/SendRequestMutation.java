@@ -17,25 +17,25 @@ public class SendRequestMutation<A> extends VisitorMutation {
     private final CompletableFuture<ReceiptSlip<A>> future;
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectedChat state) {
+    public ChatState visit(ConnectedChat state) {
         Futures.join(state.sendRequest(request),future);
         return super.visit(state);
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectingChat state) {
+    public ChatState visit(ConnectingChat state) {
         future.completeExceptionally(new ChatNotConnected());
         return state;
     }
 
     @Override
-    public @NonNull ChatState visit(ReconnectingChat state) {
+    public ChatState visit(ReconnectingChat state) {
         future.completeExceptionally(new ChatNotConnected());
         return state;
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull DisconnectedChat state) {
+    public ChatState visit(DisconnectedChat state) {
         future.completeExceptionally(new ChatNotConnected());
         return state;
     }

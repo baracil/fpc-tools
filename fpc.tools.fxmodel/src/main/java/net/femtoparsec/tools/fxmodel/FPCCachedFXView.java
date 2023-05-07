@@ -6,6 +6,7 @@ import fpc.tools.fxmodel.FXViewInstance;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import javax.annotation.Nullable;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.Optional;
@@ -13,10 +14,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class FPCCachedFXView implements CachedFXView {
 
-    @NonNull
     private final FXView reference;
 
-    private Reference<FXViewInstance> cache = null;
+    private @Nullable Reference<FXViewInstance> cache = null;
 
     @Override
     public void invalidate() {
@@ -24,7 +24,7 @@ public class FPCCachedFXView implements CachedFXView {
     }
 
     @Override
-    public @NonNull FXViewInstance getViewInstance() {
+    public FXViewInstance getViewInstance() {
         return Optional.ofNullable(cache)
                        .map(Reference::get)
                        .orElseGet(this::getNewInstance);

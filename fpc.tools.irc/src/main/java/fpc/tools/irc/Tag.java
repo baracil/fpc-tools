@@ -2,6 +2,7 @@ package fpc.tools.irc;
 
 import lombok.*;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -14,14 +15,13 @@ public class Tag {
     boolean client;
 
     @Getter(AccessLevel.NONE)
-    String vendor;
+    @Nullable String vendor;
 
-    @NonNull String keyName;
+    String keyName;
 
-    @NonNull String value;
+    String value;
 
 
-    @NonNull
     public Optional<String> vendor() {
         return Optional.ofNullable(vendor);
     }

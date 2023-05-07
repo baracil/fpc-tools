@@ -16,10 +16,10 @@ import lombok.NonNull;
 public class FPCAdvancedChatFactory extends AdvancedChatFactory {
 
     @Override
-    public @NonNull <M> AdvancedChat<M> createBasedOn(@NonNull Chat chat,
-                                                      @NonNull RequestAnswerMatcher<M> matcher,
-                                                      @NonNull MessageConverter<M> messageConverter,
-                                                      @NonNull Instants instants) {
+    public <M> AdvancedChat<M> createBasedOn(Chat chat,
+                                                      RequestAnswerMatcher<M> matcher,
+                                                      MessageConverter<M> messageConverter,
+                                                      Instants instants) {
         return new FPCAdvancedChat<>(chat, matcher, messageConverter, instants);
     }
 

@@ -16,13 +16,13 @@ import java.io.IOException;
 public class SecretSerDe implements Serde<Secret> {
 
     @Override
-    public Secret deserialize(@NonNull Decoder decoder, @NonNull DecoderContext context, @NonNull Argument<? super Secret> type) throws IOException {
+    public Secret deserialize(Decoder decoder, DecoderContext context, Argument<? super Secret> type) throws IOException {
         final var value = decoder.decodeString();
         return Secret.of(value);
     }
 
     @Override
-    public void serialize(@NonNull Encoder encoder, @NonNull EncoderContext context, @NonNull Argument<? extends Secret> type, @NonNull Secret secret) throws IOException {
+    public void serialize(Encoder encoder, EncoderContext context, Argument<? extends Secret> type, Secret secret) throws IOException {
         encoder.encodeString(secret.value());
     }
 }

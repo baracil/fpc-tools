@@ -10,16 +10,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FxClientActionTool {
 
-    @NonNull
     private final ActionStateProvider actionStateProvider;
 
-    @NonNull
     private final Executor executor;
 
-    @NonNull
     private final ActionProvider actionProvider;
 
-    @NonNull
     private final List<ActionFilter> actionFilters;
 
 

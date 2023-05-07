@@ -6,15 +6,12 @@ import java.util.Optional;
 
 public interface FXViewProvider {
 
-    @NonNull
-    <C extends FXView> Optional<FXView> findFXView(@NonNull Class<? extends C> fxViewType);
+    <C extends FXView> Optional<FXView> findFXView(Class<? extends C> fxViewType);
 
-    @NonNull
-    default <C extends FXView> FXView getFXView(@NonNull Class<? extends C> fxViewType) {
+    default <C extends FXView> FXView getFXView(Class<? extends C> fxViewType) {
         return findFXView(fxViewType).orElseGet(EmptyFXView::create);
     }
 
-    @NonNull
     default FXView getEmptyView() {
         return EmptyFXView.create();
     }

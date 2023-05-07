@@ -5,10 +5,9 @@ import lombok.NonNull;
 
 public class SubscriptionHolder {
 
-    @NonNull
     private Subscription subscription = Subscription.NONE;
 
-    public void replace(@NonNull Function0<Subscription> subscriber) {
+    public void replace(Function0<Subscription> subscriber) {
         subscription.unsubscribe();
         subscription = subscriber.apply();
     }

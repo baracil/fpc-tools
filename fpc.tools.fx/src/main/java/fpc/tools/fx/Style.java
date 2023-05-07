@@ -5,6 +5,6 @@ import lombok.Value;
 
 @Value
 public class Style {
-    @NonNull String name;
-    @NonNull String sheetStylePath;
+    String name;
+    String sheetStylePath;
 }

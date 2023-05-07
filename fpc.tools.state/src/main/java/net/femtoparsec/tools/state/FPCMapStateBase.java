@@ -26,11 +26,9 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
     /**
      * The content of this map, not directly accessible
      */
-    @NonNull
     @Getter
     private final Map<K, V> content;
 
-    @NonNull
     private final Function1<? super Map<K,V>,? extends M> factory;
 
     /**
@@ -49,14 +47,13 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      * @param key the key of the value to get
      * @return an optional containing the value if it exists, an empty optional otherwise
      */
-    public @NonNull Optional<V> get(@NonNull K key) {
+    public Optional<V> get(K key) {
         return Optional.ofNullable(content.get(key));
     }
 
     /**
      * @return the set of the entries of this map
      */
-    @NonNull
     public Set<Map.Entry<K, V>> entrySet() {
         return content.entrySet();
     }
@@ -64,7 +61,6 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
     /**
      * @return the set of the keys of this map
      */
-    @NonNull
     public Set<K> keySet() {
         return content.keySet();
     }
@@ -72,12 +68,11 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
     /**
      * @return the collection of the values of this map
      */
-    @NonNull
     public Collection<V> values() {
         return content.values();
     }
 
-    public @NonNull M remove(@NonNull K key) {
+    public M remove(K key) {
         if (!content.containsKey(key)) {
             return getThis();
         } else {
@@ -89,8 +84,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      * @param predicate a predicate that returns true for the keys that must be to remove
      * @return a new {@link FPCMapStateBase} with the key matching the predicate remove
      */
-    @NonNull
-    public M removeIfKeyMatches(@NonNull Predicate<? super K> predicate) {
+    public M removeIfKeyMatches(Predicate<? super K> predicate) {
         return removeIfEntryMatches(e -> predicate.test(e.getKey()));
     }
 
@@ -98,7 +92,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      * @param predicate a predicate that returns true for the entries that must be to remove.
      * @return a new {@link FPCMapStateBase} with the entries matching the predicate remove
      */
-    private M removeIfEntryMatches(@NonNull Predicate<Map.Entry<K, V>> predicate) {
+    private M removeIfEntryMatches(Predicate<Map.Entry<K, V>> predicate) {
         final Map<K, V> newContent = content.entrySet()
                                                      .stream()
                                                      .filter(predicate.negate())
@@ -111,7 +105,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      * @param value the value of the entry to add
      * @return a new MapState with the same values of this plus the provided entry.
      */
-    public @NonNull M put(@NonNull K key, @NonNull V value) {
+    public M put(K key, V value) {
         if (value.equals(get(key))) {
             return getThis();
         }
@@ -119,7 +113,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
     }
 
     @Override
-    public @NonNull M onlyKeepTheKeys(@NonNull Collection<K> keys) {
+    public M onlyKeepTheKeys(Collection<K> keys) {
         final var toRemove = SetTool.difference(content.keySet(),keys);
         if (toRemove.isEmpty()) {
             return getThis();
@@ -130,8 +124,8 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
     }
 
     @Override
-    public @NonNull M putAll(@NonNull Collection<K> keys,
-                                          @NonNull Function1<? super K, ? extends V> valueGetter) {
+    public M putAll(Collection<K> keys,
+                                          Function1<? super K, ? extends V> valueGetter) {
         return toBuilder().putAll(keys,valueGetter).build();
     }
 
@@ -141,7 +135,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      * @return this if this does not contain the provided key, otherwise a new MapState with the same values of
      * this plus the provided entry
      */
-    public @NonNull M replace(@NonNull K key, @NonNull V value) {
+    public M replace(K key, V value) {
         if (!this.content.containsKey(key)) {
             return getThis();
         }
@@ -150,7 +144,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
     }
 
     @Override
-    public @NonNull M replace(@NonNull K key, @NonNull UnaryOperator1<V> mutator) {
+    public M replace(K key, UnaryOperator1<V> mutator) {
         final V current = this.content.get(key);
         if (current == null) {
             return getThis();
@@ -177,8 +171,8 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      * entry (key,value) added.
      *
      */
-    public M update(@NonNull K key, @NonNull V value,
-                                       @NonNull Comparator<? super V> isNewer) {
+    public M update(K key, V value,
+                                       Comparator<? super V> isNewer) {
         final V current = this.content.get(key);
         if (current == null || isNewer.compare(current, value) < 0) {
             return put(key, value);
@@ -189,17 +183,17 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
     /**
      * Same as {@link #update(Object, Object, Comparator)} but for several values at once
      */
-    public M update(@NonNull Map<K, V> newValues,
-                                       @NonNull Comparator<? super V> isNewer) {
+    public M update(Map<K, V> newValues,
+                                       Comparator<? super V> isNewer) {
         return this.update(newValues.entrySet(), Map.Entry::getKey, Map.Entry::getValue, isNewer);
     }
 
     /**
      * Same as {@link #update(Object, Object, Comparator)} but for several values at once
      */
-    public M update(@NonNull Collection<V> newValues,
-                                       @NonNull Function1<? super V, ? extends K> keyGetter,
-                                       @NonNull Comparator<? super V> isNewer) {
+    public M update(Collection<V> newValues,
+                                       Function1<? super V, ? extends K> keyGetter,
+                                       Comparator<? super V> isNewer) {
         return this.update(newValues, keyGetter, v -> v, isNewer);
 
     }
@@ -213,10 +207,10 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
      * @param <T> the type of the items
      * @return a new updated {@link FPCMapStateBase}
      */
-    public <T> M update(@NonNull Collection<T> items,
-                                           @NonNull Function1<? super T, ? extends K> keyGetter,
-                                           @NonNull Function1<? super T, ? extends V> valueGetter,
-                                           @NonNull Comparator<? super V> isNewer) {
+    public <T> M update(Collection<T> items,
+                                           Function1<? super T, ? extends K> keyGetter,
+                                           Function1<? super T, ? extends V> valueGetter,
+                                           Comparator<? super V> isNewer) {
         if (items.isEmpty()) {
             return getThis();
         }
@@ -234,13 +228,12 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
         return builder.build();
     }
 
-    public boolean containsKey(@NonNull K key) {
+    public boolean containsKey(K key) {
         return content.containsKey(key);
     }
 
     protected abstract M getThis();
 
-    @NonNull
     public Builder<K, V,M> toBuilder() {
         return new Builder<>(getThis(), this.content, this.factory);
     }
@@ -249,27 +242,23 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
     @RequiredArgsConstructor
     public static class Builder<K, V,M extends FPCMapStateBase<K,V,M>> {
 
-        @NonNull
         private final M reference;
 
         private final Map<K,V> content;
 
-        @NonNull
         private final Function1<? super Map<K,V>,? extends M> factory;
 
-        @NonNull
         private final Set<K> removedKeys = new HashSet<>();
 
-        @NonNull
         private final Map<K, V> addedValues = new HashMap<>();
 
-        public Builder<K, V,M> remove(@NonNull K key) {
+        public Builder<K, V,M> remove(K key) {
             this.removedKeys.add(key);
             this.addedValues.remove(key);
             return this;
         }
 
-        public Builder<K, V,M> put(@NonNull K key, @NonNull V value) {
+        public Builder<K, V,M> put(K key, V value) {
             this.removedKeys.remove(key);
             this.addedValues.put(key, value);
             return this;
@@ -290,7 +279,7 @@ public abstract class FPCMapStateBase<K, V, M extends FPCMapStateBase<K,V,M>> im
             return !removedKeys.contains(key) && !addedValues.containsKey(key);
         }
 
-        public  Builder<K, V, M> putAll(@NonNull Collection<K> keys,
+        public  Builder<K, V, M> putAll(Collection<K> keys,
                                                      Function1<? super K, ? extends V> valueGetter) {
             keys.forEach(k -> put(k,valueGetter.apply(k)));
             return this;

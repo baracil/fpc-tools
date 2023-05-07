@@ -11,7 +11,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ParsedString {
 
-    @NonNull
     private final String reference;
 
     private int idx = 0;
@@ -25,7 +24,7 @@ public class ParsedString {
         return this;
     }
 
-    public int lastIndexOf(@NonNull String value) {
+    public int lastIndexOf(String value) {
         return Math.max(-1,reference.lastIndexOf(value)-idx);
     }
 
@@ -42,12 +41,11 @@ public class ParsedString {
         return moveBy(string.length());
     }
 
-    public boolean startsWith(@NonNull String prefix) {
+    public boolean startsWith(String prefix) {
         return reference.startsWith(prefix, idx);
     }
 
-    @NonNull
-    public Optional<String> extractToNextSpaceIfStartWith(@NonNull String prefix) {
+    public Optional<String> extractToNextSpaceIfStartWith(String prefix) {
         if (startsWith(prefix)) {
             return Optional.of(moveByStringLength(prefix).extractToNextSpace());
         }
@@ -76,7 +74,6 @@ public class ParsedString {
         return result;
     }
 
-    @NonNull
     public String extractToEndOfString() {
         final String result = reference.substring(idx);
         this.idx = reference.length();

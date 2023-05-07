@@ -19,7 +19,6 @@ public abstract class PersistentObjectWithUUID extends SimplePersistentObject {
     @Column(name= "EXTERNAL_ID", nullable = false, unique = true)
     protected UUID uuid;
 
-    @NonNull
     public UUID getUuid() {
         return uuid;
     }
@@ -27,11 +26,11 @@ public abstract class PersistentObjectWithUUID extends SimplePersistentObject {
     public PersistentObjectWithUUID() {
     }
 
-    public PersistentObjectWithUUID(@NonNull UUID uuid) {
+    public PersistentObjectWithUUID(UUID uuid) {
         this.uuid = uuid;
     }
 
-    protected void setUuid(@NonNull UUID uuid) {
+    protected void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 

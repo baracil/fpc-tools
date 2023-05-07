@@ -10,6 +10,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
+import javax.annotation.Nullable;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -25,13 +26,12 @@ import java.util.concurrent.locks.ReentrantLock;
 @RequiredArgsConstructor
 public class DefaultUpdater<R> implements Updater<R> {
 
-    @NonNull
     private final BlockingDeque<UpdateInformation<R,?>> updateInformationQueue = new LinkedBlockingDeque<>();
 
     private final Lock lock = new ReentrantLock();
     private final Condition done = lock.newCondition();
 
-    private Thread runningThread = null;
+    private @Nullable Thread runningThread = null;
 
 
     @Override
@@ -65,7 +65,7 @@ public class DefaultUpdater<R> implements Updater<R> {
         });
     }
 
-    private void runLocked(@NonNull Runnable runnable) {
+    private void runLocked(Runnable runnable) {
         lock.lock();
         try {
             runnable.run();
@@ -75,11 +75,11 @@ public class DefaultUpdater<R> implements Updater<R> {
     }
 
     @Override
-    public @NonNull <S> CompletionStage<UpdateResult<R, S>> offerUpdatingOperation(
-            @NonNull Mutation<R> mutation,
-            @NonNull Function0<? extends R> rootStateGetter,
-            @NonNull Consumer1<? super R> newRootStateConsumer,
-            @NonNull Function2<? super R, ? super R, ? extends S> subStateGetter) {
+    public <S> CompletionStage<UpdateResult<R, S>> offerUpdatingOperation(
+            Mutation<R> mutation,
+            Function0<? extends R> rootStateGetter,
+            Consumer1<? super R> newRootStateConsumer,
+            Function2<? super R, ? super R, ? extends S> subStateGetter) {
         final Update<R, S> update = new Update<>(rootStateGetter, newRootStateConsumer,mutation, subStateGetter);
         final UpdateInformation<R,S> updateInformation = new UpdateInformation<>(update, new CompletableFuture<>());
         runLocked(() -> {
@@ -130,11 +130,11 @@ public class DefaultUpdater<R> implements Updater<R> {
     @Value
     private static class UpdateInformation<R,S> {
 
-        @NonNull Update<R,S> updater;
+        Update<R,S> updater;
 
-        @NonNull CompletableFuture<UpdateResult<R,S>> completableFuture;
+        CompletableFuture<UpdateResult<R,S>> completableFuture;
 
-        public void completeExceptionally(@NonNull Throwable error) {
+        public void completeExceptionally(Throwable error) {
             completableFuture.completeExceptionally(error);
         }
 

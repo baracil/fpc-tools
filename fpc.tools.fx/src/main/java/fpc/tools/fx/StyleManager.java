@@ -7,17 +7,15 @@ import net.femtoparsec.tools.fx.SimpleStyleManager;
 
 public interface StyleManager {
 
-    @NonNull
     static StyleManager simple() {
         return new SimpleStyleManager();
     }
 
-    @NonNull
-    Scene addStylable(@NonNull Scene scene);
+    Scene addStylable(Scene scene);
 
-    void addStylable(@NonNull Parent parent);
+    void addStylable(Parent parent);
 
-    void applyTheme(@NonNull Theme theme);
+    void applyTheme(Theme theme);
 
     void refresh();
 

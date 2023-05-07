@@ -27,7 +27,6 @@ public class SetState<V> implements Iterable<V> {
         return EMPTY;
     }
 
-    @NonNull
     @Getter
     private final Set<V> content;
 
@@ -40,32 +39,27 @@ public class SetState<V> implements Iterable<V> {
         return content.size();
     }
 
-    @NonNull
     @Override
     public Iterator<V> iterator() {
         return content.iterator();
     }
 
-    @NonNull
     public Stream<V> stream() {
         return content.stream();
     }
 
-    @NonNull
-    public SetState<V> removeIf(@NonNull Predicate<? super V> test) {
+    public SetState<V> removeIf(Predicate<? super V> test) {
         return new SetState<>(content.stream().filter(test.negate()).collect(Collectors.toSet()));
     }
 
-    @NonNull
-    public SetState<V> remove(@NonNull V value) {
+    public SetState<V> remove(V value) {
         if (content.contains(value)) {
             return removeIf(value::equals);
         }
         return this;
     }
 
-    @NonNull
-    public SetState<V> add(@NonNull V value) {
+    public SetState<V> add(V value) {
         return toBuilder().add(value).build();
     }
 
@@ -84,35 +78,32 @@ public class SetState<V> implements Iterable<V> {
     @RequiredArgsConstructor
     public static class Builder<V> {
 
-        @NonNull
         private final SetState<V> reference;
 
-        @NonNull
         private final Set<Object> removedValues = new HashSet<>();
 
-        @NonNull
         private final Set<V> addedValues = new HashSet<>();
 
-        public Builder<V> addAll(@NonNull Collection<V> values) {
+        public Builder<V> addAll(Collection<V> values) {
             addedValues.addAll(values);
             removedValues.removeAll(values);
             return this;
         }
 
-        public Builder<V> add(@NonNull V value) {
+        public Builder<V> add(V value) {
             addedValues.add(value);
             removedValues.remove(value);
             return this;
         }
 
         @SuppressWarnings("SuspiciousMethodCalls")
-        public Builder<V> remove(@NonNull Object value) {
+        public Builder<V> remove(Object value) {
             addedValues.remove(value);
             removedValues.add(value);
             return this;
         }
 
-        public Builder<V> removeAll(@NonNull Collection<V> values) {
+        public Builder<V> removeAll(Collection<V> values) {
             addedValues.removeAll(values);
             removedValues.addAll(values);
             return this;

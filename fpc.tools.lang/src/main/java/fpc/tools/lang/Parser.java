@@ -6,9 +6,9 @@ import lombok.NonNull;
 
 public interface Parser<T> {
 
-    @NonNull TryResult<ParsingFailure,T> parse(@NonNull String value);
+    TryResult<ParsingFailure,T> parse(String value);
 
-    @NonNull Class<T> targetType();
+    Class<T> targetType();
 
 
     Parser<Integer> PARSE_INT = with(Integer::parseInt,Integer.class);
@@ -18,10 +18,10 @@ public interface Parser<T> {
     Parser<Double> PARSE_DOUBLE = with(Double::parseDouble,Double.class);
 
 
-    static @NonNull <T> Parser<T> with(@NonNull Function1<? super String, ? extends T> unsafeParser, @NonNull Class<T> type) {
+    static <T> Parser<T> with(Function1<? super String, ? extends T> unsafeParser, Class<T> type) {
         return new Parser<T>() {
             @Override
-            public @NonNull TryResult<ParsingFailure,T> parse(@NonNull String value) {
+            public TryResult<ParsingFailure,T> parse(String value) {
                 try {
                     final var t = unsafeParser.apply(value);
                     return TryResult.success(t);
@@ -32,7 +32,7 @@ public interface Parser<T> {
             }
 
             @Override
-            public @NonNull Class<T> targetType() {
+            public Class<T> targetType() {
                 return type;
             }
         };

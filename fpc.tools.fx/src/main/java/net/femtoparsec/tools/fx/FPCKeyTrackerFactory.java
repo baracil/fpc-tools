@@ -9,7 +9,7 @@ import lombok.NonNull;
 public class FPCKeyTrackerFactory implements KeyTrackerFactory {
 
     @Override
-    public @NonNull KeyTracker create() {
+    public KeyTracker create() {
         return new FPCKeyTracker();
     }
 

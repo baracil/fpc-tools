@@ -6,32 +6,32 @@ import lombok.NonNull;
 
 public class MenuItemBinder extends ItemInfoBase<MenuItem> {
 
-    public MenuItemBinder(@NonNull MenuItem item) {
+    public MenuItemBinder(MenuItem item) {
         super(item);
     }
 
     @Override
-    protected void bindDisable(@NonNull MenuItem item, @NonNull ObservableValue<? extends Boolean> observableValue) {
+    protected void bindDisable(MenuItem item, ObservableValue<? extends Boolean> observableValue) {
         item.disableProperty().bind(observableValue);
     }
 
     @Override
-    protected void unbindDisable(@NonNull MenuItem item) {
+    protected void unbindDisable(MenuItem item) {
         item.disableProperty().unbind();
     }
 
     @Override
-    protected void bindAction(@NonNull MenuItem item, @NonNull Runnable executable) {
+    protected void bindAction(MenuItem item, Runnable executable) {
         item.setOnAction(e -> executable.run());
     }
 
     @Override
-    protected void unbindAction(@NonNull MenuItem item) {
+    protected void unbindAction(MenuItem item) {
         item.setOnAction(e -> {});
     }
 
     @Override
-    protected boolean isDisabled(@NonNull MenuItem item) {
+    protected boolean isDisabled(MenuItem item) {
         return item.isDisable();
     }
 }

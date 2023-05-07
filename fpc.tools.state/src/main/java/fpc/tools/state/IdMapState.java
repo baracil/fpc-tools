@@ -16,40 +16,38 @@ import java.util.function.Predicate;
  */
 public interface IdMapState<I, V> extends fpc.tools.state.MapStateBase<I,V> {
 
-    static <I, V> @NonNull IdMapState<I, V> empty(@NonNull Function1<? super V, ? extends I> idGetter) {
+    static <I, V> IdMapState<I, V> empty(Function1<? super V, ? extends I> idGetter) {
         return FPCIdMapState.empty(idGetter);
     }
 
-    static <I, V extends Identified<I>> @NonNull IdMapState<I, V> empty() {
+    static <I, V extends Identified<I>> IdMapState<I, V> empty() {
         return FPCIdMapState.empty(Identified::getIdentification);
     }
 
-    static <I, V extends Identified<I>> @NonNull IdMapState<I, V> with(@NonNull Map<I,V> content) {
+    static <I, V extends Identified<I>> IdMapState<I, V> with(Map<I,V> content) {
         return new FPCIdMapState<>(content, Identified::getIdentification);
     }
 
-    @NonNull
-    IdMapState<I,V> remove(@NonNull I key);
+    IdMapState<I,V> remove(I key);
 
     /**
      * @param predicate a predicate that returns true for the keys that must be to remove
      * @return a new {@link IdMapState} with the key matching the predicate remove
      */
-    @NonNull
-    IdMapState<I,V> removeIfKeyMatches(@NonNull Predicate<? super I> predicate);
+    IdMapState<I,V> removeIfKeyMatches(Predicate<? super I> predicate);
 
     /**
      * @param value the value to put
      * @return a new MapState with the same values of this plus the provided entry.
      */
-    IdMapState<I, V> put(@NonNull V value);
+    IdMapState<I, V> put(V value);
 
     /**
      * @param value the value to replace
      * @return this if this does not contain the provided key, otherwise a new MapState with the same values of
      * this plus the provided entry
      */
-    IdMapState<I, V> replace(@NonNull V value);
+    IdMapState<I, V> replace(V value);
 
     /**
      * <p>
@@ -69,13 +67,13 @@ public interface IdMapState<I, V> extends fpc.tools.state.MapStateBase<I,V> {
      * entry (key,value) added.
      *
      */
-    IdMapState<I, V> updateValue(@NonNull V value, @NonNull Comparator<? super V> isNewer);
+    IdMapState<I, V> updateValue(V value, Comparator<? super V> isNewer);
 
     /**
      * Same as {@link #updateValue(Object, Comparator)} but for several values at once
      */
-    IdMapState<I, V> updateValues(@NonNull Collection<V> newValues,
-                                  @NonNull Comparator<? super V> isNewer);
+    IdMapState<I, V> updateValues(Collection<V> newValues,
+                                  Comparator<? super V> isNewer);
 
     /**
      * Same as {@link #updateValue(Object, Comparator)} but for several values at once.
@@ -86,9 +84,9 @@ public interface IdMapState<I, V> extends fpc.tools.state.MapStateBase<I,V> {
      * @param <T> the type of the items
      * @return a new updated {@link IdMapState}
      */
-    <T> IdMapState<I, V> updateItems(@NonNull Collection<T> items,
-                                     @NonNull Function1<? super T, ? extends V> valueGetter,
-                                     @NonNull Comparator<? super V> isNewer);
+    <T> IdMapState<I, V> updateItems(Collection<T> items,
+                                     Function1<? super T, ? extends V> valueGetter,
+                                     Comparator<? super V> isNewer);
 
 
 }

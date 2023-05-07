@@ -6,7 +6,7 @@ import java.util.ServiceLoader;
 
 public interface OSVersionFactory {
 
-    @NonNull OSVersion create();
+    OSVersion create();
 
     static OSVersionFactory getInstance() {
         return OSVersionFactory.Holder.FACTORY;

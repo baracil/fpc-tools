@@ -16,27 +16,22 @@ public class ViewSlot {
     /**
      * Name of the slot (used to identify this slot)
      */
-    @NonNull
     @Getter
     private final String name;
 
-    @NonNull
     private final Consumer1<? super Node> setNode;
-    @NonNull
     private final Consumer0 clearNode;
 
-    @NonNull
     private final Function2<? super FXView, ? super Node, ? extends Node> nodeMapper;
 
-    @NonNull
     private FXViewInstance viewInstance = FXViewInstance.EMPTY;
 
     private final ObjectProperty<FXView> fxView = new SimpleObjectProperty<>(EmptyFXView.create());
 
-    public ViewSlot(@NonNull String name,
-                    @NonNull Consumer1<? super Node> setNode,
-                    @NonNull Consumer0 clearNode,
-                    @NonNull Function2<? super FXView, ? super Node, ? extends Node> nodeMapper) {
+    public ViewSlot(String name,
+                    Consumer1<? super Node> setNode,
+                    Consumer0 clearNode,
+                    Function2<? super FXView, ? super Node, ? extends Node> nodeMapper) {
         this.name = name;
         this.clearNode = clearNode;
         this.setNode = setNode;
@@ -58,12 +53,10 @@ public class ViewSlot {
                     .ifPresentOrElse(setNode,clearNode);
     }
 
-    @NonNull
     public FXView getFxView() {
         return fxView.get();
     }
 
-    @NonNull
     public ObjectProperty<FXView> fxViewProperty() {
         return fxView;
     }

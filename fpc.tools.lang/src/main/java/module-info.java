@@ -10,8 +10,9 @@ module fpc.tools.lang {
     requires transitive fpc.tools.fp;
 
     requires org.slf4j;
+  requires fpc.tools.annotation;
 
-    exports fpc.tools.lang;
+  exports fpc.tools.lang;
 
     uses OSVersionFactory;
     uses ListenersFactory;

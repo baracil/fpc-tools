@@ -7,27 +7,27 @@ import lombok.NonNull;
 public abstract class VisitorMutation implements Mutation<ChatState>, ChatState.Visitor<ChatState> {
 
     @Override
-    public @NonNull ChatState mutate(@NonNull ChatState currentState) {
+    public ChatState mutate(ChatState currentState) {
         return currentState.accept(this);
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull DisconnectedChat state) {
+    public ChatState visit(DisconnectedChat state) {
         return state;
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectingChat state) {
+    public ChatState visit(ConnectingChat state) {
         return state;
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectedChat state) {
+    public ChatState visit(ConnectedChat state) {
         return state;
     }
 
     @Override
-    public @NonNull ChatState visit(ReconnectingChat state) {
+    public ChatState visit(ReconnectingChat state) {
         return state;
     }
 }

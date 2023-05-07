@@ -10,25 +10,25 @@ import lombok.extern.slf4j.Slf4j;
 public class OnConnectionEventMutation extends VisitorMutation {
 
     @Override
-    public @NonNull ChatState visit(@NonNull DisconnectedChat state) {
+    public ChatState visit(DisconnectedChat state) {
         LOG.warn("Connection event when in disconnected state ...");
         return state;
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull ReconnectingChat state) {
+    public ChatState visit(ReconnectingChat state) {
         LOG.warn("Connection event when in reconnecting state ...");
         return state;
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectingChat state) {
+    public ChatState visit(ConnectingChat state) {
         return state.onConnectionEvent();
     }
 
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectedChat state) {
+    public ChatState visit(ConnectedChat state) {
         return state;
     }
 }

@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -54,7 +55,7 @@ public abstract class BaseBiMap<K,V> implements BiMap<K,V> {
   }
 
   @Override
-  public V remove(Object key) {
+  public @Nullable V remove(Object key) {
     final var removed = direct.remove(key);
     if (removed != null) {
       invert.remove(removed);
@@ -79,7 +80,7 @@ public abstract class BaseBiMap<K,V> implements BiMap<K,V> {
   }
 
   @Override
-  public @NonNull Set<V> values() {
+  public Set<V> values() {
     return invert.keySet();
   }
 

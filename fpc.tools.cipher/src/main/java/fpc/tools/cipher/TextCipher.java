@@ -12,15 +12,15 @@ import java.security.KeyPairGenerator;
 
 public interface TextCipher extends TextEncryptor, TextDecryptor {
 
-    static @NonNull TextCipher with(@NonNull TextDecryptor decrypter, @NonNull TextEncryptor encrypter) {
+    static TextCipher with(TextDecryptor decrypter, TextEncryptor encrypter) {
         return new CompositeTextCipher(decrypter, encrypter);
     }
 
-    static @NonNull TextCipher createAES(@NonNull Secret secret) {
+    static TextCipher createAES(Secret secret) {
         return new AESTextCipher(new AESCipherFactory(secret));
     }
 
-    static @NonNull KeyPair generateRSAKeyPair() {
+    static KeyPair generateRSAKeyPair() {
         try {
             final var generator = KeyPairGenerator.getInstance("RSA");
             generator.initialize(2048);

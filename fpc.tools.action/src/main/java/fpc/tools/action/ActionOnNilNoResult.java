@@ -6,7 +6,7 @@ import lombok.NonNull;
 public abstract class ActionOnNilNoResult extends BaseAction<Nil,Nil> {
 
     @Override
-    public final Nil execute(@NonNull Nil parameter) throws Throwable {
+    public final Nil execute(Nil parameter) throws Throwable {
         execute();
         return Nil.NULL;
     }

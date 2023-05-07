@@ -9,8 +9,7 @@ import net.femtoparsec.tools.action.iteminfo.ObjectBinder;
 
 public class ItemInfoProvider {
 
-    @NonNull
-    public ItemInfo createInfo(@NonNull Object item) {
+    public ItemInfo createInfo(Object item) {
         if (item instanceof ButtonBase) {
             return forButtonBase(((ButtonBase) item));
         }
@@ -22,13 +21,11 @@ public class ItemInfoProvider {
         return new ObjectBinder(item);
     }
 
-    @NonNull
-    private ItemInfo forButtonBase(@NonNull ButtonBase buttonBase) {
+    private ItemInfo forButtonBase(ButtonBase buttonBase) {
         return new ButtonBaseBinder(buttonBase);
     }
 
-    @NonNull
-    private ItemInfo forMenuItem(@NonNull MenuItem menuItem) {
+    private ItemInfo forMenuItem(MenuItem menuItem) {
         return new MenuItemBinder(menuItem);
     }
 }

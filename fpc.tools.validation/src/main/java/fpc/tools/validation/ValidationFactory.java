@@ -7,7 +7,6 @@ import java.util.ServiceLoader;
 
 public interface ValidationFactory {
 
-    @NonNull
     Validation create();
 
     static ValidationFactory getInstance() {

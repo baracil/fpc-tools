@@ -27,12 +27,11 @@ public interface AdvancedChat<M> extends AdvancedChatIO<M> {
     /**
      * @return the timeout used when matching a request with its answer
      */
-    @NonNull
     Duration getTimeout();
 
     /**
      * @param duration the timeout to used when matching a request with its answer
      */
-    void setTimeout(@NonNull Duration duration);
+    void setTimeout(Duration duration);
 
 }

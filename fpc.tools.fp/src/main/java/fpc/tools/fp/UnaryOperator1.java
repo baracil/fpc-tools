@@ -1,7 +1,5 @@
 package fpc.tools.fp;
 
-import lombok.NonNull;
-
 import java.util.List;
 import java.util.function.Function;
 
@@ -10,8 +8,7 @@ import java.util.function.Function;
  */
 public interface UnaryOperator1<A> extends Function1<A,A> {
 
-    @NonNull
-    static <T> UnaryOperator1<T> chain(@NonNull List<? extends UnaryOperator1<T>> functions) {
+    static <T> UnaryOperator1<T> chain(List<? extends UnaryOperator1<T>> functions) {
         if (functions.isEmpty()) {
             return t -> t;
         }
@@ -35,7 +32,7 @@ public interface UnaryOperator1<A> extends Function1<A,A> {
         return f1::apply;
     }
 
-    static <A> UnaryOperator1<A> cons(@NonNull A value) {
+    static <A> UnaryOperator1<A> cons(A value) {
         return a -> value;
     }
 

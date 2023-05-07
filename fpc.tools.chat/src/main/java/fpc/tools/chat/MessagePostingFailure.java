@@ -8,11 +8,10 @@ import lombok.NonNull;
  **/
 public class MessagePostingFailure extends ChatException {
 
-    @NonNull
     @Getter
     private final String postMessage;
 
-    public MessagePostingFailure(@NonNull String postMessage, @NonNull Throwable cause) {
+    public MessagePostingFailure(String postMessage, Throwable cause) {
         super("Could not post message '"+postMessage+"'", cause);
         this.postMessage = postMessage;
     }

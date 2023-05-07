@@ -22,7 +22,7 @@ public class StringTool {
 
 
 
-    public static @NonNull String random(int length) {
+    public static String random(int length) {
         final var chars = new char[length];
         for (int i = 0; i < length; i++) {
             chars[i] = CHARS[RANDOM.nextInt(CHARS.length)];
@@ -35,7 +35,7 @@ public class StringTool {
 
     public static class IsEndingWithSuffix implements Predicate2<String,String> {
         @Override
-        public boolean test(@NonNull String str, @NonNull String suffix) {
+        public boolean test(String str, String suffix) {
             return str.endsWith(suffix);
         }
 
@@ -75,7 +75,6 @@ public class StringTool {
     @RequiredArgsConstructor
     private static class LazyToString {
 
-        @NonNull
         private final Function0<Object> supplier;
 
         @Override

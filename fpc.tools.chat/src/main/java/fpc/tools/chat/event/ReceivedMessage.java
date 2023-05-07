@@ -5,11 +5,11 @@ import lombok.NonNull;
 
 import java.time.Instant;
 
-public record ReceivedMessage(@NonNull @Getter Instant receptionTime,
-                              @NonNull @Getter String message) implements ChatEvent {
+public record ReceivedMessage(@Getter Instant receptionTime,
+                              @Getter String message) implements ChatEvent {
 
     @Override
-    public void accept(@NonNull ChatEventVisitor visitor) {
+    public void accept(ChatEventVisitor visitor) {
         visitor.visit(this);
     }
 

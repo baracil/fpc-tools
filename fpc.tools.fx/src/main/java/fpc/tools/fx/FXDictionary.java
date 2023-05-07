@@ -8,14 +8,12 @@ public interface FXDictionary {
     /**
      * @return the localized string associated with the provided <code>i18nKey</code>
      */
-    @NonNull
-    ObservableStringValue localizedString(@NonNull String i18nKey);
+    ObservableStringValue localizedString(String i18nKey);
 
     /**
      * @return the localized string with parameters associated with the provided <code>i18nKey</code>
      */
-    @NonNull
-    ObservableStringValue localizedString(@NonNull String i18nKey, @NonNull Object... parameters);
+    ObservableStringValue localizedString(String i18nKey, Object... parameters);
 
 
 }

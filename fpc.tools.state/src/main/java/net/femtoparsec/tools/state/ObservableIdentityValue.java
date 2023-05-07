@@ -13,15 +13,13 @@ import java.util.concurrent.atomic.AtomicReference;
 @Slf4j
 public class ObservableIdentityValue<R,S> extends ObservableValueBase<S> implements IdentityListener<R> {
 
-    @NonNull
     private S value;
 
     private final AtomicReference<S> pending = new AtomicReference<>(null);
 
-    @NonNull
     private final Function1<? super R, ? extends S> getter;
 
-    public ObservableIdentityValue(@NonNull R initialValue, @NonNull Function1<? super R, ? extends S> getter) {
+    public ObservableIdentityValue(R initialValue, Function1<? super R, ? extends S> getter) {
         this.getter = getter;
         this.value = getter.apply(initialValue);
     }
@@ -32,7 +30,7 @@ public class ObservableIdentityValue<R,S> extends ObservableValueBase<S> impleme
     }
 
     @Override
-    public void stateChanged(@NonNull R oldRoot, @NonNull R newRoot) {
+    public void stateChanged(R oldRoot, R newRoot) {
         final S oldValue = getter.apply(oldRoot);
         final S newValue = getter.apply(newRoot);
         LOG.warn("StateChanged : {} -> {}", oldValue, newValue);

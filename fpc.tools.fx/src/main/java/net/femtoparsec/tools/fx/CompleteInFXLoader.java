@@ -10,11 +10,10 @@ import java.util.concurrent.CompletionStage;
 @RequiredArgsConstructor
 public class CompleteInFXLoader<P,R> implements Loader<P,R> {
 
-    @NonNull
     private final Loader<P,R> original;
 
     @Override
-    public @NonNull CompletionStage<R> load(@NonNull P parameter) {
+    public CompletionStage<R> load(P parameter) {
         final CompletableFuture<R> inFx = new CompletableFuture<>();
         original.load(parameter)
                 .whenComplete((r,t) -> {
@@ -33,7 +32,7 @@ public class CompleteInFXLoader<P,R> implements Loader<P,R> {
     }
 
     @Override
-    public @NonNull Loader<P, R> duplicate() {
+    public Loader<P, R> duplicate() {
         return new CompleteInFXLoader<>(original.duplicate());
     }
 }

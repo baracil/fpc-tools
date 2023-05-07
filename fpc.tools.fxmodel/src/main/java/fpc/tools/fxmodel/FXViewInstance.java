@@ -9,7 +9,6 @@ import java.util.Optional;
 
 public interface FXViewInstance {
 
-    @NonNull
     static FXViewInstance with(FXLoadingResult loadingResult) {
         return new FPCFXViewInstance(loadingResult);
     }
@@ -17,26 +16,23 @@ public interface FXViewInstance {
     /**
      * @return the node to display
      */
-    @NonNull
     Optional<Node> node();
 
-    @NonNull
-    <C> Optional<C> controller(@NonNull Class<C> controllerType);
+    <C> Optional<C> controller(Class<C> controllerType);
 
     void  showing();
 
     void  hiding();
 
 
-    @NonNull
     FXViewInstance EMPTY = new FXViewInstance() {
         @Override
-        public @NonNull Optional<Node> node() {
+        public Optional<Node> node() {
             return Optional.empty();
         }
 
         @Override
-        public @NonNull <C> Optional<C> controller(@NonNull Class<C> controllerType) {
+        public <C> Optional<C> controller(Class<C> controllerType) {
             return Optional.empty();
         }
 

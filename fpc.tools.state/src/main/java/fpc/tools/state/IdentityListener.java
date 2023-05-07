@@ -5,10 +5,10 @@ import lombok.NonNull;
 
 public interface IdentityListener<R> {
 
-    void stateChanged(@NonNull R oldValue, @NonNull R newValue);
+    void stateChanged(R oldValue, R newValue);
 
 
-    static <R,T> @NonNull IdentityListener<T> wrap(@NonNull IdentityListener<R> listener, Function1<? super T, ? extends R> mapper) {
+    static <R,T> IdentityListener<T> wrap(IdentityListener<R> listener, Function1<? super T, ? extends R> mapper) {
         return (oldValue, newValue) -> listener.stateChanged(mapper.apply(oldValue), mapper.apply(newValue));
     }
 }

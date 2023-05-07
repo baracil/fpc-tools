@@ -9,9 +9,9 @@ public interface Instants {
 
     int VERSION = 1;
 
-    @NonNull Instant now();
+    Instant now();
 
-    static @NonNull Instants systemUTC() {
+    static Instants systemUTC() {
         return Clock.systemUTC()::instant;
     }
 }

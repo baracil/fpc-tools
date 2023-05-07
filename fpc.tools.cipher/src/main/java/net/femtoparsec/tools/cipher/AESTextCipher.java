@@ -12,19 +12,19 @@ import java.security.GeneralSecurityException;
 @RequiredArgsConstructor
 public class AESTextCipher implements TextCipher {
 
-    private final @NonNull AESCipherFactory factory;
+    private final AESCipherFactory factory;
 
     @Override
-    public @NonNull Secret decrypt(@NonNull String encryptedValue) {
+    public Secret decrypt(String encryptedValue) {
         return CipherException.wrapCall(this::doDecrypt, encryptedValue);
     }
 
     @Override
-    public @NonNull String encrypt(@NonNull Secret secret) {
+    public String encrypt(Secret secret) {
         return CipherException.wrapCall(this::doEncrypt, secret);
     }
 
-    private @NonNull String doEncrypt(@NonNull Secret secret) throws GeneralSecurityException {
+    private String doEncrypt(Secret secret) throws GeneralSecurityException {
         final var salt = Salt.random(32);
         final var cipher = factory.createForEncryption(salt);
 
@@ -36,7 +36,7 @@ public class AESTextCipher implements TextCipher {
     }
 
 
-    private @NonNull Secret doDecrypt(@NonNull String encryptedValue) throws GeneralSecurityException {
+    private Secret doDecrypt(String encryptedValue) throws GeneralSecurityException {
         final var saltAndValue = Salt.extractSalt(encryptedValue);
         final var salt = saltAndValue.v1();
         final var value = saltAndValue.v2();

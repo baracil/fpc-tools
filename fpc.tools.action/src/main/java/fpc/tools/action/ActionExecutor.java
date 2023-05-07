@@ -6,12 +6,12 @@ import java.util.concurrent.CompletionStage;
 
 public interface ActionExecutor {
 
-    <P, R> @NonNull CompletionStage<R> pushAction(@NonNull Class<? extends Action<? super P, ? extends R>> action, @NonNull P parameter);
+    <P, R> CompletionStage<R> pushAction(Class<? extends Action<? super P, ? extends R>> action, P parameter);
 
-    <P, R> @NonNull CompletionStage<R> pushAction(@NonNull Action<? super P, ? extends R> action, @NonNull P parameter);
+    <P, R> CompletionStage<R> pushAction(Action<? super P, ? extends R> action, P parameter);
 
-    void addActionSpy(@NonNull ActionSpy actionSpy);
+    void addActionSpy(ActionSpy actionSpy);
 
-    void removeActionSpy(@NonNull ActionSpy actionSpy);
+    void removeActionSpy(ActionSpy actionSpy);
 
 }

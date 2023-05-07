@@ -6,13 +6,12 @@ public record Connection() implements ChatEvent {
 
     private static final Connection CONNECTION = new Connection();
 
-    @NonNull
     public static Connection create() {
         return CONNECTION;
     }
 
     @Override
-    public void accept(@NonNull ChatEventVisitor visitor) {
+    public void accept(ChatEventVisitor visitor) {
         visitor.visit(this);
     }
 }

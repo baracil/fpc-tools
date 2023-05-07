@@ -7,16 +7,15 @@ import lombok.NonNull;
 public sealed interface ConnectedChat extends ChatState, AdvancedIO permits ConnectedChatImpl {
 
     @Override
-    default <T> @NonNull T accept(@NonNull Visitor<T> visitor) {
+    default <T> T accept(Visitor<T> visitor) {
         return visitor.visit(this);
     }
 
-    @NonNull ChatState onDisconnectionEvent();
+    ChatState onDisconnectionEvent();
 
-    @NonNull ChatState onDisconnectionRequested();
+    ChatState onDisconnectionRequested();
 
     @Override
-    @NonNull
     default State getState() {
         return State.CONNECTED;
     }

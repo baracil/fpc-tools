@@ -14,32 +14,27 @@ import java.util.function.Function;
 @Slf4j
 public class LocalizedStringFromResource implements LocalizedString {
 
-    @NonNull
     @Getter
     private final ResourceReference resourceReference;
 
-    @NonNull
     private final Function<? super Locale, ? extends ResourceBundle> resourceBundleProviders;
 
-    @NonNull
     private final ParametersTranslator parametersTranslator;
 
     public LocalizedStringFromResource(
-            @NonNull Function<? super Locale,? extends ResourceBundle> resourceBundleProviders,
-            @NonNull ResourceReference resourceReference,
-            @NonNull List<Object> parameters) {
+            Function<? super Locale,? extends ResourceBundle> resourceBundleProviders,
+            ResourceReference resourceReference,
+            List<Object> parameters) {
         this.resourceBundleProviders = resourceBundleProviders;
         this.resourceReference = resourceReference;
         this.parametersTranslator = ParametersTranslator.create(parameters);
     }
 
-    @NonNull
-    public String getValue(@NonNull Locale locale) {
+    public String getValue(Locale locale) {
         return findValue(locale).orElseGet(() -> resourceReference.getNotFoundValuePlaceholder(locale));
     }
 
-    @NonNull
-    private Optional<String> findValue(@NonNull Locale locale) {
+    private Optional<String> findValue(Locale locale) {
         try {
             final ResourceBundle resourceBundle = resourceBundleProviders.apply(locale);
             if (resourceBundle != null && resourceBundle.containsKey(resourceReference.getI18nKey())) {
@@ -54,12 +49,11 @@ public class LocalizedStringFromResource implements LocalizedString {
     }
 
     @Override
-    public @NonNull boolean hasValue(@NonNull Locale locale) {
+    public boolean hasValue(Locale locale) {
         return findValue(locale).isPresent();
     }
 
-    @NonNull
-    private String applyArguments(@NonNull String message, @NonNull Locale locale) {
+    private String applyArguments(String message, Locale locale) {
         final Object[] parameters = parametersTranslator.translate(locale);
         if (parameters.length == 0) {
             return message;

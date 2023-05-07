@@ -9,6 +9,7 @@ module fpc.tools.spring {
 
     requires org.apache.logging.log4j;
     requires spring.beans;
+  requires fpc.tools.annotation;
 
-    exports fpc.tools.spring;
+  exports fpc.tools.spring;
 }

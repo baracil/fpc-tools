@@ -10,16 +10,13 @@ import java.util.ServiceLoader;
  **/
 public abstract class IRCParserFactory {
 
-    @NonNull
     public abstract IRCParser create();
 
-    @NonNull
     static IRCParserFactory getInstance() {
         return ServiceLoaderHelper.load(ServiceLoader.load(IRCParserFactory.class));
     }
 
-    @NonNull
-    static IRCParserFactory getInstance(@NonNull ModuleLayer moduleLayer) {
+    static IRCParserFactory getInstance(ModuleLayer moduleLayer) {
         return ServiceLoaderHelper.load(ServiceLoader.load(moduleLayer, IRCParserFactory.class));
     }
 

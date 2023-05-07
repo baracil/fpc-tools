@@ -12,7 +12,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class FPCFXViewInstance implements FXViewInstance {
 
-    @NonNull
     private final FXLoadingResult result;
 
     @Override
@@ -26,12 +25,12 @@ public class FPCFXViewInstance implements FXViewInstance {
     }
 
     @Override
-    public @NonNull Optional<Node> node() {
+    public Optional<Node> node() {
         return result.getRoot(Node.class);
     }
 
     @Override
-    public @NonNull <C> Optional<C> controller(@NonNull Class<C> controllerType) {
+    public <C> Optional<C> controller(Class<C> controllerType) {
         return result.getController(controllerType);
     }
 }

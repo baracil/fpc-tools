@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -13,19 +14,16 @@ import java.util.Optional;
 @Builder(builderClassName = "Builder")
 public class Prefix {
 
-    @NonNull
     String nickOrServerName;
 
-    String user;
+    @Nullable String user;
 
-    String host;
+    @Nullable String host;
 
-    @NonNull
     public Optional<String> user() {
         return Optional.ofNullable(user);
     }
 
-    @NonNull
     public Optional<String> host() {
         return Optional.ofNullable(host);
     }

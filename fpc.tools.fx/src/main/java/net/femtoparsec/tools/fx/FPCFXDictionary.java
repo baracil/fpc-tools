@@ -12,32 +12,27 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FPCFXDictionary implements FXDictionary {
 
-    @NonNull
     private final Dictionary dictionary;
 
-    @NonNull
     private final LocaleProperty localeProperty;
 
     /**
      * @return the localized string associated with the provided <code>i18nKey</code>
      */
-    @NonNull
     @Override
-    public ObservableStringValue localizedString(@NonNull String i18nKey) {
+    public ObservableStringValue localizedString(String i18nKey) {
         return toObservable(dictionary.localizedString(i18nKey));
     }
 
     /**
      * @return the localized string with parameters associated with the provided <code>i18nKey</code>
      */
-    @NonNull
     @Override
-    public ObservableStringValue localizedString(@NonNull String i18nKey, @NonNull Object... parameters) {
+    public ObservableStringValue localizedString(String i18nKey, Object... parameters) {
         return toObservable(dictionary.localizedString(i18nKey,parameters));
     }
 
-    @NonNull
-    private ObservableStringValue toObservable(@NonNull LocalizedString localizedString) {
+    private ObservableStringValue toObservable(LocalizedString localizedString) {
         return Bindings.createStringBinding(() -> localizedString.getValue(localeProperty.getValue()), localeProperty);
     }
 

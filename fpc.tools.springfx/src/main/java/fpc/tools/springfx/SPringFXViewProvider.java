@@ -16,13 +16,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SPringFXViewProvider implements FXViewProvider {
 
-    @NonNull
     private final ApplicationContext applicationContext;
 
     @Override
-    public @NonNull <C extends FXView> Optional<FXView> findFXView(@NonNull Class<? extends C> fxViewType) {
+    public <C extends FXView> Optional<FXView> findFXView(Class<? extends C> fxViewType) {
         if (fxViewType.equals(EmptyFXView.class)) {
-            return Optional.ofNullable(EmptyFXView.create());
+            return Optional.of(EmptyFXView.create());
         }
         try {
             return Optional.of(applicationContext.getBean(fxViewType));

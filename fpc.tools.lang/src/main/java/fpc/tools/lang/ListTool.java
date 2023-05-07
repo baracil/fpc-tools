@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 @SuppressWarnings("unused")
 public class ListTool {
 
-  public static <A> List<A> addSorted(@NonNull List<A> list, @NonNull Comparator<? super A> comparator, @NonNull A element) {
+  public static <A> List<A> addSorted(List<A> list, Comparator<? super A> comparator, A element) {
     final var result = ListTool.<A>arrayList(list.size()+1);
     var added = false;
     for (A a : list) {
@@ -44,7 +44,7 @@ public class ListTool {
     return new ArrayList<>();
   }
 
-  public static <A> List<A> replace(@NonNull List<A> source, @NonNull A value, @NonNull Predicate1<A> filter) {
+  public static <A> List<A> replace(List<A> source, A value, Predicate1<A> filter) {
     return source.stream()
         .map(a -> filter.test(a) ? value : a)
         .toList();
@@ -58,14 +58,14 @@ public class ListTool {
    * @param <A>  the type of the elements
    * @return a new immutable list with <code>v1</code> as first element and all elements of <code>list</code> afterward
    */
-  public static <A> List<A> addFirst(@NonNull A v1, @NonNull List<? extends A> list) {
+  public static <A> List<A> addFirst(A v1, List<? extends A> list) {
     final var result = ListTool.<A>arrayList(list.size()+1);
     result.add(v1);
     result.addAll(list);
     return Collections.unmodifiableList(result);
   }
 
-  public static <A> List<A> addFirst(@NonNull A v1, @NonNull A v2, @NonNull List<? extends A> list) {
+  public static <A> List<A> addFirst(A v1, A v2, List<? extends A> list) {
     final var result = ListTool.<A>arrayList(list.size()+2);
     result.add(v1);
     result.add(v2);
@@ -73,7 +73,7 @@ public class ListTool {
     return Collections.unmodifiableList(result);
   }
 
-  public static <A> List<A> addFirst(@NonNull A v1, @NonNull A v2, @NonNull A v3, @NonNull List<? extends A> list) {
+  public static <A> List<A> addFirst(A v1, A v2, A v3, List<? extends A> list) {
     final var result = ListTool.<A>arrayList(list.size()+3);
     result.add(v1);
     result.add(v2);
@@ -82,7 +82,7 @@ public class ListTool {
     return Collections.unmodifiableList(result);
   }
 
-  public static <A> List<A> addFirst(@NonNull A v1, @NonNull A v2, @NonNull A v3, @NonNull A v4, @NonNull List<? extends A> list) {
+  public static <A> List<A> addFirst(A v1, A v2, A v3, A v4, List<? extends A> list) {
     final var result = ListTool.<A>arrayList(list.size()+4);
     result.add(v1);
     result.add(v2);
@@ -92,7 +92,7 @@ public class ListTool {
     return Collections.unmodifiableList(result);
   }
 
-  public static <A, I> int findFirst(@NonNull List<A> collection, @NonNull Function<? super A, ? extends I> idGetter, @NonNull I searchedId) {
+  public static <A, I> int findFirst(List<A> collection, Function<? super A, ? extends I> idGetter, I searchedId) {
     int i = 0;
     for (A a : collection) {
       if (searchedId.equals(idGetter.apply(a))) {
@@ -223,15 +223,15 @@ public class ListTool {
   }
 
 
-  public static <A> Predicate<Collection<A>> allMatch(@NonNull Predicate<A> elementPredicate) {
+  public static <A> Predicate<Collection<A>> allMatch(Predicate<A> elementPredicate) {
     return c -> c.stream().allMatch(elementPredicate);
   }
 
-  public static <A> Predicate<Collection<A>> anyMatch(@NonNull Predicate<A> elementPredicate) {
+  public static <A> Predicate<Collection<A>> anyMatch(Predicate<A> elementPredicate) {
     return c -> c.stream().anyMatch(elementPredicate);
   }
 
-  public static <A> Predicate<Collection<A>> noneMatch(@NonNull Predicate<A> elementPredicate) {
+  public static <A> Predicate<Collection<A>> noneMatch(Predicate<A> elementPredicate) {
     return c -> c.stream().noneMatch(elementPredicate);
   }
 
@@ -243,7 +243,6 @@ public class ListTool {
     return l -> map(l, mapper);
   }
 
-  @NonNull
   public static <A> List<A> concat(List<? extends A> listFirst, List<? extends A> listSecond) {
     return Stream.concat(
         listFirst.stream(),
@@ -251,7 +250,6 @@ public class ListTool {
     ).toList();
   }
 
-  @NonNull
   public static <A> Function2<List<? extends A>, List<? extends A>, List<A>> concatener(Class<A> type) {
     return ListTool::concat;
   }
@@ -260,12 +258,10 @@ public class ListTool {
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class FilteredList<A> implements Function1<Predicate<? super A>, List<A>> {
 
-    @NonNull
     private final List<A> target;
 
-    @NonNull
     @Override
-    public List<A> apply(@NonNull Predicate<? super A> predicate) {
+    public List<A> apply(Predicate<? super A> predicate) {
       return target.stream().filter(predicate).collect(collector());
     }
 
@@ -284,7 +280,6 @@ public class ListTool {
 
     private final AtomicBoolean matched = new AtomicBoolean(false);
 
-    @NonNull
     private final Predicate<? super A> test;
 
     @Override

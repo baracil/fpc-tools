@@ -9,7 +9,7 @@ import lombok.NonNull;
  */
 public interface CursorSetter {
 
-    void setTargetNode(@NonNull Node node);
+    void setTargetNode(Node node);
 
     void pushCursor(Cursor cursor);
 

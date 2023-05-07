@@ -8,11 +8,11 @@ import lombok.NonNull;
  **/
 public class ChatConnectionFailure extends ChatException {
 
-    public ChatConnectionFailure(@NonNull String message, @NonNull Throwable cause) {
+    public ChatConnectionFailure(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ChatConnectionFailure(@NonNull String message) {
+    public ChatConnectionFailure(String message) {
         super(message);
     }
 }

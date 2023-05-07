@@ -9,25 +9,21 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class ResourceReference {
 
-    @NonNull
     @Getter
     private final String resourceBasename;
 
-    @NonNull
     @Getter
     private final String i18nKey;
 
-    @NonNull
-    public String getNotFoundValuePlaceholder(@NonNull Locale locale) {
+    public String getNotFoundValuePlaceholder(Locale locale) {
         return "??"+getResourceReference(locale)+"??";
     }
 
-    @NonNull
-    public String getErrorPlaceholder(@NonNull Locale locale, @NonNull Throwable throwable) {
+    public String getErrorPlaceholder(Locale locale, Throwable throwable) {
         return "!!"+getResourceReference(locale)+" : "+throwable.getMessage()+"!!";
     }
 
-    private String getResourceReference(@NonNull Locale locale) {
+    private String getResourceReference(Locale locale) {
         return locale+":"+resourceBasename+":"+i18nKey;
     }
 

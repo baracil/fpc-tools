@@ -20,22 +20,20 @@ public class ThrottledChat implements Chat {
 
     public static final ScheduledExecutorService EXECUTOR_SERVICE = Executors.newScheduledThreadPool(0, new ThreadFactoryBuilder().setDaemon(true).setNameFormat("Bucket-%d").build());
 
-    @NonNull
     private final Chat delegate;
 
-    @NonNull
     private final LocalBucket bucket;
 
     private final AtomicReference<BandwidthLimits> bandwidthLimits;
 
-    public ThrottledChat(@NonNull Chat delegate, @NonNull BandwidthLimits bandwidthLimits) {
+    public ThrottledChat(Chat delegate, BandwidthLimits bandwidthLimits) {
         this.delegate = delegate;
         this.bandwidthLimits = new AtomicReference<>(bandwidthLimits);
         this.bucket = this.bandwidthLimits.get().addLimits(Bucket.builder()).build();
     }
 
     @Synchronized
-    public void updateBandwidthType(@NonNull BandwidthLimits bandwidthType) {
+    public void updateBandwidthType(BandwidthLimits bandwidthType) {
         final var oldType = this.bandwidthLimits.getAndSet(bandwidthType);
         if (oldType == bandwidthType) {
             return;
@@ -62,7 +60,7 @@ public class ThrottledChat implements Chat {
     }
 
     @Override
-    public void postMessage(@NonNull String message) {
+    public void postMessage(String message) {
         try {
             bucket.asScheduler().consume(1, EXECUTOR_SERVICE).get();
         } catch (Exception e) {
@@ -76,7 +74,7 @@ public class ThrottledChat implements Chat {
     }
 
     @Override
-    public @NonNull Subscription addChatListener(@NonNull ChatListener listener) {
+    public Subscription addChatListener(ChatListener listener) {
         return delegate.addChatListener(listener);
     }
 }

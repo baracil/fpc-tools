@@ -9,23 +9,23 @@ import java.lang.ref.WeakReference;
 
 public class WeakActionSpy implements ActionSpy {
 
-    private final @NonNull Reference<ActionSpy> reference;
+    private final Reference<ActionSpy> reference;
 
     public WeakActionSpy(ActionSpy reference) {
         this.reference = new WeakReference<>(reference);
     }
 
     @Override
-    public <R, P> void onPushedAction(@NonNull ActionExecutor actionExecutor, long id, Action<? super P, ? extends R> action, @NonNull P parameter) {
+    public <R, P> void onPushedAction(ActionExecutor actionExecutor, long id, Action<? super P, ? extends R> action, P parameter) {
         execute(actionExecutor, a -> a.onPushedAction(actionExecutor,id,action,parameter));
     }
 
     @Override
-    public <R> void onActionResult(@NonNull ActionExecutor actionExecutor, long id, @NonNull TryResult<Throwable, R> result) {
+    public <R> void onActionResult(ActionExecutor actionExecutor, long id, TryResult<Throwable, R> result) {
         execute(actionExecutor, a -> a.onActionResult(actionExecutor,id,result));
     }
 
-    private void execute(@NonNull ActionExecutor actionExecutor, @NonNull Consumer1<ActionSpy> action) {
+    private void execute(ActionExecutor actionExecutor, Consumer1<ActionSpy> action) {
         final ActionSpy actionSpy = reference.get();
         if (actionSpy == null) {
             actionExecutor.removeActionSpy(this);

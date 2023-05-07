@@ -1,14 +1,12 @@
 package fpc.tools.fp;
 
 import lombok.Getter;
-import lombok.NonNull;
 
 /**
  * @author Bastien Aracil
  */
 public class TryException extends RuntimeException {
 
-    @NonNull
     @Getter
     private final Throwable cause;
 

@@ -5,6 +5,6 @@ import lombok.NonNull;
 
 public interface DialogPreparer {
 
-    <O> void setup(@NonNull Stage dialogStage,
-                   @NonNull DialogInfo<O> dialogInfo);
+    <O> void setup(Stage dialogStage,
+                   DialogInfo<O> dialogInfo);
 }

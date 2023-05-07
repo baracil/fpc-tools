@@ -12,29 +12,28 @@ import java.util.Vector;
 public class NopDictionary implements Dictionary {
 
     @Override
-    public @NonNull LocalizedString localizedString(@NonNull String i18nKey) {
+    public LocalizedString localizedString(String i18nKey) {
         return new ConstantLocalizedString(i18nKey);
     }
 
     @Override
-    public @NonNull LocalizedString localizedString(@NonNull String i18nKey, @NonNull Object... parameters) {
+    public LocalizedString localizedString(String i18nKey, Object... parameters) {
         return new ConstantLocalizedString(i18nKey);
     }
 
     @Override
-    public @NonNull Dictionary withPrefix(@NonNull String i18nPrefix) {
+    public Dictionary withPrefix(String i18nPrefix) {
         return this;
     }
 
     @Override
-    public @NonNull ResourceBundle getResourceBundle(@NonNull Locale locale) {
+    public ResourceBundle getResourceBundle(Locale locale) {
         return new ResourceBundle() {
             @Override
-            protected Object handleGetObject(@NonNull String key) {
+            protected Object handleGetObject(String key) {
                 return key;
             }
 
-            @NonNull
             @Override
             public Enumeration<String> getKeys() {
                 return new Vector<String>().elements();

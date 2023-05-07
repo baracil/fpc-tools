@@ -22,11 +22,11 @@ public abstract class ChatIOBase implements ChatIO {
     private final Listeners<ChatListener> listeners = Listeners.create();
 
     @Override
-    public @NonNull Subscription addChatListener(@NonNull ChatListener listener) {
+    public Subscription addChatListener(ChatListener listener) {
         return listeners.addListener(listener);
     }
 
-    protected void warnListeners(@NonNull ChatEvent event) {
+    protected void warnListeners(ChatEvent event) {
         listeners.forEachListeners(ChatListener::onChatEvent, event);
     }
 

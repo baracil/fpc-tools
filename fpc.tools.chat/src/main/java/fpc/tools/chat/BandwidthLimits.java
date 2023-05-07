@@ -7,19 +7,19 @@ import lombok.NonNull;
 public interface BandwidthLimits {
 
 
-    @NonNull LocalBucketBuilder addLimits(@NonNull LocalBucketBuilder builder);
+    LocalBucketBuilder addLimits(LocalBucketBuilder builder);
 
-    ConfigurationBuilder addLimits(@NonNull ConfigurationBuilder builder);
+    ConfigurationBuilder addLimits(ConfigurationBuilder builder);
 
 
     BandwidthLimits NONE = new BandwidthLimits() {
         @Override
-        public @NonNull LocalBucketBuilder addLimits(@NonNull LocalBucketBuilder builder) {
+        public LocalBucketBuilder addLimits(LocalBucketBuilder builder) {
             return builder;
         }
 
         @Override
-        public ConfigurationBuilder addLimits(@NonNull ConfigurationBuilder builder) {
+        public ConfigurationBuilder addLimits(ConfigurationBuilder builder) {
             return builder;
         }
     };

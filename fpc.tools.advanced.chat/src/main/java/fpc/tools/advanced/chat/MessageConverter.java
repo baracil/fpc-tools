@@ -18,6 +18,5 @@ public interface MessageConverter<M> {
      * @return an optional containing the converted message, an empty optional
      * if the conversion could not be done
      */
-    @NonNull
-    Optional<M> convert(@NonNull String messageAsString);
+    Optional<M> convert(String messageAsString);
 }

@@ -6,26 +6,21 @@ import java.util.Locale;
 
 public interface I18nKeyProvider {
 
-    @NonNull
     String getI18nKey();
 
-    @NonNull
-    default I18nEntity toI18nEntity(@NonNull Dictionary dictionary) {
+    default I18nEntity toI18nEntity(Dictionary dictionary) {
         return new I18nEntity(this.getI18nKey(),dictionary);
     }
 
-    @NonNull
-    default LocalizedString toLocalizedString(@NonNull Dictionary dictionary) {
+    default LocalizedString toLocalizedString(Dictionary dictionary) {
         return toI18nEntity(dictionary).getLocalizedString();
     }
 
-    @NonNull
-    default String getLocalizedValue(@NonNull Dictionary dictionary) {
+    default String getLocalizedValue(Dictionary dictionary) {
         return toLocalizedString(dictionary).getValue();
     }
 
-    @NonNull
-    default String getLocalizedValue(@NonNull Dictionary dictionary, @NonNull Locale locale) {
+    default String getLocalizedValue(Dictionary dictionary, Locale locale) {
         return toLocalizedString(dictionary).getValue(locale);
     }
 

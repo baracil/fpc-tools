@@ -7,10 +7,8 @@ import java.util.ServiceLoader;
 
 public interface KeyTrackerFactory {
 
-    @NonNull
     KeyTracker create();
 
-    @NonNull
     static KeyTrackerFactory getInstance() {
         return Holder.INSTANCE;
     }

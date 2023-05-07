@@ -12,7 +12,7 @@ public interface DialogController<I,O> extends DialogResultHandler<O> {
     /**
      * @return a string property that will be used to set the title of the dialog
      */
-    @NonNull ObservableStringValue titleProperty();
+    ObservableStringValue titleProperty();
 
     /**
      * Called before the dialog is shown
@@ -20,15 +20,13 @@ public interface DialogController<I,O> extends DialogResultHandler<O> {
      * @return a subscription that will be unsubscribed by the caller when the dialog is closed or
      * if an error occurred while trying to display the dialog
      */
-    @NonNull
-    Subscription initializeDialog(@NonNull I input);
+    Subscription initializeDialog(I input);
 
-    void beforeShowing(@NonNull Stage holderStage, @NonNull I input);
+    void beforeShowing(Stage holderStage, I input);
 
     /**
      * @return an observable containing the current result (valid or invalid) of the dialog
      */
-    @NonNull
     ObservableValue<DialogState<O>> dialogStateProperty();
 
     /**
@@ -36,13 +34,11 @@ public interface DialogController<I,O> extends DialogResultHandler<O> {
      * the valid state provided by {@link DialogState#isValid()} but it might be different
      * depending of the dialog (that provides an extra condition for instance like instrument state)
      */
-    @NonNull
     ObservableBooleanValue invalidPropertyProperty();
 
     /**
      * @return the current dialog state
      */
-    @NonNull
     default DialogState<O> getDialogState() {
         return dialogStateProperty().getValue();
     }

@@ -10,12 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 public class DisconnectMutation extends VisitorMutation {
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectingChat state) {
+    public ChatState visit(ConnectingChat state) {
         return state.onDisconnectionRequested();
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectedChat state) {
+    public ChatState visit(ConnectedChat state) {
         return state.onDisconnectionRequested();
     }
 }

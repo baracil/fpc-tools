@@ -9,6 +9,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Synchronized;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -18,8 +19,7 @@ import java.util.concurrent.Executors;
 @RequiredArgsConstructor
 public class BasicLoader<P, R> implements Loader<P,R> {
 
-    @NonNull
-    public static <P,R> BasicLoader<P,R> of(@NonNull Function1<? super P, ? extends R> loadingFunction) {
+    public static <P,R> BasicLoader<P,R> of(Function1<? super P, ? extends R> loadingFunction) {
         return new BasicLoader<>(loadingFunction);
     }
 
@@ -30,13 +30,12 @@ public class BasicLoader<P, R> implements Loader<P,R> {
                     .build()
     );
 
-    @NonNull
     private final Function1<? super P, ? extends R> function;
 
-    private Runner runner = null;
+    private @Nullable Runner runner = null;
 
     @Synchronized
-    public @NonNull CompletionStage<R> load(@NonNull P parameter) {
+    public CompletionStage<R> load(P parameter) {
         this.cancelLoading();
         assert runner== null;
         final Runner runner = new Runner(parameter);
@@ -52,7 +51,6 @@ public class BasicLoader<P, R> implements Loader<P,R> {
         runner = null;
     }
 
-    @NonNull
     public BasicLoader<P,R> duplicate() {
         return new BasicLoader<>(function);
     }
@@ -60,14 +58,12 @@ public class BasicLoader<P, R> implements Loader<P,R> {
     @RequiredArgsConstructor
     private class Runner implements Runnable {
 
-        private Thread thread = null;
+        private @Nullable Thread thread = null;
 
         private boolean cancelled = false;
 
-        @NonNull
         private final P parameter;
 
-        @NonNull
         @Getter
         private final CompletableFuture<R> completableFuture = new CompletableFuture<>();
 

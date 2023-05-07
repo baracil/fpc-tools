@@ -12,10 +12,10 @@ import java.util.concurrent.CompletionStage;
 public class HeadStage<P,R> extends ActionChainBase<P,R> {
 
     @Getter
-    private final @NonNull Class<? extends Action<P, CompletionStage<R>>> initialAction;
+    private final Class<? extends Action<P, CompletionStage<R>>> initialAction;
 
     @Override
-    public @NonNull CompletionStage<R> launch(@NonNull ActionExecutor executor, @NonNull P parameter) {
+    public CompletionStage<R> launch(ActionExecutor executor, P parameter) {
         return executor.pushAction(initialAction,parameter).thenCompose(s -> s);
     }
 

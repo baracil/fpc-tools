@@ -17,12 +17,12 @@ import java.io.IOException;
 
 public class IdentifiedEnumSerDe {
 
-    public static <E extends IdentifiedEnum> void addToModule(@NonNull SimpleModule simpleModule, @NonNull Class<E> enumType) {
+    public static <E extends IdentifiedEnum> void addToModule(SimpleModule simpleModule, Class<E> enumType) {
         simpleModule.addSerializer(enumType,createSerializer());
         simpleModule.addDeserializer(enumType,createDeserializer(enumType));
     }
 
-    public static <E extends IdentifiedEnum> @NonNull JsonDeserializer<E> createDeserializer(@NonNull Class<E> enumType) {
+    public static <E extends IdentifiedEnum> JsonDeserializer<E> createDeserializer(Class<E> enumType) {
         return new JsonDeserializer<E>() {
             @Override
             public E deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
@@ -49,7 +49,7 @@ public class IdentifiedEnumSerDe {
         };
     }
 
-    public static @NonNull JsonSerializer<IdentifiedEnum> createSerializer() {
+    public static JsonSerializer<IdentifiedEnum> createSerializer() {
         return new JsonSerializer<>() {
             @Override
             public void serialize(IdentifiedEnum value, JsonGenerator gen, SerializerProvider serializers) throws IOException {

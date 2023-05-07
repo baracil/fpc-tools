@@ -21,17 +21,17 @@ public class FADialogModel<K extends DialogKindBase<K>> implements DialogModel<K
     private final ObservableMap<K, Stage> unmodifiableDialogStages = FXCollections.unmodifiableObservableMap(dialogStages);
 
     @Override
-    public @NonNull ObjectProperty<Scene> mainSceneProperty() {
+    public ObjectProperty<Scene> mainSceneProperty() {
         return mainScene;
     }
 
     @Override
-    public @NonNull ObjectProperty<Stage> primaryStageProperty() {
+    public ObjectProperty<Stage> primaryStageProperty() {
         return primaryStage;
     }
 
     @Override
-    public @NonNull ObservableMap<K, Stage> getDialogStages() {
+    public ObservableMap<K, Stage> getDialogStages() {
         return this.dialogStages;
     }
 

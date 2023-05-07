@@ -9,28 +9,25 @@ import java.util.List;
 
 public interface Listeners<L> {
 
-    @NonNull
     static <L> Listeners<L> create() {
         return ListenersFactory.getInstance().create();
     }
 
-    @NonNull
-    static <L> Listeners<L> create(@NonNull List<L> initialListeners) {
+    static <L> Listeners<L> create(List<L> initialListeners) {
         return ListenersFactory.getInstance().create(initialListeners);
     }
 
     boolean isEmpty();
 
-    @NonNull
-    Subscription addListener(@NonNull L listener);
+    Subscription addListener(L listener);
 
-    void forEachListeners(@NonNull Consumer1<? super L> action);
+    void forEachListeners(Consumer1<? super L> action);
 
-    default <A> void forEachListeners(@NonNull Consumer2<? super L, ? super A> action, @NonNull A a) {
+    default <A> void forEachListeners(Consumer2<? super L, ? super A> action, A a) {
         forEachListeners(action.f2(a));
     }
 
-    default <A,B> void forEachListeners(@NonNull Consumer3<? super L, ? super A, ? super B> action, @NonNull A a, @NonNull B b) {
+    default <A,B> void forEachListeners(Consumer3<? super L, ? super A, ? super B> action, A a, B b) {
         forEachListeners(action.f23(a,b));
     }
 

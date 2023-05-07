@@ -8,5 +8,5 @@ import lombok.experimental.Delegate;
 public class ProxyTextCipher implements TextCipher {
 
     @Delegate
-    private final @NonNull TextCipher delegate;
+    private final TextCipher delegate;
 }

@@ -4,13 +4,13 @@ import lombok.NonNull;
 
 import java.nio.charset.Charset;
 
-public record Secret(@NonNull String value) {
+public record Secret(String value) {
 
-    public static @NonNull Secret of(@NonNull String value) {
+    public static Secret of(String value) {
         return new Secret(value);
     }
 
-    public byte @NonNull [] getBytes(@NonNull Charset charset) {
+    public byte [] getBytes(Charset charset) {
         return value.getBytes(charset);
     }
 
@@ -19,7 +19,7 @@ public record Secret(@NonNull String value) {
         return "Secret{*******}";
     }
 
-    public static @NonNull Secret empty() {
+    public static Secret empty() {
         return EMPTY;
     }
 

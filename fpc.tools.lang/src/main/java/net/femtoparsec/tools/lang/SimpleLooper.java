@@ -7,6 +7,7 @@ import lombok.NonNull;
 import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.annotation.Nullable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.Condition;
@@ -16,13 +17,13 @@ import java.util.concurrent.locks.ReentrantLock;
 @Slf4j
 public class SimpleLooper implements Looper {
 
-    private final @NonNull LoopAction loopAction;
-    private final @NonNull ExecutorService executorService;
+    private final LoopAction loopAction;
+    private final ExecutorService executorService;
 
-    private Runner runner = null;
-    private Future<?> future = null;
+    private @Nullable Runner runner = null;
+    private @Nullable Future<?> future = null;
 
-    public SimpleLooper(@NonNull LoopAction loopAction, @NonNull ExecutorService executorService) {
+    public SimpleLooper(LoopAction loopAction, ExecutorService executorService) {
         this.loopAction = loopAction;
         this.executorService = executorService;
     }

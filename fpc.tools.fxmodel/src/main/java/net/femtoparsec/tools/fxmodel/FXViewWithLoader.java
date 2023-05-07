@@ -9,11 +9,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FXViewWithLoader implements FXView {
 
-    @NonNull
     private final FXLoader fxLoader;
 
     @Override
-    public @NonNull FXViewInstance getViewInstance() {
+    public FXViewInstance getViewInstance() {
         return new FPCFXViewInstance(fxLoader.load());
     }
 

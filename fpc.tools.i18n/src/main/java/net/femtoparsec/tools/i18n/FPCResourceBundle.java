@@ -11,8 +11,7 @@ public class FPCResourceBundle extends ResourceBundle {
 
 
 
-    @NonNull
-    public static FPCResourceBundle create(@NonNull ResourceBundleProvider bundleProvider, @NonNull String resourceBasename, @NonNull Locale locale, @NonNull Locale fallbackLocale) {
+    public static FPCResourceBundle create(ResourceBundleProvider bundleProvider, String resourceBasename, Locale locale, Locale fallbackLocale) {
         final ResourceBundle mainBundle = bundleProvider.getBundle(resourceBasename,locale);
         final ResourceBundle fallbackBundle = bundleProvider.getBundle(resourceBasename,fallbackLocale);
         return new FPCResourceBundle(resourceBasename,locale, mainBundle,fallbackBundle);

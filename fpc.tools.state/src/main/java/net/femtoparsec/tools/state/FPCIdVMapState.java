@@ -18,12 +18,11 @@ import java.util.Map;
 @EqualsAndHashCode(exclude = {"idGetter"},callSuper = true)
 public class FPCIdVMapState<I, V extends Versioned> extends FPCMapStateBase<I, V, FPCIdVMapState<I, V>> implements IdVMapState<I, V> {
 
-    @NonNull
     private final Function1<? super V, ? extends I> idGetter;
 
     public FPCIdVMapState(
-            @NonNull Map<I, V> content,
-            @NonNull Function1<? super V, ? extends I> idGetter) {
+            Map<I, V> content,
+            Function1<? super V, ? extends I> idGetter) {
         super(content, c -> new FPCIdVMapState<>(c, idGetter));
         this.idGetter = idGetter;
     }
@@ -34,28 +33,28 @@ public class FPCIdVMapState<I, V extends Versioned> extends FPCMapStateBase<I, V
     }
 
     @Override
-    public @NonNull IdVMapState<I, V> put(@NonNull V value) {
+    public IdVMapState<I, V> put(V value) {
         return put(idGetter.apply(value), value);
     }
 
     @Override
-    public @NonNull IdVMapState<I, V> replace(@NonNull V value) {
+    public IdVMapState<I, V> replace(V value) {
         return replace(idGetter.apply(value), value);
     }
 
     @Override
-    public @NonNull IdVMapState<I, V> updateValue(@NonNull V value) {
+    public IdVMapState<I, V> updateValue(V value) {
         return update(idGetter.apply(value), value, Versioned.VERSIONED_COMPARATOR);
     }
 
     @Override
-    public @NonNull IdVMapState<I, V> updateValues(@NonNull Collection<V> newValues) {
+    public IdVMapState<I, V> updateValues(Collection<V> newValues) {
         return update(newValues, idGetter, Versioned.VERSIONED_COMPARATOR);
     }
 
     @Override
-    public @NonNull <T> IdVMapState<I, V> updateItems(@NonNull Collection<T> items,
-                                                      @NonNull Function1<? super T, ? extends V> valueGetter) {
+    public <T> IdVMapState<I, V> updateItems(Collection<T> items,
+                                                      Function1<? super T, ? extends V> valueGetter) {
         return update(items, valueGetter.then(idGetter), valueGetter, Versioned.VERSIONED_COMPARATOR);
     }
 }

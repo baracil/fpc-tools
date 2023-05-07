@@ -12,13 +12,11 @@ import net.femtoparsec.tools.fx.dialog.FADialogModel;
  */
 public interface DialogModel<K extends DialogKindBase<K>> extends ReadOnlyDialogModel<K> {
 
-    @NonNull
     static <K extends DialogKindBase<K>> DialogModel<K> create() {
         return new FADialogModel<>();
     }
 
     @Override
-    @NonNull
     ObjectProperty<Scene> mainSceneProperty();
 
     default void setMainScene(Scene scene) {
@@ -26,21 +24,19 @@ public interface DialogModel<K extends DialogKindBase<K>> extends ReadOnlyDialog
     }
 
     @Override
-    @NonNull
     ObjectProperty<Stage> primaryStageProperty();
 
     default void setPrimaryStage(Stage stage) {
         primaryStageProperty().set(stage);
     }
 
-    @NonNull
     ObservableMap<K, Stage> getDialogStages();
 
-    default void setDialogData(@NonNull K dialogKind, @NonNull Stage stage) {
+    default void setDialogData(K dialogKind, Stage stage) {
         getDialogStages().put(dialogKind, stage);
     }
 
-    default void clearDialogStage(@NonNull K dialogKind) {
+    default void clearDialogStage(K dialogKind) {
         getDialogStages().put(dialogKind, null);
     }
 }

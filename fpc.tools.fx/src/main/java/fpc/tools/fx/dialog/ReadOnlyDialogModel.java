@@ -28,7 +28,6 @@ public interface ReadOnlyDialogModel<K extends DialogKindBase<K>> {
 
     ObservableMap<K, Stage> getUnmodifiableDialogStages();
 
-    @NonNull
     default Optional<Stage> getDialogStage(K dialogKind) {
         return Optional.ofNullable(getUnmodifiableDialogStages().get(dialogKind));
     }

@@ -17,7 +17,6 @@ public interface PostData<A, M> {
     /**
      * @return the message to send
      */
-    @NonNull
     Message message();
 
     /**
@@ -27,7 +26,6 @@ public interface PostData<A, M> {
      * when the message is sent. If the message is a request (that expected an answer from the chat),
      * the completion stage completes when the answer from the chat is received (within the time out limit).
      */
-    @NonNull
     CompletionStage<A> completionStage();
 
     /**
@@ -37,22 +35,21 @@ public interface PostData<A, M> {
      * @return this in an optionnal as a {@link RequestPostData} if this is a <code>RequestPostData</code>, an empty
      * optional otherwise.
      */
-    @NonNull
     Optional<RequestPostData<?, M>> asRequestPostData();
 
     /**
      * Method called by the dispatcher when this has been posted.
      * @param dispatchingTime the time of the post
      */
-    void onMessagePosted(@NonNull Instant dispatchingTime);
+    void onMessagePosted(Instant dispatchingTime);
 
     /**
      * Method called by the dispatcher when the post of this has failed.
      * @param t the error that occurred when posting this
      */
-    void onMessagePostFailure(@NonNull Throwable t);
+    void onMessagePostFailure(Throwable t);
 
-    default @NonNull String messagePayload(@NonNull Instant dispatchInstant) {
+    default String messagePayload(Instant dispatchInstant) {
         return message().payload(dispatchInstant);
     }
 

@@ -9,18 +9,13 @@ import lombok.NonNull;
  */
 public interface AdvancedChatEventVisitor<M,T> {
 
-    @NonNull
-    T visit(@NonNull Connection<M> event);
+    T visit(Connection<M> event);
 
-    @NonNull
-    T visit(@NonNull Disconnection<M> event);
+    T visit(Disconnection<M> event);
 
-    @NonNull
-    T visit(@NonNull PostedMessage<M> event);
+    T visit(PostedMessage<M> event);
 
-    @NonNull
-    T visit(@NonNull ReceivedMessage<M> event);
+    T visit(ReceivedMessage<M> event);
 
-    @NonNull
-    T visit(@NonNull Error<M> event);
+    T visit(Error<M> event);
 }

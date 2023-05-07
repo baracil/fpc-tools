@@ -12,8 +12,7 @@ public interface ActionFilter {
      * @param action the action that will be executed
      * @return the provided action by default, or another action to use
      */
-    @NonNull
-    default <P,R> Action<P,R> preProcessAction(@NonNull Action<P,R> action, @NonNull P parameter) {
+    default <P,R> Action<P,R> preProcessAction(Action<P,R> action, P parameter) {
         return action;
     }
 
@@ -24,5 +23,5 @@ public interface ActionFilter {
      * @param action the action that has been executed
      * @param result the result of the action
      */
-    <P,R> void postProcessAction(@NonNull Action<? super P, ? extends R> action, @NonNull TryResult<Throwable, R> result);
+    <P,R> void postProcessAction(Action<? super P, ? extends R> action, TryResult<Throwable, R> result);
 }

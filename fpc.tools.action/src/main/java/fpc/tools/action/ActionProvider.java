@@ -6,11 +6,9 @@ import java.util.Optional;
 
 public interface ActionProvider {
 
-    @NonNull
-    <A> Optional<? extends A> findAction(@NonNull Class<A> actionType);
+    <A> Optional<? extends A> findAction(Class<A> actionType);
 
-    @NonNull
-    default <A> A getAction(@NonNull Class<A> actionType) {
+    default <A> A getAction(Class<A> actionType) {
         return findAction(actionType).orElseThrow(() -> new RuntimeException("Action not found '"+actionType+"'"));
     }
 }

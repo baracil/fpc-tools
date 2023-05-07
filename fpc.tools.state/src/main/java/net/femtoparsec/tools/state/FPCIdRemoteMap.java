@@ -12,22 +12,19 @@ import java.util.Map;
 
 public class FPCIdRemoteMap<K,V> extends FPCRemoteMapBase<K,V, FPCIdRemoteMap<K,V>> implements IdRemoteMap<K,V> {
 
-    @NonNull
-    public static <K,V> FPCIdRemoteMap<K,V> empty(@NonNull Function1<? super V, ? extends K> idGetter) {
+    public static <K,V> FPCIdRemoteMap<K,V> empty(Function1<? super V, ? extends K> idGetter) {
         return new FPCIdRemoteMap<>(Map.of(), idGetter);
     }
 
-    @NonNull
     public static <K,V extends Identified<K>> FPCIdRemoteMap<K,V> empty() {
         return new FPCIdRemoteMap<>(Map.of(), Identified::getIdentification);
     }
 
-    @NonNull
     private final Function1<? super V, ? extends K> idGetter;
 
     public FPCIdRemoteMap(
-            @NonNull Map<K, RemoteData<V>> content,
-            @NonNull Function1<? super V, ? extends K> idGetter) {
+            Map<K, RemoteData<V>> content,
+            Function1<? super V, ? extends K> idGetter) {
         super(content, c-> new FPCIdRemoteMap<>(c,idGetter));
         this.idGetter = idGetter;
     }
@@ -38,29 +35,29 @@ public class FPCIdRemoteMap<K,V> extends FPCRemoteMapBase<K,V, FPCIdRemoteMap<K,
     }
 
     @Override
-    public IdRemoteMap<K, V> put(@NonNull V value) {
+    public IdRemoteMap<K, V> put(V value) {
         return put(idGetter.apply(value),value);
     }
 
     @Override
-    public IdRemoteMap<K, V> replace(@NonNull V value) {
+    public IdRemoteMap<K, V> replace(V value) {
         return replace(idGetter.apply(value),value);
     }
 
     @Override
-    public IdRemoteMap<K, V> updateValue(@NonNull V value, @NonNull Comparator<? super V> isNewer) {
+    public IdRemoteMap<K, V> updateValue(V value, Comparator<? super V> isNewer) {
         return update(idGetter.apply(value),value,isNewer);
     }
 
     @Override
-    public IdRemoteMap<K, V> updateValues(@NonNull Collection<V> newValues, @NonNull Comparator<? super V> isNewer) {
+    public IdRemoteMap<K, V> updateValues(Collection<V> newValues, Comparator<? super V> isNewer) {
         return update(newValues,idGetter,isNewer);
     }
 
     @Override
-    public <T> IdRemoteMap<K, V> updateItems(@NonNull Collection<T> items,
-                                             @NonNull Function1<? super T, ? extends V> valueGetter,
-                                             @NonNull Comparator<? super V> isNewer) {
+    public <T> IdRemoteMap<K, V> updateItems(Collection<T> items,
+                                             Function1<? super T, ? extends V> valueGetter,
+                                             Comparator<? super V> isNewer) {
         return update(items,valueGetter.then(idGetter),valueGetter,isNewer);
     }
 }

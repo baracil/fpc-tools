@@ -13,8 +13,7 @@ public interface AdvancedChatIO<M> extends AdvancedIO {
      * @param listener a listener to add
      * @return a subscription that can be used to remove the listener
      */
-    @NonNull
-    Subscription addChatListener(@NonNull AdvancedChatListener<M> listener);
+    Subscription addChatListener(AdvancedChatListener<M> listener);
 
     boolean isRunning();
 

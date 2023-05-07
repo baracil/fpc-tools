@@ -18,6 +18,7 @@ import org.controlsfx.validation.decoration.GraphicValidationDecoration;
 import org.controlsfx.validation.decoration.StyleClassValidationDecoration;
 import org.controlsfx.validation.decoration.ValidationDecoration;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -26,16 +27,13 @@ import java.util.Optional;
 @Builder
 public class ControlInfo {
 
-    @NonNull
     private final Dictionary dictionary;
 
-    @NonNull
     private final Control control;
 
-    @NonNull
     private final ValidationDecoration validationDecoration = new CompoundValidationDecoration(new GraphDeco(), new StyleClassValidationDecoration());
 
-    public void updateDecoration(@NonNull List<ValidationError> errors) {
+    public void updateDecoration(List<ValidationError> errors) {
         final Optional<ValidationMessage> message = errors.stream()
                                                           .findFirst()
                                                           .map(ValidationError::getErrorType)
@@ -69,10 +67,10 @@ public class ControlInfo {
                 yOffset = 0;
             }
 
-            return Arrays.asList(new GraphicDecoration(node, Pos.TOP_RIGHT, xOffset,yOffset));
+            return List.of(new GraphicDecoration(node, Pos.TOP_RIGHT, xOffset, yOffset));
         }
 
-        private Image extractImage(Node node) {
+        private @Nullable Image extractImage(@Nullable Node node) {
             if (node == null) {
                 return null;
             }

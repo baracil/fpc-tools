@@ -12,15 +12,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @RequiredArgsConstructor
 public class ActionItem<P,R> {
 
-    @NonNull
     @Getter
     private final Action<? super P, ? extends R> action;
 
-    @NonNull
     @Getter
     private final P parameter;
 
-    @NonNull
     private final CompletableFuture<R> completableFuture;
 
     private final AtomicBoolean completed = new AtomicBoolean(false);
@@ -35,7 +32,7 @@ public class ActionItem<P,R> {
         }
     }
 
-    public void completeWith(@NonNull R result) {
+    public void completeWith(R result) {
         completed.set(true);
         this.completableFuture.complete(result);
     }

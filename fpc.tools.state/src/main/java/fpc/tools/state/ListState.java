@@ -25,12 +25,10 @@ public class ListState<V> implements Iterable<V> {
         return EMPTY;
     }
 
-    @NonNull
-    public static <V> ListState<V> of(@NonNull List<V> content) {
+    public static <V> ListState<V> of(List<V> content) {
         return new ListState<>(content);
     }
 
-    @NonNull
     private final List<V> content;
 
 
@@ -38,24 +36,20 @@ public class ListState<V> implements Iterable<V> {
         return content.size();
     }
 
-    @NonNull
     public V get(int index) {
         return content.get(index);
     }
 
 
-    @NonNull
-    public <U> ListState<U> map(@NonNull Function<? super V, ? extends U> mapper) {
+    public <U> ListState<U> map(Function<? super V, ? extends U> mapper) {
         return new ListState<>(ListTool.map(content, mapper));
     }
 
-    @NonNull
-    public ListState<V> replace(@NonNull Predicate<? super V> filter,@NonNull V newValue) {
+    public ListState<V> replace(Predicate<? super V> filter,V newValue) {
         return map(v -> filter.test(v)?newValue:v);
     }
 
-    @NonNull
-    public ListState<V> replace(@NonNull Predicate<? super V> filter,@NonNull Function<? super V, ? extends V> mapper) {
+    public ListState<V> replace(Predicate<? super V> filter,Function<? super V, ? extends V> mapper) {
         if (content.stream().noneMatch(filter)) {
             return this;
         }
@@ -63,17 +57,14 @@ public class ListState<V> implements Iterable<V> {
     }
 
 
-    @NonNull
-    public OptionalInt indexOf(@NonNull Object object) {
+    public OptionalInt indexOf(Object object) {
         return indexOf(object::equals);
     }
 
-    @NonNull
-    public OptionalInt indexOf(@NonNull Predicate<? super V> test) {
+    public OptionalInt indexOf(Predicate<? super V> test) {
         return IntStream.range(0, size()).filter(i -> test.test(content.get(i))).findFirst();
     }
 
-    @NonNull
     public Optional<V> find(int index) {
         if (index < 0 || index >= size()) {
             return Optional.empty();
@@ -81,34 +72,29 @@ public class ListState<V> implements Iterable<V> {
         return Optional.of(get(index));
     }
 
-    @NonNull
-    public Optional<V> find(@NonNull Predicate<? super V> test) {
+    public Optional<V> find(Predicate<? super V> test) {
         return content.stream().filter(test).findFirst();
     }
 
 
-    @NonNull
     @Override
     public Iterator<V> iterator() {
         return content.iterator();
     }
 
-    @NonNull
     public Stream<V> stream() {
         return content.stream();
     }
 
-    @NonNull
-    public ListState<V> removeIf(@NonNull Predicate<? super V> test) {
+    public ListState<V> removeIf(Predicate<? super V> test) {
         return new ListState<>(content.stream().filter(test.negate()).toList());
     }
 
-    @NonNull
-    public ListState<V> remove(@NonNull Object value) {
+    public ListState<V> remove(Object value) {
         return removeIf(value::equals);
     }
 
-    public ListState<V> add(@NonNull V value) {
+    public ListState<V> add(V value) {
         return toBuilder().add(value).build();
     }
 
@@ -123,33 +109,32 @@ public class ListState<V> implements Iterable<V> {
 
     public static class Builder<V> {
 
-        @NonNull
         private final List<V> content;
 
-        public Builder(@NonNull ListState<V> listState) {
+        public Builder(ListState<V> listState) {
             this.content = new ArrayList<>(listState.content);
         }
 
-        public Builder<V> add(@NonNull V value) {
+        public Builder<V> add(V value) {
             content.add(value);
             return this;
         }
 
-        public Builder<V> add(int index, @NonNull V value) {
+        public Builder<V> add(int index, V value) {
             content.add(index, value);
             return this;
         }
 
-        public Builder<V> remove(@NonNull V value) {
+        public Builder<V> remove(V value) {
             content.remove(value);
             return this;
         }
 
-        public Builder<V> addAll(@NonNull Collection<? extends V> values) {
+        public Builder<V> addAll(Collection<? extends V> values) {
             content.addAll(values);
             return this;
         }
-        public Builder<V> addAll(int index, @NonNull Collection<? extends V> values) {
+        public Builder<V> addAll(int index, Collection<? extends V> values) {
             content.addAll(index, values);
             return this;
         }

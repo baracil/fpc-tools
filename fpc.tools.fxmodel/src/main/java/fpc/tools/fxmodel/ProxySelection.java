@@ -9,7 +9,6 @@ import java.util.Set;
 @RequiredArgsConstructor
 public abstract class ProxySelection<T,R extends Selection<T>> implements Selection<T> {
 
-    @NonNull
     private final Selection<T> delegate;
 
     @Override
@@ -18,12 +17,12 @@ public abstract class ProxySelection<T,R extends Selection<T>> implements Select
     }
 
     @Override
-    public @NonNull Set<T> getSelectedElements() {
+    public Set<T> getSelectedElements() {
         return delegate.getSelectedElements();
     }
 
     @Override
-    public @NonNull R removeFromSelection(@NonNull T item) {
+    public R removeFromSelection(T item) {
         final Selection<T> newSelection = delegate.removeFromSelection(item);
         if (newSelection == delegate) {
             return getThis();
@@ -32,7 +31,7 @@ public abstract class ProxySelection<T,R extends Selection<T>> implements Select
     }
 
     @Override
-    public @NonNull Selection<T> addToSelection(@NonNull T item) {
+    public Selection<T> addToSelection(T item) {
         final Selection<T> newSelection = delegate.addToSelection(item);
         if (newSelection == delegate) {
             return getThis();
@@ -40,12 +39,12 @@ public abstract class ProxySelection<T,R extends Selection<T>> implements Select
         return withNewSelection(newSelection);
     }
 
-    protected abstract R withNewSelection(@NonNull Selection<T> selection);
+    protected abstract R withNewSelection(Selection<T> selection);
 
     protected abstract R getThis();
 
     @Override
-    public boolean isSelected(@NonNull T item) {
+    public boolean isSelected(T item) {
         return delegate.isSelected(item);
     }
 }

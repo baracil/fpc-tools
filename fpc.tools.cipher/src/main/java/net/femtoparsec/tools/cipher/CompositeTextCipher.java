@@ -10,16 +10,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CompositeTextCipher implements TextCipher {
 
-    private final @NonNull TextDecryptor textDecryptor;
-    private final @NonNull TextEncryptor textEncryptor;
+    private final TextDecryptor textDecryptor;
+    private final TextEncryptor textEncryptor;
 
     @Override
-    public @NonNull Secret decrypt(@NonNull String encryptedValue) {
+    public Secret decrypt(String encryptedValue) {
         return textDecryptor.decrypt(encryptedValue);
     }
 
     @Override
-    public @NonNull String encrypt(@NonNull Secret value) {
+    public String encrypt(Secret value) {
         return textEncryptor.encrypt(value);
     }
 }

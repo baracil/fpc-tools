@@ -25,12 +25,9 @@ public class FXSpringConfiguration {
 
     public static final boolean FXLOADER_CACHE_ALL_LOADING = Boolean.getBoolean("fxloader.cache-all");
 
-    @NonNull
     private final ApplicationContext applicationContext;
-    @NonNull
     private final ApplicationArguments applicationArguments;
 
-    @NonNull
     private final Dictionary dictionary;
 
     @Bean
@@ -47,13 +44,13 @@ public class FXSpringConfiguration {
 
     @Bean
     @Qualifier("auto")
-    public @NonNull SlotMapperFactory slotMapperFactory() {
+    public SlotMapperFactory slotMapperFactory() {
         return new SpringSlotMapperFactory(applicationArguments);
     }
 
     @Bean
     @Qualifier("auto")
-    public @NonNull FXViewProvider fxViewProvider() {
+    public FXViewProvider fxViewProvider() {
         return new SPringFXViewProvider(applicationContext);
     }
 
@@ -66,40 +63,36 @@ public class FXSpringConfiguration {
 
     @Bean
     @Qualifier("auto")
-    public @NonNull KeyTracker keyTracker() {
+    public KeyTracker keyTracker() {
         return KeyTracker.create();
     }
 
     @Bean
     @Qualifier("auto")
-    @NonNull
     public AlertShower alertShower() {
         return AlertShower.create(dictionary);
     }
 
     @Bean
-    @NonNull
     @Qualifier("auto")
     public LocaleProperty localeProperty() {
         return new LocaleProperty();
     }
 
     @Bean
-    @NonNull
     @Qualifier("auto")
     public CursorSetter cursorSetter() {
         return new FXCursorSetter();
     }
 
     @Bean
-    @NonNull
     @Qualifier("auto")
     public FXDictionary fxDictionary() {
         return localeProperty().wrapDictionary(dictionary);
     }
 
 
-    private @NonNull UnaryOperator1<FXLoader> createLoaderWrapper() {
+    private UnaryOperator1<FXLoader> createLoaderWrapper() {
         if (FXLOADER_CACHE_ALL_LOADING) {
             return FXLoader::cached;
         }

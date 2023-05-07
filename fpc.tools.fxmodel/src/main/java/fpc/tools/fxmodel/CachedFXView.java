@@ -5,7 +5,7 @@ import net.femtoparsec.tools.fxmodel.FPCCachedFXView;
 
 public interface CachedFXView extends FXView {
 
-    static CachedFXView cached(@NonNull FXView fxView) {
+    static CachedFXView cached(FXView fxView) {
         if (fxView instanceof CachedFXView) {
             return (CachedFXView) fxView;
         }

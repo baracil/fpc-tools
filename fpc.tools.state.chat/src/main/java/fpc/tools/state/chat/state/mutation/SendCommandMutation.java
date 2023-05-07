@@ -17,25 +17,25 @@ public class SendCommandMutation extends VisitorMutation {
     private final CompletableFuture<DispatchSlip> future;
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectedChat state) {
+    public ChatState visit(ConnectedChat state) {
         Futures.join(state.sendCommand(command),future);
         return state;
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull DisconnectedChat state) {
+    public ChatState visit(DisconnectedChat state) {
         future.completeExceptionally(new ChatNotConnected());
         return state;
     }
 
     @Override
-    public @NonNull ChatState visit(ReconnectingChat state) {
+    public ChatState visit(ReconnectingChat state) {
         future.completeExceptionally(new ChatNotConnected());
         return state;
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull ConnectingChat state) {
+    public ChatState visit(ConnectingChat state) {
         future.completeExceptionally(new ChatNotConnected());
         return state;
     }

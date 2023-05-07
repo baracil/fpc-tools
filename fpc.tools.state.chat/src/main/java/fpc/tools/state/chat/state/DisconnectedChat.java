@@ -5,15 +5,14 @@ import lombok.NonNull;
 
 public sealed interface DisconnectedChat extends ChatState permits DisconnectedChatImpl {
 
-    @NonNull ChatState onConnectionRequested();
+    ChatState onConnectionRequested();
 
     @Override
-    default <T> @NonNull T accept(@NonNull Visitor<T> visitor) {
+    default <T> T accept(Visitor<T> visitor) {
         return visitor.visit(this);
     }
 
     @Override
-    @NonNull
     default State getState() {
         return State.DISCONNECTED;
     }

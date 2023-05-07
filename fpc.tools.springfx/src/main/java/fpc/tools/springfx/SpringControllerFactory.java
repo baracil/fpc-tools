@@ -12,11 +12,10 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 @Slf4j
 public class SpringControllerFactory implements ControllerFactory {
 
-    @NonNull
     private final BeanFactory beanFactory;
 
     @Override
-    public @NonNull Object getController(@NonNull Class<?> controllerType) throws Exception {
+    public Object getController(Class<?> controllerType) throws Exception {
         try {
             return beanFactory.getBean(controllerType);
         } catch (NoSuchBeanDefinitionException e) {

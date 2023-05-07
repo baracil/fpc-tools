@@ -29,7 +29,6 @@ public class FXAddTabPane  extends TabPane {
         this.fxAddTabPaneSkin = new FXAddTabPaneSkin(this);
     }
 
-    @NonNull
     @Override
     protected Skin<?> createDefaultSkin() {
         if ( this.fxAddTabPaneSkin == null ) {

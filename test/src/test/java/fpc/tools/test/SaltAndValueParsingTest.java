@@ -22,14 +22,14 @@ public class SaltAndValueParsingTest {
 
     @ParameterizedTest
     @MethodSource("saltAndValues")
-    public void shouldHaveRightSalt(@NonNull String saltAndValue, @NonNull String salt, @NonNull String value) {
+    public void shouldHaveRightSalt(String saltAndValue, String salt, String value) {
         final var s = Salt.extractSalt(saltAndValue);
         Assertions.assertEquals(salt,s.v1().value());
     }
 
     @ParameterizedTest
     @MethodSource("saltAndValues")
-    public void shouldHaveRightValue(@NonNull String saltAndValue, @NonNull String salt, @NonNull String value) {
+    public void shouldHaveRightValue(String saltAndValue, String salt, String value) {
         final var s = Salt.extractSalt(saltAndValue);
         Assertions.assertEquals(value,s.v2());
     }

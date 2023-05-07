@@ -22,28 +22,25 @@ public abstract class AdvancedChatFactory {
 
      * @return an <code>AdvancedChat</code> base on the provided parameters
      */
-    @NonNull
     public abstract <M> AdvancedChat<M> createBasedOn(
-            @NonNull Chat chat,
-            @NonNull RequestAnswerMatcher<M> matcher,
-            @NonNull MessageConverter<M> messageConverter,
-            @NonNull Instants instants
+            Chat chat,
+            RequestAnswerMatcher<M> matcher,
+            MessageConverter<M> messageConverter,
+            Instants instants
     );
 
     /**
      *
      */
-    @NonNull
     public static <M> AdvancedChat<M> createAdvancedChatBasedOn(
-            @NonNull Chat chat,
-            @NonNull RequestAnswerMatcher<M> matcher,
-            @NonNull MessageConverter<M> messageConverter,
-            @NonNull Instants instants
+            Chat chat,
+            RequestAnswerMatcher<M> matcher,
+            MessageConverter<M> messageConverter,
+            Instants instants
     ) {
         return getInstance().createBasedOn(chat, matcher, messageConverter, instants);
     }
 
-    @NonNull
     public static AdvancedChatFactory getInstance() {
         return Holder.INSTANCE;
     }

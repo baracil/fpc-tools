@@ -15,31 +15,30 @@ import java.util.concurrent.TimeoutException;
  **/
 public class RequestPostData<A, M> extends AbstractPostData<ReceiptSlip<A>, Request<A>, M> {
 
-    @NonNull
     private final RequestAnswerMatcher<M> matcher;
 
     private Instant dispatchingTime = null;
 
-    public RequestPostData(@NonNull Request<A> request, @NonNull RequestAnswerMatcher<M> matcher) {
+    public RequestPostData(Request<A> request, RequestAnswerMatcher<M> matcher) {
         super(request);
         this.matcher = matcher;
     }
 
     @Override
-    public @NonNull Optional<RequestPostData<?, M>> asRequestPostData() {
+    public Optional<RequestPostData<?, M>> asRequestPostData() {
         return Optional.of(this);
     }
 
     @Override
-    public void onMessagePosted(@NonNull Instant dispatchingTime) {
+    public void onMessagePosted(Instant dispatchingTime) {
         this.dispatchingTime = dispatchingTime;
     }
 
-    public void onRequestTimeout(@NonNull Duration duration) {
+    public void onRequestTimeout(Duration duration) {
         completeExceptionallyWith(new TimeoutException("Timeout after " + duration));
     }
 
-    public boolean tryToCompleteWith(@NonNull M incomingMessage, @NonNull Instant receptionTime) {
+    public boolean tryToCompleteWith(M incomingMessage, Instant receptionTime) {
         try {
             final var match = matcher.performMatch(message(), incomingMessage).orElse(null);
             if (match != null) {
@@ -53,8 +52,7 @@ public class RequestPostData<A, M> extends AbstractPostData<ReceiptSlip<A>, Requ
         }
     }
 
-    @NonNull
-    private BasicReceiptSlip<A> buildReceiptSlip(@NonNull A answer, @NonNull Instant receptionTime) {
+    private BasicReceiptSlip<A> buildReceiptSlip(A answer, Instant receptionTime) {
         return new BasicReceiptSlip<>(dispatchingTime, receptionTime, message(), answer);
     }
 

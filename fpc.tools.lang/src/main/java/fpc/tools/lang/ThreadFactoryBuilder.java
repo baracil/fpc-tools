@@ -3,6 +3,7 @@ package fpc.tools.lang;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;
@@ -14,7 +15,7 @@ public class ThreadFactoryBuilder {
   private Integer priority;
 
   public ThreadFactory build() {
-    return new Factory(nameFormat,daemon,priority);
+    return new Factory(nameFormat, daemon, priority);
   }
 
   public ThreadFactoryBuilder setDaemon(Boolean daemon) {
@@ -34,16 +35,16 @@ public class ThreadFactoryBuilder {
   }
 
   @RequiredArgsConstructor
-  private class Factory implements ThreadFactory {
+  private static class Factory implements ThreadFactory {
 
     private final AtomicLong id = new AtomicLong();
 
-    private final String nameFormat;
-    private final Boolean daemon;
-    private final Integer priority;
+    private final @Nullable String nameFormat;
+    private final @Nullable Boolean daemon;
+    private final @Nullable Integer priority;
 
     @Override
-    public Thread newThread(@NonNull Runnable runnable) {
+    public Thread newThread(Runnable runnable) {
       final var thread = new Thread(runnable);
       Optional.ofNullable(priority).ifPresent(thread::setPriority);
       Optional.ofNullable(nameFormat).map(n -> n.formatted(id.incrementAndGet())).ifPresent(thread::setName);

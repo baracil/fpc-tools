@@ -9,8 +9,8 @@ public class DefaultDialogPreparer implements DialogPreparer {
     private final SetupDialogButton setupDialogButton = new SetupDialogButton();
 
     @Override
-    public <O> void setup(@NonNull Stage dialogStage,
-                          @NonNull DialogInfo<O> dialogInfo) {
+    public <O> void setup(Stage dialogStage,
+                          DialogInfo<O> dialogInfo) {
         setupDialogButton.setup(dialogStage, dialogInfo);
         setupDialogDecoration.setup(dialogStage, dialogInfo);
     }

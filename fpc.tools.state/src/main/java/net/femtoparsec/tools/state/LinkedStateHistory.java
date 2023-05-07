@@ -13,13 +13,13 @@ public class LinkedStateHistory<S> implements StateHistory<S> {
 
     private final int capacity;
 
-    public LinkedStateHistory(int capacity, @NonNull S initialState) {
+    public LinkedStateHistory(int capacity, S initialState) {
         this.capacity = capacity;
         this.deque.addFirst(initialState);
     }
 
     @Override
-    public boolean pushNewState(@NonNull S state) {
+    public boolean pushNewState(S state) {
         if (deque.size()==capacity) {
             deque.removeLast();
         }
@@ -29,17 +29,17 @@ public class LinkedStateHistory<S> implements StateHistory<S> {
     }
 
     @Override
-    public @NonNull S getCurrent() {
+    public S getCurrent() {
         return deque.getFirst();
     }
 
     @Override
-    public @NonNull S getPrevious() {
+    public S getPrevious() {
         return getAt(1);
     }
 
     @Override
-    public @NonNull S getAt(int depth) {
+    public S getAt(int depth) {
         if (depth == 0) {
             return deque.getFirst();
         }

@@ -13,7 +13,6 @@ public interface ChatFactory {
                 ReconnectionPolicy reconnectionPolicy,
                 Instants instants);
 
-    @NonNull
     static ChatFactory getInstance() {
         return Holder.INSTANCE;
     }

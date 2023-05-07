@@ -7,13 +7,13 @@ import java.util.stream.Stream;
 
 public interface SpringModule {
 
-    @NonNull Stream<String> packagesToScan();
+    Stream<String> packagesToScan();
 
-    static @NonNull SpringModule with(@NonNull String... packagesToScan) {
+    static SpringModule with(String... packagesToScan) {
         return () -> Arrays.stream(packagesToScan);
     }
 
-    static @NonNull SpringModule with(@NonNull Class<?> basePackageClass) {
+    static SpringModule with(Class<?> basePackageClass) {
         return () -> Stream.of(basePackageClass.getPackage().getName());
     }
 }

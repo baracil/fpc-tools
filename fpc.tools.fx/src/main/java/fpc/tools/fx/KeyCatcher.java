@@ -8,6 +8,6 @@ import lombok.NonNull;
  */
 public interface KeyCatcher {
 
-    void onKeyEvent(@NonNull KeyEvent event, @NonNull ReadOnlyKeyTracker keyTracker);
+    void onKeyEvent(KeyEvent event, ReadOnlyKeyTracker keyTracker);
 
 }

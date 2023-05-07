@@ -16,38 +16,35 @@ import java.util.Vector;
 @RequiredArgsConstructor
 public class PrefixedDictionary implements Dictionary {
 
-    @NonNull
     private final Dictionary delegate;
 
-    @NonNull
     private final String prefix;
 
     @Override
-    public @NonNull LocalizedString localizedString(@NonNull String i18nKey) {
+    public LocalizedString localizedString(String i18nKey) {
         return delegate.localizedString(prefix + i18nKey);
     }
 
     @Override
-    public @NonNull LocalizedString localizedString(@NonNull String i18nKey, @NonNull Object... parameters) {
+    public LocalizedString localizedString(String i18nKey, Object... parameters) {
         return delegate.localizedString(prefix + i18nKey, parameters);
     }
 
     @Override
-    public @NonNull Dictionary withPrefix(@NonNull String i18nPrefix) {
+    public Dictionary withPrefix(String i18nPrefix) {
         return new PrefixedDictionary(delegate,prefix+i18nPrefix);
     }
 
     @Override
-    public @NonNull ResourceBundle getResourceBundle(@NonNull Locale locale) {
+    public ResourceBundle getResourceBundle(Locale locale) {
         final ResourceBundle resourceBundle = delegate.getResourceBundle(locale);
         return new ResourceBundle() {
             @Override
-            protected Object handleGetObject(@NonNull String key) {
+            protected Object handleGetObject(String key) {
                 return resourceBundle.getObject(prefix+key);
             }
 
             @Override
-            @NonNull
             public Enumeration<String> getKeys() {
                 final Enumeration<String> enumeration = resourceBundle.getKeys();
                 final Vector<String> vector = new Vector<>();

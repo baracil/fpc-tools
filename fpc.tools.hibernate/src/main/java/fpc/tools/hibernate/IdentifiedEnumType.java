@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.DynamicParameterizedType;
 
+import javax.annotation.Nullable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,8 +46,8 @@ public class IdentifiedEnumType  extends ImmutableUserType implements DynamicPar
     }
 
     @Override
-    public Object nullSafeGet(ResultSet rs, String[] names, SharedSessionContractImplementor session,
-            Object owner) throws HibernateException, SQLException {
+    public @Nullable Object nullSafeGet(ResultSet rs, String[] names, SharedSessionContractImplementor session,
+                                        Object owner) throws HibernateException, SQLException {
         final String name = names[0];
         final String value = name == null ? null: rs.getString(name);
         return value == null ? null:findEnum(value);
@@ -64,7 +65,7 @@ public class IdentifiedEnumType  extends ImmutableUserType implements DynamicPar
 
 
 
-    public Object findEnum(@NonNull String id) {
+    public Object findEnum(String id) {
         return IdentifiedEnumTools.getEnum(id,enumType);
     }
 }

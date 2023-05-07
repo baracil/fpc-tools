@@ -6,17 +6,17 @@ import lombok.NonNull;
 @Getter
 public class ParsingFailure extends FPCException {
 
-    private final @NonNull String value;
+    private final String value;
 
-    private final @NonNull Class<?> targetType;
+    private final Class<?> targetType;
 
-    public ParsingFailure(@NonNull String value, @NonNull Class<?> targetType) {
+    public ParsingFailure(String value, Class<?> targetType) {
         super("Could not parse '"+value+"' to type '"+targetType+"'");
         this.value = value;
         this.targetType = targetType;
     }
 
-    public ParsingFailure(@NonNull String value, @NonNull Class<?> targetType, @NonNull Throwable cause) {
+    public ParsingFailure(String value, Class<?> targetType, Throwable cause) {
         this(value,targetType);
         initCause(cause);
     }

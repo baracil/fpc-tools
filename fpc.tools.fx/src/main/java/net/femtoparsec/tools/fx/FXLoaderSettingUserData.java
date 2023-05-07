@@ -13,12 +13,12 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class FXLoaderSettingUserData implements FXLoader {
 
-    private final @NonNull FXLoader delegate;
+    private final FXLoader delegate;
 
-    private final @NonNull Object propertyKey;
+    private final Object propertyKey;
 
     @Override
-    public @NonNull FXLoadingResult load(@NonNull Locale locale) {
+    public FXLoadingResult load(Locale locale) {
 
         final FXLoadingResult result = delegate.load(locale);
         final Reference<Object> reference = new WeakReference<>(result.getController());
@@ -28,7 +28,7 @@ public class FXLoaderSettingUserData implements FXLoader {
     }
 
     @Override
-    public @NonNull FXLoader cached() {
+    public FXLoader cached() {
         return new CachedFXLoader(this);
     }
 }

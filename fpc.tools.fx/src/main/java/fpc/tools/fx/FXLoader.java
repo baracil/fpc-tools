@@ -11,23 +11,21 @@ public interface FXLoader {
 
     Object CONTROLLER_KEY = new Object();
 
-    @NonNull
-    FXLoadingResult load(@NonNull Locale locale);
+    FXLoadingResult load(Locale locale);
 
     default FXLoadingResult load() {
         return load(Locale.getDefault());
     }
 
-    @NonNull
     FXLoader cached();
 
-    static @NonNull Optional<Object> retrieveController(@NonNull Node node) {
+    static Optional<Object> retrieveController(Node node) {
         return Optional.ofNullable(node.getProperties().get(CONTROLLER_KEY))
                        .filter(Reference.class::isInstance)
                        .map(r -> ((Reference<?>) r).get());
     }
 
-    static @NonNull <T> Optional<T> retrieveController(@NonNull Node node, @NonNull Class<T> type) {
+    static <T> Optional<T> retrieveController(Node node, Class<T> type) {
         return retrieveController(node).filter(type::isInstance).map(type::cast);
     }
 }

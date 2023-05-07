@@ -7,9 +7,9 @@ import java.util.ServiceLoader;
 
 public interface ListenersFactory {
 
-    @NonNull <L> Listeners<L> create();
+    <L> Listeners<L> create();
 
-    @NonNull <L> Listeners<L> create(@NonNull List<L> initialListeners);
+    <L> Listeners<L> create(List<L> initialListeners);
 
 
     static ListenersFactory getInstance() {

@@ -8,11 +8,9 @@ import java.util.ServiceLoader;
 
 public interface IdentityFactory {
 
-    @NonNull
-    <R> Identity<R> createIdentity(@NonNull R initialValue);
+    <R> Identity<R> createIdentity(R initialValue);
 
-    @NonNull
-    <R> Identity<R> createIdentity(@NonNull Function1<? super IdentityMutator<R>, ? extends R> initialValueFactory);
+    <R> Identity<R> createIdentity(Function1<? super IdentityMutator<R>, ? extends R> initialValueFactory);
 
     static IdentityFactory getInstance() {
         return Holder.FACTORY;

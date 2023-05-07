@@ -7,11 +7,10 @@ import java.util.Optional;
 
 public interface Caster<T> extends Function1<Object,Optional<T>> {
 
-    @NonNull Optional<T> cast(@NonNull Object object);
+    Optional<T> cast(Object object);
 
     @Override
-    @NonNull
-    default Optional<T> apply(@NonNull Object o) {
+    default Optional<T> apply(Object o) {
         return cast(o);
     }
 }

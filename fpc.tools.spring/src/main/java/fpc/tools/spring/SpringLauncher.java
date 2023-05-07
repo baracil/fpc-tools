@@ -24,44 +24,38 @@ import java.util.ServiceLoader;
 @RequiredArgsConstructor
 public class SpringLauncher {
 
-    @NonNull
     private final List<String> arguments;
 
-    @NonNull
     private final Class<?>[] applicationClasses;
 
-    @NonNull
     private final Consumer1<SpringApplication> modifier;
 
-    @NonNull
     private final ApplicationContextInitializer<?>[] initializers;
 
-    @NonNull
     private final Predicate1<? super SpringModule> springModuleFilter;
 
 
-    public SpringLauncher(@NonNull List<String> arguments,
-                          @NonNull Class<?>[] applicationClasses,
-                          @NonNull ApplicationContextInitializer<?>[] initializers,
-                          @NonNull Predicate1<? super SpringModule> springModuleFilter) {
+    public SpringLauncher(List<String> arguments,
+                          Class<?>[] applicationClasses,
+                          ApplicationContextInitializer<?>[] initializers,
+                          Predicate1<? super SpringModule> springModuleFilter) {
         this(arguments,applicationClasses,a -> {}, initializers, springModuleFilter);
    }
-    public SpringLauncher(@NonNull List<String> arguments,
-                          @NonNull Class<?> applicationClass,
-                          @NonNull ApplicationContextInitializer<?>[] initializers,
-                          @NonNull Predicate1<? super SpringModule> springModuleFilter) {
+    public SpringLauncher(List<String> arguments,
+                          Class<?> applicationClass,
+                          ApplicationContextInitializer<?>[] initializers,
+                          Predicate1<? super SpringModule> springModuleFilter) {
         this(arguments,new Class<?>[]{applicationClass},a -> {}, initializers, springModuleFilter);
    }
 
-    public SpringLauncher(@NonNull List<String> arguments,
-                          @NonNull Class<?> applicationClass,
-                          @NonNull Consumer1<SpringApplication> modifier,
-                          @NonNull ApplicationContextInitializer<?>[] initializers,
-                          @NonNull Predicate1<? super SpringModule> springModuleFilter) {
+    public SpringLauncher(List<String> arguments,
+                          Class<?> applicationClass,
+                          Consumer1<SpringApplication> modifier,
+                          ApplicationContextInitializer<?>[] initializers,
+                          Predicate1<? super SpringModule> springModuleFilter) {
         this(arguments,new Class<?>[]{applicationClass},modifier, initializers, springModuleFilter);
    }
 
-    @NonNull
     public ApplicationCloser launch() {
         return new Execution().launch();
     }

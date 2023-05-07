@@ -9,9 +9,9 @@ import lombok.NonNull;
  */
 public interface ReadOnlyKeyTracker {
 
-    boolean isPressed(@NonNull KeyCode keyCode);
+    boolean isPressed(KeyCode keyCode);
 
-    boolean arePressed(@NonNull KeyCode... keyCodes);
+    boolean arePressed(KeyCode... keyCodes);
 
-    boolean isMouseOver(@NonNull Node node);
+    boolean isMouseOver(Node node);
 }

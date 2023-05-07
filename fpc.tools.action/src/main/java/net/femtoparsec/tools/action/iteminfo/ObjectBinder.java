@@ -8,28 +8,28 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ObjectBinder extends ItemInfoBase<Object> {
 
-    public ObjectBinder(@NonNull Object item) {
+    public ObjectBinder(Object item) {
         super(item);
     }
 
     @Override
-    public void bindDisable(@NonNull Object item, @NonNull ObservableValue<? extends Boolean> observableValue) {
+    public void bindDisable(Object item, ObservableValue<? extends Boolean> observableValue) {
         LOG.warn("Binding on an unknown item. No disable property available to bind. Item type : {}",item.getClass());
     }
 
     @Override
-    protected void unbindDisable(@NonNull Object item) {    }
+    protected void unbindDisable(Object item) {    }
 
     @Override
-    protected void bindAction(@NonNull Object item, @NonNull Runnable executable) {
+    protected void bindAction(Object item, Runnable executable) {
         LOG.warn("Binding on an unknown item. No action available to bind the executable. Item type : {}",item.getClass());
     }
 
     @Override
-    protected void unbindAction(@NonNull Object item) {}
+    protected void unbindAction(Object item) {}
 
     @Override
-    protected boolean isDisabled(@NonNull Object item) {
+    protected boolean isDisabled(Object item) {
         return true;
     }
 }

@@ -21,7 +21,7 @@ public class FPCMapState<K, V> extends FPCMapStateBase<K,V, FPCMapState<K,V>> {
         return EMPTY;
     }
 
-    public FPCMapState(@NonNull Map<K, V> content) {
+    public FPCMapState(Map<K, V> content) {
         super(content, FPCMapState::new);
     }
 

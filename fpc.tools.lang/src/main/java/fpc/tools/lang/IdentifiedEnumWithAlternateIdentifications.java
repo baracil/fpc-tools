@@ -6,7 +6,6 @@ import java.util.Set;
 
 public interface IdentifiedEnumWithAlternateIdentifications extends IdentifiedEnum {
 
-    @NonNull
     Set<String> getAlternateIdentifications();
     
 }

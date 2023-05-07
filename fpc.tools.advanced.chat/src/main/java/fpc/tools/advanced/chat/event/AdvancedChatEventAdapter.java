@@ -4,30 +4,30 @@ import lombok.NonNull;
 
 public abstract class AdvancedChatEventAdapter<M,T> implements AdvancedChatEventVisitor<M,T> {
 
-    protected abstract T fallback(@NonNull AdvancedChatEvent<M> event);
+    protected abstract T fallback(AdvancedChatEvent<M> event);
 
     @Override
-    public @NonNull T visit(@NonNull Connection<M> event) {
+    public T visit(Connection<M> event) {
         return fallback(event);
     }
 
     @Override
-    public @NonNull T visit(@NonNull Disconnection<M> event) {
+    public T visit(Disconnection<M> event) {
         return fallback(event);
     }
 
     @Override
-    public @NonNull T visit(@NonNull PostedMessage<M> event) {
+    public T visit(PostedMessage<M> event) {
         return fallback(event);
     }
 
     @Override
-    public @NonNull T visit(@NonNull ReceivedMessage<M> event) {
+    public T visit(ReceivedMessage<M> event) {
         return fallback(event);
     }
 
     @Override
-    public @NonNull T visit(@NonNull Error<M> event) {
+    public T visit(Error<M> event) {
         return fallback(event);
     }
 }

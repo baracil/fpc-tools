@@ -6,15 +6,14 @@ import lombok.NonNull;
 
 public class FXViewWithController implements FXView {
 
-    @NonNull
     private final FXLoader fxLoader;
 
-    public FXViewWithController(@NonNull FXLoaderFactory fxLoaderFactory, @NonNull Class<?> controllerClass) {
+    public FXViewWithController(FXLoaderFactory fxLoaderFactory, Class<?> controllerClass) {
         this.fxLoader = fxLoaderFactory.create(controllerClass);
     }
 
     @Override
-    public @NonNull FXViewInstance getViewInstance() {
+    public FXViewInstance getViewInstance() {
         return FXViewInstance.with(fxLoader.load());
     }
 }

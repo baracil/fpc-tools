@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.annotation.Nullable;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -14,12 +15,12 @@ public class FXCursorSetter implements CursorSetter {
 
     private final Deque<Cursor> stack = new LinkedList<>();
 
-    private Cursor initialCursor = null;
+    private @Nullable Cursor initialCursor = null;
 
-    private Node targetNode = null;
+    private @Nullable Node targetNode = null;
 
     @Override
-    public void setTargetNode(@NonNull Node node) {
+    public void setTargetNode(Node node) {
         if (targetNode != null) {
             targetNode.setCursor(initialCursor);
         }
@@ -48,15 +49,14 @@ public class FXCursorSetter implements CursorSetter {
     }
 
 
-    private void setCursor(Cursor cursor) {
+    private void setCursor(@Nullable Cursor cursor) {
         if (targetNode != null) {
             targetNode.setCursor(cursor);
         }
     }
 
 
-    @NonNull
-    private static Cursor convert(@NonNull fpc.tools.fx.Cursor cursor) {
+    private static Cursor convert(fpc.tools.fx.Cursor cursor) {
         return switch (cursor) {
             case CROSSHAIR -> Cursor.CROSSHAIR;
             case TEXT -> Cursor.TEXT;

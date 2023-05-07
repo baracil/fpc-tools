@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lombok.NonNull;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 /**
@@ -19,7 +20,7 @@ import java.util.*;
  */
 public class FPCKeyTracker implements KeyTracker {
 
-    private Stage target = null;
+    private @Nullable Stage target = null;
 
     private final EventHandler<KeyEvent> keyEventEventHandler = this::handleKeyEvent;
     private final EventHandler<MouseEvent> mouseEventHandler = this::handleMouseEvent;
@@ -29,10 +30,10 @@ public class FPCKeyTracker implements KeyTracker {
 
     private final Map<Node, List<KeyCatcher>> keyCatchers = new HashMap<>();
 
-    private MouseEvent lastMouseEvent = null;
+    private @Nullable MouseEvent lastMouseEvent = null;
 
     @Override
-    public void attach(@NonNull Stage target) {
+    public void attach(Stage target) {
         this.detach();
         this.target = target;
         this.target.addEventFilter(KeyEvent.ANY, keyEventEventHandler);
@@ -76,12 +77,12 @@ public class FPCKeyTracker implements KeyTracker {
     }
 
     @Override
-    public boolean arePressed(@NonNull KeyCode... keyCodes) {
+    public boolean arePressed(KeyCode... keyCodes) {
         return pressedKeys.containsAll(Arrays.asList(keyCodes));
     }
 
     @Override
-    public Subscription addKeyCatcher(@NonNull Node node, @NonNull KeyCatcher keyCatcher) {
+    public Subscription addKeyCatcher(Node node, KeyCatcher keyCatcher) {
         //IMPROVE implementation for hierarchical node structure
         final List<KeyCatcher> keyCatchers = this.keyCatchers.computeIfAbsent(node, n -> new ArrayList<>());
         keyCatchers.add(keyCatcher);
@@ -89,7 +90,7 @@ public class FPCKeyTracker implements KeyTracker {
     }
 
     @Override
-    public @NonNull Subscription addKeyCatcherOnlyIfOver(Node node, KeyCatcher keyCatcher) {
+    public Subscription addKeyCatcherOnlyIfOver(Node node, KeyCatcher keyCatcher) {
         return addKeyCatcher(node, new KeyCatcherOnlyIfOver(node, keyCatcher));
     }
 
@@ -97,7 +98,7 @@ public class FPCKeyTracker implements KeyTracker {
         this.lastMouseEvent = mouseEvent;
     }
 
-    private void remove(@NonNull Node node, @NonNull KeyCatcher keyCatcher) {
+    private void remove(Node node, KeyCatcher keyCatcher) {
         final List<KeyCatcher> keyCatchers = this.keyCatchers.get(node);
         if (keyCatchers != null) {
             keyCatchers.remove(keyCatcher);
@@ -108,7 +109,7 @@ public class FPCKeyTracker implements KeyTracker {
     }
 
     @Override
-    public boolean isMouseOver(@NonNull Node node) {
+    public boolean isMouseOver(Node node) {
         final MouseEvent last = lastMouseEvent;
         if (last == null) {
             return false;

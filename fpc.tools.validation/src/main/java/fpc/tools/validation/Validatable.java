@@ -4,6 +4,5 @@ import lombok.NonNull;
 
 public interface Validatable {
 
-    @NonNull
-    fpc.tools.validation.Validation validate(@NonNull fpc.tools.validation.Validation validation);
+    fpc.tools.validation.Validation validate(fpc.tools.validation.Validation validation);
 }

@@ -11,19 +11,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public final class ConnectingChatImpl<M> implements ConnectingChat {
 
-    private final @NonNull ChatStateContext<M> context;
-    private final @NonNull AdvancedChat<M> chat;
-    private final @NonNull Subscription subscription;
+    private final ChatStateContext<M> context;
+    private final AdvancedChat<M> chat;
+    private final Subscription subscription;
 
     @Override
-    public @NonNull ChatState onDisconnectionEvent() {
+    public ChatState onDisconnectionEvent() {
         subscription.unsubscribe();
         context.onDisconnected();
         return new DisconnectedChatImpl<>(context);
     }
 
     @Override
-    public @NonNull ChatState onConnectionEvent() {
+    public ChatState onConnectionEvent() {
         try {
             final var connectionOk = context.onConnected(chat);
             return switch (connectionOk) {
@@ -49,7 +49,7 @@ public final class ConnectingChatImpl<M> implements ConnectingChat {
     }
 
     @Override
-    public @NonNull ChatState onDisconnectionRequested() {
+    public ChatState onDisconnectionRequested() {
         chat.requestDisconnection();
         return this;
     }

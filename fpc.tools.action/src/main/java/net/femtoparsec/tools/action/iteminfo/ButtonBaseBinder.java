@@ -5,17 +5,17 @@ import lombok.NonNull;
 
 public class ButtonBaseBinder extends NodeBaseItemInfo<ButtonBase> {
 
-    public ButtonBaseBinder(@NonNull ButtonBase item) {
+    public ButtonBaseBinder(ButtonBase item) {
         super(item);
     }
 
     @Override
-    protected void bindAction(@NonNull ButtonBase item, @NonNull Runnable executable) {
+    protected void bindAction(ButtonBase item, Runnable executable) {
         item.setOnAction(e -> executable.run());
     }
 
     @Override
-    protected void unbindAction(@NonNull ButtonBase item) {
+    protected void unbindAction(ButtonBase item) {
         item.setOnAction(null);
     }
 

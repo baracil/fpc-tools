@@ -13,13 +13,10 @@ import java.util.Set;
 @Getter
 public class ValidationResult {
 
-    @NonNull
     private final Set<String> validatedFields;
 
-    @NonNull
     private final Map<String, List<ValidationError>> errors;
 
-    @NonNull
     public static ValidationResult empty() {
         return new ValidationResult(Set.of(), Map.of());
     }
@@ -28,13 +25,11 @@ public class ValidationResult {
         return errors.isEmpty();
     }
 
-    @NonNull
-    public List<ValidationError> getErrors(@NonNull String fieldName) {
+    public List<ValidationError> getErrors(String fieldName) {
         return errors.getOrDefault(fieldName,List.of());
     }
 
-    @NonNull
-    public Optional<ValidationError> getFirstError(@NonNull String fieldName) {
+    public Optional<ValidationError> getFirstError(String fieldName) {
         final List<ValidationError> fieldErrors = errors.get(fieldName);
         if (fieldErrors == null || fieldErrors.isEmpty()) {
             return Optional.empty();

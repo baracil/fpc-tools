@@ -4,6 +4,7 @@ import fpc.tools.state.RemoteData;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -13,23 +14,20 @@ public class FPCRemoteData<V> implements RemoteData<V> {
     private static final FPCRemoteData LOADED_NOT_FOUND = new FPCRemoteData<>(null, RemoteDataState.LOADED_NOT_FOUND);
 
     @SuppressWarnings("unchecked")
-    @NonNull
     public static <V> FPCRemoteData<V> notLoaded() {
         return NOT_LOADED;
     }
 
     @SuppressWarnings("unchecked")
-    @NonNull
     public static <V> FPCRemoteData<V> loadedNotFound() {
         return LOADED_NOT_FOUND;
     }
 
-    @NonNull
-    public static <V> FPCRemoteData<V> loadedFound(@NonNull V value) {
+    public static <V> FPCRemoteData<V> loadedFound(V value) {
         return new FPCRemoteData<>(value, RemoteDataState.LOADED);
     }
 
-    private final V value;
+    private @Nullable final V value;
 
     private final RemoteDataState state;
 
@@ -42,22 +40,22 @@ public class FPCRemoteData<V> implements RemoteData<V> {
     }
 
     @Override
-    public @NonNull Optional<V> getValue() {
+    public Optional<V> getValue() {
         return Optional.ofNullable(value);
     }
 
     @Override
-    public @NonNull RemoteData<V> reset() {
+    public RemoteData<V> reset() {
         return notLoaded();
     }
 
     @Override
-    public @NonNull RemoteData<V> loadedAndNotFound() {
+    public RemoteData<V> loadedAndNotFound() {
         return loadedNotFound();
     }
 
     @Override
-    public @NonNull RemoteData<V> loadedAndFound(@NonNull V value) {
+    public RemoteData<V> loadedAndFound(V value) {
         return loadedFound(value);
     }
 }

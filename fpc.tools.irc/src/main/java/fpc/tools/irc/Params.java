@@ -14,7 +14,6 @@ import java.util.List;
 @Builder(builderClassName = "Builder")
 public class Params {
 
-    @NonNull
     @Singular
     List<String> parameters;
 
@@ -22,12 +21,10 @@ public class Params {
         return parameters.isEmpty();
     }
 
-    @NonNull
     public String parameterAt(int index) {
         return parameters.get(index);
     }
 
-    @NonNull
     public String lastParameter() {
         return parameterAt(parameters.size()-1);
     }

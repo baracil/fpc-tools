@@ -11,13 +11,12 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class FXLoaderWrapNode implements FXLoader {
 
-    @NonNull
     private final FXLoader fxLoader;
 
     private final Function2<? super String, ? super Node, ? extends Node> wrapper;
 
     @Override
-    public @NonNull FXLoadingResult load(@NonNull Locale locale) {
+    public FXLoadingResult load(Locale locale) {
         final var result = fxLoader.load();
         final Object controller = result.getController();
         final Object root = result.getRoot();
@@ -29,7 +28,7 @@ public class FXLoaderWrapNode implements FXLoader {
     }
 
     @Override
-    public @NonNull FXLoader cached() {
+    public FXLoader cached() {
         return new CachedFXLoader(this);
     }
 }

@@ -19,7 +19,7 @@ public class ChatStateManager<M> implements AdvancedIO {
 
     private final Identity<ChatState> stat2e;
 
-    public ChatStateManager(@NonNull ChatInfo<M> chatInfo) {
+    public ChatStateManager(ChatInfo<M> chatInfo) {
         this.stat2e = Identity.create(i -> ChatState.createInitial(new ChatStateContext<>(this::mutate,chatInfo, new Listener())));
     }
 
@@ -32,7 +32,7 @@ public class ChatStateManager<M> implements AdvancedIO {
     }
 
     @Override
-    public @NonNull CompletionStage<DispatchSlip> sendCommand(@NonNull Command command) {
+    public CompletionStage<DispatchSlip> sendCommand(Command command) {
         final var future = new CompletableFuture<DispatchSlip>();
         final var mutation = new SendCommandMutation(command,future);
         this.mutate(mutation);
@@ -40,7 +40,7 @@ public class ChatStateManager<M> implements AdvancedIO {
     }
 
     @Override
-    public @NonNull <A> CompletionStage<ReceiptSlip<A>> sendRequest(@NonNull Request<A> request) {
+    public <A> CompletionStage<ReceiptSlip<A>> sendRequest(Request<A> request) {
         final var future = new CompletableFuture<ReceiptSlip<A>>();
         final var mutation = new SendRequestMutation<>(request,future);
         this.mutate(mutation);
@@ -50,28 +50,28 @@ public class ChatStateManager<M> implements AdvancedIO {
     private class Listener extends AdvancedChatEventAdapter<M,Mutation<ChatState>> implements AdvancedChatListener<M> {
 
         @Override
-        public void onChatEvent(@NonNull AdvancedChatEvent<M> chatEvent) {
+        public void onChatEvent(AdvancedChatEvent<M> chatEvent) {
             final var mutation = chatEvent.accept(this);
             mutate(mutation);
         }
 
         @Override
-        protected Mutation<ChatState> fallback(@NonNull AdvancedChatEvent<M> event) {
+        protected Mutation<ChatState> fallback(AdvancedChatEvent<M> event) {
             return s -> s;
         }
 
         @Override
-        public @NonNull Mutation<ChatState> visit(@NonNull Connection<M> event) {
+        public Mutation<ChatState> visit(Connection<M> event) {
             return new OnConnectionEventMutation();
         }
 
         @Override
-        public @NonNull Mutation<ChatState> visit(@NonNull Disconnection<M> event) {
+        public Mutation<ChatState> visit(Disconnection<M> event) {
             return new OnDisconnectionEventMutation();
         }
     }
 
-    private @NonNull CompletionStage<ChatState> mutate(@NonNull Mutation<ChatState> mutation) {
+    private CompletionStage<ChatState> mutate(Mutation<ChatState> mutation) {
         return stat2e.mutate(mutation, (o,n) -> {
             if (o.getState() != n.getState()) {
                 n.onEnter(o.getState());

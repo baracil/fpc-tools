@@ -5,13 +5,13 @@ import lombok.NonNull;
 
 public interface ItemInfo {
 
-    void bindDisable(@NonNull ObservableValue<? extends Boolean> observableValue);
+    void bindDisable(ObservableValue<? extends Boolean> observableValue);
 
     void unbindDisable();
 
     boolean isDisabled();
 
-    void bindAction(@NonNull Runnable executable);
+    void bindAction(Runnable executable);
 
     void unbindAction();
 

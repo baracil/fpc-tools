@@ -31,32 +31,27 @@ public class ChatSender<M> implements LoopAction {
     /**
      * The chat i/o used to send the message
      */
-    @NonNull
     private final ChatIO chat;
 
     /**
      * the list of listeners of chat events.
      */
-    @NonNull
     private final Listeners<AdvancedChatListener<M>> listeners;
 
     /**
      * contains the list of requests waiting for an answer from the chat
      */
-    @NonNull
     private final BlockingDeque<RequestPostData<?,M>> requestPostDataQueue;
 
     /**
      * The queue of pending message to send
      */
-    @NonNull
     private final BlockingDeque<PostData<?,M>> postQueue = new LinkedBlockingDeque<>();
 
-    private final @NonNull Instants instants;
+    private final Instants instants;
 
     private final Timer timer = new Timer("Request timeout", true);
 
-    @NonNull
     @Getter
     @Setter
     private Duration timeout = Duration.ofMinutes(1);
@@ -64,7 +59,7 @@ public class ChatSender<M> implements LoopAction {
     private volatile boolean running = false;
 
     @Override
-    public @NonNull NextState beforeLooping() {
+    public NextState beforeLooping() {
         running = true;
         return NextState.CONTINUE;
     }
@@ -74,7 +69,7 @@ public class ChatSender<M> implements LoopAction {
         running = false;
     }
 
-    public <A> CompletionStage<A> send(@NonNull PostData<A,M> postData) {
+    public <A> CompletionStage<A> send(PostData<A,M> postData) {
         if (running) {
             postQueue.add(postData);
             return postData.completionStage();
@@ -84,7 +79,7 @@ public class ChatSender<M> implements LoopAction {
     }
 
     @Override
-    public @NonNull NextState performOneIteration() throws Exception {
+    public NextState performOneIteration() throws Exception {
         final PostData<?,M> postData = postQueue.takeFirst();
 
         try {
@@ -100,16 +95,16 @@ public class ChatSender<M> implements LoopAction {
         return NextState.CONTINUE;
     }
 
-    private void handleRequestPostData(@NonNull RequestPostData<?,M> requestPostData) {
+    private void handleRequestPostData(RequestPostData<?,M> requestPostData) {
         this.addRequestPostDataToQueue(requestPostData);
         this.addTimeoutTimerForRequest(requestPostData);
     }
 
-    private void addRequestPostDataToQueue(@NonNull RequestPostData<?,M> requestPostData) {
+    private void addRequestPostDataToQueue(RequestPostData<?,M> requestPostData) {
         requestPostDataQueue.offerLast(requestPostData);
     }
 
-    protected void addTimeoutTimerForRequest(@NonNull RequestPostData<?,M> requestPostData) {
+    protected void addTimeoutTimerForRequest(RequestPostData<?,M> requestPostData) {
         final Duration timeout = this.timeout;
         timer.schedule(new TimerTask() {
             @Override
@@ -119,18 +114,18 @@ public class ChatSender<M> implements LoopAction {
         },timeout.toMillis());
     }
 
-    private void postMessageToChat(@NonNull PostData<?,M> postData) {
+    private void postMessageToChat(PostData<?,M> postData) {
         final var dispatchContext = instants.now();
         chat.postMessage(postData.messagePayload(dispatchContext));
     }
 
-    private void performActionsAfterSuccessfulPost(@NonNull PostData<?,M> postData, @NonNull Instant dispatchingTime) {
+    private void performActionsAfterSuccessfulPost(PostData<?,M> postData, Instant dispatchingTime) {
         final var postedMessage = new PostedMessage<M>(dispatchingTime, postData.message());
         listeners.forEachListeners(AdvancedChatListener::onChatEvent, postedMessage);
         postData.onMessagePosted(dispatchingTime);
     }
 
-    private void performActionsAfterFailedPost(@NonNull PostData<?,M> postData, @NonNull Throwable t) {
+    private void performActionsAfterFailedPost(PostData<?,M> postData, Throwable t) {
         final var error = new Error<M>(t);
         listeners.forEachListeners(AdvancedChatListener::onChatEvent,error);
         postData.onMessagePostFailure(t);

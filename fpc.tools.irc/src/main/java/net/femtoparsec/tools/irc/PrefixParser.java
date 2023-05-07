@@ -10,8 +10,7 @@ import java.util.Optional;
  **/
 public class PrefixParser {
 
-    @NonNull
-    public Optional<Prefix> parse(@NonNull String prefixAsString) {
+    public Optional<Prefix> parse(String prefixAsString) {
         final int userStart = prefixAsString.indexOf("!");
         final int hostStart = prefixAsString.lastIndexOf("@");
 

@@ -8,17 +8,17 @@ import net.femtoparsec.tools.cipher.RSATextEncryptor;
 
 public interface TextEncryptor {
 
-    @NonNull String encrypt(@NonNull Secret value);
+    String encrypt(Secret value);
 
-    static @NonNull TextEncryptor createAES(@NonNull Secret password) {
+    static TextEncryptor createAES(Secret password) {
         return new AESTextCipher(new AESCipherFactory(password));
     }
 
-    static @NonNull TextEncryptor createRSA(byte @NonNull [] encodedPublicKey) {
+    static TextEncryptor createRSA(byte [] encodedPublicKey) {
         return new RSATextEncryptor(encodedPublicKey);
     }
 
-    default <T> @NonNull T encrypt(@NonNull Encryptable<T> encryptable) {
+    default <T> T encrypt(Encryptable<T> encryptable) {
         return encryptable.encrypt(this);
     }
 

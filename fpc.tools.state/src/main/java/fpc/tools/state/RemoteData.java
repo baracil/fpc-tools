@@ -12,22 +12,17 @@ import net.femtoparsec.tools.state.FPCRemoteData;
  */
 public interface RemoteData<V> extends RemoteDataBase<V> {
 
-    @NonNull
     static <V> RemoteData<V> notLoaded() {
         return FPCRemoteData.notLoaded();
     }
 
-    @NonNull
     static <V> RemoteData<V> loaded(V value) {
         return FPCRemoteData.loadedFound(value);
     }
 
-    @NonNull
     RemoteData<V> reset();
 
-    @NonNull
     RemoteData<V> loadedAndNotFound();
 
-    @NonNull
-    RemoteData<V> loadedAndFound(@NonNull V value);
+    RemoteData<V> loadedAndFound(V value);
 }

@@ -13,17 +13,17 @@ import java.util.function.Function;
 public class Transition<S> implements Predicate1<Function<? super S, ?>> {
 
     @Getter
-    private final @NonNull S current;
+    private final S current;
 
     @Getter
-    private final @NonNull S previous;
+    private final S previous;
 
     public boolean isNop() {
         return Objects.equals(current,previous);
     }
 
     @Override
-    public boolean test(@NonNull Function<? super S, ?> function) {
+    public boolean test(Function<? super S, ?> function) {
         return Todo.same(previous,current,function);
     }
 }

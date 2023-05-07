@@ -19,16 +19,15 @@ import java.util.Map;
 public class FPCIdMapState<I, V> extends FPCMapStateBase<I, V, FPCIdMapState<I, V>> implements IdMapState<I, V> {
 
     @SuppressWarnings("unchecked")
-    public static <I, V> FPCIdMapState<I, V> empty(@NonNull Function1<? super V, ? extends I> idGetter) {
+    public static <I, V> FPCIdMapState<I, V> empty(Function1<? super V, ? extends I> idGetter) {
         return new FPCIdMapState<>(Map.of(), idGetter);
     }
 
-    @NonNull
     private final Function1<? super V, ? extends I> idGetter;
 
     public FPCIdMapState(
-            @NonNull Map<I, V> content,
-            @NonNull Function1<? super V, ? extends I> idGetter) {
+            Map<I, V> content,
+            Function1<? super V, ? extends I> idGetter) {
         super(content, c -> new FPCIdMapState<>(c, idGetter));
         this.idGetter = idGetter;
     }
@@ -39,29 +38,29 @@ public class FPCIdMapState<I, V> extends FPCMapStateBase<I, V, FPCIdMapState<I, 
     }
 
     @Override
-    public IdMapState<I, V> put(@NonNull V value) {
+    public IdMapState<I, V> put(V value) {
         return put(idGetter.apply(value), value);
     }
 
     @Override
-    public IdMapState<I, V> replace(@NonNull V value) {
+    public IdMapState<I, V> replace(V value) {
         return replace(idGetter.apply(value), value);
     }
 
     @Override
-    public IdMapState<I, V> updateValue(@NonNull V value, @NonNull Comparator<? super V> isNewer) {
+    public IdMapState<I, V> updateValue(V value, Comparator<? super V> isNewer) {
         return update(idGetter.apply(value), value, isNewer);
     }
 
     @Override
-    public IdMapState<I, V> updateValues(@NonNull Collection<V> newValues, @NonNull Comparator<? super V> isNewer) {
+    public IdMapState<I, V> updateValues(Collection<V> newValues, Comparator<? super V> isNewer) {
         return update(newValues, idGetter, isNewer);
     }
 
     @Override
-    public <T> IdMapState<I, V> updateItems(@NonNull Collection<T> items,
-                                            @NonNull Function1<? super T, ? extends V> valueGetter,
-                                            @NonNull Comparator<? super V> isNewer) {
+    public <T> IdMapState<I, V> updateItems(Collection<T> items,
+                                            Function1<? super T, ? extends V> valueGetter,
+                                            Comparator<? super V> isNewer) {
         return update(items, valueGetter.then(idGetter), valueGetter, isNewer);
     }
 }

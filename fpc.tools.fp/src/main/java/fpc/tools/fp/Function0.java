@@ -1,17 +1,15 @@
 package fpc.tools.fp;
 
-import lombok.NonNull;
-
 import java.util.function.Supplier;
 
 public interface Function0<R> extends Supplier<R>, Try0<R, RuntimeException> {
 
-    static <R> @NonNull Function0<R> of(@NonNull Function0<R> function0) {
+    static <R> Function0<R> of(Function0<R> function0) {
         return function0;
     }
 
 
-    @NonNull R apply();
+    R apply();
 
     @Override
     default R get() {
@@ -19,7 +17,7 @@ public interface Function0<R> extends Supplier<R>, Try0<R, RuntimeException> {
     }
 
 
-    static <R> @NonNull Function0<R> cons(@NonNull R parameter) {
+    static <R> Function0<R> cons(R parameter) {
         return () -> parameter;
     }
 

@@ -6,22 +6,22 @@ import lombok.NonNull;
 
 public abstract class NodeBaseItemInfo<N extends Node> extends ItemInfoBase<N> {
 
-    public NodeBaseItemInfo(@NonNull N item) {
+    public NodeBaseItemInfo(N item) {
         super(item);
     }
 
     @Override
-    protected boolean isDisabled(@NonNull N item) {
+    protected boolean isDisabled(N item) {
         return item.isDisabled();
     }
 
     @Override
-    protected void bindDisable(@NonNull N item, @NonNull ObservableValue<? extends Boolean> observableValue) {
+    protected void bindDisable(N item, ObservableValue<? extends Boolean> observableValue) {
         item.disableProperty().bind(observableValue);
     }
 
     @Override
-    protected void unbindDisable(@NonNull N item) {
+    protected void unbindDisable(N item) {
         item.disableProperty().unbind();
     }
 

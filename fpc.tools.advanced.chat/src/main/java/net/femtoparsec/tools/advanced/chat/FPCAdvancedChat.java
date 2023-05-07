@@ -23,10 +23,8 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class FPCAdvancedChat<M> implements AdvancedChat<M> {
 
-    @NonNull
     private final Chat chat;
 
-    @NonNull
     private final RequestAnswerMatcher<M> matcher;
 
     private final MessageConverter<M> messageConverter;
@@ -45,14 +43,14 @@ public class FPCAdvancedChat<M> implements AdvancedChat<M> {
     private final ChatSender<M> chatSender;
     private final ChatReceiver<M> chatReceiver;
 
-    private final @NonNull Looper senderLooper;
-    private final @NonNull Looper receiverLooper;
+    private final Looper senderLooper;
+    private final Looper receiverLooper;
 
     public FPCAdvancedChat(
-            @NonNull Chat chat,
-            @NonNull RequestAnswerMatcher<M> matcher,
-            @NonNull MessageConverter<M> messageConverter,
-            @NonNull Instants instants) {
+            Chat chat,
+            RequestAnswerMatcher<M> matcher,
+            MessageConverter<M> messageConverter,
+            Instants instants) {
         this.chat = chat;
         this.messageConverter = messageConverter;
         this.matcher = matcher;
@@ -91,27 +89,27 @@ public class FPCAdvancedChat<M> implements AdvancedChat<M> {
     }
 
 
-    private void onChatEvent(@NonNull ChatEvent chatEvent) {
+    private void onChatEvent(ChatEvent chatEvent) {
         chatEvent.accept(eventHandler);
     }
 
     @Override
-    public @NonNull Subscription addChatListener(@NonNull AdvancedChatListener<M> listener) {
+    public Subscription addChatListener(AdvancedChatListener<M> listener) {
         return listeners.addListener(listener);
     }
 
 
     @Override
-    public @NonNull CompletionStage<DispatchSlip> sendCommand(@NonNull Command command) {
+    public CompletionStage<DispatchSlip> sendCommand(Command command) {
         return chatSender.send(new CommandPostData<>(command));
     }
 
     @Override
-    public @NonNull <A> CompletionStage<ReceiptSlip<A>> sendRequest(@NonNull Request<A> request) {
+    public <A> CompletionStage<ReceiptSlip<A>> sendRequest(Request<A> request) {
         return chatSender.send(new RequestPostData<>(request, matcher));
     }
 
-    private void warnListeners(@NonNull AdvancedChatEvent<M> event) {
+    private void warnListeners(AdvancedChatEvent<M> event) {
         listeners.forEachListeners(AdvancedChatListener::onChatEvent, event);
     }
 
@@ -119,26 +117,26 @@ public class FPCAdvancedChat<M> implements AdvancedChat<M> {
     private class EventHandler implements ChatEventVisitor {
 
         @Override
-        public void visit(@NonNull Connection event) {
+        public void visit(Connection event) {
             warnListeners(fpc.tools.advanced.chat.event.Connection.create());
         }
 
         @Override
-        public void visit(@NonNull Disconnection event) {
+        public void visit(Disconnection event) {
             warnListeners(fpc.tools.advanced.chat.event.Disconnection.create());
         }
 
         @Override
-        public void visit(@NonNull Error event) {
+        public void visit(Error event) {
             warnListeners(fpc.tools.advanced.chat.event.Error.create(event.error()));
         }
 
         @Override
-        public void visit(@NonNull PostedMessage event) {
+        public void visit(PostedMessage event) {
         }
 
         @Override
-        public void visit(@NonNull fpc.tools.chat.event.ReceivedMessage event) {
+        public void visit(fpc.tools.chat.event.ReceivedMessage event) {
             final Instant receptionTime = event.getReceptionTime();
             Stream.of(event.message().split("\\R"))
                   .map(messageConverter::convert)
@@ -147,7 +145,7 @@ public class FPCAdvancedChat<M> implements AdvancedChat<M> {
                   .forEach(this::dispatchReceivedMessage);
         }
 
-        private void dispatchReceivedMessage(@NonNull ReceivedMessage<M> receivedMessage) {
+        private void dispatchReceivedMessage(ReceivedMessage<M> receivedMessage) {
             listeners.forEachListeners(AdvancedChatListener::onChatEvent, receivedMessage);
             chatReceiver.onMessageReception(receivedMessage);
         }

@@ -22,37 +22,37 @@ public abstract class AbstractDialogController<I,O> implements DialogController<
     }
 
     @Override
-    public @NonNull Subscription initializeDialog(@NonNull I input) {
+    public Subscription initializeDialog(I input) {
         this.setTitle(this.getInitialTitleDialog());
         return Subscription.NONE;
     }
 
-    protected abstract @NonNull String getInitialTitleDialog();
+    protected abstract String getInitialTitleDialog();
 
-    protected void setDialogState(@NonNull DialogState<O> dialogState) {
+    protected void setDialogState(DialogState<O> dialogState) {
         resultProperty.set(dialogState);
     }
 
     @Override
-    public @NonNull ObjectProperty<DialogState<O>> dialogStateProperty() {
+    public ObjectProperty<DialogState<O>> dialogStateProperty() {
         return resultProperty;
     }
 
     @Override
-    public @NonNull ObservableBooleanValue invalidPropertyProperty() {
+    public ObservableBooleanValue invalidPropertyProperty() {
         return invalidProperty;
     }
 
 
-    public @NonNull String getTitle() {
+    public String getTitle() {
         return titleProperty.get();
     }
 
-    public @NonNull StringProperty titleProperty() {
+    public StringProperty titleProperty() {
         return titleProperty;
     }
 
-    public void setTitle(@NonNull String title) {
+    public void setTitle(String title) {
         this.titleProperty.set(title);
     }
 }

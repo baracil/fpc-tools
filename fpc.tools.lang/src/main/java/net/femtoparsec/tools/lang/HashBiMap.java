@@ -17,7 +17,7 @@ public class HashBiMap<K,V> extends BaseBiMap<K,V> {
   }
 
   @Override
-  public @NonNull BiMap<V, K> inverse() {
+  public BiMap<V, K> inverse() {
     return inverse;
   }
 

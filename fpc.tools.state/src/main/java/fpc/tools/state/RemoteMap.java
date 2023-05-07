@@ -19,15 +19,14 @@ public interface RemoteMap<K, V> extends fpc.tools.state.RemoteMapBase<K, V> {
    * @param predicate a predicate that returns true for the keys that must be to remove
    * @return a new {@link fpc.tools.state.MapState} with the key matching the predicate remove
    */
-  @NonNull
-  RemoteMap<K, V> removeIfKeyMatches(@NonNull Predicate<? super K> predicate);
+  RemoteMap<K, V> removeIfKeyMatches(Predicate<? super K> predicate);
 
   /**
    * @param key   the key of the entry to add
    * @param value the value of the entry to add
    * @return a new MapState with the same values of this plus the provided entry.
    */
-  RemoteMap<K, V> put(@NonNull K key, @NonNull V value);
+  RemoteMap<K, V> put(K key, V value);
 
   /**
    * @param key   the key of the entry to replace
@@ -35,7 +34,7 @@ public interface RemoteMap<K, V> extends fpc.tools.state.RemoteMapBase<K, V> {
    * @return this if this does not contain the provided key, otherwise a new MapState with the same values of
    * this plus the provided entry
    */
-  RemoteMap<K, V> replace(@NonNull K key, @NonNull V value);
+  RemoteMap<K, V> replace(K key, V value);
 
   /**
    * <p>
@@ -55,21 +54,21 @@ public interface RemoteMap<K, V> extends fpc.tools.state.RemoteMapBase<K, V> {
    * accordingly to the provided predicate, otherwise a new {@link fpc.tools.state.MapState} with the provided
    * entry (key,value) added.
    */
-  RemoteMap<K, V> update(@NonNull K key, @NonNull V value,
-                         @NonNull Comparator<? super V> isNewer);
+  RemoteMap<K, V> update(K key, V value,
+                         Comparator<? super V> isNewer);
 
   /**
    * Same as {@link #update(Object, Object, Comparator)} but for several values at once
    */
-  RemoteMap<K, V> update(@NonNull Map<K, V> newValues,
-                         @NonNull Comparator<? super V> isNewer);
+  RemoteMap<K, V> update(Map<K, V> newValues,
+                         Comparator<? super V> isNewer);
 
   /**
    * Same as {@link #update(Object, Object, Comparator)} but for several values at once
    */
-  RemoteMap<K, V> update(@NonNull Collection<V> newValues,
-                         @NonNull Function1<? super V, ? extends K> keyGetter,
-                         @NonNull Comparator<? super V> isNewer);
+  RemoteMap<K, V> update(Collection<V> newValues,
+                         Function1<? super V, ? extends K> keyGetter,
+                         Comparator<? super V> isNewer);
 
   /**
    * Same as {@link #update(Object, Object, Comparator)} but for several values at once.
@@ -81,10 +80,10 @@ public interface RemoteMap<K, V> extends fpc.tools.state.RemoteMapBase<K, V> {
    * @param <T>         the type of the items
    * @return a new updated {@link fpc.tools.state.MapState}
    */
-  <T> RemoteMap<K, V> update(@NonNull Collection<T> items,
-                             @NonNull Function1<? super T, ? extends K> keyGetter,
-                             @NonNull Function1<? super T, ? extends V> valueGetter,
-                             @NonNull Comparator<? super V> isNewer);
+  <T> RemoteMap<K, V> update(Collection<T> items,
+                             Function1<? super T, ? extends K> keyGetter,
+                             Function1<? super T, ? extends V> valueGetter,
+                             Comparator<? super V> isNewer);
 
 
 }

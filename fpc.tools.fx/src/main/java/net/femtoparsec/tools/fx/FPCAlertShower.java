@@ -18,31 +18,29 @@ import java.io.StringWriter;
 @RequiredArgsConstructor
 public class FPCAlertShower implements AlertShower {
 
-    @NonNull
     private final Dictionary dictionary;
 
 
-    public void showAlert(@NonNull AlertInfo alertInfo) {
+    public void showAlert(AlertInfo alertInfo) {
         prepare(alertInfo).show();
     }
 
-    public void showAlertAndWait(@NonNull AlertInfo alertInfo) {
+    public void showAlertAndWait(AlertInfo alertInfo) {
         prepare(alertInfo).showAndWait();
     }
 
-    private Alert prepare(@NonNull AlertInfo alertInfo) {
+    private Alert prepare(AlertInfo alertInfo) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(dictionary.value("error-dialog.title"));
         alert.setHeaderText(dictionary.value("error-dialog.header-text"));
         alert.setContentText(alertInfo.getMessage(dictionary).getValue());
 
-        alertInfo.getError()
-                 .map(this::prepareStacktrace)
-                 .ifPresent(n -> alert.getDialogPane().setExpandableContent(n));
+        final var stacktrace = this.prepareStacktrace(alertInfo.getError());
+        alert.getDialogPane().setExpandableContent(stacktrace);
         return alert;
     }
 
-    private Node prepareStacktrace(@NonNull Throwable throwable) {
+    private Node prepareStacktrace(Throwable throwable) {
 
         final String exceptionText = printStackTrace(throwable);
         Label label = new Label(dictionary.value("error-dialog.stacktrace-label"));
@@ -64,7 +62,7 @@ public class FPCAlertShower implements AlertShower {
         return expContent;
     }
 
-    private String printStackTrace(@NonNull Throwable throwable) {
+    private String printStackTrace(Throwable throwable) {
         StringWriter sw = new StringWriter();
         try (PrintWriter pw = new PrintWriter(sw)) {
             throwable.printStackTrace(pw);

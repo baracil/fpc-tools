@@ -5,7 +5,8 @@ module fpc.tools.jackson {
     requires transitive com.fasterxml.jackson.databind;
 
     requires transitive fpc.tools.lang;
+  requires fpc.tools.annotation;
 
 
-    exports fpc.tools.jackson;
+  exports fpc.tools.jackson;
 }

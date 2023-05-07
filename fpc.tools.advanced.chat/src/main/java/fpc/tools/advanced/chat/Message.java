@@ -9,6 +9,5 @@ import java.time.Instant;
  **/
 public interface Message {
 
-    @NonNull
-    String payload(@NonNull Instant dispatchInstant);
+    String payload(Instant dispatchInstant);
 }

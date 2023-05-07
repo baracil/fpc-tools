@@ -24,12 +24,11 @@ public class FPCRemoteMap<K, V> extends FPCRemoteMapBase<K,V, FPCRemoteMap<K,V>>
         return EMPTY;
     }
 
-    @NonNull
-    public static <K,V> FPCRemoteMap<K,V> create(@NonNull Map<K,V> data) {
+    public static <K,V> FPCRemoteMap<K,V> create(Map<K,V> data) {
         return new FPCRemoteMap<>(MapTool.mapValue(data, RemoteData::loaded));
     }
 
-    public FPCRemoteMap(@NonNull Map<K, RemoteData<V>> content) {
+    public FPCRemoteMap(Map<K, RemoteData<V>> content) {
         super(content, FPCRemoteMap::new);
     }
 

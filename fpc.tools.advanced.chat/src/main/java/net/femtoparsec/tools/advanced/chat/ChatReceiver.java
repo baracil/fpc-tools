@@ -20,20 +20,16 @@ import java.util.function.Predicate;
 @RequiredArgsConstructor
 public class ChatReceiver<M> implements LoopAction {
 
-    @NonNull
     private final Predicate<? super M> shouldPerformMatching;
 
-    @NonNull
     private final BlockingDeque<RequestPostData<?,M>> requestPostData;
 
-    @NonNull
     private final BlockingDeque<ReceivedMessage<M>> incomingMessages = new LinkedBlockingDeque<>();
 
-    @NonNull
     private final List<RequestPostData<?,M>> pending = new LinkedList<>();
 
     @Override
-    public @NonNull NextState performOneIteration() throws Exception {
+    public NextState performOneIteration() throws Exception {
         final ReceivedMessage<M> reception = incomingMessages.takeFirst();
 
         final M message = reception.getMessage();
@@ -45,11 +41,11 @@ public class ChatReceiver<M> implements LoopAction {
     }
 
     @Override
-    public boolean shouldStopOnError(@NonNull Throwable error) {
+    public boolean shouldStopOnError(Throwable error) {
         return false;
     }
 
-    private void performRendezvousWithRequests(@NonNull M message, @NonNull Instant receptionTime) {
+    private void performRendezvousWithRequests(M message, Instant receptionTime) {
         this.preparePendingRequests();
         for (RequestPostData<?,M> postData : pending) {
             if (postData.tryToCompleteWith(message, receptionTime)) {
@@ -64,7 +60,7 @@ public class ChatReceiver<M> implements LoopAction {
         pending.removeIf(RequestPostData::isCompleted);
     }
 
-    public void onMessageReception(@NonNull ReceivedMessage<M> message) {
+    public void onMessageReception(ReceivedMessage<M> message) {
         incomingMessages.add(message);
     }
 

@@ -14,9 +14,9 @@ import java.security.spec.X509EncodedKeySpec;
 
 public class RSATextEncryptor implements TextEncryptor {
 
-    private final @NonNull PublicKey publicKey;
+    private final PublicKey publicKey;
 
-    public RSATextEncryptor(byte @NonNull [] encodedPublicKey) {
+    public RSATextEncryptor(byte [] encodedPublicKey) {
         try {
             var keyFactory = KeyFactory.getInstance("RSA");
             var publicKeySpec = new X509EncodedKeySpec(encodedPublicKey);
@@ -27,11 +27,11 @@ public class RSATextEncryptor implements TextEncryptor {
     }
 
     @Override
-    public @NonNull String encrypt(@NonNull Secret value) {
+    public String encrypt(Secret value) {
         return CipherException.wrapCall(this::doEncrypt, value);
     }
 
-    private @NonNull String doEncrypt(@NonNull Secret secret) throws GeneralSecurityException {
+    private String doEncrypt(Secret secret) throws GeneralSecurityException {
         final var encryptCipher = Cipher.getInstance("RSA");
         encryptCipher.init(Cipher.ENCRYPT_MODE, publicKey);
 

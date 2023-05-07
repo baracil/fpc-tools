@@ -18,15 +18,15 @@ public class FPCActionChainOpt<P, U, R, RR> extends ActionChainOptBase<P,R> {
     @Getter
     private final Class<? extends Action<?,?>> initialAction;
 
-    private final @NonNull Function2<? super ActionExecutor, ? super P, ? extends CompletionStage<Optional<U>>> before;
+    private final Function2<? super ActionExecutor, ? super P, ? extends CompletionStage<Optional<U>>> before;
 
-    private final @NonNull Class<? extends Action<U, RR>> then;
+    private final Class<? extends Action<U, RR>> then;
 
-    private final @NonNull Function1<? super RR, ? extends Optional<R>> finalizer;
+    private final Function1<? super RR, ? extends Optional<R>> finalizer;
 
 
     @Override
-    public @NonNull CompletionStage<Optional<R>> launch(@NonNull ActionExecutor executor, @NonNull P parameter) {
+    public CompletionStage<Optional<R>> launch(ActionExecutor executor, P parameter) {
         return before.apply(executor, parameter)
                      .thenCompose(u -> {
                          if (u.isPresent()) {

@@ -12,11 +12,10 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class ConstantLocalizedString implements LocalizedString {
 
-    @NonNull
     private final String value;
 
     @Override
-    public @NonNull String getValue(@NonNull Locale locale) {
+    public String getValue(Locale locale) {
         return value;
     }
 
@@ -26,7 +25,7 @@ public class ConstantLocalizedString implements LocalizedString {
     }
 
     @Override
-    public @NonNull boolean hasValue(@NonNull Locale locale) {
+    public boolean hasValue(Locale locale) {
         return true;
     }
 }

@@ -1,6 +1,5 @@
 package fpc.tools.fp;
 
-import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
 import java.io.InterruptedIOException;
@@ -25,7 +24,7 @@ public class FPUtils {
     };
   }
 
-  public static <A> Function1<Optional<A>, A> orElse(@NonNull A value) {
+  public static <A> Function1<Optional<A>, A> orElse(A value) {
     return o -> o.orElse(value);
   }
 
@@ -37,7 +36,7 @@ public class FPUtils {
     return Collectors.toList();
   }
 
-  public static <A, K, V> Collector<A, ?, Map<K, V>> immutableMapCollector(@NonNull Function<? super A, ? extends K> keyGetter, @NonNull Function<? super A, ? extends V> valueGetter) {
+  public static <A, K, V> Collector<A, ?, Map<K, V>> immutableMapCollector(Function<? super A, ? extends K> keyGetter, Function<? super A, ? extends V> valueGetter) {
     return Collectors.toUnmodifiableMap(keyGetter, valueGetter);
   }
 
@@ -56,7 +55,7 @@ public class FPUtils {
     );
   }
 
-  public static <A> Collector<A, ?, SortedSet<A>> immutableSortedSetCollector(@NonNull Comparator<A> comparator) {
+  public static <A> Collector<A, ?, SortedSet<A>> immutableSortedSetCollector(Comparator<A> comparator) {
     return Collectors.collectingAndThen(
         Collector.of(() -> new TreeSet<A>(comparator), Set::add, (t1, t2) -> {
           t1.addAll(t2);
@@ -68,8 +67,8 @@ public class FPUtils {
 
 
   public static <A, K extends Comparable<K>, V> Collector<A, ?, SortedMap<K, V>> immutableSortedMapCollectorNatural(
-      @NonNull Function<? super A, ? extends K> keyGetter,
-      @NonNull Function<? super A, ? extends V> valueGetter) {
+      Function<? super A, ? extends K> keyGetter,
+      Function<? super A, ? extends V> valueGetter) {
     return
         Collectors.collectingAndThen(
             Collector.of(
@@ -85,8 +84,8 @@ public class FPUtils {
   }
 
   public static <A, K, V> Collector<A, ?, SortedMap<K, V>> immutableSortedMapCollector(
-      @NonNull Function<? super A, ? extends K> keyGetter,
-      @NonNull Function<? super A, ? extends V> valueGetter, Comparator<K> comparator) {
+      Function<? super A, ? extends K> keyGetter,
+      Function<? super A, ? extends V> valueGetter, Comparator<K> comparator) {
     return
         Collectors.collectingAndThen(
             Collector.of(
@@ -110,20 +109,20 @@ public class FPUtils {
     };
   }
 
-  public static void interruptIfCausedByAnInterruption(@NonNull Throwable throwable) {
+  public static void interruptIfCausedByAnInterruption(Throwable throwable) {
     if (isCausedByInterruption(throwable)) {
       Thread.currentThread().interrupt();
     }
   }
 
-  public static boolean isCausedByInterruption(@NonNull Throwable throwable) {
+  public static boolean isCausedByInterruption(Throwable throwable) {
     if (isInterruption(throwable)) {
       return true;
     }
     return isCausedByInterruption(throwable, new HashSet<>());
   }
 
-  private static boolean isCausedByInterruption(@NonNull Throwable throwable, @NonNull Set<Throwable> seen) {
+  private static boolean isCausedByInterruption(Throwable throwable, Set<Throwable> seen) {
     Throwable current = throwable;
     do {
       if (isInterruption(current)) {
@@ -138,7 +137,7 @@ public class FPUtils {
     return false;
   }
 
-  private static boolean isInterruption(@NonNull Throwable throwable) {
+  private static boolean isInterruption(Throwable throwable) {
     return throwable instanceof InterruptedException || throwable instanceof InterruptedIOException;
   }
 

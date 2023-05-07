@@ -21,9 +21,8 @@ public class NodeWrapper implements BiFunction<String, Node, Node> {
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
-    @NonNull
     @Override
-    public Node apply(@NonNull String labelText, @NonNull Node node) {
+    public Node apply(String labelText, Node node) {
         FXTools.fitToAnchorPane(node);
         final Label label = new Label(labelText);
         label.getStyleClass().add("debug-node-label");

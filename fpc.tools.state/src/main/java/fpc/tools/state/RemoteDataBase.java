@@ -8,7 +8,6 @@ public interface RemoteDataBase<V> {
 
     boolean hasBeenLoaded();
 
-    @NonNull
     Optional<V> getValue();
 
 }

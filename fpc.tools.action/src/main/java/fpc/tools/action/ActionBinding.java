@@ -8,7 +8,6 @@ import lombok.NonNull;
  */
 public interface ActionBinding {
 
-    @NonNull
     BooleanProperty filteredProperty();
 
     void bind();

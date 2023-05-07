@@ -13,18 +13,16 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class WithLocalizedStringInParameters implements ParametersTranslator {
 
-    @NonNull
     private final List<Object> parameters;
 
     @Override
-    public @NonNull Object[] translate(@NonNull Locale locale) {
+    public Object[] translate(Locale locale) {
         return new Translator(locale).translate();
     }
 
     @RequiredArgsConstructor
     private class Translator {
 
-        @NonNull
         private final Locale locale;
 
         public Object[] translate() {
@@ -33,7 +31,7 @@ public class WithLocalizedStringInParameters implements ParametersTranslator {
                              .toArray();
         }
 
-        private Object transformObjectParameters(@NonNull Object parameter) {
+        private Object transformObjectParameters(Object parameter) {
             if (parameter instanceof LocalizedString) {
                 return ((LocalizedString) parameter).getValue(locale);
             }

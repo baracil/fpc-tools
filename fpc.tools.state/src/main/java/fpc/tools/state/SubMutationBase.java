@@ -6,12 +6,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public abstract class SubMutationBase<S, V> implements Mutation<S> {
 
-    @NonNull
     private final Accessor<S, V> accessor;
 
-    @NonNull
     @Override
-    public S mutate(@NonNull S currentState) {
+    public S mutate(S currentState) {
         final V currentValue = accessor.getValue(currentState);
         final V newValue = subMutate(currentValue);
         if (newValue == currentValue) {
@@ -21,5 +19,5 @@ public abstract class SubMutationBase<S, V> implements Mutation<S> {
         return accessor.subMutation(currentState,newValue);
     }
 
-    protected abstract @NonNull V subMutate(@NonNull V currentValue);
+    protected abstract V subMutate(V currentValue);
 }

@@ -25,5 +25,5 @@ public abstract class PluggableControllerBase implements PluggableController {
      * @return any child pluggable controllers this controller used. They are used to automatically
      * call {@link #onShowing()} and {@link #onHiding()}
      */
-    protected abstract @NonNull Stream<PluggableController> subPluggableController();
+    protected abstract Stream<PluggableController> subPluggableController();
 }

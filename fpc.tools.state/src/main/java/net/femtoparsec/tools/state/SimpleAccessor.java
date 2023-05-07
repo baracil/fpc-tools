@@ -9,21 +9,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SimpleAccessor<S,V> implements Accessor<S,V> {
 
-    @NonNull
     private final Function1<? super S, ? extends V> getter;
 
-    @NonNull
     private final Function2<? super S, ? super V, ? extends S> updater;
 
-    @NonNull
     @Override
-    public V getValue(@NonNull S state) {
+    public V getValue(S state) {
         return getter.apply(state);
     }
 
-    @NonNull
     @Override
-    public S subMutation(@NonNull S currentState, @NonNull V newValue) {
+    public S subMutation(S currentState, V newValue) {
         return updater.apply(currentState,newValue);
     }
 }

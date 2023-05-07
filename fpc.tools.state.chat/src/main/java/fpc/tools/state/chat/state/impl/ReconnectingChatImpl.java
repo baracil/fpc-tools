@@ -15,10 +15,10 @@ import java.util.Optional;
 @Slf4j
 public final class ReconnectingChatImpl<M> implements ReconnectingChat {
 
-    private final @NonNull ChatStateContext<M> context;
+    private final ChatStateContext<M> context;
 
     @Override
-    public @NonNull ChatState onConnectionRequested() {
+    public ChatState onConnectionRequested() {
         Subscription subscription = Subscription.NONE;
         AdvancedChat<M> chat = null;
         try {

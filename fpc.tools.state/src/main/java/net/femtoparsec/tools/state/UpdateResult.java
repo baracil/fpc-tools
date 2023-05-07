@@ -8,9 +8,9 @@ import lombok.Value;
 @Builder
 public class UpdateResult<R,S> {
 
-    @NonNull R oldRoot;
+    R oldRoot;
 
-    @NonNull R newRoot;
+    R newRoot;
 
-    @NonNull S result;
+    S result;
 }

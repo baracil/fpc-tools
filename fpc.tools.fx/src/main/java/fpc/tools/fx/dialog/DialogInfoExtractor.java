@@ -17,25 +17,19 @@ import java.util.Optional;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class DialogInfoExtractor<O> {
 
-    @NonNull
-    public static <O> DialogInfo<O> extract(@NonNull Dictionary dictionary,
-                                            @NonNull DialogController<?, O> controller) {
+    public static <O> DialogInfo<O> extract(Dictionary dictionary,
+                                            DialogController<?, O> controller) {
         return new DialogInfoExtractor<>(dictionary, controller, controller).extract();
     }
 
-    @NonNull
     private final Dictionary dictionary;
 
-    @NonNull
     private final DialogController<?, O> dialogController;
 
-    @NonNull
     private final DialogResultHandler<O> resultHandler;
 
-    @NonNull
     private final DialogInfo.Builder<O> builder = DialogInfo.<O>builder();
 
-    @NonNull
     private DialogInfo<O> extract() {
         final Field[] fields = dialogController.getClass().getDeclaredFields();
         Arrays.stream(fields)
@@ -54,13 +48,12 @@ public class DialogInfoExtractor<O> {
         this.checkValidatable(f);
     }
 
-    private void checkValidatable(@NonNull Field f) {
+    private void checkValidatable(Field f) {
         final Optional<String> name = getValidatableFieldName(f);
         name.ifPresent(n -> getControlInfoFromField(f).ifPresent(c -> builder.validatableField(n, c)));
     }
 
-    @NonNull
-    private Optional<String> getValidatableFieldName(@NonNull Field field) {
+    private Optional<String> getValidatableFieldName(Field field) {
         final ValidatableField annotation = field.getAnnotation(ValidatableField.class);
         if (annotation == null) {
             return Optional.empty();
@@ -73,26 +66,23 @@ public class DialogInfoExtractor<O> {
     }
 
 
-    private void checkButton(@NonNull Field field, @NonNull Class<? extends Annotation> annotation,
-                             @NonNull Consumer1<Button> consumer) {
+    private void checkButton(Field field, Class<? extends Annotation> annotation,
+                             Consumer1<Button> consumer) {
         if (field.isAnnotationPresent(annotation)) {
             getButtonFromField(field).ifPresent(consumer);
         }
     }
 
-    @NonNull
-    private Optional<Button> getButtonFromField(@NonNull Field f) {
+    private Optional<Button> getButtonFromField(Field f) {
         return getValueFromField(f, Button.class);
     }
 
-    @NonNull
-    private Optional<ControlInfo> getControlInfoFromField(@NonNull Field f) {
+    private Optional<ControlInfo> getControlInfoFromField(Field f) {
         return getValueFromField(f, Control.class)
                 .map(c -> new ControlInfo(dictionary, c));
     }
 
-    @NonNull
-    private <T> Optional<T> getValueFromField(@NonNull Field f, @NonNull Class<T> expectedType) {
+    private <T> Optional<T> getValueFromField(Field f, Class<T> expectedType) {
         if (expectedType.isAssignableFrom(f.getType())) {
             boolean accessible = f.canAccess(dialogController);
             try {

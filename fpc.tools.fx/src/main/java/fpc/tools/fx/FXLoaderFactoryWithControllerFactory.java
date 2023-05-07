@@ -14,49 +14,44 @@ import java.net.URL;
 @RequiredArgsConstructor
 public class FXLoaderFactoryWithControllerFactory implements FXLoaderFactory {
 
-    @NonNull
     private final URLGuesser urlGuesser = new URLGuesser();
 
-    @NonNull
     private final ControllerFactory controllerFactory;
 
-    @NonNull
     private final BuilderFactory builderFactory;
 
-    @NonNull
     private final Dictionary dictionary;
 
-    @NonNull
     private final UnaryOperator1<FXLoader> fxLoaderWrapper;
 
-    public FXLoaderFactoryWithControllerFactory(@NonNull ControllerFactory controllerFactory,
-                                                @NonNull Dictionary dictionary,
-                                                @NonNull UnaryOperator1<FXLoader> fxLoaderWrapper) {
+    public FXLoaderFactoryWithControllerFactory(ControllerFactory controllerFactory,
+                                                Dictionary dictionary,
+                                                UnaryOperator1<FXLoader> fxLoaderWrapper) {
         this(controllerFactory,new JavaFXBuilderFactory(),dictionary, fxLoaderWrapper);
     }
 
     @Override
-    public @NonNull FXLoader create(@NonNull URL fxmlFile, @NonNull Dictionary dictionary) {
+    public FXLoader create(URL fxmlFile, Dictionary dictionary) {
         return fxLoaderWrapper.apply(createRawLoader(fxmlFile,dictionary));
     }
 
     @Override
-    public @NonNull FXLoader create(@NonNull Class<?> controllerClass, @NonNull Dictionary dictionary) {
+    public FXLoader create(Class<?> controllerClass, Dictionary dictionary) {
         return create(urlGuesser.guessFromController(controllerClass),dictionary);
     }
 
     @Override
-    public @NonNull FXLoader create(@NonNull URL fxmlFile) {
+    public FXLoader create(URL fxmlFile) {
         return create(fxmlFile,dictionary);
     }
 
     @Override
-    public @NonNull FXLoader create(@NonNull Class<?> controllerClass) {
+    public FXLoader create(Class<?> controllerClass) {
         return create(controllerClass,dictionary);
     }
 
 
-    private @NonNull FXLoader createRawLoader(@NonNull URL fxmlFile, @NonNull Dictionary dictionary) {
+    private FXLoader createRawLoader(URL fxmlFile, Dictionary dictionary) {
         return new FXLoaderSettingUserData(new DefaultFXLoader(controllerFactory, builderFactory, dictionary, fxmlFile), FXLoader.CONTROLLER_KEY);
     }
 }

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 
+import javax.annotation.Nullable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,9 +17,9 @@ public abstract class ImmutableScalarStringUserType<T> extends ImmutableUserType
 
     private final int SQL_TYPE = Types.VARCHAR;
 
-    private final @NonNull Class<T> returnedClass;
-    private final @NonNull Function<? super T, ? extends String> toString;
-    private final @NonNull Function<? super String, ? extends T> fromString;
+    private final Class<T> returnedClass;
+    private final Function<? super T, ? extends String> toString;
+    private final Function<? super String, ? extends T> fromString;
 
     @Override
     public int[] sqlTypes() {
@@ -31,7 +32,7 @@ public abstract class ImmutableScalarStringUserType<T> extends ImmutableUserType
     }
 
     @Override
-    public Object nullSafeGet(ResultSet rs, String[] names, SharedSessionContractImplementor session, Object owner) throws HibernateException, SQLException {
+    public @Nullable Object nullSafeGet(ResultSet rs, String[] names, SharedSessionContractImplementor session, Object owner) throws HibernateException, SQLException {
         final String name = names[0];
         final String value = name == null ? null: rs.getString(name);
         return value == null ? null:fromString.apply(value);

@@ -5,7 +5,7 @@ import lombok.NonNull;
 
 public class NotImplemented extends FPCException {
 
-    public NotImplemented(@NonNull String method) {
+    public NotImplemented(String method) {
         super("Not Implemented : "+method);
     }
 

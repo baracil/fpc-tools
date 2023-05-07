@@ -12,13 +12,11 @@ public interface DispatchSlip {
     /**
      * @return the command sent
      */
-    @NonNull
     Command getSentCommand();
 
     /**
      * @return the time when the command was sent
      */
-    @NonNull
     Instant getDispatchingTime();
 
 }

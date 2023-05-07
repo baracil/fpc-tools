@@ -1,7 +1,5 @@
 package fpc.tools.fp;
 
-import lombok.NonNull;
-
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -10,11 +8,9 @@ import java.util.function.Supplier;
  */
 public interface Try1<A, Z, T extends Throwable> {
 
-    @NonNull
-    Z apply(@NonNull A a) throws T;
+    Z apply(A a) throws T;
 
-    @NonNull
-    default TryResult<Throwable, Z> applySafely(@NonNull A a) {
+    default TryResult<Throwable, Z> applySafely(A a) {
         try {
             return TryResult.success(apply(a));
         } catch (Throwable throwable) {
@@ -23,8 +19,7 @@ public interface Try1<A, Z, T extends Throwable> {
         }
     }
 
-    @NonNull
-    default Function1<A,Z> wrapError(@NonNull Function1<? super Throwable, ? extends RuntimeException> errorWrapper) {
+    default Function1<A,Z> wrapError(Function1<? super Throwable, ? extends RuntimeException> errorWrapper) {
         return a -> {
             try {
                 return apply(a);
@@ -35,24 +30,22 @@ public interface Try1<A, Z, T extends Throwable> {
     }
 
 
-    default Try0<Z,T> f1(@NonNull A a) {
+    default Try0<Z,T> f1(A a) {
         return () -> apply(a);
     }
 
-    default Try0<Z,T> apply(@NonNull Supplier<? extends A> a) {
+    default Try0<Z,T> apply(Supplier<? extends A> a) {
         return () -> apply(a.get());
     }
 
-    @NonNull
-    default <Y> Try1<A,Y,T> then(@NonNull Function<? super Z, ? extends Y> after){
+    default <Y> Try1<A,Y,T> then(Function<? super Z, ? extends Y> after){
         return a -> after.apply(this.apply(a));
     }
 
-    default <Y> Try1<A,Y,T> thenTry(@NonNull Try1<? super Z, ? extends Y,? extends T> after) {
+    default <Y> Try1<A,Y,T> thenTry(Try1<? super Z, ? extends Y,? extends T> after) {
         return a -> after.apply(this.apply(a));
     }
 
-    @NonNull
     default Function1<A,TryResult<Throwable, Z>> safe() {
         return this::applySafely;
     }
@@ -64,7 +57,7 @@ public interface Try1<A, Z, T extends Throwable> {
         return (a,c) -> this.apply(a);
     }
 
-    static <A,Z,T extends Throwable> Try1<A,Z,T> of(@NonNull Try1<A,Z,T> t) {
+    static <A,Z,T extends Throwable> Try1<A,Z,T> of(Try1<A,Z,T> t) {
         return t;
     }
 

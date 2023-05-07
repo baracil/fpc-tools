@@ -17,11 +17,11 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class ScalarStringSerDe<S> implements Registrable {
 
-    private final @NonNull Class<S> type;
-    private final @NonNull Function<? super S, ? extends String> toString;
-    private final @NonNull Function<? super String, ? extends S> fromString;
+    private final Class<S> type;
+    private final Function<? super S, ? extends String> toString;
+    private final Function<? super String, ? extends S> fromString;
 
-    public void register(@NonNull SimpleModule simpleModule) {
+    public void register(SimpleModule simpleModule) {
         simpleModule.addSerializer(type, new Serializer<>(toString));
         simpleModule.addDeserializer(type, new Deserializer<>(fromString));
     }
@@ -29,10 +29,10 @@ public class ScalarStringSerDe<S> implements Registrable {
 
     @RequiredArgsConstructor
     public static class Serializer<S> extends JsonSerializer<S> {
-        private final @NonNull Function<? super S, ? extends String> toString;
+        private final Function<? super S, ? extends String> toString;
 
         @Override
-        public void serialize(@NonNull S value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+        public void serialize(S value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
             final var serialized = toString.apply(value);
             jsonGenerator.writeString(serialized);
         }
@@ -40,7 +40,7 @@ public class ScalarStringSerDe<S> implements Registrable {
 
     @RequiredArgsConstructor
     public static class Deserializer<S> extends JsonDeserializer<S> {
-        private final @NonNull Function<? super String, ? extends S> fromString;
+        private final Function<? super String, ? extends S> fromString;
 
         @Override
         public S deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {

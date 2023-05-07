@@ -35,7 +35,7 @@ public class Disposer {
         thread.start();
     }
 
-    public <S> @NonNull Reference<S> add(@NonNull S value, @NonNull Runnable actionOnDispose) {
+    public <S> Reference<S> add(S value, Runnable actionOnDispose) {
         final WeakReference<S> reference = new WeakReference<>(value,referenceQueue);
         saveAction(reference,actionOnDispose);
         return reference;
@@ -75,7 +75,7 @@ public class Disposer {
         }
     }
 
-    private void saveAction(@NonNull Reference<?> reference, @NonNull Runnable runnable) {
+    private void saveAction(Reference<?> reference, Runnable runnable) {
         lock.writeLock().lock();
         try {
             if (thread.isInterrupted()) {
@@ -87,8 +87,7 @@ public class Disposer {
         }
     }
 
-    @NonNull
-    private Runnable extractAction(@NonNull Reference<?> reference) {
+    private Runnable extractAction(Reference<?> reference) {
         lock.readLock().lock();
         try {
             return actionOnDispose.getOrDefault(reference,NOPE);

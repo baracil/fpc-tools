@@ -1,15 +1,13 @@
 package fpc.tools.fx;
 
-import lombok.NonNull;
-
 import java.net.URL;
+import java.util.Objects;
 
 public class URLGuesser {
 
     public static final String CONTROLLER_SUFFIX = "Controller";
 
-    @NonNull
-    public URL guessFromController(@NonNull Class<?> controllerType) {
+    public URL guessFromController(Class<?> controllerType) {
         if (controllerType.getSimpleName().endsWith(CONTROLLER_SUFFIX)) {
             return extractFromClassName(controllerType);
         }
@@ -20,6 +18,6 @@ public class URLGuesser {
         final String className = controllerType.getSimpleName();
         final String resourceName = className.substring(0,className.length()-CONTROLLER_SUFFIX.length())+".fxml";
         final URL url = controllerType.getResource(resourceName);
-        return url;
+        return Objects.requireNonNull(url,"Could not guess URL from "+controllerType+" : no resource found with name '"+resourceName+"'");
     }
 }

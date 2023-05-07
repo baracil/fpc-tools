@@ -29,26 +29,26 @@ public class WebSocketChat extends ChatIOBase implements Chat {
 
     private final Looper looper;
 
-    private final @NonNull Instants instants;
+    private final Instants instants;
 
     private final AtomicReference<WebSocket> webSocketReference = new AtomicReference<>(null);
 
     private final SmartLock lock = SmartLock.reentrant();
     private final Condition disconnection = lock.newCondition();
 
-    public WebSocketChat(@NonNull URI uri, @NonNull Instants instants) {
+    public WebSocketChat(URI uri, Instants instants) {
         this(uri, ReconnectionPolicy.NO_RECONNECTION, instants);
     }
 
-    public WebSocketChat(@NonNull URI uri, @NonNull ReconnectionPolicy policy, @NonNull Instants instants) {
+    public WebSocketChat(URI uri, ReconnectionPolicy policy, Instants instants) {
         this(uri, policy, WaitStrategy.create(), instants);
     }
 
     public WebSocketChat(
-            @NonNull URI uri,
-            @NonNull ReconnectionPolicy policy,
-            @NonNull WaitStrategy waitStrategy,
-            @NonNull Instants instants) {
+            URI uri,
+            ReconnectionPolicy policy,
+            WaitStrategy waitStrategy,
+            Instants instants) {
         final var action = new ChatLoopAction(uri, policy, waitStrategy);
         this.looper = Looper.simple(action);
         this.instants = instants;
@@ -70,7 +70,7 @@ public class WebSocketChat extends ChatIOBase implements Chat {
     }
 
     @Override
-    public void postMessage(@NonNull String message) {
+    public void postMessage(String message) {
         final var websocket = webSocketReference.get();
         if (websocket == null) {
             throw new ChatNotConnected();
@@ -88,18 +88,15 @@ public class WebSocketChat extends ChatIOBase implements Chat {
     @RequiredArgsConstructor
     private class ChatLoopAction implements LoopAction {
 
-        @NonNull
         private final URI uri;
 
-        @NonNull
         private final ReconnectionPolicy reconnectionPolicy;
 
-        @NonNull
         private final WaitStrategy waitStrategy;
 
 
         @Override
-        public @NonNull NextState beforeLooping() {
+        public NextState beforeLooping() {
             this.connect();
             return NextState.CONTINUE;
         }
@@ -123,7 +120,7 @@ public class WebSocketChat extends ChatIOBase implements Chat {
         }
 
         @Override
-        public @NonNull NextState performOneIteration() throws Exception {
+        public NextState performOneIteration() throws Exception {
             this.waitForDisconnection();
             int attemptIndex = 0;
             boolean connected = false;
@@ -159,7 +156,7 @@ public class WebSocketChat extends ChatIOBase implements Chat {
         }
 
         @Override
-        public boolean shouldStopOnError(@NonNull Throwable error) {
+        public boolean shouldStopOnError(Throwable error) {
             return false;
         }
 

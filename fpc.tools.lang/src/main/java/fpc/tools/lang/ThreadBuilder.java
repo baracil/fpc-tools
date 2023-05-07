@@ -2,6 +2,7 @@ package fpc.tools.lang;
 
 import lombok.NonNull;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -17,13 +18,13 @@ public class ThreadBuilder {
         return new ThreadBuilder();
     }
 
-    private Thread.UncaughtExceptionHandler uncaughtExceptionHandler = null;
-    private Runnable runnable = null;
-    private String name = null;
-    private Boolean daemon = null;
-    private Integer priority = null;
+    private @Nullable Thread.UncaughtExceptionHandler uncaughtExceptionHandler = null;
+    private @Nullable Runnable runnable = null;
+    private @Nullable String name = null;
+    private @Nullable Boolean daemon = null;
+    private @Nullable Integer priority = null;
 
-    public ThreadBuilder(@NonNull Runnable runnable) {
+    public ThreadBuilder(Runnable runnable) {
         this.runnable = runnable;
     }
 

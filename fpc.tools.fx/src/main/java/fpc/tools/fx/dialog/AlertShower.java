@@ -9,13 +9,12 @@ import net.femtoparsec.tools.fx.FPCAlertShower;
  */
 public interface AlertShower {
 
-    @NonNull
-    static AlertShower create(@NonNull Dictionary dictionary) {
+    static AlertShower create(Dictionary dictionary) {
         return new FPCAlertShower(dictionary);
     }
 
-    void showAlert(@NonNull AlertInfo parameters);
+    void showAlert(AlertInfo parameters);
 
-    void showAlertAndWait(@NonNull AlertInfo parameters);
+    void showAlertAndWait(AlertInfo parameters);
 
 }

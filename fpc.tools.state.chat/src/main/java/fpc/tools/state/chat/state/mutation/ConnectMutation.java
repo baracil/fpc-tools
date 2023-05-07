@@ -11,12 +11,12 @@ public class ConnectMutation extends VisitorMutation {
 
 
     @Override
-    public @NonNull ChatState visit(@NonNull DisconnectedChat state) {
+    public ChatState visit(DisconnectedChat state) {
         return state.onConnectionRequested();
     }
 
     @Override
-    public @NonNull ChatState visit(@NonNull ReconnectingChat state) {
+    public ChatState visit(ReconnectingChat state) {
         return state.onConnectionRequested();
     }
 }

@@ -16,16 +16,16 @@ import java.util.concurrent.locks.Condition;
 @Slf4j
 public class ScheduledLooper implements Looper, Runnable {
 
-    private final @NonNull SmartLock lock = SmartLock.reentrant();
-    private final @NonNull Condition loopStopped = lock.newCondition();
-    private final @NonNull Condition loopStarted = lock.newCondition();
+    private final SmartLock lock = SmartLock.reentrant();
+    private final Condition loopStopped = lock.newCondition();
+    private final Condition loopStarted = lock.newCondition();
     private volatile boolean started = false;
 
 
-    private final @NonNull LoopAction loopAction;
-    private final @NonNull Duration delay;
-    private final @NonNull Duration period;
-    private @NonNull State state = State.STOPPED;
+    private final LoopAction loopAction;
+    private final Duration delay;
+    private final Duration period;
+    private State state = State.STOPPED;
 
 
     @Override
@@ -90,7 +90,7 @@ public class ScheduledLooper implements Looper, Runnable {
         lock.runLocked(this::doRun);
     }
 
-    private void setState(@NonNull State state) {
+    private void setState(State state) {
         lock.runLocked(() -> this.state = state);
     }
 

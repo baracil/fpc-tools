@@ -13,7 +13,7 @@ public class ThreadSleepWaitStrategy implements WaitStrategy {
 
 
     @Override
-    public void waitFor(@NonNull Duration duration) throws InterruptedException {
+    public void waitFor(Duration duration) throws InterruptedException {
         if (!duration.isNegative() && !duration.isZero()) {
             Thread.sleep(duration.toMillis(), duration.toNanosPart());
         }

@@ -7,8 +7,9 @@ module fpc.tools.validation {
 
     requires fpc.tools.fp;
     requires fpc.tools.lang;
+  requires fpc.tools.annotation;
 
-    exports fpc.tools.validation;
+  exports fpc.tools.validation;
     exports net.femtoparsec.tools.validation;
 
     uses fpc.tools.validation.ValidationFactory;

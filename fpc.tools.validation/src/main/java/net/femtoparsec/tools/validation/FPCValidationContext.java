@@ -14,25 +14,22 @@ public class FPCValidationContext implements ValidationContext  {
     private static final Collector<Map.Entry<String, Set<ValidationError>>, ?, Map<String, List<ValidationError>>> COLLECTOR
         = Collectors.toMap(Map.Entry::getKey, e -> List.copyOf(e.getValue()));
 
-    @NonNull
     private final Set<String> validatedFields = new HashSet<>();
 
-    @NonNull
     private final Map<String, Set<ValidationError>> errors = new HashMap<>();
 
-    public void addValidatedField(@NonNull String validatedField) {
+    public void addValidatedField(String validatedField) {
         this.validatedFields.add(validatedField);
     }
 
-    public void addError(@NonNull ValidationError error) {
+    public void addError(ValidationError error) {
         this.errors.computeIfAbsent(error.getFieldName(), f -> new LinkedHashSet<>()).add(error);
     }
 
-    public void addError(@NonNull String fieldName, @NonNull String errorType) {
+    public void addError(String fieldName, String errorType) {
         this.addError(new ValidationError(fieldName, errorType));
     }
 
-    @NonNull
     public ValidationResult getResult() {
         final Map<String, List<ValidationError>> errorByField = errors.entrySet()
                                                                                         .stream()

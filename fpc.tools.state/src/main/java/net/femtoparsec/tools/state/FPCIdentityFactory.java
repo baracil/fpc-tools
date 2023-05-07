@@ -18,7 +18,7 @@ public class FPCIdentityFactory implements IdentityFactory {
     private static final Disposer DISPOSER = new Disposer("Identity");
 
     @Override
-    public @NonNull <R> Identity<R> createIdentity(@NonNull R initialValue) {
+    public <R> Identity<R> createIdentity(R initialValue) {
         final Identity<R> proxyIdentity;
         {
             final FPCIdentity<R> identity = new FPCIdentity<>(initialValue);
@@ -30,7 +30,7 @@ public class FPCIdentityFactory implements IdentityFactory {
     }
 
     @Override
-    public @NonNull <R> Identity<R> createIdentity(@NonNull Function1<? super IdentityMutator<R>, ? extends R> initialValueFactory) {
+    public <R> Identity<R> createIdentity(Function1<? super IdentityMutator<R>, ? extends R> initialValueFactory) {
         final ProxyIdentity<R> proxyIdentity;
         {
             final var holder = new AtomicReference<FPCIdentity<R>>();

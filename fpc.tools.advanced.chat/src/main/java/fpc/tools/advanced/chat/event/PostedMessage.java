@@ -11,12 +11,11 @@ import java.time.Instant;
  *
  * @param <M>
  */
-public record PostedMessage<M>(@NonNull Instant dispatchingTime,
-                               @NonNull @Getter Message postedMessage) implements AdvancedChatEvent<M> {
+public record PostedMessage<M>(Instant dispatchingTime,
+                               @Getter Message postedMessage) implements AdvancedChatEvent<M> {
 
-    @NonNull
     @Override
-    public <T> T accept(@NonNull AdvancedChatEventVisitor<M, T> visitor) {
+    public <T> T accept(AdvancedChatEventVisitor<M, T> visitor) {
         return visitor.visit(this);
     }
 

@@ -12,8 +12,9 @@ module fpc.tools.state {
 
     requires transitive javafx.base;
     requires transitive javafx.graphics;
+  requires fpc.tools.annotation;
 
-    exports fpc.tools.state;
+  exports fpc.tools.state;
 
     uses IdentityFactory;
 

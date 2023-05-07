@@ -11,17 +11,16 @@ import java.util.Optional;
  *
  * @param <M>
  */
-public record ReceivedMessage<M>(@NonNull @Getter Instant receptionTime,
-                                 @NonNull @Getter M message) implements AdvancedChatEvent<M> {
+public record ReceivedMessage<M>(@Getter Instant receptionTime,
+                                 @Getter M message) implements AdvancedChatEvent<M> {
 
-    @NonNull
     @Override
-    public <T> T accept(@NonNull AdvancedChatEventVisitor<M, T> visitor) {
+    public <T> T accept(AdvancedChatEventVisitor<M, T> visitor) {
         return visitor.visit(this);
     }
 
     @Override
-    public @NonNull Optional<ReceivedMessage<M>> castToReceivedMessage() {
+    public Optional<ReceivedMessage<M>> castToReceivedMessage() {
         return Optional.of(this);
     }
 

@@ -7,23 +7,19 @@ import java.util.Optional;
 
 public interface ActionBinder<P> {
 
-    @NonNull
-    ActionBinding createBinding(@NonNull Object item, @NonNull Function0<? extends Optional<? extends P>> parameterSupplier);
+    ActionBinding createBinding(Object item, Function0<? extends Optional<? extends P>> parameterSupplier);
 
-    @NonNull
-    default ActionBinding createBinding(@NonNull Object item, @NonNull P parameter) {
+    default ActionBinding createBinding(Object item, P parameter) {
         return createBinding(item,Function0.cons(Optional.of(parameter)));
     }
 
-    @NonNull
-    default ActionBinding bind(@NonNull Object item, @NonNull Function0<? extends Optional<? extends P>> parameterSupplier) {
+    default ActionBinding bind(Object item, Function0<? extends Optional<? extends P>> parameterSupplier) {
         final ActionBinding binding = createBinding(item,parameterSupplier);
         binding.bind();
         return binding;
     }
 
-    @NonNull
-    default ActionBinding bind(@NonNull Object item, @NonNull P parameter) {
+    default ActionBinding bind(Object item, P parameter) {
         return bind(item,Function0.cons(Optional.of(parameter)));
     }
 

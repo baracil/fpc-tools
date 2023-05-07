@@ -20,38 +20,33 @@ import java.util.concurrent.CompletionStage;
 @RequiredArgsConstructor
 public class DefaultDialogHelper<K extends DialogKindBase<K>> implements DialogHelper<K> {
 
-    @NonNull
     private final FXProperties fxProperties;
 
-    @NonNull
     private final Dictionary dictionary;
 
-    @NonNull
     private final DialogModel<K> dialogModel;
 
-    @NonNull
     private final StyleManager styleManager;
 
-    @NonNull
     private final DialogPreparer dialogPreparer;
 
 
     @Override
-    public @NonNull <I, O, C extends DialogController<I, O>> CompletionStage<Optional<O>> showDialog(
-            @NonNull K dialogKind,
-            @NonNull Class<C> controllerClass,
-            @NonNull Function1<? super Class<C>, ? extends FXLoader> loaderFactory,
-            @NonNull I input) {
+    public <I, O, C extends DialogController<I, O>> CompletionStage<Optional<O>> showDialog(
+            K dialogKind,
+            Class<C> controllerClass,
+            Function1<? super Class<C>, ? extends FXLoader> loaderFactory,
+            I input) {
         final var result = loaderFactory.apply(controllerClass).load();
         final var controller = result.getController(controllerClass).orElseThrow(() -> new RuntimeException("Invalid controller class " + controllerClass));
         return showDialog(dialogKind, controller, result.getRoot(), input);
     }
 
     private <I, O> CompletionStage<Optional<O>> showDialog(
-            @NonNull K dialogKind,
-            @NonNull DialogController<I, O> controller,
-            @NonNull Parent root,
-            @NonNull I input
+            K dialogKind,
+            DialogController<I, O> controller,
+            Parent root,
+            I input
     ) {
 
         final CompletableFuture<Optional<O>> result = new CompletableFuture<>();
@@ -100,9 +95,9 @@ public class DefaultDialogHelper<K extends DialogKindBase<K>> implements DialogH
 
     @Override
     public <I> void showDialog(
-            @NonNull K dialogKind,
-            @NonNull FXLoader loader,
-            @NonNull I input
+            K dialogKind,
+            FXLoader loader,
+            I input
     ) {
         final Stage current = this.dialogModel.getDialogStage(dialogKind).orElse(null);
 
@@ -120,7 +115,7 @@ public class DefaultDialogHelper<K extends DialogKindBase<K>> implements DialogH
 
     }
 
-    private void clearStage(@NonNull K dialogKind) {
+    private void clearStage(K dialogKind) {
         dialogModel.clearDialogStage(dialogKind);
     }
 }

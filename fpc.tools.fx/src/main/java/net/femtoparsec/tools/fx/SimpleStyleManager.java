@@ -27,8 +27,7 @@ public class SimpleStyleManager implements StyleManager {
         applyTheme(currentTheme);
     }
 
-    @NonNull
-    public Scene addStylable(@NonNull Scene scene) {
+    public Scene addStylable(Scene scene) {
         this.scenes.add(Stylable.forScene(scene));
         if (!currentTheme.isEmpty()) {
             scene.getStylesheets().add(currentTheme.getThemeUrl());
@@ -37,7 +36,7 @@ public class SimpleStyleManager implements StyleManager {
     }
 
     @Override
-    public void addStylable(@NonNull Parent parent) {
+    public void addStylable(Parent parent) {
         this.scenes.add(Stylable.forParent(parent));
         if (!currentTheme.isEmpty()) {
             parent.getStylesheets().add(currentTheme.getThemeUrl());
@@ -45,7 +44,7 @@ public class SimpleStyleManager implements StyleManager {
     }
 
     @Override
-    public void applyTheme(@NonNull Theme theme) {
+    public void applyTheme(Theme theme) {
         final Iterator<Stylable<?>> sceneIterator = scenes.iterator();
         final Theme oldTheme = currentTheme;
         final Theme newTheme = theme;
@@ -62,23 +61,19 @@ public class SimpleStyleManager implements StyleManager {
     @RequiredArgsConstructor
     private static class Stylable<T> {
 
-        @NonNull
         private final Reference<T> reference;
 
-        @NonNull
         private final Function1<? super T, ? extends ObservableList<String>> stylesheets;
 
-        @NonNull
-        public static Stylable<Scene> forScene(@NonNull Scene scene) {
+        public static Stylable<Scene> forScene(Scene scene) {
             return new Stylable<>(new WeakReference<>(scene), Scene::getStylesheets);
         }
 
-        @NonNull
-        public static Stylable<Parent> forParent(@NonNull Parent parent) {
+        public static Stylable<Parent> forParent(Parent parent) {
             return new Stylable<>(new WeakReference<>(parent), Parent::getStylesheets);
         }
 
-        public boolean tryToSetStyle(@NonNull Theme oldTheme, @NonNull Theme newTheme) {
+        public boolean tryToSetStyle(Theme oldTheme, Theme newTheme) {
             final T value = reference.get();
             if (value != null) {
                 updateScene(stylesheets.apply(value),oldTheme,newTheme);
@@ -87,7 +82,7 @@ public class SimpleStyleManager implements StyleManager {
         }
 
 
-        private void updateScene(@NonNull ObservableList<String> stylesheets, @NonNull Theme oldTheme, @NonNull Theme newTheme) {
+        private void updateScene(ObservableList<String> stylesheets, Theme oldTheme, Theme newTheme) {
                     Platform.runLater(() -> {
                 if (!oldTheme.isEmpty()) {
                     stylesheets.remove(oldTheme.getThemeUrl());

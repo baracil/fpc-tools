@@ -11,20 +11,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FPCActionBinding implements ActionBinding {
 
-    @NonNull
     private final BooleanProperty filteredProperty = new SimpleBooleanProperty();
 
-    @NonNull
     private final ItemInfo itemInfo;
 
-    @NonNull
     private final Consumer0 executable;
 
-    @NonNull
     private final ObservableBooleanValue disabledProperty;
 
     @Override
-    public @NonNull BooleanProperty filteredProperty() {
+    public BooleanProperty filteredProperty() {
         return filteredProperty;
     }
 

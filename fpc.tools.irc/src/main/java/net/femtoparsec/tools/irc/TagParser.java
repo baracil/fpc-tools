@@ -5,6 +5,7 @@ import fpc.tools.lang.ThrowableTool;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 import static net.femtoparsec.tools.irc.FPCIRCParser.IRC_MARKER;
@@ -19,8 +20,7 @@ public class TagParser {
 
     private final TagValueUnescaper tagValueUnescaper = new TagValueUnescaper();
 
-    @NonNull
-    public Optional<Tag> parse(@NonNull String tagAsString) {
+    public Optional<Tag> parse(String tagAsString) {
         try {
             return Optional.ofNullable(performParsing(tagAsString));
         } catch (Exception e) {
@@ -30,7 +30,7 @@ public class TagParser {
         }
     }
 
-    private Tag performParsing(@NonNull String tagAsString) {
+    private @Nullable Tag performParsing(String tagAsString) {
         final String[] token = tagAsString.split("=",2);
         if (token.length != 2 || token[0].isEmpty() || token[1].isBlank()) {
             return null;

@@ -8,19 +8,19 @@ import lombok.NonNull;
  */
 public interface ActionManager extends ActionLauncher {
 
-    @NonNull <P, R> ActionBinder<P> binder(@NonNull Launchable<P, R> actionType);
+    <P, R> ActionBinder<P> binder(Launchable<P, R> actionType);
 
-    @NonNull <R> NilActionBinder nilBinder(@NonNull Launchable<Nil, R> actionType);
+    <R> NilActionBinder nilBinder(Launchable<Nil, R> actionType);
 
-    default @NonNull <P, R> ActionBinder<P> binder(@NonNull Class<? extends Action<P, R>> actionType) {
+    default <P, R> ActionBinder<P> binder(Class<? extends Action<P, R>> actionType) {
         return binder(Launchable.single(actionType));
     }
 
-    default @NonNull <R> NilActionBinder nilBinder(@NonNull Class<? extends Action<Nil, R>> actionType) {
+    default <R> NilActionBinder nilBinder(Class<? extends Action<Nil, R>> actionType) {
         return nilBinder(Launchable.single(actionType));
     }
 
-    default @NonNull <R> ActionBinding createBinding(@NonNull Class< ? extends Action<Nil,R>> actionType, @NonNull Object item) {
+    default <R> ActionBinding createBinding(Class< ? extends Action<Nil,R>> actionType, Object item) {
         return nilBinder(actionType).createBinding(item);
     }
 

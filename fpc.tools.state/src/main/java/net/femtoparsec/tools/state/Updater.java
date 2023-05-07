@@ -17,12 +17,11 @@ public interface Updater<R> {
 
     void stop();
 
-    @NonNull
     <S> CompletionStage<UpdateResult<R,S>> offerUpdatingOperation(
-            @NonNull Mutation<R> mutation,
-            @NonNull Function0<? extends R> rootStateGetter,
-            @NonNull Consumer1<? super R> newRootStateConsumer,
-            @NonNull Function2<? super R, ? super R, ? extends S> subStateGetter
+            Mutation<R> mutation,
+            Function0<? extends R> rootStateGetter,
+            Consumer1<? super R> newRootStateConsumer,
+            Function2<? super R, ? super R, ? extends S> subStateGetter
             );
 
 

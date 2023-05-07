@@ -13,32 +13,30 @@ import java.util.concurrent.CompletionStage;
 @RequiredArgsConstructor
 public abstract class AbstractPostData<A,S extends Message, M> implements PostData<A,M> {
 
-    @NonNull
     private final S message;
 
-    @NonNull
     private final CompletableFuture<A> completableFuture = new CompletableFuture<>();
 
     @Override
-    public @NonNull S message() {
+    public S message() {
         return message;
     }
 
     @Override
-    public @NonNull CompletionStage<A> completionStage() {
+    public CompletionStage<A> completionStage() {
         return completableFuture;
     }
 
-    protected void completeWith(@NonNull A value) {
+    protected void completeWith(A value) {
         completableFuture.complete(value);
     }
 
-    protected void completeExceptionallyWith(@NonNull Throwable error) {
+    protected void completeExceptionallyWith(Throwable error) {
         completableFuture.completeExceptionally(error);
     }
 
     @Override
-    public void onMessagePostFailure(@NonNull Throwable t) {
+    public void onMessagePostFailure(Throwable t) {
         completableFuture.completeExceptionally(t);
     }
 

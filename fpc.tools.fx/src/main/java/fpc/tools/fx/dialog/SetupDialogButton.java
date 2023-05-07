@@ -11,8 +11,8 @@ import lombok.NonNull;
 public class SetupDialogButton implements DialogPreparer {
 
     @Override
-    public <O> void setup(@NonNull Stage dialogStage,
-                          @NonNull DialogInfo<O> dialogInfo
+    public <O> void setup(Stage dialogStage,
+                          DialogInfo<O> dialogInfo
     ) {
         final DialogController<?, O> controller = dialogInfo.getDialogController();
         final ObservableBooleanValue invalid = controller.invalidPropertyProperty();
@@ -48,7 +48,7 @@ public class SetupDialogButton implements DialogPreparer {
 
     }
 
-    private <O> EventHandler<Event> cancelledHandler(@NonNull Stage dialogStage, @NonNull DialogController<?,O> controller) {
+    private <O> EventHandler<Event> cancelledHandler(Stage dialogStage, DialogController<?,O> controller) {
         return e -> {
             if (!e.isConsumed() && controller.requestPermissionToClose()) {
                 e.consume();
@@ -58,7 +58,7 @@ public class SetupDialogButton implements DialogPreparer {
         };
     }
 
-    private <O> EventHandler<Event> resultHandler(@NonNull Stage dialogStage, @NonNull DialogController<?,O> controller, boolean isApply) {
+    private <O> EventHandler<Event> resultHandler(Stage dialogStage, DialogController<?,O> controller, boolean isApply) {
         return e -> {
             if (!e.isConsumed()) {
                 e.consume();

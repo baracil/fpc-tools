@@ -6,18 +6,17 @@ import java.util.function.Consumer;
 
 public interface ChatEventVisitor {
 
-    @NonNull
     default Consumer<ChatEvent> toFunction() {
         return e -> e.accept(this);
     }
 
-    void visit(@NonNull Connection event);
+    void visit(Connection event);
 
-    void visit(@NonNull Disconnection event);
+    void visit(Disconnection event);
 
-    void visit(@NonNull PostedMessage event);
+    void visit(PostedMessage event);
 
-    void visit(@NonNull ReceivedMessage event);
+    void visit(ReceivedMessage event);
 
-    void visit(@NonNull Error event);
+    void visit(Error event);
 }

@@ -11,10 +11,9 @@ import java.util.Locale;
 @NoArgsConstructor
 public class LocaleProperty extends ObservableValueBase<Locale> {
 
-    @NonNull
     private Locale value = Locale.getDefault();
 
-    public void setLocale(@NonNull Locale locale) {
+    public void setLocale(Locale locale) {
         Locale.setDefault(locale);
         value = locale;
         fireValueChangedEvent();
@@ -25,8 +24,7 @@ public class LocaleProperty extends ObservableValueBase<Locale> {
         return value;
     }
 
-    @NonNull
-    public FXDictionary wrapDictionary(@NonNull Dictionary dictionary) {
+    public FXDictionary wrapDictionary(Dictionary dictionary) {
         return new FPCFXDictionary(dictionary,this);
     }
 }

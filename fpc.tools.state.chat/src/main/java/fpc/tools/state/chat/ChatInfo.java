@@ -15,16 +15,16 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class ChatInfo<M> implements ChatStateListener<M> {
 
-    @NonNull URI address;
-    @NonNull RequestAnswerMatcher<M> matcher;
-    @NonNull MessageConverter<M> messageConverter;
-    @NonNull ReconnectionPolicy reconnectionPolicy;
-    @NonNull Instants instants;
+    URI address;
+    RequestAnswerMatcher<M> matcher;
+    MessageConverter<M> messageConverter;
+    ReconnectionPolicy reconnectionPolicy;
+    Instants instants;
     @Delegate
-    @NonNull ChatStateListener<M> chatStateListener;
+    ChatStateListener<M> chatStateListener;
     BandwidthLimits bandwidthLimits;
 
-    public ChatInfo(@NonNull URI address, @NonNull RequestAnswerMatcher<M> matcher, @NonNull MessageConverter<M> messageConverter, @NonNull ReconnectionPolicy reconnectionPolicy, @NonNull Instants instants, @NonNull ChatStateListener<M> chatStateListener, @NonNull BandwidthLimits bandwidthLimits) {
+    public ChatInfo(URI address, RequestAnswerMatcher<M> matcher, MessageConverter<M> messageConverter, ReconnectionPolicy reconnectionPolicy, Instants instants, ChatStateListener<M> chatStateListener, BandwidthLimits bandwidthLimits) {
         this.address = address;
         this.matcher = matcher;
         this.messageConverter = messageConverter;
@@ -35,7 +35,7 @@ public class ChatInfo<M> implements ChatStateListener<M> {
     }
 
 
-    public @NonNull AdvancedChat<M> createChat() {
+    public AdvancedChat<M> createChat() {
         final var advancedChatFactory = AdvancedChatFactory.getInstance();
         final var chat = createSimpleChat();
         return advancedChatFactory.createBasedOn(chat, matcher, messageConverter, instants);

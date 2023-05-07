@@ -23,6 +23,10 @@
     <dependencies>
         <dependency>
             <groupId>net.femtoparsec.tools</groupId>
+            <artifactId>fpc-tools-annotation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.femtoparsec.tools</groupId>
             <artifactId>fpc-tools-fp</artifactId>
         </dependency>
         <dependency>
@@ -60,7 +64,6 @@
         </resources>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <!-- Uncomment to enable incremental compilation -->

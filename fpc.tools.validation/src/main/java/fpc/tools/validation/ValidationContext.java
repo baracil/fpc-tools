@@ -5,13 +5,12 @@ import lombok.NonNull;
 public interface ValidationContext {
 
 
-    void addValidatedField(@NonNull String validatedField);
+    void addValidatedField(String validatedField);
 
-    void addError(@NonNull ValidationError error);
+    void addError(ValidationError error);
 
-    void addError(@NonNull String fieldName, @NonNull String errorType);
+    void addError(String fieldName, String errorType);
 
-    @NonNull
     ValidationResult getResult();
 
     boolean isValid();

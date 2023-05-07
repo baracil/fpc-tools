@@ -41,7 +41,7 @@ public class MapTool {
     return collector(keyGetter, Function1.identity());
   }
 
-  public static <K,V> Map<K,V> addOneEntry(@NonNull Map<K,V> reference, @NonNull K key, @NonNull V value) {
+  public static <K,V> Map<K,V> addOneEntry(Map<K,V> reference, K key, V value) {
     final var result = MapTool.<K,V>hashMap();
     result.putAll(reference);
     result.put(key,value);
@@ -134,12 +134,10 @@ public class MapTool {
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class FilteredMap<K, V> implements Function1<Predicate<? super K>, Map<K, V>> {
 
-    @NonNull
     private final Map<K, V> target;
 
-    @NonNull
     @Override
-    public Map<K, V> apply(@NonNull Predicate<? super K> predicate) {
+    public Map<K, V> apply(Predicate<? super K> predicate) {
       return target.keySet().stream().filter(predicate).collect(collector(k -> k, target::get));
     }
 

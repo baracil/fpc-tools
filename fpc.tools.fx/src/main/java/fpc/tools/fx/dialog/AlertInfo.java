@@ -9,36 +9,31 @@ import java.util.Optional;
 
 public class AlertInfo {
 
-    @NonNull
     private final Throwable error;
 
-    @NonNull
     @Getter
     private final String msgI18nKey;
 
-    @NonNull
     @Getter
     private final Object[] parameters;
 
-    public AlertInfo(@NonNull Throwable error, @NonNull String msgI18nKey) {
+    public AlertInfo(Throwable error, String msgI18nKey) {
         this.error = error;
         this.msgI18nKey = msgI18nKey;
         this.parameters = new Object[0];
     }
 
-    public AlertInfo(@NonNull Throwable error, @NonNull String msgI18nKey, @NonNull Object... parameters) {
+    public AlertInfo(Throwable error, String msgI18nKey, Object... parameters) {
         this.error = error;
         this.msgI18nKey = msgI18nKey;
         this.parameters = parameters;
     }
 
-    @NonNull
-    public Optional<Throwable> getError() {
-        return Optional.ofNullable(error);
+    public Throwable getError() {
+        return error;
     }
 
-    @NonNull
-    public LocalizedString getMessage(@NonNull Dictionary dictionary) {
+    public LocalizedString getMessage(Dictionary dictionary) {
         if (parameters.length == 0) {
             return dictionary.localizedString(msgI18nKey);
         }

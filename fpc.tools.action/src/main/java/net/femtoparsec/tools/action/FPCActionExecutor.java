@@ -20,31 +20,28 @@ public class FPCActionExecutor implements ActionExecutor {
 
   private final AtomicLong actionId = new AtomicLong(0);
 
-  @NonNull
   private final Executor executor;
 
-  @NonNull
   private final ActionProvider actionProvider;
 
-  @NonNull
   private final List<ActionFilter> actionFilters;
 
   private final ActionSpyDispatcher dispatcher = new ActionSpyDispatcher();
 
   @Override
-  public void addActionSpy(@NonNull ActionSpy actionSpy) {
+  public void addActionSpy(ActionSpy actionSpy) {
     dispatcher.addActionSpy(actionSpy);
   }
 
   @Override
-  public void removeActionSpy(@NonNull ActionSpy actionSpy) {
+  public void removeActionSpy(ActionSpy actionSpy) {
     dispatcher.removeActionSpy(actionSpy);
   }
 
   @Override
-  public @NonNull <P, R> CompletionStage<R> pushAction(
-      @NonNull Class<? extends Action<? super P, ? extends R>> actionClass,
-      @NonNull P parameter) {
+  public <P, R> CompletionStage<R> pushAction(
+      Class<? extends Action<? super P, ? extends R>> actionClass,
+      P parameter) {
     try {
       final Action<? super P, ? extends R> action = actionProvider.getAction(actionClass);
       return this.pushAction(action, parameter);
@@ -55,8 +52,8 @@ public class FPCActionExecutor implements ActionExecutor {
   }
 
   @Override
-  public <P, R> @NonNull CompletionStage<R> pushAction(@NonNull Action<? super P, ? extends R> action,
-                                                       @NonNull P parameter) {
+  public <P, R> CompletionStage<R> pushAction(Action<? super P, ? extends R> action,
+                                                       P parameter) {
     final long id = actionId.getAndIncrement();
     dispatcher.onPushedAction(this, id, action, parameter);
     return this.<P, R>doPushAction(action, parameter).whenComplete((r, t) -> {
@@ -65,8 +62,8 @@ public class FPCActionExecutor implements ActionExecutor {
     });
   }
 
-  public <P, R> @NonNull CompletionStage<R> doPushAction(@NonNull Action<? super P, ? extends R> action,
-                                                         @NonNull P parameter) {
+  public <P, R> CompletionStage<R> doPushAction(Action<? super P, ? extends R> action,
+                                                         P parameter) {
     final CompletableFuture<R> result = new CompletableFuture<>();
     final ActionItem<P, R> actionItem = new ActionItem<>(action, parameter, result);
     try {
@@ -84,7 +81,7 @@ public class FPCActionExecutor implements ActionExecutor {
   }
 
 
-  private <P, R> void performAction(@NonNull ActionItem<P, R> ticket) {
+  private <P, R> void performAction(ActionItem<P, R> ticket) {
     final Runnable execution;
     if (TRACE_ACTIONS) {
       execution = wrapWithTrace(ticket, createExecution(ticket));
@@ -94,7 +91,7 @@ public class FPCActionExecutor implements ActionExecutor {
     ticket.executeIfNotCompleted(execution);
   }
 
-  private Runnable wrapWithTrace(@NonNull ActionItem<?, ?> ticket, @NonNull Runnable execution) {
+  private Runnable wrapWithTrace(ActionItem<?, ?> ticket, Runnable execution) {
     return () -> {
       final long start = System.nanoTime();
       final String actionName = ticket.getAction().getClass().getSimpleName();
@@ -109,7 +106,7 @@ public class FPCActionExecutor implements ActionExecutor {
     };
   }
 
-  private <P, R> Runnable createExecution(@NonNull ActionItem<P, R> ticket) {
+  private <P, R> Runnable createExecution(ActionItem<P, R> ticket) {
     return () -> {
       final P parameter = ticket.getParameter();
       Action<? super P, ? extends R> effectiveAction = ticket.getAction();
@@ -135,8 +132,8 @@ public class FPCActionExecutor implements ActionExecutor {
     };
   }
 
-  private <P, R> void postProcess(@NonNull Action<? super P, ? extends R> action,
-                                  @NonNull TryResult<Throwable, R> result) {
+  private <P, R> void postProcess(Action<? super P, ? extends R> action,
+                                  TryResult<Throwable, R> result) {
     final var iter = actionFilters.listIterator(actionFilters.size());
     while (iter.hasPrevious()) {
       iter.previous().postProcessAction(action, result);

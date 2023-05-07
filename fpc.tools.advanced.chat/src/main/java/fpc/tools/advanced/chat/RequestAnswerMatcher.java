@@ -23,7 +23,7 @@ public interface RequestAnswerMatcher<M> {
      * @param message a message received from the chat
      * @return true if the provided message can be used to perform a match with the requests
      */
-    boolean shouldPerformMatching(@NonNull M message);
+    boolean shouldPerformMatching(M message);
 
     /**
      * <p>Perform a match between a request and a message received from the chat.
@@ -44,6 +44,5 @@ public interface RequestAnswerMatcher<M> {
      * @return an optional containing the result of the match if the message is the answer of the request,
      * an empty optional if the message is not the answer of the request
      */
-    @NonNull
-    <A> Optional<TryResult<Throwable, A>> performMatch(@NonNull Request<A> request, @NonNull M message);
+    <A> Optional<TryResult<Throwable, A>> performMatch(Request<A> request, M message);
 }

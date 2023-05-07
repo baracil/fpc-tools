@@ -8,5 +8,5 @@ import java.util.concurrent.CompletionStage;
 
 public interface ChatStateMutator {
 
-    @NonNull CompletionStage<ChatState> mutate(@NonNull Mutation<ChatState> mutation);
+    CompletionStage<ChatState> mutate(Mutation<ChatState> mutation);
 }

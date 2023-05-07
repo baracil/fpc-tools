@@ -1,7 +1,5 @@
 package fpc.tools.fp;
 
-import lombok.NonNull;
-
 import java.util.function.Function;
 
 /**
@@ -9,11 +7,9 @@ import java.util.function.Function;
  */
 public interface Try2<A,B, Z,T extends Throwable> {
 
-    @NonNull
-    Z apply(@NonNull A a, @NonNull B b) throws T;
+    Z apply(A a, B b) throws T;
 
-    @NonNull
-    default TryResult<Throwable, Z> applySafely(@NonNull A a, @NonNull B b) {
+    default TryResult<Throwable, Z> applySafely(A a, B b) {
         try {
             return TryResult.success(apply(a,b));
         } catch (Throwable throwable) {
@@ -22,8 +18,7 @@ public interface Try2<A,B, Z,T extends Throwable> {
         }
     }
 
-    @NonNull
-    default Function2<A,B,Z> wrapError(@NonNull Function1<? super Throwable, ? extends RuntimeException> errorWrapper) {
+    default Function2<A,B,Z> wrapError(Function1<? super Throwable, ? extends RuntimeException> errorWrapper) {
         return (a,b) -> {
             try {
                 return apply(a,b);
@@ -33,11 +28,11 @@ public interface Try2<A,B, Z,T extends Throwable> {
         };
     }
 
-    default Try1<B,Z,T> f1(@NonNull A a) {
+    default Try1<B,Z,T> f1(A a) {
         return b -> apply(a,b);
     }
 
-    default Try1<A,Z,T> f2(@NonNull B b) {
+    default Try1<A,Z,T> f2(B b) {
         return a -> apply(a,b);
     }
 
@@ -49,33 +44,27 @@ public interface Try2<A,B, Z,T extends Throwable> {
         return a -> apply(a, b.apply());
     }
 
-    @NonNull
     default <Y> Try2<A,B,Y,T> then(Function<? super Z, ? extends Y> after) {
         return (a,b) -> after.apply(this.apply(a,b));
     }
 
 
-    @NonNull
     default Function2<A,B, TryResult<Throwable, Z>> safe() {
         return this::applySafely;
     }
 
-    @NonNull
     default Function1<A, Try1<B,Z,T>> curry1() {
         return a -> b -> this.apply(a,b);
     }
 
-    @NonNull
     default Function1<B, Try1<A,Z,T>> curry2() {
         return b -> a -> this.apply(a,b);
     }
 
-    @NonNull
     default Function2<A,B, Try0<Z,T>> curry12() {
         return (a,b) -> () -> this.apply(a,b);
     }
 
-    @NonNull
     static <A,B,Z, T extends Throwable> Try2<A,B,Z,T> of(Try2<A,B,Z,T> try2) {
         return try2;
     }

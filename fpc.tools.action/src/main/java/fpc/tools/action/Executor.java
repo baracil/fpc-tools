@@ -5,7 +5,7 @@ import net.femtoparsec.tools.action.FPCExecutor;
 
 public interface Executor {
 
-    static @NonNull Executor create() {
+    static Executor create() {
         return new FPCExecutor();
     }
 

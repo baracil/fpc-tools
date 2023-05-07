@@ -14,15 +14,15 @@ import java.security.PrivateKey;
 @RequiredArgsConstructor
 public class RSATextDecryptor implements TextDecryptor {
 
-    private final @NonNull PrivateKey privateKey;
+    private final PrivateKey privateKey;
 
 
     @Override
-    public @NonNull Secret decrypt(@NonNull String encryptedValue) {
+    public Secret decrypt(String encryptedValue) {
         return CipherException.wrapCall(this::doDecrypt, encryptedValue);
     }
 
-    private @NonNull Secret doDecrypt(@NonNull String encryptedValue) throws GeneralSecurityException {
+    private Secret doDecrypt(String encryptedValue) throws GeneralSecurityException {
         Cipher decryptCipher = Cipher.getInstance("RSA");
         decryptCipher.init(Cipher.DECRYPT_MODE, privateKey);
 

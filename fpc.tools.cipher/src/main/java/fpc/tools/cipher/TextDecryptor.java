@@ -10,18 +10,18 @@ import java.security.PrivateKey;
 
 public interface TextDecryptor {
 
-    @NonNull Secret decrypt(@NonNull String encryptedValue);
+    Secret decrypt(String encryptedValue);
 
-    static @NonNull TextDecryptor createAES(@NonNull Secret password) {
+    static TextDecryptor createAES(Secret password) {
         return new AESTextCipher(new AESCipherFactory(password));
     }
 
-    static @NonNull TextDecryptor createRSA(@NonNull PrivateKey privateKey) {
+    static TextDecryptor createRSA(PrivateKey privateKey) {
         return new RSATextDecryptor(privateKey);
     }
 
 
-    default <T> @NonNull T decrypt(@NonNull Decryptable<T> decryptable) {
+    default <T> T decrypt(Decryptable<T> decryptable) {
         return decryptable.decrypt(this);
     }
 }

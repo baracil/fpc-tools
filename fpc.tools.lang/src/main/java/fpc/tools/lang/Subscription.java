@@ -9,26 +9,23 @@ public interface Subscription {
 
     void unsubscribe();
 
-    @NonNull
-    default Subscription then(@NonNull Subscription other) {
+    default Subscription then(Subscription other) {
         return () -> {
             this.unsubscribe();
             other.unsubscribe();
         };
     }
 
-    @NonNull
-    static Subscription multi(@NonNull Subscription... subscriptions) {
+    static Subscription multi(Subscription... subscriptions) {
         return new MultiSubscriptions(List.of(subscriptions));
     }
 
-    @NonNull
     Subscription NONE = new Subscription() {
         @Override
         public void unsubscribe() {}
 
         @Override
-        public @NonNull Subscription then(@NonNull Subscription other) {
+        public Subscription then(Subscription other) {
             return other;
         }
     };

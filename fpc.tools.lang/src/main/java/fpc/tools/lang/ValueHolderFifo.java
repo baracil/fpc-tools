@@ -11,12 +11,12 @@ public class ValueHolderFifo<T> implements ValueHolder<T> {
     private final Deque<T> values = new LinkedList<>();
 
     @Override
-    public @NonNull Optional<T> get() {
+    public Optional<T> get() {
         return Optional.ofNullable(values.peekLast());
     }
 
     @Override
-    public void push(@NonNull T value) {
+    public void push(T value) {
         values.addLast(value);
     }
 

@@ -6,8 +6,8 @@ public interface DialogResultHandler<O> {
 
     default void onCancelled() {}
 
-    default void onApplied(@NonNull O value) {}
+    default void onApplied(O value) {}
 
-    default void onValidated(@NonNull O value) {}
+    default void onValidated(O value) {}
 
 }

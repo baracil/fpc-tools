@@ -12,7 +12,7 @@ import lombok.NonNull;
 public class FPCIRCParserFactory extends IRCParserFactory {
 
     @Override
-    public @NonNull IRCParser create() {
+    public IRCParser create() {
         return new FPCIRCParser();
     }
 

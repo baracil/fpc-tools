@@ -11,6 +11,7 @@ import java.lang.annotation.RetentionPolicy;
  * Applies the {@link Nonnull} annotation to every class field unless overridden.
  */
 @Documented
+@Nonnull
 @TypeQualifierDefault({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})  // <-- use METHOD for return values
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FPMAreNonnullByDefault

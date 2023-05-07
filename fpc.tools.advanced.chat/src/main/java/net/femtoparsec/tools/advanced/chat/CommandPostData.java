@@ -12,17 +12,17 @@ import java.util.Optional;
  **/
 public class CommandPostData<M> extends AbstractPostData<DispatchSlip, Command, M> {
 
-    public CommandPostData(@NonNull Command message) {
+    public CommandPostData(Command message) {
         super(message);
     }
 
     @Override
-    public @NonNull Optional<RequestPostData<?,M>> asRequestPostData() {
+    public Optional<RequestPostData<?,M>> asRequestPostData() {
         return Optional.empty();
     }
 
     @Override
-    public void onMessagePosted(@NonNull Instant dispatchingTime) {
+    public void onMessagePosted(Instant dispatchingTime) {
         completeWith(new BasicDispatchSlip(dispatchingTime,message()));
     }
 

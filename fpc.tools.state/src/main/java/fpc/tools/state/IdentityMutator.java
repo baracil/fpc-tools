@@ -12,11 +12,11 @@ public interface IdentityMutator<S> {
      * @param mutation the mutation to apply to the state
      * @return a completion stage contained the mutated state
      */
-    @NonNull CompletionStage<S> mutate(@NonNull Mutation<S> mutation);
+    CompletionStage<S> mutate(Mutation<S> mutation);
 
-    @NonNull <V> CompletionStage<V> mutate(@NonNull Mutation<S> mutation, @NonNull Function1<? super S, ? extends CompletionStage<V>> action);
+    <V> CompletionStage<V> mutate(Mutation<S> mutation, Function1<? super S, ? extends CompletionStage<V>> action);
 
-    @NonNull <V> CompletionStage<V> mutate(@NonNull Mutation<S> mutation, @NonNull Function2<? super S, ? super S, ? extends CompletionStage<V>> action);
+    <V> CompletionStage<V> mutate(Mutation<S> mutation, Function2<? super S, ? super S, ? extends CompletionStage<V>> action);
 
     /**
      * Perform a sub mutation (a mutation of one of the property of the application state)
@@ -25,8 +25,7 @@ public interface IdentityMutator<S> {
      * @param <V> the type of the value to mutate
      * @return a completion stage contained the mutated application state
      */
-    @NonNull
-    default <V> CompletionStage<S> mutate(@NonNull Mutation<V> subMutation, @NonNull Accessor<S, V> accessor) {
+    default <V> CompletionStage<S> mutate(Mutation<V> subMutation, Accessor<S, V> accessor) {
         return mutate(new SubMutation<>(accessor,subMutation));
     }
 

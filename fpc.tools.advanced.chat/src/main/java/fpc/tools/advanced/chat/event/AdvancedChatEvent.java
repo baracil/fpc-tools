@@ -12,9 +12,9 @@ import java.util.Optional;
  */
 public sealed interface AdvancedChatEvent<M> permits Error, Connection, Disconnection, PostedMessage, ReceivedMessage {
 
-    @NonNull <T> T accept(@NonNull AdvancedChatEventVisitor<M, T> visitor);
+    <T> T accept(AdvancedChatEventVisitor<M, T> visitor);
 
-    default @NonNull Optional<ReceivedMessage<M>> castToReceivedMessage() {
+    default Optional<ReceivedMessage<M>> castToReceivedMessage() {
         return Optional.empty();
     }
 

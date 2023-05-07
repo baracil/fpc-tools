@@ -11,8 +11,8 @@ import java.nio.file.Path;
 
 public class FPCPathValidator extends AbstractValidator<Path, PathValidator> implements PathValidator {
 
-    public FPCPathValidator(@NonNull ValidationContext context,
-                            @NonNull String fieldName,
+    public FPCPathValidator(ValidationContext context,
+                            String fieldName,
                             Path value) {
         super(context, fieldName, value);
     }
@@ -23,22 +23,22 @@ public class FPCPathValidator extends AbstractValidator<Path, PathValidator> imp
     }
 
     @Override
-    public @NonNull PathValidator isAFolder() {
+    public PathValidator isAFolder() {
         return errorIfNot(Files::isDirectory, ErrorType.A_FOLDER_IS_REQUIRED);
     }
 
     @Override
-    public @NonNull PathValidator doesNotExist() {
+    public PathValidator doesNotExist() {
         return errorIfNot(Files::exists, ErrorType.PATH_SHOULD_NOT_EXIST);
     }
 
     @Override
-    public @NonNull PathValidator isRegularFile() {
+    public PathValidator isRegularFile() {
         return errorIfNot(Files::isRegularFile, ErrorType.A_REGULAR_FILE_IS_REQUIRED);
     }
 
     @Override
-    public @NonNull PathValidator resolve(@NonNull StringValidator stringValidator) {
+    public PathValidator resolve(StringValidator stringValidator) {
         stringValidator.isNotBlank();
         return map(
                 path -> path.resolve(stringValidator.getValue()),

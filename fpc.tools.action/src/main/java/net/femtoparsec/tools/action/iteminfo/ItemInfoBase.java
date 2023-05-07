@@ -8,7 +8,6 @@ import net.femtoparsec.tools.action.ItemInfo;
 @RequiredArgsConstructor
 public abstract class ItemInfoBase<I> implements ItemInfo {
 
-    @NonNull
     private final I item;
 
     @Override
@@ -17,7 +16,7 @@ public abstract class ItemInfoBase<I> implements ItemInfo {
     }
 
     @Override
-    public void bindAction(@NonNull Runnable executable) {
+    public void bindAction(Runnable executable) {
         bindAction(item,executable);
     }
 
@@ -27,7 +26,7 @@ public abstract class ItemInfoBase<I> implements ItemInfo {
     }
 
     @Override
-    public void bindDisable(@NonNull ObservableValue<? extends Boolean> observableValue) {
+    public void bindDisable(ObservableValue<? extends Boolean> observableValue) {
         bindDisable(item,observableValue);
     }
 
@@ -36,14 +35,14 @@ public abstract class ItemInfoBase<I> implements ItemInfo {
         unbindDisable(item);
     }
 
-    protected abstract boolean isDisabled(@NonNull I item);
+    protected abstract boolean isDisabled(I item);
 
-    protected abstract void bindDisable(@NonNull I item, @NonNull ObservableValue<? extends Boolean> observableValue);
+    protected abstract void bindDisable(I item, ObservableValue<? extends Boolean> observableValue);
 
-    protected abstract void unbindDisable(@NonNull I item);
+    protected abstract void unbindDisable(I item);
 
 
-    protected abstract void bindAction(@NonNull I item, @NonNull Runnable executable);
+    protected abstract void bindAction(I item, Runnable executable);
 
-    protected abstract void unbindAction(@NonNull I item);
+    protected abstract void unbindAction(I item);
 }

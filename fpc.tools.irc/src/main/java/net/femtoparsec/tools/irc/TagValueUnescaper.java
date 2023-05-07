@@ -9,8 +9,7 @@ public class TagValueUnescaper {
 
     public static final char ESCAPING_CHAR = '\\';
 
-    @NonNull
-    public String unescape(@NonNull String value) {
+    public String unescape(String value) {
         if (value.indexOf(ESCAPING_CHAR)<0) {
             return value;
         }

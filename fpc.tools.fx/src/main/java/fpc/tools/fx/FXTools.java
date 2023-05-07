@@ -23,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import lombok.NonNull;
 import net.femtoparsec.tools.fx.CompleteInFXLoader;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -35,26 +36,24 @@ public class FXTools {
 
     private static final PseudoClass NOT_EDITING = PseudoClass.getPseudoClass("not-editing");
 
-    public static <T> @NonNull Subscription subscribe(@NonNull ObservableValue<T> observable, @NonNull ChangeListener<T> listener) {
+    public static <T> Subscription subscribe(ObservableValue<T> observable, ChangeListener<T> listener) {
         observable.addListener(listener);
         return () -> observable.removeListener(listener);
     }
 
-    public static <T> @NonNull Subscription subscribe(@NonNull Observable observable, @NonNull InvalidationListener listener) {
+    public static <T> Subscription subscribe(Observable observable, InvalidationListener listener) {
         observable.addListener(listener);
         return () -> observable.removeListener(listener);
     }
 
-    @NonNull
-    public static <P,R> Loader<P,R> completeInFX(@NonNull Loader<P,R> loader) {
+    public static <P,R> Loader<P,R> completeInFX(Loader<P,R> loader) {
         if (loader instanceof CompleteInFXLoader) {
             return loader;
         }
         return new CompleteInFXLoader<>(loader);
     }
 
-    @NonNull
-    public static <C> CompletionStage<C> completeLater(@NonNull CompletionStage<C> stage) {
+    public static <C> CompletionStage<C> completeLater(CompletionStage<C> stage) {
         final CompletableFuture<C> future = new CompletableFuture<>();
         stage.whenComplete((c,t) -> {
             Platform.runLater(() -> {
@@ -68,8 +67,7 @@ public class FXTools {
         return future;
     }
 
-    @NonNull
-    public static Consumer<? super Node> anchorPaneFitter(@NonNull AnchorPane parent) {
+    public static Consumer<? super Node> anchorPaneFitter(AnchorPane parent) {
         return n -> {
             if (n == null) {
                 parent.getChildren().clear();
@@ -80,18 +78,16 @@ public class FXTools {
         };
     }
 
-    @NonNull
-    public static <T> BooleanBinding anyOf(@NonNull Collection<T> items, Function1<? super T, ? extends ObservableBooleanValue> observableGetter) {
+    public static <T> BooleanBinding anyOf(Collection<T> items, Function1<? super T, ? extends ObservableBooleanValue> observableGetter) {
         final ObservableBooleanValue[] observables = items.stream().map(observableGetter).toArray(ObservableBooleanValue[]::new);
         return Bindings.createBooleanBinding(() -> Arrays.stream(observables).anyMatch(ObservableBooleanValue::get),observables);
     }
 
-    public static void fitToAnchorPane(@NonNull Node node) {
+    public static void fitToAnchorPane(Node node) {
         setAnchorConstraints(node, 0.0, 0.0, 0.0, 0.0);
     }
 
-    @NonNull
-    public static Node setAnchorConstraints(@NonNull Node node, Double top, Double right, Double bottom, Double left) {
+    public static Node setAnchorConstraints(Node node, @Nullable Double top, @Nullable Double right, @Nullable Double bottom, @Nullable Double left) {
         AnchorPane.setTopAnchor(node, top);
         AnchorPane.setRightAnchor(node, right);
         AnchorPane.setBottomAnchor(node, bottom);
@@ -99,20 +95,17 @@ public class FXTools {
         return node;
     }
 
-    @NonNull
-    public static <L extends Labeled> L setAlignment(@NonNull L c, @NonNull Pos alignment) {
+    public static <L extends Labeled> L setAlignment(L c, Pos alignment) {
         c.setAlignment(alignment);
         return c;
     }
 
-    @NonNull
-    public static <L extends Labeled> L centeredAligned(@NonNull L c) {
+    public static <L extends Labeled> L centeredAligned(L c) {
         return setAlignment(c, Pos.CENTER);
     }
 
 
-    @NonNull
-    public static <C extends ComboBoxBase<?>> C addNotEditingPseudoClass(@NonNull C comboBoxBase) {
+    public static <C extends ComboBoxBase<?>> C addNotEditingPseudoClass(C comboBoxBase) {
         comboBoxBase.showingProperty().addListener(l -> updateNotEditingPseudoState(comboBoxBase));
         comboBoxBase.armedProperty().addListener(l -> updateNotEditingPseudoState(comboBoxBase));
         updateNotEditingPseudoState(comboBoxBase);
@@ -120,12 +113,12 @@ public class FXTools {
         return comboBoxBase;
     }
 
-    public static void updateNotEditingPseudoState(@NonNull ComboBoxBase<?> comboBoxBase) {
+    public static void updateNotEditingPseudoState(ComboBoxBase<?> comboBoxBase) {
         final boolean notEditing = !comboBoxBase.isArmed() && !comboBoxBase.isShowing();
         comboBoxBase.pseudoClassStateChanged(NOT_EDITING, notEditing);
     }
 
-    public static <T> void synchronize(@NonNull Collection<T> values,@NonNull ObservableList<T> items) {
+    public static <T> void synchronize(Collection<T> values,ObservableList<T> items) {
         if (values.isEmpty()) {
             items.clear();
         }
@@ -150,10 +143,10 @@ public class FXTools {
     }
 
 
-    public static <V, T> void synchronize(@NonNull List<V> newValues,
-                                          @NonNull ObservableList<T> items,
-                                          @NonNull Function0<? extends T> itemFactory,
-                                          @NonNull Consumer2<? super V, ? super T> itemInitializer) {
+    public static <V, T> void synchronize(List<V> newValues,
+                                          ObservableList<T> items,
+                                          Function0<? extends T> itemFactory,
+                                          Consumer2<? super V, ? super T> itemInitializer) {
         adaptSize(items, newValues.size(), itemFactory);
         assert newValues.size() == items.size();
 
@@ -168,7 +161,7 @@ public class FXTools {
 
     }
 
-    private static <T> void adaptSize(@NonNull ObservableList<T> observableList, int requestedSize, @NonNull Function0<? extends T> factory) {
+    private static <T> void adaptSize(ObservableList<T> observableList, int requestedSize, Function0<? extends T> factory) {
         if (requestedSize <= 0) {
             observableList.clear();
         }
@@ -188,11 +181,11 @@ public class FXTools {
         }
     }
 
-    public static void bindManagedToVisible(@NonNull Node... nodes) {
+    public static void bindManagedToVisible(Node... nodes) {
         Stream.of(nodes).forEach(n -> n.managedProperty().bind(n.visibleProperty()));
     }
 
-    public static void bindManagedToVisible(@NonNull Collection<? extends Node> nodes) {
+    public static void bindManagedToVisible(Collection<? extends Node> nodes) {
         nodes.forEach(n -> n.managedProperty().bind(n.visibleProperty()));
     }
 
@@ -208,7 +201,7 @@ public class FXTools {
         return Platform.isFxApplicationThread();
     }
 
-    public static void runInFXThread(@NonNull Runnable runnable) {
+    public static void runInFXThread(Runnable runnable) {
         if (isFXThread()) {
             runnable.run();
         } else {

@@ -14,18 +14,17 @@ import java.util.List;
 @Slf4j
 public class FPCListeners<L> implements Listeners<L> {
 
-    public static @NonNull ListenersFactory provider() {
+    public static ListenersFactory provider() {
         return new Factory();
     }
 
-    @NonNull
     private List<L> listeners;
 
     public FPCListeners() {
         this(List.of());
     }
 
-    public FPCListeners(@NonNull List<L> listeners) {
+    public FPCListeners(List<L> listeners) {
         this.listeners = listeners;
     }
 
@@ -34,35 +33,34 @@ public class FPCListeners<L> implements Listeners<L> {
         return listeners.isEmpty();
     }
 
-    @NonNull
     @Synchronized
-    public Subscription addListener(@NonNull L listener) {
+    public Subscription addListener(L listener) {
         listeners = ListTool.addFirst(listener,listeners);
         return () -> remove(listener);
     }
 
     @Synchronized
-    private void remove(@NonNull L listener) {
+    private void remove(L listener) {
         listeners = ListTool.removeOnceFrom(listeners).apply(l -> l == listener);
     }
 
-    public void forEachListeners(@NonNull Consumer1<? super L> action) {
+    public void forEachListeners(Consumer1<? super L> action) {
         listeners.forEach(l -> forOneListener(l,action));
     }
 
-    private void forOneListener(@NonNull L listener, @NonNull Consumer1<? super L> action) {
+    private void forOneListener(L listener, Consumer1<? super L> action) {
         action.acceptSafe(listener)
               .ifFailedAccept(e -> LOG.warn("Error while calling listener : ",e));
     }
 
     private static class Factory implements ListenersFactory {
         @Override
-        public @NonNull <L> Listeners<L> create() {
+        public <L> Listeners<L> create() {
             return new FPCListeners<>();
         }
 
         @Override
-        public @NonNull <L> Listeners<L> create(@NonNull List<L> initialListeners) {
+        public <L> Listeners<L> create(List<L> initialListeners) {
             return new FPCListeners<>(initialListeners);
         }
     }

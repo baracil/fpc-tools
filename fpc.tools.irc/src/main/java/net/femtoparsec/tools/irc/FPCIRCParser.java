@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -26,23 +27,22 @@ public class FPCIRCParser implements IRCParser {
     private final PrefixParser prefixParser = new PrefixParser();
 
     @Override
-    public @NonNull IRCParsing parse(@NonNull String message) {
+    public IRCParsing parse(String message) {
         return new Execution(message).parse();
     }
 
     @RequiredArgsConstructor
     private final class Execution {
 
-        @NonNull
         private final String rawMessage;
 
-        private Prefix prefix;
+        private @Nullable Prefix prefix;
 
         private Map<String, Tag> tags = Map.of();
 
-        private String command;
+        private @Nullable String command;
 
-        private Params params;
+        private @Nullable Params params;
 
         public IRCParsing parse() {
             final ParsedString parsedString = new ParsedString(rawMessage);
@@ -63,7 +63,7 @@ public class FPCIRCParser implements IRCParser {
         }
 
 
-        private void parseTags(@NonNull String tagsAsString) {
+        private void parseTags(String tagsAsString) {
             tags = Stream.of(tagsAsString.split(";"))
                          .map(tagParser::parse)
                          .flatMap(Optional::stream)
@@ -71,15 +71,15 @@ public class FPCIRCParser implements IRCParser {
                          .collect(MapTool.collector(Tag::getKeyName));
         }
 
-        private void parsePrefix(@NonNull String prefixAsString) {
+        private void parsePrefix(String prefixAsString) {
             prefix = prefixParser.parse(prefixAsString).orElse(null);
         }
 
-        private void parseCommand(@NonNull ParsedString parsedString) {
+        private void parseCommand(ParsedString parsedString) {
             command = parsedString.extractToNextSpaceOrEndOfString();
         }
 
-        private void parseParams(@NonNull ParsedString parsedString) {
+        private void parseParams(ParsedString parsedString) {
             final Params.Builder builder = Params.builder();
 
             while (!parsedString.isEmpty()) {

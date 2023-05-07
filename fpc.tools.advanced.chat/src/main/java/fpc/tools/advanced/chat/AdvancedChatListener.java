@@ -13,5 +13,5 @@ public interface AdvancedChatListener<M> {
      * Called when an event occurs on the chat
      * @param chatEvent the event that occurred
      */
-    void onChatEvent(@NonNull AdvancedChatEvent<M> chatEvent);
+    void onChatEvent(AdvancedChatEvent<M> chatEvent);
 }

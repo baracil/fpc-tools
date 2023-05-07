@@ -17,13 +17,13 @@ public class FPCActionChainOpt2<P, U, R> extends ActionChainBase<P, R> {
     @Getter
     private final Class<? extends Action<?,?>> initialAction;
 
-    private final @NonNull Function2<? super ActionExecutor, ? super P, ? extends CompletionStage<Optional<U>>> before;
+    private final Function2<? super ActionExecutor, ? super P, ? extends CompletionStage<Optional<U>>> before;
 
-    private final @NonNull Class<? extends Action<U, R>> ifPresent;
-    private final @NonNull Class<? extends Action<Nil, R>> ifAbsent;
+    private final Class<? extends Action<U, R>> ifPresent;
+    private final Class<? extends Action<Nil, R>> ifAbsent;
 
     @Override
-    public @NonNull CompletionStage<R> launch(@NonNull ActionExecutor executor, @NonNull P parameter) {
+    public CompletionStage<R> launch(ActionExecutor executor, P parameter) {
         return before.apply(executor, parameter)
                      .thenCompose(ou -> ou.map(u -> executor.pushAction(ifPresent, u))
                                       .orElseGet(() -> executor.pushAction(ifAbsent, Nil.NULL)));

@@ -6,12 +6,10 @@ import net.femtoparsec.tools.fxmodel.FXViewWithLoader;
 
 public interface FXView {
 
-    @NonNull
-    static FXView create(@NonNull FXLoader fxLoader) {
+    static FXView create(FXLoader fxLoader) {
         return new FXViewWithLoader(fxLoader);
     }
 
-    @NonNull
     FXViewInstance getViewInstance();
 
     default CachedFXView cached() {

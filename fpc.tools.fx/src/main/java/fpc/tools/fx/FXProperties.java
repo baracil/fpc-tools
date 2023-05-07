@@ -10,11 +10,9 @@ import lombok.RequiredArgsConstructor;
 public class FXProperties {
 
     @Getter
-    @NonNull
     private final Stage primaryStage;
 
     @Getter
-    @NonNull
     private final HostServices hostServices;
 
 

@@ -11,17 +11,16 @@ public class Theme {
 
     public static final Theme EMPTY = new Theme("-","");
 
-    @NonNull
-    public static Theme create(@NonNull String name, @NonNull String themeUrl) {
+    public static Theme create(String name, String themeUrl) {
         if (name.isEmpty()) {
             throw new IllegalArgumentException("Invalid theme name '"+name+"'");
         }
         return new Theme(name,themeUrl);
     }
 
-    @NonNull String name;
+    String name;
 
-    @NonNull String themeUrl;
+    String themeUrl;
 
     public boolean isEmpty() {
         return themeUrl.isEmpty();

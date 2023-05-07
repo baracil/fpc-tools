@@ -13,21 +13,19 @@ import java.util.Collection;
 public class ActionState {
 
 
-    @NonNull
     public static ActionState allEnabled() {
         return new ActionState(SetState.empty());
     }
 
 
-    @NonNull
     private final SetState<Class<? extends Action<?,?>>> disabledActions;
 
 
-    public boolean isEnabled(@NonNull Class<? extends Action<?,?>> action) {
+    public boolean isEnabled(Class<? extends Action<?,?>> action) {
         return !isDisabled(action);
     }
 
-    public boolean isDisabled(@NonNull Class<? extends Action<?, ?>> action) {
+    public boolean isDisabled(Class<? extends Action<?, ?>> action) {
         return disabledActions.contains(action);
     }
 
@@ -40,29 +38,24 @@ public class ActionState {
     @RequiredArgsConstructor
     private static class Builder {
 
-        @NonNull
         private final SetState.Builder<Class<? extends Action<?,?>>> disableActionBuilder;
 
-        @NonNull
-        public Builder enableAction(@NonNull Class<? extends Action<?,?>> action) {
+        public Builder enableAction(Class<? extends Action<?,?>> action) {
             disableActionBuilder.remove(action);
             return this;
         }
 
-        @NonNull
-        public Builder enableActions(@NonNull Collection<Class<? extends Action<?,?>>> action) {
+        public Builder enableActions(Collection<Class<? extends Action<?,?>>> action) {
             action.forEach(disableActionBuilder::remove);
             return this;
         }
 
-        @NonNull
-        public Builder disableAction(@NonNull Class<? extends Action<?,?>> action) {
+        public Builder disableAction(Class<? extends Action<?,?>> action) {
             disableActionBuilder.add(action);
             return this;
         }
 
-        @NonNull
-        public Builder disableActions(@NonNull Collection<Class<? extends Action<?,?>>> action) {
+        public Builder disableActions(Collection<Class<? extends Action<?,?>>> action) {
             action.forEach(disableActionBuilder::add);
             return this;
         }

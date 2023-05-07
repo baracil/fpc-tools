@@ -9,29 +9,29 @@ public class TwoStateHistory<S> implements StateHistory<S> {
 
     private S current;
 
-    public TwoStateHistory(@NonNull S initialState) {
+    public TwoStateHistory(S initialState) {
         this.current = initialState;
     }
 
     @Override
-    public boolean pushNewState(@NonNull S state) {
+    public boolean pushNewState(S state) {
         this.previous = this.current;
         this.current = state;
         return previous == null || !this.previous.equals(state);
     }
 
     @Override
-    public @NonNull S getCurrent() {
+    public S getCurrent() {
         return getAt(0);
     }
 
     @Override
-    public @NonNull S getPrevious() {
+    public S getPrevious() {
         return getAt(1);
     }
 
     @Override
-    public @NonNull S getAt(int depth) {
+    public S getAt(int depth) {
         final var value =  switch (depth) {
             case 0 -> current;
             case 1 -> previous;

@@ -7,7 +7,7 @@ public class OnceRunner {
 
     private boolean updating = false;
 
-    public void run(@NonNull Runnable runnable) {
+    public void run(Runnable runnable) {
         assert Platform.isFxApplicationThread();
         if (updating) {
             return;

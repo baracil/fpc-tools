@@ -22,11 +22,9 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
     /**
      * The content of this map, not directly accessible
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private final Map<K, RemoteData<V>> content;
 
-    @NonNull
     private final Function1<? super Map<K,RemoteData<V>>,? extends M> factory;
 
     /**
@@ -45,8 +43,7 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * @param key the key of the value to get
      * @return an optional containing the value if it exists, an empty optional otherwise
      */
-    @NonNull
-    public Optional<RemoteData<V>> get(@NonNull K key) {
+    public Optional<RemoteData<V>> get(K key) {
         return Optional.ofNullable(content.get(key));
     }
 
@@ -54,14 +51,13 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * @return the set of the entries of this map
      */
     @Override
-    public @NonNull Set<Map.Entry<K, RemoteData<V>>> entrySet() {
+    public Set<Map.Entry<K, RemoteData<V>>> entrySet() {
         return content.entrySet();
     }
 
     /**
      * @return the set of the keys of this map
      */
-    @NonNull
     public Set<K> keySet() {
         return content.keySet();
     }
@@ -69,14 +65,12 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
     /**
      * @return the collection of the values of this map
      */
-    @NonNull
     public Collection<RemoteData<V>> values() {
         return content.values();
     }
 
 
-    @NonNull
-    public M remove(@NonNull K key) {
+    public M remove(K key) {
         if (content.containsKey(key)) {
             return removeIfKeyMatches(key::equals);
         } else {
@@ -88,8 +82,7 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * @param predicate a predicate that returns true for the keys that must be to remove
      * @return a new {@link FPCRemoteMapBase} with the key matching the predicate remove
      */
-    @NonNull
-    public M removeIfKeyMatches(@NonNull Predicate<? super K> predicate) {
+    public M removeIfKeyMatches(Predicate<? super K> predicate) {
         return removeIfEntryMatches(e -> predicate.test(e.getKey()));
     }
 
@@ -97,7 +90,7 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * @param predicate a predicate that returns true for the entries that must be to remove.
      * @return a new {@link FPCRemoteMapBase} with the entries matching the predicate remove
      */
-    private M removeIfEntryMatches(@NonNull Predicate<Map.Entry<K, RemoteData<V>>> predicate) {
+    private M removeIfEntryMatches(Predicate<Map.Entry<K, RemoteData<V>>> predicate) {
         final Map<K, RemoteData<V>> newContent = content.entrySet()
                                                      .stream()
                                                      .filter(predicate.negate())
@@ -110,7 +103,7 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * @param value the value of the entry to add
      * @return a new MapState with the same values of this plus the provided entry.
      */
-    public M put(@NonNull K key, @NonNull V value) {
+    public M put(K key, V value) {
         return toBuilder().put(key, value).build();
     }
 
@@ -120,7 +113,7 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * @return this if this does not contain the provided key, otherwise a new MapState with the same values of
      * this plus the provided entry
      */
-    public M replace(@NonNull K key, @NonNull V value) {
+    public M replace(K key, V value) {
         if (!this.content.containsKey(key)) {
             return getThis();
         }
@@ -146,8 +139,8 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * entry (key,value) added.
      *
      */
-    public M update(@NonNull K key, @NonNull V value,
-                                       @NonNull Comparator<? super V> isNewer) {
+    public M update(K key, V value,
+                                       Comparator<? super V> isNewer) {
         final RemoteData<V> current = content.get(key);
         final V currentValue = current == null ? null : current.getValue().orElse(null);
         if (currentValue == null || isNewer.compare(currentValue, value) < 0) {
@@ -159,17 +152,17 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
     /**
      * Same as {@link #update(Object, Object, Comparator)} but for several values at once
      */
-    public M update(@NonNull Map<K, V> newValues,
-                                       @NonNull Comparator<? super V> isNewer) {
+    public M update(Map<K, V> newValues,
+                                       Comparator<? super V> isNewer) {
         return this.update(newValues.entrySet(), Map.Entry::getKey, Map.Entry::getValue, isNewer);
     }
 
     /**
      * Same as {@link #update(Object, Object, Comparator)} but for several values at once
      */
-    public M update(@NonNull Collection<V> newValues,
-                                       @NonNull Function1<? super V, ? extends K> keyGetter,
-                                       @NonNull Comparator<? super V> isNewer) {
+    public M update(Collection<V> newValues,
+                                       Function1<? super V, ? extends K> keyGetter,
+                                       Comparator<? super V> isNewer) {
         return this.update(newValues, keyGetter, v -> v, isNewer);
 
     }
@@ -183,10 +176,10 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
      * @param <T> the type of the items
      * @return a new updated {@link FPCRemoteMapBase}
      */
-    public <T> M update(@NonNull Collection<T> items,
-                                           @NonNull Function1<? super T, ? extends K> keyGetter,
-                                           @NonNull Function1<? super T, ? extends V> valueGetter,
-                                           @NonNull Comparator<? super V> isNewer) {
+    public <T> M update(Collection<T> items,
+                                           Function1<? super T, ? extends K> keyGetter,
+                                           Function1<? super T, ? extends V> valueGetter,
+                                           Comparator<? super V> isNewer) {
         if (items.isEmpty()) {
             return getThis();
         }
@@ -205,14 +198,13 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
         return builder.build();
     }
 
-    public boolean containsKey(@NonNull K key) {
+    public boolean containsKey(K key) {
         return content.containsKey(key);
     }
 
 
     protected abstract M getThis();
 
-    @NonNull
     public Builder<K, V,M> toBuilder() {
         return new Builder<>(getThis(), this.content, this.factory);
     }
@@ -221,27 +213,23 @@ public abstract class FPCRemoteMapBase<K, V, M extends FPCRemoteMapBase<K,V,M>> 
     @RequiredArgsConstructor
     public static class Builder<K, V,M extends FPCRemoteMapBase<K,V,M>> {
 
-        @NonNull
         private final M reference;
 
         private final Map<K, RemoteData<V>> content;
 
-        @NonNull
         private final Function1<? super Map<K,RemoteData<V>>,? extends M> factory;
 
-        @NonNull
         private final Set<K> removedKeys = new HashSet<>();
 
-        @NonNull
         private final Map<K, RemoteData<V>> addedValues = new HashMap<>();
 
-        public Builder<K, V,M> remove(@NonNull K key) {
+        public Builder<K, V,M> remove(K key) {
             this.removedKeys.add(key);
             this.addedValues.remove(key);
             return this;
         }
 
-        public Builder<K, V,M> put(@NonNull K key, @NonNull V value) {
+        public Builder<K, V,M> put(K key, V value) {
             this.removedKeys.remove(key);
             this.addedValues.put(key, RemoteData.loaded(value));
             return this;

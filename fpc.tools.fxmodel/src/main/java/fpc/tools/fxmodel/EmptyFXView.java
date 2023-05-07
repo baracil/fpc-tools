@@ -14,7 +14,7 @@ public class EmptyFXView implements FXView {
     private static final EmptyFXView INSTANCE = new EmptyFXView();
 
     @Override
-    public @NonNull FXViewInstance getViewInstance() {
+    public FXViewInstance getViewInstance() {
         return FXViewInstance.EMPTY;
     }
 

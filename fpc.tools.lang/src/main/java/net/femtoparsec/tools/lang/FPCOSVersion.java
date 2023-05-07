@@ -9,12 +9,12 @@ import java.nio.file.Path;
 
 public class FPCOSVersion implements OSVersion {
 
-    public static @NonNull OSVersionFactory provider() {
+    public static OSVersionFactory provider() {
         return FPCOSVersion::new;
     }
 
     @Override
-    public @NonNull Path getUserHome() {
+    public Path getUserHome() {
         return Path.of(System.getProperty("user.home"));
     }
 }

@@ -9,13 +9,13 @@ import java.util.Set;
 public interface BiMap<K,V> extends Map<K,V> {
 
 
-  @NonNull BiMap<V,K> inverse();
+  BiMap<V,K> inverse();
 
   @Override
-  @NonNull Set<V> values();
+  Set<V> values();
 
 
-  static <K,V> @NonNull BiMap<K,V> createHashBiMap() {
+  static <K,V> BiMap<K,V> createHashBiMap() {
     return new HashBiMap<>();
   }
 

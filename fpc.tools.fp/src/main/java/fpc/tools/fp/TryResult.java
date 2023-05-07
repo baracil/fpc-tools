@@ -1,7 +1,5 @@
 package fpc.tools.fp;
 
-import lombok.NonNull;
-
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -18,7 +16,7 @@ public final class TryResult<E extends Throwable, A> {
         return new TryResult<>(either);
     }
 
-    public static <A,E extends Throwable> TryResult<E, A> success(@NonNull A result) {
+    public static <A,E extends Throwable> TryResult<E, A> success(A result) {
         return new TryResult<>(Either.right(result));
     }
 
@@ -30,10 +28,9 @@ public final class TryResult<E extends Throwable, A> {
     /**
      * The underlying either containing the result or the exception
      */
-    @NonNull
     private final Either<E,A> result;
 
-    public TryResult(@NonNull Either<E, A> result) {
+    public TryResult(Either<E, A> result) {
         this.result = result;
     }
 
@@ -54,7 +51,6 @@ public final class TryResult<E extends Throwable, A> {
     /**
      * @return an optional containing the exception of this try result if this is a failure, an empty optional otherwise
      */
-    @NonNull
     public Optional<E> getException() {
         return result.left();
     }
@@ -62,7 +58,6 @@ public final class TryResult<E extends Throwable, A> {
     /**
      * @return an optional containing the result of this try result if this is a success, an empty optional otherwise
      */
-    @NonNull
     public Optional<A> getResult() {
         return result.right();
     }
@@ -71,8 +66,7 @@ public final class TryResult<E extends Throwable, A> {
      * @param defaultValue the value returned if this is a failure
      * @return the result of this try result if this is a success, <code>defaultValue</code> otherwise
      */
-    @NonNull
-    public A getResult(@NonNull A defaultValue) {
+    public A getResult(A defaultValue) {
         return result.right().orElse(defaultValue);
     }
 
@@ -82,7 +76,6 @@ public final class TryResult<E extends Throwable, A> {
      * @param failure the consumer consuming the exception of this result if this is a failure
      * @return this
      */
-    @NonNull
     public TryResult<E, A> ifFailedAccept(Consumer<? super E> failure) {
         this.getException().ifPresent(failure);
         return this;
@@ -94,7 +87,6 @@ public final class TryResult<E extends Throwable, A> {
      * @param failure the function call if this is a failure
      * @return this
      */
-    @NonNull
     public TryResult<E, A> ifFailedApply(Function<E, Nil> failure) {
         this.getException().ifPresent(failure::apply);
         return this;
@@ -104,7 +96,6 @@ public final class TryResult<E extends Throwable, A> {
      * @return the value of this result if this is not a failure
      * @throws E if this is a failure
      */
-    @NonNull
     public A throwIfFailure() throws E {
         return this.getEither().tryMerge(
                 e -> { throw e;},
@@ -146,7 +137,6 @@ public final class TryResult<E extends Throwable, A> {
      * @return the result of this try if this is a success
      * @throws E is this is a failure
      */
-    @NonNull
     public A acceptIfFailedThenGetWithThrow(Consumer<E> failure) throws E {
         return ifFailedAccept(failure).throwIfFailure();
     }
@@ -158,7 +148,6 @@ public final class TryResult<E extends Throwable, A> {
      * @return the result of this try if this is a success
      * @throws E is this is a failure
      */
-    @NonNull
     public A applyIfFailedThenGetWithThrow(Function<E,Nil> failure) throws E {
         return ifFailedApply(failure).throwIfFailure();
     }
@@ -166,7 +155,6 @@ public final class TryResult<E extends Throwable, A> {
     /**
      * @return the {@link Either} object used to store the result or the exception
      */
-    @NonNull
     public Either<E,A> getEither() {
         return result;
     }
@@ -174,7 +162,6 @@ public final class TryResult<E extends Throwable, A> {
     /**
      * @return the result if this is a success, otherwise wrap the throw exception in a {@link TryException} which is an unchecked exception
      */
-    @NonNull
     public A getSuccess() {
         return result.merge(e -> {throw new TryException(e);}, Function1.identity());
     }
@@ -189,23 +176,20 @@ public final class TryResult<E extends Throwable, A> {
         return new TryResult<>(result.map(Function1.identity(),f));
     }
 
-    @NonNull
     public <B> TryResult<Throwable, B> tryMap(Try1<? super A, ? extends B,?> t) {
         final TryResult<Throwable, ? extends B> result = getEither().merge(TryResult::failure, t::applySafely);
         return result.map(b -> b);
     }
 
-    @NonNull
     public <B> TryResult<E, B> bind(Function1<? super A, TryResult<E, B>> f) {
         return result.merge(TryResult::failure, f);
     }
 
-    @NonNull
     public <W extends Exception> TryResult<W, A> wrapException(Function1<? super E, ? extends W> exceptionWrapper) {
         return new TryResult<>(result.map(exceptionWrapper,Function1.identity()));
     }
 
-    public void accept(@NonNull Consumer1<? super E> onError, @NonNull Consumer1<? super A> onResult) {
+    public void accept(Consumer1<? super E> onError, Consumer1<? super A> onResult) {
         result.acceptMerge(onError,onResult);
     }
 }

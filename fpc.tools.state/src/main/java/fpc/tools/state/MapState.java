@@ -22,42 +22,37 @@ public interface MapState<K, V> extends fpc.tools.state.MapStateBase<K,V> {
         return FPCMapState.empty();
     }
 
-    static <K,V> MapState<K,V> with(@NonNull Map<K, V> content) {
+    static <K,V> MapState<K,V> with(Map<K, V> content) {
         return new FPCMapState<>(content);
     }
 
-    @NonNull Map<K,V> getContent();
+    Map<K,V> getContent();
 
-    MapState<K,V> remove(@NonNull K key);
+    MapState<K,V> remove(K key);
 
     /**
      * @param predicate a predicate that returns true for the keys that must be to remove
      * @return a new {@link MapState} with the key matching the predicate remove
      */
-    @NonNull
-    MapState<K,V> removeIfKeyMatches(@NonNull Predicate<? super K> predicate);
+    MapState<K,V> removeIfKeyMatches(Predicate<? super K> predicate);
 
     /**
      * @param key the key of the entry to add
      * @param value the value of the entry to add
      * @return a new MapState with the same values of this plus the provided entry.
      */
-    @NonNull
-    MapState<K, V> put(@NonNull K key, @NonNull V value);
+    MapState<K, V> put(K key, V value);
 
-    @NonNull
-    MapState<K,V> onlyKeepTheKeys(@NonNull Collection<K> keys);
+    MapState<K,V> onlyKeepTheKeys(Collection<K> keys);
 
     /**
      * @param keys the keys of the entry to add
      * @param valueGetter the function to use on the key to get the values
      * @return a new MapState with the same values of this plus the provided entry.
      */
-    @NonNull
-    MapState<K, V> putAll(@NonNull Collection<K> keys, @NonNull Function1<? super K, ? extends V> valueGetter);
+    MapState<K, V> putAll(Collection<K> keys, Function1<? super K, ? extends V> valueGetter);
 
-    @NonNull
-    default MapState<K, V> putAll(@NonNull Collection<K> keys, @NonNull V value) {
+    default MapState<K, V> putAll(Collection<K> keys, V value) {
         return putAll(keys,k -> value);
     }
 
@@ -68,11 +63,9 @@ public interface MapState<K, V> extends fpc.tools.state.MapStateBase<K,V> {
      * @return this if this does not contain the provided key, otherwise a new MapState with the same values of
      * this plus the provided entry
      */
-    @NonNull
-    MapState<K, V> replace(@NonNull K key, @NonNull V value);
+    MapState<K, V> replace(K key, V value);
 
-    @NonNull
-    MapState<K, V> replace(@NonNull K key, @NonNull UnaryOperator1<V> mutator);
+    MapState<K, V> replace(K key, UnaryOperator1<V> mutator);
 
     /**
      * <p>
@@ -93,21 +86,21 @@ public interface MapState<K, V> extends fpc.tools.state.MapStateBase<K,V> {
      * entry (key,value) added.
      *
      */
-    MapState<K, V> update(@NonNull K key, @NonNull V value,
-                            @NonNull Comparator<? super V> isNewer);
+    MapState<K, V> update(K key, V value,
+                            Comparator<? super V> isNewer);
 
     /**
      * Same as {@link #update(Object, Object, Comparator)} but for several values at once
      */
-    MapState<K, V> update(@NonNull Map<K, V> newValues,
-                            @NonNull Comparator<? super V> isNewer);
+    MapState<K, V> update(Map<K, V> newValues,
+                            Comparator<? super V> isNewer);
 
     /**
      * Same as {@link #update(Object, Object, Comparator)} but for several values at once
      */
-    MapState<K, V> update(@NonNull Collection<V> newValues,
-                            @NonNull Function1<? super V, ? extends K> keyGetter,
-                            @NonNull Comparator<? super V> isNewer);
+    MapState<K, V> update(Collection<V> newValues,
+                            Function1<? super V, ? extends K> keyGetter,
+                            Comparator<? super V> isNewer);
 
     /**
      * Same as {@link #update(Object, Object, Comparator)} but for several values at once.
@@ -119,12 +112,12 @@ public interface MapState<K, V> extends fpc.tools.state.MapStateBase<K,V> {
      * @param <T> the type of the items
      * @return a new updated {@link MapState}
      */
-    <T> MapState<K, V> update(@NonNull Collection<T> items,
-                                @NonNull Function1<? super T, ? extends K> keyGetter,
-                                @NonNull Function1<? super T, ? extends V> valueGetter,
-                                @NonNull Comparator<? super V> isNewer);
+    <T> MapState<K, V> update(Collection<T> items,
+                                Function1<? super T, ? extends K> keyGetter,
+                                Function1<? super T, ? extends V> valueGetter,
+                                Comparator<? super V> isNewer);
 
-    default void forEach(@NonNull Consumer2<? super K, ? super V> action) {
+    default void forEach(Consumer2<? super K, ? super V> action) {
         getContent().forEach(action);
     }
 

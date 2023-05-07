@@ -2,6 +2,7 @@ package fpc.tools.irc;
 
 import lombok.*;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -16,30 +17,29 @@ public class IRCParsing {
     /**
      * The original message used by the parser
      */
-    @NonNull String rawMessage;
+    String rawMessage;
 
     /**
      * A map of tags
      */
-    @NonNull Map<String,Tag> tags;
+    Map<String,Tag> tags;
 
     /**
      * The optional prefix of the IRC message
      */
     @Getter(AccessLevel.NONE)
-    Prefix prefix;
+    @Nullable Prefix prefix;
 
     /**
      * The command of the IRC message
      */
-    @NonNull String command;
+    String command;
 
     /**
      * The parameters of the IRC message
      */
-    @NonNull Params params;
+    Params params;
 
-    @NonNull
     public Optional<Prefix> getPrefix() {
         return Optional.ofNullable(prefix);
     }
@@ -48,7 +48,6 @@ public class IRCParsing {
      * @return the last parameter of the IRC message.
      * @throws IndexOutOfBoundsException if there is no such parameter
      */
-    @NonNull
     public String lastParameter() {
         return params.lastParameter();
     }
@@ -58,13 +57,11 @@ public class IRCParsing {
      * @param sep
      * @return
      */
-    @NonNull
-    public Stream<String> splitLastParameter(@NonNull String sep) {
+    public Stream<String> splitLastParameter(String sep) {
         return Stream.of(lastParameter().split(sep));
     }
 
-    @NonNull
-    public Optional<String> tagValue(@NonNull String tagName) {
+    public Optional<String> tagValue(String tagName) {
         return Optional.ofNullable(tags.get(tagName)).map(Tag::getValue);
     }
 }

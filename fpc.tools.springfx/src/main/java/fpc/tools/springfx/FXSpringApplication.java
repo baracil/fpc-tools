@@ -21,7 +21,6 @@ import java.util.concurrent.CompletionStage;
 @RequiredArgsConstructor
 public abstract class FXSpringApplication extends Application {
 
-    @NonNull
     private final Class<?> applicationClass;
 
     private ApplicationCloser contextCloser = () -> {
@@ -45,12 +44,11 @@ public abstract class FXSpringApplication extends Application {
     }
 
 
-    @NonNull
     private FXProperties createFxProperties(Stage primaryStage) {
         return new FXProperties(primaryStage, getHostServices());
     }
 
-    private void handleSpringLaunchCompletion(@NonNull Stage primaryStage, ApplicationCloser applicationCloser, Throwable error) {
+    private void handleSpringLaunchCompletion(Stage primaryStage, ApplicationCloser applicationCloser, Throwable error) {
         final TryResult<Throwable, ApplicationCloser> result = error == null ? TryResult.success(applicationCloser) : TryResult.failure(error);
         this.afterLaunchingSpring(primaryStage, result);
 
@@ -64,7 +62,6 @@ public abstract class FXSpringApplication extends Application {
     }
 
 
-    @NonNull
     private CompletionStage<ApplicationCloser> launchSpring(
             ApplicationContextInitializer<?>... initializers) {
         final var springLauncher = new SpringLauncher(getParameters().getRaw(),
@@ -82,7 +79,7 @@ public abstract class FXSpringApplication extends Application {
         return new Class<?>[]{applicationClass};
     }
 
-    protected boolean processPackagesBeforeIncludingThemIntoSpring(@NonNull SpringModule plugin) {
+    protected boolean processPackagesBeforeIncludingThemIntoSpring(SpringModule plugin) {
         return true;
     }
 
@@ -90,10 +87,10 @@ public abstract class FXSpringApplication extends Application {
         return true;
     }
 
-    protected abstract void beforeLaunchingSpring(@NonNull Stage primaryStage) throws Exception;
+    protected abstract void beforeLaunchingSpring(Stage primaryStage) throws Exception;
 
     protected void afterLaunchingSpring(
-            @NonNull Stage primaryStage,
-            @NonNull TryResult<Throwable, ApplicationCloser> result) {
+            Stage primaryStage,
+            TryResult<Throwable, ApplicationCloser> result) {
     }
 }

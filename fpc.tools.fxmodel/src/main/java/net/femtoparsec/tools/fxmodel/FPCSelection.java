@@ -4,6 +4,7 @@ import fpc.tools.fxmodel.Selection;
 import fpc.tools.state.SetState;
 import lombok.*;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ public class FPCSelection<T> implements Selection<T> {
         return new FPCSelection<>();
     }
 
-    public static <T> FPCSelection<T> with(@NonNull T mainSelection, @NonNull Set<T> selectedElements) {
+    public static <T> FPCSelection<T> with(T mainSelection, Set<T> selectedElements) {
         assert selectedElements.contains(mainSelection) : "Main selection is not in the selected elements";
         return new FPCSelection<>(mainSelection, new SetState<>(selectedElements));
     }
@@ -26,12 +27,11 @@ public class FPCSelection<T> implements Selection<T> {
      * operation
      */
     @Getter(AccessLevel.NONE)
-    private final T mainSelection;
+    private final @Nullable T mainSelection;
 
     /**
      * All the selected elements, including the main selection.
      */
-    @NonNull
     private final SetState<T> selectedElements;
 
 
@@ -47,12 +47,12 @@ public class FPCSelection<T> implements Selection<T> {
     }
 
     @Override
-    public @NonNull Selection<T> removeFromSelection(@NonNull T item) {
+    public Selection<T> removeFromSelection(T item) {
         if (!selectedElements.contains(item)) {
             return this;
         }
         final SetState<T> newSelectedElements = selectedElements.remove(item);
-        if (mainSelection.equals(item)) {
+        if (item.equals(mainSelection)) {
             return newSelectedElements.stream()
                                       .findFirst()
                                       .map(ms -> new FPCSelection<>(ms, newSelectedElements))
@@ -63,7 +63,7 @@ public class FPCSelection<T> implements Selection<T> {
     }
 
     @Override
-    public @NonNull Selection<T> addToSelection(@NonNull T item) {
+    public Selection<T> addToSelection(T item) {
         if (item.equals(this.mainSelection)) {
             return this;
         }
@@ -72,12 +72,12 @@ public class FPCSelection<T> implements Selection<T> {
     }
 
     @Override
-    public @NonNull Set<T> getSelectedElements() {
+    public Set<T> getSelectedElements() {
         return selectedElements.getContent();
     }
 
     @Override
-    public boolean isSelected(@NonNull T item) {
+    public boolean isSelected(T item) {
         return selectedElements.contains(item);
     }
 }

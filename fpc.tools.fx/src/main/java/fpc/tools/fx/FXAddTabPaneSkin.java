@@ -67,7 +67,7 @@ public class FXAddTabPaneSkin extends TabPaneSkin {
     private Double tabHeaderRegionInitialInset = Double.NaN;
 
 
-    public FXAddTabPaneSkin(@NonNull FXAddTabPane fxAddTabPane) {
+    public FXAddTabPaneSkin(FXAddTabPane fxAddTabPane) {
         super(fxAddTabPane);
         this.fxAddTabPane = fxAddTabPane;
         this.headerArea = (StackPane) fxAddTabPane.lookup(".tab-header-area");

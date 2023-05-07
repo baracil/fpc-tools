@@ -14,8 +14,7 @@ public interface ActionLauncher {
      * @param <P> the parameter type
      * @return a completion state that completes when the action is done
      */
-    @NonNull
-    <P,R> ActionTicket<R> pushAction(@NonNull Launchable<P,R> actionType, @NonNull P parameter);
+    <P,R> ActionTicket<R> pushAction(Launchable<P,R> actionType, P parameter);
 
 
     /**
@@ -24,38 +23,35 @@ public interface ActionLauncher {
      * @param <P> the parameter type
      * @return a completion state that completes when the action is done
      */
-    @NonNull
-    default <P,R> ActionTicket<R> pushAction(@NonNull Class<? extends Action<P,R>> actionType, @NonNull P parameter) {
+    default <P,R> ActionTicket<R> pushAction(Class<? extends Action<P,R>> actionType, P parameter) {
         return pushAction(Launchable.single(actionType),parameter);
     }
 
     /**
      * short cut to <code>execute(actionType,Nil.NULL)</code>
      */
-    @NonNull
-    default <R> ActionTicket<R> pushAction(@NonNull Class<? extends Action<Nil,R>> actionType) {
+    default <R> ActionTicket<R> pushAction(Class<? extends Action<Nil,R>> actionType) {
         return pushAction(Launchable.single(actionType),Nil.NULL);
     }
 
-    default <R> ActionTicket<R> pushActionAsync(@NonNull Class<? extends AsyncAction<Nil,R>> actionType) {
+    default <R> ActionTicket<R> pushActionAsync(Class<? extends AsyncAction<Nil,R>> actionType) {
         return pushAction(Launchable.singleAsync(actionType),Nil.NULL);
     }
 
-    default <P,R> ActionTicket<R> pushActionAsync(@NonNull Class<? extends AsyncAction<P,R>> actionType, @NonNull P parameter) {
+    default <P,R> ActionTicket<R> pushActionAsync(Class<? extends AsyncAction<P,R>> actionType, P parameter) {
         return pushAction(Launchable.singleAsync(actionType),parameter);
     }
 
     /**
      * short cut to <code>execute(actionType,Nil.NULL)</code>
      */
-    @NonNull
-    default <R> ActionTicket<R> pushAction(@NonNull Launchable<Nil,R> actionType) {
+    default <R> ActionTicket<R> pushAction(Launchable<Nil,R> actionType) {
         return pushAction(actionType,Nil.NULL);
     }
 
-    void addActionSpy(@NonNull ActionSpy actionSpy);
+    void addActionSpy(ActionSpy actionSpy);
 
-    void removeActionSpy(@NonNull ActionSpy actionSpy);
+    void removeActionSpy(ActionSpy actionSpy);
 
 
 }

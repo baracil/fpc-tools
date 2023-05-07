@@ -13,28 +13,28 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public class ChatStateContext<M> {
-    private final @NonNull ChatStateMutator mutator;
-    private final @NonNull ChatInfo<M> chatInfo;
-    private final @NonNull AdvancedChatListener<M> listener;
+    private final ChatStateMutator mutator;
+    private final ChatInfo<M> chatInfo;
+    private final AdvancedChatListener<M> listener;
     private final int nbTries;
 
-    public ChatStateContext(@NonNull ChatStateMutator mutator, @NonNull ChatInfo<M> chatInfo, @NonNull AdvancedChatListener<M> listener) {
+    public ChatStateContext(ChatStateMutator mutator, ChatInfo<M> chatInfo, AdvancedChatListener<M> listener) {
         this.mutator = mutator;
         this.chatInfo = chatInfo;
         this.listener = listener;
         this.nbTries = 0;
     }
 
-    public @NonNull AdvancedChat<M> createChat() {
+    public AdvancedChat<M> createChat() {
         return chatInfo.createChat();
     }
 
 
-    public @NonNull ChatStateContext<M> resetNbTries() {
+    public ChatStateContext<M> resetNbTries() {
         return new ChatStateContext<>(mutator,chatInfo,listener,0);
     }
 
-    public @NonNull ChatStateContext<M> requestReconnection() {
+    public ChatStateContext<M> requestReconnection() {
         final var nextContext = new ChatStateContext<>(mutator,chatInfo,listener,nbTries+1);
         mutator.mutate(new ConnectMutation());
         return nextContext;
@@ -44,7 +44,7 @@ public class ChatStateContext<M> {
         chatInfo.onConnectionStarted();
     }
 
-    public void onConnectionFailed(@NonNull RuntimeException error) {
+    public void onConnectionFailed(RuntimeException error) {
         chatInfo.onConnectionFailed(error);
     }
 
@@ -52,7 +52,7 @@ public class ChatStateContext<M> {
         chatInfo.onDisconnected();
     }
 
-    public @NonNull OnConnectedResult onConnected(@NonNull AdvancedChat<M> chat) throws InterruptedException {
+    public OnConnectedResult onConnected(AdvancedChat<M> chat) throws InterruptedException {
         return chatInfo.onConnected(chat, nbTries);
     }
 

@@ -17,10 +17,8 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class DefaultFXLoader implements FXLoader {
 
-    @NonNull
     private final ControllerFactory controllerFactory;
 
-    @NonNull
     private final BuilderFactory builderFactory;
 
     private final Dictionary dictionary;
@@ -28,7 +26,7 @@ public class DefaultFXLoader implements FXLoader {
     private final URL fxmlFile;
 
     @Override
-    public @NonNull FXLoadingResult load(@NonNull Locale locale) {
+    public FXLoadingResult load(Locale locale) {
         final FXMLLoader loader = createAndPrepareLoader(this.fxmlFile, locale);
         try {
             loader.load();
@@ -38,7 +36,7 @@ public class DefaultFXLoader implements FXLoader {
         }
     }
 
-    private FXMLLoader createAndPrepareLoader(@NonNull URL fxmlFile, @NonNull Locale locale) {
+    private FXMLLoader createAndPrepareLoader(URL fxmlFile, Locale locale) {
         final FXMLLoader loader = new FXMLLoader();
         loader.setLocation(fxmlFile);
         loader.setControllerFactory(controllerFactory.asCallbackForFXMLLoader());
@@ -48,7 +46,7 @@ public class DefaultFXLoader implements FXLoader {
     }
 
     @Override
-    public @NonNull FXLoader cached() {
+    public FXLoader cached() {
         return new CachedFXLoader(this);
     }
 }

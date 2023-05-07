@@ -11,13 +11,11 @@ import java.util.Optional;
 @Slf4j
 public class CastTool {
 
-    @NonNull
-    public static <T> Caster<T> caster(@NonNull Class<T> type) {
+    public static <T> Caster<T> caster(Class<T> type) {
         return new BasicCaster<>(type);
     }
 
-    @NonNull
-    public static <T> Optional<T> as(@NonNull Class<T> type, @NonNull Object value) {
+    public static <T> Optional<T> as(Class<T> type, Object value) {
         return caster(type).cast(value);
     }
 
@@ -27,34 +25,31 @@ public class CastTool {
      * @param string the string to convert
      * @return an optional contain the conversion result, an empty optional if the conversion could not be done
      */
-    @NonNull
-    public static Optional<Integer> castToInt(@NonNull String string) {
+    public static Optional<Integer> castToInt(String string) {
         return castToNumber(string,Integer::parseInt);
     }
 
-    public static int castToInt(@NonNull String string, int defaultValue) {
+    public static int castToInt(String string, int defaultValue) {
         return castToInt(string).orElse(defaultValue);
     }
 
-    @NonNull
-    public static Optional<Double> castToDouble(@NonNull String string) {
+    public static Optional<Double> castToDouble(String string) {
         return castToNumber(string,Double::parseDouble);
     }
 
-    public static double castToDouble(@NonNull String string, double defaultValue) {
+    public static double castToDouble(String string, double defaultValue) {
         return castToDouble(string).orElse(defaultValue);
     }
 
-    @NonNull
-    public static Optional<Long> castToLong(@NonNull String string) {
+    public static Optional<Long> castToLong(String string) {
         return castToNumber(string,Long::parseLong);
     }
 
-    public static double castToLong(@NonNull String string, long defaultValue) {
+    public static double castToLong(String string, long defaultValue) {
         return castToLong(string).orElse(defaultValue);
     }
 
-    private static <N extends Number> Optional<N> castToNumber(@NonNull String string, @NonNull Function1<? super String, ? extends N> caster) {
+    private static <N extends Number> Optional<N> castToNumber(String string, Function1<? super String, ? extends N> caster) {
         try {
             return Optional.of(caster.apply(string));
         } catch (NumberFormatException nfe) {

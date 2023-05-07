@@ -7,14 +7,11 @@ import java.util.Optional;
 
 public interface ActionChainOpt<P,R> extends Launchable<P,Optional<R>> {
 
-    @NonNull
-    <S> ActionChainOpt<P,S> then(@NonNull Class<? extends Action<R,S>> actionType);
+    <S> ActionChainOpt<P,S> then(Class<? extends Action<R,S>> actionType);
 
-    @NonNull
-    <S> ActionChainOpt<P,S> thenFlat(@NonNull Class<? extends Action<R,Optional<S>>> actionType);
+    <S> ActionChainOpt<P,S> thenFlat(Class<? extends Action<R,Optional<S>>> actionType);
 
-    @NonNull
-    <S> ActionChain<P,S> thenOr(@NonNull Class<? extends Action<R,S>> actionType, @NonNull Class<? extends Action<Nil,S>> or);
+    <S> ActionChain<P,S> thenOr(Class<? extends Action<R,S>> actionType, Class<? extends Action<Nil,S>> or);
 
 
 

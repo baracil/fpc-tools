@@ -7,9 +7,9 @@ public interface ChatStateListener<M>  {
 
     void onConnectionStarted();
 
-    void onConnectionFailed(@NonNull RuntimeException error);
+    void onConnectionFailed(RuntimeException error);
 
-    @NonNull OnConnectedResult onConnected(@NonNull AdvancedChat<M> chat, int nbTries) throws InterruptedException;
+    OnConnectedResult onConnected(AdvancedChat<M> chat, int nbTries) throws InterruptedException;
 
     void onRetry();
 

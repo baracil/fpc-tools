@@ -12,7 +12,7 @@ public class SpinWaitStrategy implements WaitStrategy {
     }
 
     @Override
-    public void waitFor(@NonNull Duration duration) throws InterruptedException {
+    public void waitFor(Duration duration) throws InterruptedException {
         final long target = System.nanoTime()+duration.toNanos();
         while ((target-System.nanoTime())>0) {
             checkInterruption();

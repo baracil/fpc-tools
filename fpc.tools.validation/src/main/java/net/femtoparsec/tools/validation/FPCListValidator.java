@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class FPCListValidator<T> extends AbstractValidator<List<T>, ListValidator<T>> implements ListValidator<T> {
 
-    public FPCListValidator(@NonNull ValidationContext context, @NonNull String fieldName, List<T> value) {
+    public FPCListValidator(ValidationContext context, String fieldName, List<T> value) {
         super(context, fieldName, value);
     }
 
@@ -23,7 +23,7 @@ public class FPCListValidator<T> extends AbstractValidator<List<T>, ListValidato
     }
 
     @Override
-    public @NonNull ListValidator<T> isNotEmpty() {
+    public ListValidator<T> isNotEmpty() {
         return errorIf(List::isEmpty, ErrorType.NOT_EMPTY_LIST_REQUIRED);
     }
 }

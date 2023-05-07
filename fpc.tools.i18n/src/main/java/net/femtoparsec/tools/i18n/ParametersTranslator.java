@@ -13,11 +13,9 @@ public interface ParametersTranslator {
 
     Object[] EMPTY = new Object[0];
 
-    @NonNull
-    Object[] translate(@NonNull Locale locale);
+    Object[] translate(Locale locale);
 
-    @NonNull
-    static ParametersTranslator create(@NonNull List<Object> parameters) {
+    static ParametersTranslator create(List<Object> parameters) {
         if (parameters.isEmpty()) {
             return locale ->  EMPTY;
         }

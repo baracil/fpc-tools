@@ -12,13 +12,11 @@ import java.util.concurrent.CompletionStage;
  */
 public interface ReadOnlyIdentity<S> {
 
-    @NonNull
     CompletionStage<S> getState();
 
-    @NonNull
-    Subscription addListener(@NonNull IdentityListener<S> listener);
+    Subscription addListener(IdentityListener<S> listener);
 
-    void addWeakListener(@NonNull IdentityListener<S> listener);
+    void addWeakListener(IdentityListener<S> listener);
 
     /**
      * @param getter a getter to extract a specific value from the root value of this identity
@@ -26,14 +24,12 @@ public interface ReadOnlyIdentity<S> {
      * @return an observable value that is updated in the FX Thread (ths FX thread must be started before
      * calling this method)
      */
-    @NonNull
-    <V> ObservableValue<V> asFXObservableValue(@NonNull Function1<? super S,? extends V> getter);
+    <V> ObservableValue<V> asFXObservableValue(Function1<? super S,? extends V> getter);
 
     /**
      * @return an observable value that is updated in the FX Thread (ths FX thread must be started before
      * calling this method)
      */
-    @NonNull
     default ObservableValue<S> asFXObservableValue() {
         return asFXObservableValue(r -> r);
     }
@@ -42,6 +38,6 @@ public interface ReadOnlyIdentity<S> {
     /**
      * @return the current state, there might be mutations in progress which means this state might not the up to date one
      */
-    @NonNull S getCurrentState();
+    S getCurrentState();
 
 }
