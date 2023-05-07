@@ -15,7 +15,7 @@
         <application.name>FPC Tools</application.name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        <micronaut.version>3.6.1</micronaut.version>
+        <micronaut.version>3.8.8</micronaut.version>
         <lombok.version>1.18.24</lombok.version>
         <guava.version>31.0.1-jre</guava.version>
         <javafx.version>17.0.2</javafx.version>
@@ -27,6 +27,7 @@
     </properties>
 
     <modules>
+        <module>fpc.tools.annotation</module>
         <module>fpc.tools.action</module>
         <module>fpc.tools.advanced.chat</module>
         <module>fpc.tools.chat</module>

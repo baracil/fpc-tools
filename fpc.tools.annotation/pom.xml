@@ -10,31 +10,21 @@
         <version>0.1.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>fpc-tools-micronaut</artifactId>
+    <artifactId>fpc-tools-annotation</artifactId>
     <version>0.1.1-SNAPSHOT</version>
 
     <name>${application.name} - ${module.name}</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <module.name>Micronaut</module.name>
+        <module.name>Annotations</module.name>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>net.femtoparsec.tools</groupId>
-            <artifactId>fpc-tools-fp</artifactId>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
         </dependency>
-        <dependency>
-            <groupId>net.femtoparsec.tools</groupId>
-            <artifactId>fpc-tools-lang</artifactId>
-        </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>io.micronaut.serde</groupId>-->
-<!--            <artifactId>micronaut-serde-jackson</artifactId>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
 
     </dependencies>
 
