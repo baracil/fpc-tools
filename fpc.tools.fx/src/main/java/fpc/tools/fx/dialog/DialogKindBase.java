@@ -3,7 +3,6 @@ package fpc.tools.fx.dialog;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import lombok.NonNull;
 
 import java.util.Map;
 import java.util.Optional;

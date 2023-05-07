@@ -2,7 +2,6 @@ package fpc.tools.hibernate;
 
 import fpc.tools.lang.IdentifiedEnum;
 import fpc.tools.lang.IdentifiedEnumTools;
-import lombok.NonNull;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.DynamicParameterizedType;

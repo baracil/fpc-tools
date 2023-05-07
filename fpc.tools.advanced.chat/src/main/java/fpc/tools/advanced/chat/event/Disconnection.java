@@ -1,7 +1,5 @@
 package fpc.tools.advanced.chat.event;
 
-import lombok.NonNull;
-
 /**
  * Event sent when the chat is disconnected
  * @param <M>

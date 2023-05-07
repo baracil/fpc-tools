@@ -1,7 +1,6 @@
 package fpc.tools.advanced.chat;
 
 import fpc.tools.advanced.chat.event.AdvancedChatEvent;
-import lombok.NonNull;
 
 /**
  * @author Bastien Aracil

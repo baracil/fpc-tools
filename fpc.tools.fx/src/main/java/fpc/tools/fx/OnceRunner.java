@@ -1,7 +1,6 @@
 package fpc.tools.fx;
 
 import javafx.application.Platform;
-import lombok.NonNull;
 
 public class OnceRunner {
 

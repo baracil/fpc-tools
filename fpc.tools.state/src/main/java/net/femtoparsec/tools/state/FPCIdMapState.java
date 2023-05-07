@@ -3,7 +3,6 @@ package net.femtoparsec.tools.state;
 import fpc.tools.fp.Function1;
 import fpc.tools.state.IdMapState;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 
 import java.util.Collection;
 import java.util.Comparator;

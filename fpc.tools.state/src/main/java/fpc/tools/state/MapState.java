@@ -3,7 +3,6 @@ package fpc.tools.state;
 import fpc.tools.fp.Consumer2;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.UnaryOperator1;
-import lombok.NonNull;
 import net.femtoparsec.tools.state.FPCMapState;
 
 import java.util.Collection;

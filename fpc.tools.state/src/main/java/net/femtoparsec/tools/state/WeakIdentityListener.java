@@ -5,7 +5,6 @@ import fpc.tools.lang.Subscription;
 import fpc.tools.state.IdentityListener;
 import fpc.tools.state.ReadOnlyIdentity;
 import lombok.Getter;
-import lombok.NonNull;
 
 import java.lang.ref.Reference;
 

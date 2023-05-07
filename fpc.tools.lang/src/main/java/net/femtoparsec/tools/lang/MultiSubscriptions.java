@@ -5,7 +5,6 @@ import fpc.tools.fp.TryResult;
 import fpc.tools.lang.ListTool;
 import fpc.tools.lang.Subscription;
 import fpc.tools.lang.UnsubscriptionError;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

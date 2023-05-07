@@ -1,7 +1,5 @@
 package fpc.tools.i18n;
 
-import lombok.NonNull;
-
 import java.util.Locale;
 
 public interface I18nKeyProvider {

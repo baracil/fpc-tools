@@ -2,7 +2,6 @@ package fpc.tools.chat;
 
 import io.github.bucket4j.ConfigurationBuilder;
 import io.github.bucket4j.local.LocalBucketBuilder;
-import lombok.NonNull;
 
 public interface BandwidthLimits {
 

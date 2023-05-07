@@ -1,7 +1,5 @@
 package fpc.tools.fxmodel;
 
-import lombok.NonNull;
-
 import java.util.Optional;
 
 public interface FXViewProvider {

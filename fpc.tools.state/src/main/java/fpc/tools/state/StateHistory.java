@@ -3,7 +3,6 @@ package fpc.tools.state;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Predicate1;
 import fpc.tools.lang.Todo;
-import lombok.NonNull;
 import net.femtoparsec.tools.state.LinkedStateHistory;
 import net.femtoparsec.tools.state.TwoStateHistory;
 

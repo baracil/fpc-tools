@@ -2,7 +2,6 @@ package fpc.tools.action;
 
 import fpc.tools.lang.FPCException;
 import lombok.Getter;
-import lombok.NonNull;
 
 public class ActionCancelled extends FPCException {
 

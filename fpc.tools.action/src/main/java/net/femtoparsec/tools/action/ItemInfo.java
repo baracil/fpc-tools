@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.action;
 
 import javafx.beans.value.ObservableValue;
-import lombok.NonNull;
 
 public interface ItemInfo {
 

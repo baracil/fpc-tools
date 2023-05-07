@@ -1,7 +1,6 @@
 package fpc.tools.action;
 
 import fpc.tools.fp.TryResult;
-import lombok.NonNull;
 
 public interface ActionFilter {
 

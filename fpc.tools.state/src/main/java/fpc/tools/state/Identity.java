@@ -1,7 +1,6 @@
 package fpc.tools.state;
 
 import fpc.tools.fp.Function1;
-import lombok.NonNull;
 
 import java.util.concurrent.CompletionStage;
 

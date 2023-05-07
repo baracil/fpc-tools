@@ -1,7 +1,6 @@
 package fpc.tools.lang;
 
 import fpc.tools.fp.Function0;
-import lombok.NonNull;
 
 public class SubscriptionHolder {
 

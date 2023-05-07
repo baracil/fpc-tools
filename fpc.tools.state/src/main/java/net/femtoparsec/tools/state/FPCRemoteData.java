@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.state;
 
 import fpc.tools.state.RemoteData;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.annotation.Nullable;

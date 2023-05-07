@@ -3,7 +3,6 @@ package net.femtoparsec.tools.validation;
 import fpc.tools.validation.ErrorType;
 import fpc.tools.validation.ListValidator;
 import fpc.tools.validation.ValidationContext;
-import lombok.NonNull;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.lang;
 
 import fpc.tools.lang.Caster;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;

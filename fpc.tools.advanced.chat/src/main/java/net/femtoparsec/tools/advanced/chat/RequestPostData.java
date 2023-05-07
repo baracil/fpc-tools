@@ -3,7 +3,6 @@ package net.femtoparsec.tools.advanced.chat;
 import fpc.tools.advanced.chat.ReceiptSlip;
 import fpc.tools.advanced.chat.Request;
 import fpc.tools.advanced.chat.RequestAnswerMatcher;
-import lombok.NonNull;
 
 import java.time.Duration;
 import java.time.Instant;

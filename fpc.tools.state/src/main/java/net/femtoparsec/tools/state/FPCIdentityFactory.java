@@ -7,7 +7,6 @@ import fpc.tools.state.Identity;
 import fpc.tools.state.IdentityFactory;
 import fpc.tools.state.IdentityMutator;
 import fpc.tools.state.ProxyIdentity;
-import lombok.NonNull;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;

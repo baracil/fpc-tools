@@ -1,7 +1,6 @@
 package fpc.tools.lang;
 
 import lombok.Getter;
-import lombok.NonNull;
 
 @Getter
 public class ParsingFailure extends FPCException {

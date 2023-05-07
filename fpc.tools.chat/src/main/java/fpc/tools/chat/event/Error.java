@@ -1,7 +1,5 @@
 package fpc.tools.chat.event;
 
-import lombok.NonNull;
-
 public record Error(Throwable error) implements ChatEvent {
 
     public static Error with(Throwable error) {

@@ -4,7 +4,6 @@ import fpc.tools.fp.Function2;
 import fpc.tools.fx.NodeWrapper;
 import fpc.tools.fxmodel.FXView;
 import javafx.scene.Node;
-import lombok.NonNull;
 
 
 public class DebugFXView implements Function2<FXView, Node, Node> {

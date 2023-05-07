@@ -2,7 +2,6 @@ package net.femtoparsec.tools.action.iteminfo;
 
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
-import lombok.NonNull;
 
 public abstract class NodeBaseItemInfo<N extends Node> extends ItemInfoBase<N> {
 

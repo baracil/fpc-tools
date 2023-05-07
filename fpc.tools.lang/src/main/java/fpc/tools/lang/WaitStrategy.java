@@ -1,6 +1,5 @@
 package fpc.tools.lang;
 
-import lombok.NonNull;
 import net.femtoparsec.tools.lang.SpinWaitStrategy;
 import net.femtoparsec.tools.lang.ThreadSleepWaitStrategy;
 

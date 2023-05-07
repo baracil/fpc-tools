@@ -3,9 +3,6 @@ package fpc.tools.fx.dialog;
 import fpc.tools.i18n.Dictionary;
 import fpc.tools.i18n.LocalizedString;
 import lombok.Getter;
-import lombok.NonNull;
-
-import java.util.Optional;
 
 public class AlertInfo {
 

@@ -8,7 +8,6 @@ import io.micronaut.serde.Decoder;
 import io.micronaut.serde.Encoder;
 import io.micronaut.serde.util.NullableSerde;
 import jakarta.inject.Singleton;
-import lombok.NonNull;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;

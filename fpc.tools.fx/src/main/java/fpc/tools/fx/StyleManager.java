@@ -2,7 +2,6 @@ package fpc.tools.fx;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import lombok.NonNull;
 import net.femtoparsec.tools.fx.SimpleStyleManager;
 
 public interface StyleManager {

@@ -4,7 +4,6 @@ import fpc.tools.fx.FXLoadingResult;
 import fpc.tools.fxmodel.FXViewInstance;
 import fpc.tools.fxmodel.PluggableController;
 import javafx.scene.Node;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;

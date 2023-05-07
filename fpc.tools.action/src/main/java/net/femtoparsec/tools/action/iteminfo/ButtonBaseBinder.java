@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.action.iteminfo;
 
 import javafx.scene.control.ButtonBase;
-import lombok.NonNull;
 
 public class ButtonBaseBinder extends NodeBaseItemInfo<ButtonBase> {
 

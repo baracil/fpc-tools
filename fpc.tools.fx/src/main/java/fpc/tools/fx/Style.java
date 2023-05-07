@@ -1,6 +1,5 @@
 package fpc.tools.fx;
 
-import lombok.NonNull;
 import lombok.Value;
 
 @Value

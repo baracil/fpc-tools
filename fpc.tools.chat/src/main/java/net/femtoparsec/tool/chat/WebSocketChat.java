@@ -6,7 +6,6 @@ import fpc.tools.chat.event.Disconnection;
 import fpc.tools.chat.event.Error;
 import fpc.tools.chat.event.ReceivedMessage;
 import fpc.tools.lang.*;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

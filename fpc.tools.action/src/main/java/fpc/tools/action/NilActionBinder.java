@@ -1,7 +1,5 @@
 package fpc.tools.action;
 
-import lombok.NonNull;
-
 public interface NilActionBinder {
 
     ActionBinding createBinding(Object item);

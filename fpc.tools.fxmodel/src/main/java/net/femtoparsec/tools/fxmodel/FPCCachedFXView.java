@@ -3,7 +3,6 @@ package net.femtoparsec.tools.fxmodel;
 import fpc.tools.fxmodel.CachedFXView;
 import fpc.tools.fxmodel.FXView;
 import fpc.tools.fxmodel.FXViewInstance;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.annotation.Nullable;

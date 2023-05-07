@@ -1,6 +1,9 @@
 package fpc.tools.irc;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Value;
 
 import javax.annotation.Nullable;
 import java.util.Map;

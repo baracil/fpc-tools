@@ -1,7 +1,6 @@
 package fpc.tools.fx;
 
 import javafx.scene.Node;
-import lombok.NonNull;
 
 import java.lang.ref.Reference;
 import java.util.Locale;

@@ -6,7 +6,6 @@ import fpc.tools.i18n.Dictionary;
 import fpc.tools.i18n.LocalizedString;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableStringValue;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

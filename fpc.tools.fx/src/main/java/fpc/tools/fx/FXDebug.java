@@ -3,7 +3,6 @@ package fpc.tools.fx;
 import fpc.tools.fp.Nil;
 import fpc.tools.fp.Try0;
 import fpc.tools.lang.Todo;
-import lombok.NonNull;
 
 public class FXDebug {
 

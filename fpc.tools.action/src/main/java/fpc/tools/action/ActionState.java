@@ -1,7 +1,6 @@
 package fpc.tools.action;
 
 import fpc.tools.state.SetState;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collection;

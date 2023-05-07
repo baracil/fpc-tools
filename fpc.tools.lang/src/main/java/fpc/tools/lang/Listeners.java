@@ -3,7 +3,6 @@ package fpc.tools.lang;
 import fpc.tools.fp.Consumer1;
 import fpc.tools.fp.Consumer2;
 import fpc.tools.fp.Consumer3;
-import lombok.NonNull;
 
 import java.util.List;
 

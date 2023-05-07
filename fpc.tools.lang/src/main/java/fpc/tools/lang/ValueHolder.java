@@ -2,7 +2,6 @@ package fpc.tools.lang;
 
 import fpc.tools.fp.Function0;
 import fpc.tools.fp.Try0;
-import lombok.NonNull;
 
 import java.util.Optional;
 

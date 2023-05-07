@@ -1,7 +1,6 @@
 package fpc.tools.state.chat.state;
 
 import fpc.tools.state.chat.state.impl.ConnectingChatImpl;
-import lombok.NonNull;
 
 public sealed interface ConnectingChat extends ChatState permits ConnectingChatImpl {
 

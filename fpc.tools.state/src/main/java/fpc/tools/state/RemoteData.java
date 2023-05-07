@@ -1,6 +1,5 @@
 package fpc.tools.state;
 
-import lombok.NonNull;
 import net.femtoparsec.tools.state.FPCRemoteData;
 
 /**

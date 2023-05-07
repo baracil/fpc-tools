@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.advanced.chat;
 
 import fpc.tools.advanced.chat.Message;
-import lombok.NonNull;
 
 import java.time.Instant;
 import java.util.Optional;

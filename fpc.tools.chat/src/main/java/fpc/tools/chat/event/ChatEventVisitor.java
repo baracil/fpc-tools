@@ -1,7 +1,5 @@
 package fpc.tools.chat.event;
 
-import lombok.NonNull;
-
 import java.util.function.Consumer;
 
 public interface ChatEventVisitor {

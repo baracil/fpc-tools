@@ -1,6 +1,5 @@
 package fpc.tools.lang;
 
-import lombok.NonNull;
 import net.femtoparsec.tools.lang.MultiSubscriptions;
 
 import java.util.List;

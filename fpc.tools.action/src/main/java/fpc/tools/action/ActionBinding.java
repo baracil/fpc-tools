@@ -1,7 +1,6 @@
 package fpc.tools.action;
 
 import javafx.beans.property.BooleanProperty;
-import lombok.NonNull;
 
 /**
  * Binding between an action and an FX Node.

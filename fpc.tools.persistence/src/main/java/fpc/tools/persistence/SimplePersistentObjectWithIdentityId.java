@@ -1,7 +1,5 @@
 package fpc.tools.persistence;
 
-import lombok.NonNull;
-
 import javax.persistence.*;
 import java.io.Serial;
 import java.util.function.Function;

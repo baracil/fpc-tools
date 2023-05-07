@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import fpc.tools.lang.IdentifiedEnum;
 import fpc.tools.lang.IdentifiedEnumTools;
 import fpc.tools.lang.IdentifiedEnumWithAlternateIdentifications;
-import lombok.NonNull;
 
 import java.io.IOException;
 

@@ -1,7 +1,6 @@
 package fpc.tools.fxmodel;
 
 import fpc.tools.fx.FXLoader;
-import lombok.NonNull;
 import net.femtoparsec.tools.fxmodel.FXViewWithLoader;
 
 public interface FXView {

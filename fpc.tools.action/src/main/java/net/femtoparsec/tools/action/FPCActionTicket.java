@@ -8,7 +8,6 @@ import fpc.tools.fp.Consumer1;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Nil;
 import fpc.tools.fp.TryResult;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.concurrent.CompletionStage;

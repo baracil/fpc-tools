@@ -3,7 +3,6 @@ package fpc.tools.state;
 import fpc.tools.fp.Predicate1;
 import fpc.tools.lang.Todo;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Objects;

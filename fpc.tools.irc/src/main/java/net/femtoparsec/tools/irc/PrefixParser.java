@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.irc;
 
 import fpc.tools.irc.Prefix;
-import lombok.NonNull;
 
 import java.util.Optional;
 

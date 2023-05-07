@@ -10,7 +10,6 @@ import fpc.tools.state.Identity;
 import fpc.tools.state.IdentityListener;
 import fpc.tools.state.Mutation;
 import javafx.beans.value.ObservableValue;
-import lombok.NonNull;
 
 import java.util.concurrent.*;
 

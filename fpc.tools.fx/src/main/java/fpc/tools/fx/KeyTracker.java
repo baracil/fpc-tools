@@ -3,7 +3,6 @@ package fpc.tools.fx;
 import fpc.tools.lang.Subscription;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import lombok.NonNull;
 
 /**
  * @author Bastien Aracil

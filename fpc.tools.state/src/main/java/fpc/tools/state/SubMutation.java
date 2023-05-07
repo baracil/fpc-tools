@@ -1,7 +1,5 @@
 package fpc.tools.state;
 
-import lombok.NonNull;
-
 public class SubMutation<S, V> extends SubMutationBase<S,V> implements Mutation<S> {
 
     private final Mutation<V> subMutation;

@@ -5,7 +5,6 @@ import fpc.tools.lang.Subscription;
 import fpc.tools.state.chat.state.ChatState;
 import fpc.tools.state.chat.state.ChatStateContext;
 import fpc.tools.state.chat.state.ConnectingChat;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

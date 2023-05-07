@@ -5,7 +5,6 @@ import fpc.tools.advanced.chat.DispatchSlip;
 import fpc.tools.chat.ChatNotConnected;
 import fpc.tools.lang.Futures;
 import fpc.tools.state.chat.state.*;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.concurrent.CompletableFuture;

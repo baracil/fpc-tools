@@ -1,7 +1,5 @@
 package fpc.tools.lang;
 
-import lombok.NonNull;
-
 import java.util.ServiceLoader;
 
 public interface OSVersionFactory {

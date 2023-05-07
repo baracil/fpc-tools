@@ -3,7 +3,6 @@ package fpc.tools.fx;
 import javafx.application.HostServices;
 import javafx.stage.Stage;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

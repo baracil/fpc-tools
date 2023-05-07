@@ -8,7 +8,6 @@ import fpc.tools.fxmodel.SlotMapperFactory;
 import fpc.tools.i18n.Dictionary;
 import fpc.tools.spring.ApplicationCloser;
 import javafx.application.Platform;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;

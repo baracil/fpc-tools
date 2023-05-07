@@ -2,7 +2,6 @@ package fpc.tools.lang;
 
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.TryResult;
-import lombok.NonNull;
 
 public interface Parser<T> {
 

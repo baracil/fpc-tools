@@ -2,7 +2,6 @@ package fpc.tools.fx;
 
 import fpc.tools.fp.Function2;
 import javafx.scene.Node;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import net.femtoparsec.tools.fx.CachedFXLoader;
 

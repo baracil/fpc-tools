@@ -3,7 +3,6 @@ package fpc.tools.fxmodel;
 import fpc.tools.fp.Consumer0;
 import fpc.tools.fp.Consumer1;
 import javafx.scene.Node;
-import lombok.NonNull;
 
 import java.util.function.Consumer;
 

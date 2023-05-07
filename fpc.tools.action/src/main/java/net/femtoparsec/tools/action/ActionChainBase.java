@@ -3,7 +3,6 @@ package net.femtoparsec.tools.action;
 import fpc.tools.action.Action;
 import fpc.tools.action.ActionChain;
 import fpc.tools.action.ActionChainOpt;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;

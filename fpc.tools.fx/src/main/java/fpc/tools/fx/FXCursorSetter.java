@@ -2,8 +2,6 @@ package fpc.tools.fx;
 
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import lombok.NonNull;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Nullable;

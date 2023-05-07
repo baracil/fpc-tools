@@ -4,7 +4,6 @@ import fpc.tools.action.ActionBinder;
 import fpc.tools.action.ActionBinding;
 import fpc.tools.action.NilActionBinder;
 import fpc.tools.fp.Nil;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

@@ -1,7 +1,6 @@
 package fpc.tools.fx.dialog;
 
 import javafx.stage.Stage;
-import lombok.NonNull;
 
 public class DefaultDialogPreparer implements DialogPreparer {
 

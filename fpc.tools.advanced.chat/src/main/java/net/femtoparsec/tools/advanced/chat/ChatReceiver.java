@@ -2,7 +2,6 @@ package net.femtoparsec.tools.advanced.chat;
 
 import fpc.tools.advanced.chat.event.ReceivedMessage;
 import fpc.tools.lang.LoopAction;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

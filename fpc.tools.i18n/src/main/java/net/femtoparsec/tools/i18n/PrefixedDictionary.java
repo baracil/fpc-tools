@@ -2,7 +2,6 @@ package net.femtoparsec.tools.i18n;
 
 import fpc.tools.i18n.Dictionary;
 import fpc.tools.i18n.LocalizedString;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Enumeration;

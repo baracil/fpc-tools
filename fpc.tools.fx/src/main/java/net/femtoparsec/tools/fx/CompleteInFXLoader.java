@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.fx;
 
 import fpc.tools.lang.Loader;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.concurrent.CompletableFuture;

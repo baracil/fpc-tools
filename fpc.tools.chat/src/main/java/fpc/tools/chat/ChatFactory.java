@@ -2,7 +2,6 @@ package fpc.tools.chat;
 
 import fpc.tools.lang.Instants;
 import fpc.tools.lang.ServiceLoaderHelper;
-import lombok.NonNull;
 
 import java.net.URI;
 import java.util.ServiceLoader;

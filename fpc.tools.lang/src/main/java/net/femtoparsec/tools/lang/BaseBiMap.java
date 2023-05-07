@@ -2,7 +2,6 @@ package net.femtoparsec.tools.lang;
 
 import fpc.tools.lang.BiMap;
 import lombok.AccessLevel;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.annotation.Nullable;

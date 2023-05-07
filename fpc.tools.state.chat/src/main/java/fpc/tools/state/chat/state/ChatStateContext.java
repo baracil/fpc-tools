@@ -7,7 +7,6 @@ import fpc.tools.state.chat.ChatStateMutator;
 import fpc.tools.state.chat.OnConnectedResult;
 import fpc.tools.state.chat.state.mutation.ConnectMutation;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

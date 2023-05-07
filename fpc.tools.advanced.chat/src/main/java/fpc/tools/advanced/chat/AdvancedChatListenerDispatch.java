@@ -3,7 +3,6 @@ package fpc.tools.advanced.chat;
 import fpc.tools.advanced.chat.event.AdvancedChatEvent;
 import fpc.tools.lang.Listeners;
 import fpc.tools.lang.Subscription;
-import lombok.NonNull;
 
 public class AdvancedChatListenerDispatch<M> implements AdvancedChatListener<M> {
 

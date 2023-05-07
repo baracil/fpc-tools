@@ -7,7 +7,6 @@ import fpc.tools.advanced.chat.RequestAnswerMatcher;
 import fpc.tools.chat.Chat;
 import fpc.tools.lang.Instants;
 import fpc.tools.lang.Priority;
-import lombok.NonNull;
 
 /**
  * @author Bastien Aracil

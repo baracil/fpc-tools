@@ -5,7 +5,6 @@ import javafx.beans.value.ObservableBooleanValue;
 import javafx.beans.value.ObservableStringValue;
 import javafx.beans.value.ObservableValue;
 import javafx.stage.Stage;
-import lombok.NonNull;
 
 public interface DialogController<I,O> extends DialogResultHandler<O> {
 

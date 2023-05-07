@@ -2,7 +2,6 @@ package net.femtoparsec.tools.action.iteminfo;
 
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.MenuItem;
-import lombok.NonNull;
 
 public class MenuItemBinder extends ItemInfoBase<MenuItem> {
 

@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import lombok.NonNull;
 
 /**
  * @author Bastien Aracil

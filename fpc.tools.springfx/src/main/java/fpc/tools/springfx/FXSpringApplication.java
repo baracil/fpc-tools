@@ -9,7 +9,6 @@ import fpc.tools.spring.SpringModule;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContextInitializer;

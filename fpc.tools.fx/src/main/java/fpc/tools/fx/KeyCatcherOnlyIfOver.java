@@ -2,7 +2,6 @@ package fpc.tools.fx;
 
 import javafx.scene.Node;
 import javafx.scene.input.KeyEvent;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

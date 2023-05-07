@@ -2,7 +2,6 @@ package net.femtoparsec.tools.advanced.chat;
 
 import fpc.tools.advanced.chat.Command;
 import fpc.tools.advanced.chat.DispatchSlip;
-import lombok.NonNull;
 
 import java.time.Instant;
 import java.util.Optional;

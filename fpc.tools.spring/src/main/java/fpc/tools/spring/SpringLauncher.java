@@ -2,10 +2,7 @@ package fpc.tools.spring;
 
 import fpc.tools.fp.Consumer1;
 import fpc.tools.fp.Predicate1;
-import fpc.tools.fp.UnaryOperator1;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;

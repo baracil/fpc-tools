@@ -5,7 +5,6 @@ import fpc.tools.fp.Function2;
 import fpc.tools.lang.Subscription;
 import javafx.beans.value.ObservableValue;
 import lombok.AccessLevel;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.concurrent.CompletionStage;

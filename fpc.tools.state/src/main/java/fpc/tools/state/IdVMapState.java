@@ -2,7 +2,6 @@ package fpc.tools.state;
 
 import fpc.tools.fp.Function1;
 import fpc.tools.lang.MapTool;
-import lombok.NonNull;
 import net.femtoparsec.tools.state.FPCIdVMapState;
 
 import java.util.Collection;

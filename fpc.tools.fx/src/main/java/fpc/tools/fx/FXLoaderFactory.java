@@ -1,7 +1,6 @@
 package fpc.tools.fx;
 
 import fpc.tools.i18n.Dictionary;
-import lombok.NonNull;
 
 import java.net.URL;
 

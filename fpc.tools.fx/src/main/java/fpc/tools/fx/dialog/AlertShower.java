@@ -1,7 +1,6 @@
 package fpc.tools.fx.dialog;
 
 import fpc.tools.i18n.Dictionary;
-import lombok.NonNull;
 import net.femtoparsec.tools.fx.FPCAlertShower;
 
 /**

@@ -4,7 +4,10 @@ import fpc.tools.fp.Function1;
 import fpc.tools.lang.MapTool;
 import fpc.tools.state.RemoteData;
 import fpc.tools.state.RemoteMap;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.*;
 import java.util.function.Predicate;

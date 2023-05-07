@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.lang;
 
 import fpc.tools.lang.ThreadFactoryBuilder;
-import lombok.NonNull;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

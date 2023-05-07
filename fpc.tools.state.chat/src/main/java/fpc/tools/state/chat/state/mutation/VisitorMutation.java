@@ -2,7 +2,6 @@ package fpc.tools.state.chat.state.mutation;
 
 import fpc.tools.state.Mutation;
 import fpc.tools.state.chat.state.*;
-import lombok.NonNull;
 
 public abstract class VisitorMutation implements Mutation<ChatState>, ChatState.Visitor<ChatState> {
 

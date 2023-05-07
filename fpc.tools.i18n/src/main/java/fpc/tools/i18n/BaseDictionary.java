@@ -1,6 +1,5 @@
 package fpc.tools.i18n;
 
-import lombok.NonNull;
 import net.femtoparsec.tools.i18n.FPCResourceBundle;
 import net.femtoparsec.tools.i18n.LocalizedStringFromResource;
 import net.femtoparsec.tools.i18n.PrefixedDictionary;

@@ -1,6 +1,5 @@
 package fpc.tools.fxmodel;
 
-import lombok.NonNull;
 import net.femtoparsec.tools.fxmodel.DebugFXView;
 
 import java.util.Map;

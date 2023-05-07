@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.validation;
 
 import fpc.tools.validation.ValidationContext;
-import lombok.NonNull;
 
 import javax.annotation.Nullable;
 

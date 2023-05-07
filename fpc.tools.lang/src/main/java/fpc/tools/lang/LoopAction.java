@@ -1,7 +1,5 @@
 package fpc.tools.lang;
 
-import lombok.NonNull;
-
 import javax.annotation.Nullable;
 
 public interface LoopAction {

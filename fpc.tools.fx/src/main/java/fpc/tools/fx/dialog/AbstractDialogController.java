@@ -4,7 +4,6 @@ import fpc.tools.lang.Subscription;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.beans.value.ObservableBooleanValue;
-import lombok.NonNull;
 
 public abstract class AbstractDialogController<I,O> implements DialogController<I,O> {
 

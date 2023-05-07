@@ -1,7 +1,6 @@
 package fpc.tools.state.chat.state;
 
 import fpc.tools.state.chat.state.impl.DisconnectedChatImpl;
-import lombok.NonNull;
 
 public sealed interface ChatState permits DisconnectedChat, ConnectedChat, ConnectingChat, ReconnectingChat {
 

@@ -1,6 +1,5 @@
 package net.femtoparsec.tools.irc;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;

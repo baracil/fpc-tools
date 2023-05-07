@@ -3,7 +3,6 @@ package net.femtoparsec.tools.validation;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Predicate1;
 import fpc.tools.validation.*;
-import lombok.NonNull;
 
 import javax.annotation.Nullable;
 import java.nio.file.Path;

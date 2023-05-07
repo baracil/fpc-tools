@@ -1,7 +1,5 @@
 package fpc.tools.irc;
 
-import lombok.NonNull;
-
 /**
  * @author Bastien Aracil
  **/

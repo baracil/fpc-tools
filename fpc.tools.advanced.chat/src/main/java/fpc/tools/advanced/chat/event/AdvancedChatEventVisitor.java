@@ -1,7 +1,5 @@
 package fpc.tools.advanced.chat.event;
 
-import lombok.NonNull;
-
 /**
  * Visitor for all {@link AdvancedChatEvent}
  * @param <M> the type of the message of the chat

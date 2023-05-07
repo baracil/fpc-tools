@@ -4,7 +4,6 @@ import fpc.tools.cipher.CipherException;
 import fpc.tools.cipher.CipherHelper;
 import fpc.tools.cipher.TextCipher;
 import fpc.tools.lang.Secret;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.security.GeneralSecurityException;

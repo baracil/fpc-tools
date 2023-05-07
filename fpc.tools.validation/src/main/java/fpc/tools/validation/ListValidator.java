@@ -1,7 +1,6 @@
 package fpc.tools.validation;
 
 import fpc.tools.fp.Predicate1;
-import lombok.NonNull;
 
 import java.util.List;
 

@@ -1,7 +1,5 @@
 package fpc.tools.advanced.chat.event;
 
-import lombok.NonNull;
-
 public record Error<M>(Throwable error) implements AdvancedChatEvent<M> {
 
     public static <M> Error<M> create(Throwable error) {

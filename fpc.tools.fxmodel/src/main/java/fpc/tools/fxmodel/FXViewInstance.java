@@ -2,7 +2,6 @@ package fpc.tools.fxmodel;
 
 import fpc.tools.fx.FXLoadingResult;
 import javafx.scene.Node;
-import lombok.NonNull;
 import net.femtoparsec.tools.fxmodel.FPCFXViewInstance;
 
 import java.util.Optional;

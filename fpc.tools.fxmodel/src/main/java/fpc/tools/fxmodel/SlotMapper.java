@@ -4,7 +4,6 @@ import fpc.tools.fp.Consumer0;
 import fpc.tools.fp.Consumer1;
 import fpc.tools.fp.Function2;
 import javafx.scene.Node;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Map;

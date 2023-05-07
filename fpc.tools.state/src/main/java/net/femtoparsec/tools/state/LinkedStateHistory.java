@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.state;
 
 import fpc.tools.state.StateHistory;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.LinkedList;

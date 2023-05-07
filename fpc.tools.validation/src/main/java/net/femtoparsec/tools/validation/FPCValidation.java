@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.validation;
 
 import fpc.tools.validation.*;
-import lombok.NonNull;
 
 import java.nio.file.Path;
 import java.util.List;

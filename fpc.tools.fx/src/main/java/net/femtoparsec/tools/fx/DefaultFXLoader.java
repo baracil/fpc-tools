@@ -6,7 +6,6 @@ import fpc.tools.fx.FXLoadingResult;
 import fpc.tools.i18n.Dictionary;
 import javafx.fxml.FXMLLoader;
 import javafx.util.BuilderFactory;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;

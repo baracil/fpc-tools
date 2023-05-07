@@ -20,7 +20,6 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBoxBase;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.AnchorPane;
-import lombok.NonNull;
 import net.femtoparsec.tools.fx.CompleteInFXLoader;
 
 import javax.annotation.Nullable;

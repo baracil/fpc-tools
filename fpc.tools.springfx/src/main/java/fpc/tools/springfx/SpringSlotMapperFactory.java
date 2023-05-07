@@ -3,7 +3,6 @@ package fpc.tools.springfx;
 import fpc.tools.fxmodel.SlotMapper;
 import fpc.tools.fxmodel.SlotMapperFactory;
 import fpc.tools.fxmodel.ViewSlot;
-import lombok.NonNull;
 import org.springframework.boot.ApplicationArguments;
 
 import java.util.Map;

@@ -2,7 +2,6 @@ package fpc.tools.fx.dialog;
 
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

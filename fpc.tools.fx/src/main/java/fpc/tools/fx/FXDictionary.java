@@ -1,7 +1,6 @@
 package fpc.tools.fx;
 
 import javafx.beans.value.ObservableStringValue;
-import lombok.NonNull;
 
 public interface FXDictionary {
 

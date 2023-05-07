@@ -1,7 +1,5 @@
 package fpc.tools.lang;
 
-import lombok.NonNull;
-
 import java.nio.file.Path;
 
 public interface OSVersion {

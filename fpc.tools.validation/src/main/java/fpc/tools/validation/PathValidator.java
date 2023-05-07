@@ -1,7 +1,5 @@
 package fpc.tools.validation;
 
-import lombok.NonNull;
-
 import java.nio.file.Path;
 
 public interface PathValidator extends fpc.tools.validation.Validator<Path,PathValidator> {

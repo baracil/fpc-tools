@@ -4,7 +4,6 @@ import fpc.tools.lang.MapTool;
 import fpc.tools.state.RemoteData;
 import fpc.tools.state.RemoteMap;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 
 import java.util.Map;
 

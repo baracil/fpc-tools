@@ -1,6 +1,5 @@
 package fpc.tools.lang;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.annotation.Nullable;

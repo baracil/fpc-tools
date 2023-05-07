@@ -4,7 +4,6 @@ import fpc.tools.fp.UnaryOperator1;
 import fpc.tools.i18n.Dictionary;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.util.BuilderFactory;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import net.femtoparsec.tools.fx.DefaultFXLoader;
 import net.femtoparsec.tools.fx.FXLoaderSettingUserData;

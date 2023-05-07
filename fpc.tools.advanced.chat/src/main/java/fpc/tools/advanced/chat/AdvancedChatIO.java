@@ -1,7 +1,6 @@
 package fpc.tools.advanced.chat;
 
 import fpc.tools.lang.Subscription;
-import lombok.NonNull;
 
 /**
  * @author Bastien Aracil

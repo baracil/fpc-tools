@@ -1,6 +1,5 @@
 package fpc.tools.action;
 
-import lombok.NonNull;
 import net.femtoparsec.tools.action.Head;
 
 import java.util.Optional;

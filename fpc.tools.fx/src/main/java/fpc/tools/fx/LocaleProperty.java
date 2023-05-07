@@ -3,7 +3,6 @@ package fpc.tools.fx;
 import fpc.tools.i18n.Dictionary;
 import javafx.beans.value.ObservableValueBase;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import net.femtoparsec.tools.fx.FPCFXDictionary;
 
 import java.util.Locale;

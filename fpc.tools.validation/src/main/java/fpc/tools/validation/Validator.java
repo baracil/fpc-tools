@@ -2,7 +2,6 @@ package fpc.tools.validation;
 
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Predicate1;
-import lombok.NonNull;
 
 import javax.annotation.Nullable;
 import java.nio.file.Path;

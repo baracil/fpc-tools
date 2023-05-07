@@ -2,7 +2,6 @@ package net.femtoparsec.tools.irc;
 
 import fpc.tools.irc.*;
 import fpc.tools.lang.MapTool;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;

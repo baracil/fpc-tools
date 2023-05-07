@@ -1,7 +1,6 @@
 package fpc.tools.action;
 
 import fpc.tools.fp.Nil;
-import lombok.NonNull;
 
 public abstract class ActionNoResult<P> extends BaseAction<P, Nil> {
 

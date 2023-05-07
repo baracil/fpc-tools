@@ -1,7 +1,6 @@
 package fpc.tools.cipher;
 
 import fpc.tools.lang.Secret;
-import lombok.NonNull;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;

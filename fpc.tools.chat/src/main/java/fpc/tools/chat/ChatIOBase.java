@@ -3,7 +3,6 @@ package fpc.tools.chat;
 import fpc.tools.chat.event.ChatEvent;
 import fpc.tools.lang.Listeners;
 import fpc.tools.lang.Subscription;
-import lombok.NonNull;
 
 /**
  * Chat implementing the listener part of the {@link ChatIO} interface.

@@ -3,7 +3,6 @@ package net.femtoparsec.tools.state;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Function2;
 import fpc.tools.state.Accessor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

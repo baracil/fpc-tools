@@ -4,10 +4,12 @@ import fpc.tools.fp.Function1;
 import fpc.tools.fp.Function2;
 import fpc.tools.fp.Tuple2;
 import lombok.AccessLevel;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;

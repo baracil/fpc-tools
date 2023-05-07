@@ -1,7 +1,5 @@
 package fpc.tools.lang;
 
-import lombok.NonNull;
-
 import java.nio.charset.Charset;
 
 public record Secret(String value) {

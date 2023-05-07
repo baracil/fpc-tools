@@ -1,7 +1,6 @@
 package fpc.tools.chat;
 
 import lombok.Getter;
-import lombok.NonNull;
 
 /**
  * @author Bastien Aracil

@@ -1,7 +1,6 @@
 package fpc.tools.irc;
 
 import fpc.tools.lang.ServiceLoaderHelper;
-import lombok.NonNull;
 
 import java.util.ServiceLoader;
 

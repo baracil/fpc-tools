@@ -1,7 +1,6 @@
 package fpc.tools.persistence;
 
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;

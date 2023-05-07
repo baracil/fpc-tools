@@ -1,7 +1,6 @@
 package fpc.tools.state.chat;
 
 import fpc.tools.advanced.chat.AdvancedChat;
-import lombok.NonNull;
 
 public interface ChatStateListener<M>  {
 

@@ -2,7 +2,6 @@ package fpc.tools.advanced.chat.event;
 
 import fpc.tools.advanced.chat.Message;
 import lombok.Getter;
-import lombok.NonNull;
 
 import java.time.Instant;
 

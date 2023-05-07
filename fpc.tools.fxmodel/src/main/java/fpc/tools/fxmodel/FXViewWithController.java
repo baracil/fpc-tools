@@ -2,7 +2,6 @@ package fpc.tools.fxmodel;
 
 import fpc.tools.fx.FXLoader;
 import fpc.tools.fx.FXLoaderFactory;
-import lombok.NonNull;
 
 public class FXViewWithController implements FXView {
 

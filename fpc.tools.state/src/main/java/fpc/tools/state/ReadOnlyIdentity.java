@@ -3,7 +3,6 @@ package fpc.tools.state;
 import fpc.tools.fp.Function1;
 import fpc.tools.lang.Subscription;
 import javafx.beans.value.ObservableValue;
-import lombok.NonNull;
 
 import java.util.concurrent.CompletionStage;
 

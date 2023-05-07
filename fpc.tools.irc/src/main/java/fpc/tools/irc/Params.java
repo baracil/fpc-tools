@@ -1,7 +1,6 @@
 package fpc.tools.irc;
 
 import lombok.Builder;
-import lombok.NonNull;
 import lombok.Singular;
 import lombok.Value;
 

@@ -5,7 +5,6 @@ import fpc.tools.fp.Function2;
 import fpc.tools.fp.Function3;
 import fpc.tools.fp.Predicate1;
 import lombok.AccessLevel;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.*;

@@ -1,7 +1,6 @@
 package fpc.tools.fx;
 
 import lombok.AccessLevel;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 

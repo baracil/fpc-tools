@@ -1,7 +1,5 @@
 package fpc.tools.chat;
 
-import lombok.NonNull;
-
 import java.time.Duration;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;

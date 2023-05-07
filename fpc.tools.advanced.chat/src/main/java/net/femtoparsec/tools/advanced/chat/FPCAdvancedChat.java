@@ -10,7 +10,10 @@ import fpc.tools.lang.Instants;
 import fpc.tools.lang.Listeners;
 import fpc.tools.lang.Looper;
 import fpc.tools.lang.Subscription;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.Synchronized;
 
 import java.time.Duration;
 import java.time.Instant;

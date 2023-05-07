@@ -2,7 +2,6 @@ package fpc.tools.state;
 
 import fpc.tools.lang.ListTool;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.*;

@@ -2,7 +2,6 @@ package fpc.tools.fx;
 
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
-import lombok.NonNull;
 
 /**
  * @author Bastien Aracil

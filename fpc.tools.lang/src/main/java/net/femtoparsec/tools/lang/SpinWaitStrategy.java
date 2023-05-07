@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.lang;
 
 import fpc.tools.lang.WaitStrategy;
-import lombok.NonNull;
 
 import java.time.Duration;
 

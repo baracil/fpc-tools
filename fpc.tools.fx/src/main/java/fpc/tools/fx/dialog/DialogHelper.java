@@ -5,7 +5,6 @@ import fpc.tools.fx.FXLoader;
 import fpc.tools.fx.FXProperties;
 import fpc.tools.fx.StyleManager;
 import fpc.tools.i18n.Dictionary;
-import lombok.NonNull;
 import net.femtoparsec.tools.fx.dialog.DefaultDialogHelper;
 
 import java.util.Optional;

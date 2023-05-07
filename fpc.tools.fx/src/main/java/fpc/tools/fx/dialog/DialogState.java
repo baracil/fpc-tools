@@ -3,7 +3,6 @@ package fpc.tools.fx.dialog;
 import fpc.tools.validation.ValidationResult;
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Value;
 
 import javax.annotation.Nullable;

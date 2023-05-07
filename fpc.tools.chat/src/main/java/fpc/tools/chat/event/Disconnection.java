@@ -1,7 +1,5 @@
 package fpc.tools.chat.event;
 
-import lombok.NonNull;
-
 public record Disconnection() implements ChatEvent {
 
     private static final Disconnection DISCONNECTION = new Disconnection();

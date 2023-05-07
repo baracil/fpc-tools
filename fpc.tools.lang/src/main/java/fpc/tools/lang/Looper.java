@@ -1,6 +1,5 @@
 package fpc.tools.lang;
 
-import lombok.NonNull;
 import net.femtoparsec.tools.lang.Loopers;
 import net.femtoparsec.tools.lang.ScheduledLooper;
 import net.femtoparsec.tools.lang.SimpleLooper;

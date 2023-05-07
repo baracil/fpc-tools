@@ -4,7 +4,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableMap;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import lombok.NonNull;
 import net.femtoparsec.tools.fx.dialog.FADialogModel;
 
 /**

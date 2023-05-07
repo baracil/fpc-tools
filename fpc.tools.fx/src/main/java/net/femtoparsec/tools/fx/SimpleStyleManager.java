@@ -7,7 +7,6 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.lang.ref.Reference;

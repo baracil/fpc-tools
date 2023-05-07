@@ -1,7 +1,6 @@
 package fpc.tools.lang;
 
 import fpc.tools.fp.Function1;
-import lombok.NonNull;
 import net.femtoparsec.tools.lang.BasicLoader;
 
 import java.util.concurrent.CompletionStage;

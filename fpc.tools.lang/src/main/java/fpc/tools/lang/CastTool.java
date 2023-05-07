@@ -1,7 +1,6 @@
 package fpc.tools.lang;
 
 import fpc.tools.fp.Function1;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import net.femtoparsec.tools.lang.BasicCaster;
 

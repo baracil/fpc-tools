@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.i18n;
 
 import fpc.tools.i18n.LocalizedString;
-import lombok.NonNull;
 
 import java.util.List;
 import java.util.Locale;

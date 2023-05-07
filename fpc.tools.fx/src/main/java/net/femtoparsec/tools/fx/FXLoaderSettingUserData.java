@@ -3,7 +3,6 @@ package net.femtoparsec.tools.fx;
 import fpc.tools.fx.FXLoader;
 import fpc.tools.fx.FXLoadingResult;
 import javafx.scene.Node;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.lang.ref.Reference;

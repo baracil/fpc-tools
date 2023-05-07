@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.advanced.chat;
 
 import fpc.tools.advanced.chat.Message;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.concurrent.CompletableFuture;

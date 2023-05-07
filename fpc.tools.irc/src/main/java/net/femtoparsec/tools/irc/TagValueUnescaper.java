@@ -1,7 +1,5 @@
 package net.femtoparsec.tools.irc;
 
-import lombok.NonNull;
-
 /**
  * @author Bastien Aracil
  **/

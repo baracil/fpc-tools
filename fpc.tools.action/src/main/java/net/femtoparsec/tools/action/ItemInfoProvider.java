@@ -2,7 +2,6 @@ package net.femtoparsec.tools.action;
 
 import javafx.scene.control.ButtonBase;
 import javafx.scene.control.MenuItem;
-import lombok.NonNull;
 import net.femtoparsec.tools.action.iteminfo.ButtonBaseBinder;
 import net.femtoparsec.tools.action.iteminfo.MenuItemBinder;
 import net.femtoparsec.tools.action.iteminfo.ObjectBinder;

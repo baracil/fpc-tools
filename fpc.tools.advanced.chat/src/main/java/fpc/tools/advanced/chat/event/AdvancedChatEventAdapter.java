@@ -1,7 +1,5 @@
 package fpc.tools.advanced.chat.event;
 
-import lombok.NonNull;
-
 public abstract class AdvancedChatEventAdapter<M,T> implements AdvancedChatEventVisitor<M,T> {
 
     protected abstract T fallback(AdvancedChatEvent<M> event);

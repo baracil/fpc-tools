@@ -1,7 +1,6 @@
 package fpc.tools.fx;
 
 import javafx.util.Callback;
-import lombok.NonNull;
 
 public interface ControllerFactory {
 

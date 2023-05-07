@@ -1,7 +1,5 @@
 package fpc.tools.fxmodel;
 
-import lombok.NonNull;
-
 import java.util.stream.Stream;
 
 public abstract class PluggableControllerBase implements PluggableController {

@@ -1,6 +1,5 @@
 package fpc.tools.hibernate;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;

@@ -1,6 +1,5 @@
 package fpc.tools.fxmodel;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;

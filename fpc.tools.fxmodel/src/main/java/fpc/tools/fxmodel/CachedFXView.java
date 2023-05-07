@@ -1,6 +1,5 @@
 package fpc.tools.fxmodel;
 
-import lombok.NonNull;
 import net.femtoparsec.tools.fxmodel.FPCCachedFXView;
 
 public interface CachedFXView extends FXView {

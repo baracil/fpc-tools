@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.state;
 
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 
 import java.util.Map;
 

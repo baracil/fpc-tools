@@ -1,7 +1,6 @@
 package net.femtoparsec.tools.state;
 
 import lombok.Builder;
-import lombok.NonNull;
 import lombok.Value;
 
 @Value
