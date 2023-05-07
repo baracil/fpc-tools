@@ -1,10 +1,11 @@
 package net.femtoparsec.tools.state;
 
 import fpc.tools.state.StateHistory;
+import jakarta.annotation.Nullable;
 
 public class TwoStateHistory<S> implements StateHistory<S> {
 
-    private S previous;
+    private @Nullable S previous;
 
     private S current;
 
@@ -16,7 +17,7 @@ public class TwoStateHistory<S> implements StateHistory<S> {
     public boolean pushNewState(S state) {
         this.previous = this.current;
         this.current = state;
-        return previous == null || !this.previous.equals(state);
+        return !this.previous.equals(state);
     }
 
     @Override
@@ -49,6 +50,6 @@ public class TwoStateHistory<S> implements StateHistory<S> {
 
     @Override
     public int size() {
-        return ((previous == null)?0:1)+ ((current==null)?0:1);
+        return (previous == null ?0:1)+ 1;
     }
 }

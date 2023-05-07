@@ -2,6 +2,7 @@ package fpc.tools.spring;
 
 import fpc.tools.fp.Consumer1;
 import fpc.tools.fp.Predicate1;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.Banner;
@@ -59,18 +60,15 @@ public class SpringLauncher {
 
     private class Execution {
 
-        private SpringApplication application;
+        private @Nullable SpringApplication application;
+        private @Nullable String[] extraPackagesToScan;
 
-        private String[] extraPackagesToScan;
-
-        private ApplicationCloser closer;
 
         private ApplicationCloser launch() {
             this.createSpringApplication();
             this.retrieveAllExtraPackagesToScan();
             this.setupSpringApplicationInitializerToTakeIntoAccountExtraPackages();
-            this.launchTheApplicationAndConstructTheCloser();
-            return closer;
+            return this.launchTheApplicationAndConstructTheCloser();
         }
 
 
@@ -95,6 +93,8 @@ public class SpringLauncher {
         }
 
         private void setupSpringApplicationInitializerToTakeIntoAccountExtraPackages() {
+            assert extraPackagesToScan != null;
+            assert application != null;
             if (extraPackagesToScan.length == 0) {
                 return;
             }
@@ -109,9 +109,10 @@ public class SpringLauncher {
             });
         }
 
-        private void launchTheApplicationAndConstructTheCloser() {
+        private ApplicationCloser launchTheApplicationAndConstructTheCloser() {
+            assert application != null;
             final ApplicationContext app = application.run(arguments.toArray(String[]::new));
-            closer = () -> SpringApplication.exit(app);
+            return () -> SpringApplication.exit(app);
         }
 
     }

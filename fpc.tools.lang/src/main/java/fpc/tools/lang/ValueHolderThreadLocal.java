@@ -1,15 +1,13 @@
 package fpc.tools.lang;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 
-@RequiredArgsConstructor
 @Slf4j
 public abstract class ValueHolderThreadLocal<T> implements ValueHolder<T> {
 
-    private ThreadLocal<ValueHolder<T>> threadLocal;
+    private final ThreadLocal<ValueHolder<T>> threadLocal;
 
     public ValueHolderThreadLocal(ThreadLocal<ValueHolder<T>> threadLocal) {
         this.threadLocal = threadLocal;

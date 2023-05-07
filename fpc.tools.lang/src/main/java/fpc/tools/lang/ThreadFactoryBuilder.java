@@ -9,9 +9,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class ThreadFactoryBuilder {
 
-  private String nameFormat;
-  private Boolean daemon;
-  private Integer priority;
+  private @Nullable String nameFormat;
+  private @Nullable Boolean daemon;
+  private @Nullable Integer priority;
 
   public ThreadFactory build() {
     return new Factory(nameFormat, daemon, priority);
