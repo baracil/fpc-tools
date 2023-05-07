@@ -1,8 +1,7 @@
 package net.femtoparsec.tools.validation;
 
 import fpc.tools.validation.ValidationContext;
-
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 public class FPCValidator<O> extends AbstractValidator<O, FPCValidator<O>> {
 

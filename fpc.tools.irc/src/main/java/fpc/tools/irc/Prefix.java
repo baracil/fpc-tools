@@ -1,9 +1,9 @@
 package fpc.tools.irc;
 
+import jakarta.annotation.Nullable;
 import lombok.Builder;
 import lombok.Value;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**

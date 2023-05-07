@@ -1,6 +1,6 @@
 package fpc.tools.lang;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 public interface LoopAction {
 

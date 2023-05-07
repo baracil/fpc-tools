@@ -2,6 +2,7 @@ package fpc.tools.fx.dialog;
 
 import fpc.tools.i18n.Dictionary;
 import fpc.tools.validation.ValidationError;
+import jakarta.annotation.Nullable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Control;
@@ -17,7 +18,6 @@ import org.controlsfx.validation.decoration.GraphicValidationDecoration;
 import org.controlsfx.validation.decoration.StyleClassValidationDecoration;
 import org.controlsfx.validation.decoration.ValidationDecoration;
 
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;

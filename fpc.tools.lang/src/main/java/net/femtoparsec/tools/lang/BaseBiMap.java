@@ -1,10 +1,10 @@
 package net.femtoparsec.tools.lang;
 
 import fpc.tools.lang.BiMap;
+import jakarta.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

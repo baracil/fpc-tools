@@ -3,8 +3,8 @@ package net.femtoparsec.tools.validation;
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Predicate1;
 import fpc.tools.validation.*;
+import jakarta.annotation.Nullable;
 
-import javax.annotation.Nullable;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Function;

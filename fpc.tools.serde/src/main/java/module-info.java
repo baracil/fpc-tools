@@ -11,7 +11,6 @@ module fpc.tools.serde {
   requires io.micronaut.inject;
   requires io.micronaut.serde.serde_api;
   requires fpc.tools.annotation;
-  requires jsr305;
 
   exports fpc.tools.serde;
 }

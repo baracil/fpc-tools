@@ -1,8 +1,8 @@
 package fpc.tools.lang;
 
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;

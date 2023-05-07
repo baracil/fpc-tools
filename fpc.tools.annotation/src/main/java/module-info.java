@@ -1,6 +1,6 @@
 open module fpc.tools.annotation {
   exports fpc.tools.annotations;
+  exports javax.annotation.meta;
 
-  requires transitive jsr305;
-
+  requires transitive jakarta.annotation;
 }

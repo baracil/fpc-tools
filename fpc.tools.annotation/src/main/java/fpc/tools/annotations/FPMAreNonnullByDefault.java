@@ -1,6 +1,7 @@
 package fpc.tools.annotations;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+
 import javax.annotation.meta.TypeQualifierDefault;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -12,7 +13,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 @Documented
 @Nonnull
-@TypeQualifierDefault({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})  // <-- use METHOD for return values
+@TypeQualifierDefault({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FPMAreNonnullByDefault
 {

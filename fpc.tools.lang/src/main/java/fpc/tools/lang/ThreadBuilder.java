@@ -1,6 +1,7 @@
 package fpc.tools.lang;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
 import java.util.Optional;
 
 /**

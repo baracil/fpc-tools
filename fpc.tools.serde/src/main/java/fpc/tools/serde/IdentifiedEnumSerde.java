@@ -9,7 +9,6 @@ import io.micronaut.serde.Encoder;
 import io.micronaut.serde.util.NullableSerde;
 import jakarta.inject.Singleton;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 
 @Singleton
@@ -30,7 +29,6 @@ public class IdentifiedEnumSerde<E extends Enum<E>> implements NullableSerde<E> 
         }
     }
 
-    @Nonnull
     @Override
     public E deserializeNonNull(Decoder decoder, DecoderContext decoderContext, Argument<? super E> type) throws IOException {
         final var str = decoder.decodeString();

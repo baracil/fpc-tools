@@ -4,6 +4,7 @@ import fpc.tools.fx.KeyCatcher;
 import fpc.tools.fx.KeyCatcherOnlyIfOver;
 import fpc.tools.fx.KeyTracker;
 import fpc.tools.lang.Subscription;
+import jakarta.annotation.Nullable;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
@@ -11,7 +12,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import javax.annotation.Nullable;
 import java.util.*;
 
 /**

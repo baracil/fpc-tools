@@ -6,10 +6,10 @@ import fpc.tools.fp.Function2;
 import fpc.tools.lang.ThreadBuilder;
 import fpc.tools.lang.ThrowableTool;
 import fpc.tools.state.Mutation;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;

@@ -29,6 +29,7 @@ public class BaseDictionary implements Dictionary {
         this.baseResourceName = getClass().getName();
     }
 
+
     public LocalizedString localizedString(String i18nKey) {
         final var resourceReference = new ResourceReference(baseResourceName,i18nKey);
         return new LocalizedStringFromResource(this::getResourceBundle, resourceReference, List.of());

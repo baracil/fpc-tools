@@ -2,18 +2,18 @@ import fpc.tools.validation.ValidationFactory;
 import net.femtoparsec.tools.validation.FPCValidation;
 
 module fpc.tools.validation {
-    requires static lombok;
-    requires java.desktop;
+  requires static lombok;
+  requires java.desktop;
+  requires fpc.tools.fp;
+  requires fpc.tools.lang;
 
-    requires fpc.tools.fp;
-    requires fpc.tools.lang;
   requires fpc.tools.annotation;
 
   exports fpc.tools.validation;
-    exports net.femtoparsec.tools.validation;
+  exports net.femtoparsec.tools.validation;
 
-    uses fpc.tools.validation.ValidationFactory;
+  uses fpc.tools.validation.ValidationFactory;
 
-    provides ValidationFactory with FPCValidation;
+  provides ValidationFactory with FPCValidation;
 
 }

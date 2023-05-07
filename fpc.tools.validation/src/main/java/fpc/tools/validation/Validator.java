@@ -2,8 +2,8 @@ package fpc.tools.validation;
 
 import fpc.tools.fp.Function1;
 import fpc.tools.fp.Predicate1;
+import jakarta.annotation.Nullable;
 
-import javax.annotation.Nullable;
 import java.nio.file.Path;
 import java.util.Optional;
 

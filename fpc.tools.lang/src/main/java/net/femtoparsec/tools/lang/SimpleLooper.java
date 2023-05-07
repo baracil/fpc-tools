@@ -3,10 +3,10 @@ package net.femtoparsec.tools.lang;
 import fpc.tools.lang.LoopAction;
 import fpc.tools.lang.Looper;
 import fpc.tools.lang.ThrowableTool;
+import jakarta.annotation.Nullable;
 import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.Condition;

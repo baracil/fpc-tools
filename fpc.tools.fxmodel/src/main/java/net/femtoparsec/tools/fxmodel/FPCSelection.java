@@ -2,12 +2,12 @@ package net.femtoparsec.tools.fxmodel;
 
 import fpc.tools.fxmodel.Selection;
 import fpc.tools.state.SetState;
+import jakarta.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Set;
 

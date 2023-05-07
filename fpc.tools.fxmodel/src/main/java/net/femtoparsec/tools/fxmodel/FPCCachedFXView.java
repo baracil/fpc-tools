@@ -3,9 +3,9 @@ package net.femtoparsec.tools.fxmodel;
 import fpc.tools.fxmodel.CachedFXView;
 import fpc.tools.fxmodel.FXView;
 import fpc.tools.fxmodel.FXViewInstance;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 
-import javax.annotation.Nullable;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.Optional;

@@ -1,11 +1,11 @@
 package fpc.tools.fx.dialog;
 
 import fpc.tools.validation.ValidationResult;
+import jakarta.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Value;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 
 @Value

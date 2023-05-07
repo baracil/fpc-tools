@@ -2,11 +2,11 @@ package fpc.tools.hibernate;
 
 import fpc.tools.lang.IdentifiedEnum;
 import fpc.tools.lang.IdentifiedEnumTools;
+import jakarta.annotation.Nullable;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.DynamicParameterizedType;
 
-import javax.annotation.Nullable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,10 +1,10 @@
 package fpc.tools.fx;
 
+import jakarta.annotation.Nullable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.Nullable;
 import java.util.Deque;
 import java.util.LinkedList;
 

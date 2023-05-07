@@ -2,9 +2,9 @@ package net.femtoparsec.tools.fx;
 
 import fpc.tools.fx.FXLoader;
 import fpc.tools.fx.FXLoadingResult;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 
-import javax.annotation.Nullable;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.Locale;

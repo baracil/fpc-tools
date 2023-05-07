@@ -2,11 +2,11 @@ package net.femtoparsec.tools.irc;
 
 import fpc.tools.irc.*;
 import fpc.tools.lang.MapTool;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;

@@ -2,9 +2,9 @@ package net.femtoparsec.tools.irc;
 
 import fpc.tools.irc.Tag;
 import fpc.tools.lang.ThrowableTool;
+import jakarta.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 
 import static net.femtoparsec.tools.irc.FPCIRCParser.IRC_MARKER;

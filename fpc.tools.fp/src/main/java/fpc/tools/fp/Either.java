@@ -1,7 +1,8 @@
 package fpc.tools.fp;
 
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
 import java.util.Optional;
 
 /**
@@ -71,8 +72,9 @@ public final class Either<A, B> {
       return Either.left(leftMapper.apply(left));
     } else if (right != null) {
       return Either.right(rightMapper.apply(right));
+    } else {
+      throw new IllegalStateException("One and only one of left or right must be non null");
     }
-    throw new IllegalStateException("One and only one of left or right must be non null");
   }
 
   public <C, D> Either<C, D> flatMap(Function1<? super A, Either<C, D>> leftMapper, Function1<? super B, Either<C, D>> rightMapper) {
@@ -80,8 +82,9 @@ public final class Either<A, B> {
       return leftMapper.apply(left);
     } else if (right != null) {
       return rightMapper.apply(right);
+    } else {
+      throw new IllegalStateException("One and only one of left or right must be non null");
     }
-    throw new IllegalStateException("One and only one of left or right must be non null");
   }
 
   /**
@@ -97,8 +100,9 @@ public final class Either<A, B> {
       return leftMapper.apply(left);
     } else if (right != null) {
       return rightMapper.apply(right);
+    } else {
+      throw new IllegalStateException("One and only one of left or right must be non null");
     }
-    throw new IllegalStateException("One and only one of left or right must be non null");
   }
 
   public <C, T extends Throwable> C tryMerge(Try1<? super A, ? extends C, ? extends T> leftMapper,
@@ -107,8 +111,9 @@ public final class Either<A, B> {
       return leftMapper.apply(left);
     } else if (right != null) {
       return rightMapper.apply(right);
+    } else {
+      throw new IllegalStateException("One and only one of left or right must be non null");
     }
-    throw new IllegalStateException("One and only one of left or right must be non null");
   }
 
   public void acceptMerge(Consumer1<? super A> leftConsumer, Consumer1<? super B> rightConsumer) {
@@ -116,8 +121,9 @@ public final class Either<A, B> {
       leftConsumer.accept(left);
     } else if (right != null) {
       rightConsumer.accept(right);
+    } else {
+      throw new IllegalStateException("One and only one of left or right must be non null");
     }
-    throw new IllegalStateException("One and only one of left or right must be non null");
   }
 
   public B toRightValue(Function1<? super A, ? extends B> switcher) {
@@ -125,8 +131,9 @@ public final class Either<A, B> {
       return switcher.apply(left);
     } else if (right != null) {
       return right;
+    } else {
+      throw new IllegalStateException("One and only one of left or right must be non null");
     }
-    throw new IllegalStateException("One and only one of left or right must be non null");
   }
 
   public A toLeftValue(Function1<? super B, ? extends A> switcher) {
@@ -134,7 +141,8 @@ public final class Either<A, B> {
       return switcher.apply(right);
     } else if (left != null) {
       return left;
+    } else {
+      throw new IllegalStateException("One and only one of left or right must be non null");
     }
-    throw new IllegalStateException("One and only one of left or right must be non null");
   }
 }

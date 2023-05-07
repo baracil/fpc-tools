@@ -1,13 +1,13 @@
 package fpc.tools.fx.dialog;
 
 import fpc.tools.validation.ValidationResult;
+import jakarta.annotation.Nullable;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
 
-import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Optional;
 

@@ -5,6 +5,7 @@ import fpc.tools.fp.Function0;
 import fpc.tools.fp.Function1;
 import fpc.tools.lang.Loader;
 import fpc.tools.lang.Subscription;
+import jakarta.annotation.Nullable;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -22,7 +23,6 @@ import javafx.scene.control.Labeled;
 import javafx.scene.layout.AnchorPane;
 import net.femtoparsec.tools.fx.CompleteInFXLoader;
 
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;

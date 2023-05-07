@@ -1,8 +1,8 @@
 package fpc.tools.lang;
 
 import fpc.tools.fp.Function1;
+import jakarta.annotation.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class IdentifiedEnumTools {

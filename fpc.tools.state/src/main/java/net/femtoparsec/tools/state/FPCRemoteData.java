@@ -1,9 +1,9 @@
 package net.femtoparsec.tools.state;
 
 import fpc.tools.state.RemoteData;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 
 @RequiredArgsConstructor
