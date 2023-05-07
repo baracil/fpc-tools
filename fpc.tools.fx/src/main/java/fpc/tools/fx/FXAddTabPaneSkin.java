@@ -186,6 +186,7 @@ public class FXAddTabPaneSkin extends TabPaneSkin {
    * Add an extra padding on tab-header-region based on addButton width.
    */
   private void updateTabHeaderRegionPadding() {
+    assert buttonSize != null;
     final Insets inset = this.tabHeaderRegion.getPadding();
     if (this.tabHeaderRegionInitialInset.isNaN()) {
       this.tabHeaderRegionInitialInset = inset.getRight();
